@@ -235,6 +235,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
           <button class="btn" id="btn-coller-entree">Coller depuis le presse-papiers</button>
           <span class="esp"></span>
           <button class="btn discret" id="btn-effacer-entree">Effacer ce texte</button>
+          <button class="btn discret btn-tout-effacer">Tout effacer</button>
         </div>
       </div>
     </section>
@@ -257,6 +258,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
           <button class="btn" data-aller="reponse">Étape 3, coller la réponse</button>
           <span class="esp"></span>
           <button class="btn discret" data-aller="entree">Retour à l'entrée</button>
+          <button class="btn discret btn-tout-effacer">Tout effacer</button>
         </div>
       </div>
     </section>
@@ -274,6 +276,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
           <button class="btn" id="btn-coller-reponse">Coller depuis le presse-papiers</button>
           <span class="esp"></span>
           <button class="btn discret" id="btn-effacer-reponse">Effacer ce texte</button>
+          <button class="btn discret btn-tout-effacer">Tout effacer</button>
         </div>
       </div>
     </section>
@@ -294,7 +297,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
           <button class="btn principal" id="btn-copier-restitue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copier le texte final</button>
           <button class="btn" id="btn-telecharger-restitue">Télécharger en .txt</button>
           <span class="esp"></span>
-          <button class="btn discret" id="btn-tout-effacer">Tout effacer et recommencer</button>
+          <button class="btn discret btn-tout-effacer">Tout effacer et recommencer</button>
         </div>
       </div>
     </section>
@@ -309,7 +312,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
           <button class="btn" id="btn-charger-corresp">Charger une table</button>
           <input type="file" id="fichier-corresp" accept=".txt,.tsv,.csv,text/plain" class="visually-hidden">
           <span class="esp"></span>
-          <button class="btn discret" id="btn-vider-corresp">Vider la table</button>
+          <button class="btn discret btn-tout-effacer">Tout effacer</button>
         </div>
         <div class="corresp"><table><thead><tr><th>Élément d'origine</th><th>Code</th></tr></thead><tbody id="tbody-corresp"></tbody></table><div class="vide" id="corresp-vide">Aucune correspondance pour le moment.</div></div>
       </div>
@@ -386,7 +389,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-apropos">
       <div class="carte">
         <h1>À propos</h1>
-        <p><strong>Pseudonymiseur</strong>, version web 1.0 du 19 octobre 2026. Reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test. Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
+        <p><strong>Pseudonymiseur</strong>, version web 1.0 du 19 octobre 2026. Reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections : une civilité suivie d'un code (M. Pseudo_Telephone_001) ne forme plus une personne, et une suite de chiffres collée à un code n'est plus reprise. Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
         <h2>Où vont les données</h2>
         <ul class="propre">
           <li>Nulle part. Cette page est un programme complet que le serveur livre à votre navigateur ; le traitement se fait ensuite sur votre poste. Le serveur ne voit ni le texte, ni la table de correspondance, ni vos listes.</li>
@@ -399,6 +402,8 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
           <li>Il ne lit pas les images ni les pièces jointes : seul le texte collé est traité.</li>
           <li>Il ne remplace pas la relecture : chaque envoi à l'outil d'intelligence artificielle se vérifie avant de partir.</li>
         </ul>
+        <h2>Auteur</h2>
+        <p>Outil créé le 10 août 2026 par M. Manoël PYANET, directeur administratif du département composante Génie Électrique et des Procédés, Lyon 1 Université.</p>
         <h2>Ordre de traitement</h2>
         <p>Adresses mail et liens ; Dictionnaire ; adresses postales, codes postaux, bâtiments et campus ; IBAN, sécurité sociale, cartes, suites de onze chiffres et plus, téléphones, plaques et identifiants, SIRET, nombres longs ; dates ; personnes (mots en majuscules, prénoms connus, civilité suivie d'un nom, avec ou sans particule) ; puis un second passage pour les noms de famille écrits seuls, vus dans un nom complet du même texte ou listés dans Noms du service. Chaque ligne du texte est traitée comme une ligne de tableau, chaque tabulation comme une colonne, exactement comme dans le classeur Excel.</p>
       </div>
@@ -1296,13 +1301,14 @@ var LISTES_ORIGINE = {"prenoms": ["Aaron", "Abdel", "Abdelkader", "Abdellah", "A
     if (!$('restitue').value.trim()) { toast('Rien à télécharger.'); return; }
     telecharger('Texte final_' + horodatage() + '.txt', $('restitue').value.replace(/\n/g, '\r\n'));
   });
-  $('btn-tout-effacer').addEventListener('click', function () {
+  document.querySelectorAll('.btn-tout-effacer').forEach(function (b) { b.addEventListener('click', toutEffacer); });
+  function toutEffacer() {
     if (!confirm('Effacer le texte d\u2019origine, la sortie, la réponse, le texte final et la table de correspondance ?')) return;
     ['entree', 'sortie', 'reponse', 'restitue'].forEach(function (id) { $(id).value = ''; });
     ['msg-entree', 'msg-sortie', 'msg-reponse', 'msg-restitue'].forEach(function (id) { message(id, '', ''); });
     etat.correspondance = []; etat.dateCorresp = ''; $('bilan').innerHTML = '';
     afficherCorrespondance(); majEtapes(); sauverSession(); toast('Tout est effacé.'); montrer('entree');
-  });
+  }
 
   // ------------------------------------------------------------------ correspondance
   function afficherCorrespondance() {
@@ -1334,11 +1340,6 @@ var LISTES_ORIGINE = {"prenoms": ["Aaron", "Abdel", "Abdelkader", "Abdellah", "A
       etat.correspondance = table; etat.dateCorresp = 'chargée le ' + new Date().toLocaleString('fr-FR');
       afficherCorrespondance(); sauverSession(); toast(table.length + ' ligne' + (table.length > 1 ? 's' : '') + ' chargée' + (table.length > 1 ? 's' : '') + '.');
     });
-  });
-  $('btn-vider-corresp').addEventListener('click', function () {
-    if (!etat.correspondance.length) return;
-    if (!confirm('Vider la table de correspondance ? La restitution ne sera plus possible sans la recharger.')) return;
-    etat.correspondance = []; etat.dateCorresp = ''; afficherCorrespondance(); sauverSession();
   });
 
   // ------------------------------------------------------------------ dictionnaire
