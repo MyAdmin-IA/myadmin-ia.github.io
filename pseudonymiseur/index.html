@@ -406,7 +406,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-apropos">
       <div class="carte">
         <h1>À propos</h1>
-        <p><strong>Pseudonymiseur</strong>, version web 1.4 du 20 octobre 2026. Reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
+        <p><strong>Pseudonymiseur</strong>, version web 1.5 du 20 octobre 2026. Reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et trois corrections (la troisième : un prénom composé dont la suite est en minuscules, Pierre-marie MARTIN, est reconnu) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
         <h2>Où vont les données</h2>
         <ul class="propre">
           <li>Nulle part. Cette page est un programme complet que le serveur livre à votre navigateur ; le traitement se fait ensuite sur votre poste. Le serveur ne voit ni le texte, ni la table de correspondance, ni vos listes.</li>
@@ -431,7 +431,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
 
 <footer class="pied">
   <span>Lyon 1 Université</span>
-  <span>Pseudonymiseur, version web 1.4 du 20 octobre 2026</span>
+  <span>Pseudonymiseur, version web 1.5 du 20 octobre 2026</span>
   <span>Traitement local, aucune donnée transmise</span>
 </footer>
 <div class="toast" id="toast"></div>
@@ -834,6 +834,17 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     var p = cle.indexOf('-');
     return p > 0 ? !!this.prenoms[cle.substring(0, p)] : false;
   };
+  // Correction par rapport au module 4.1 : un prénom composé dont la suite est en minuscules (Pierre-marie, Jean-pierre,
+  // fréquent dans les signatures) compte comme un prénom avec majuscule ; sinon « Pierre-marie MARTIN » laissait le prénom en clair.
+  Session.prototype.prenomComposeMinuscule = function (m) {
+    var p = m.indexOf('-');
+    if (p <= 0 || estCapitalise(m)) return false;
+    var parts = m.split('-');
+    if (!estCapitaliseSimple(parts[0]) || !this.prenoms[normaliser(parts[0])]) return false;
+    for (var i = 1; i < parts.length; i++) { if (!/^[a-zà-ÿ]+$/.test(parts[i])) return false; }
+    return true;
+  };
+
   Session.prototype.estPrenom = function (m) {
     if (this.prenoms[normaliser(m)]) return true;
     var p = m.indexOf('-');
@@ -912,7 +923,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       if (this.conserver[normaliser(mots[k])]) break;
       if (motElide(mots[k])) break;
       if (estCode(mots, genres, n, k)) break;
-      if ((estMaj(mots[k]) && mots[k].length >= 2) || estCapitalise(mots[k])) { fin = k; ajoutes++; } else break;
+      if ((estMaj(mots[k]) && mots[k].length >= 2) || estCapitalise(mots[k]) || this.prenomComposeMinuscule(mots[k])) { fin = k; ajoutes++; } else break;
     }
     return fin;
   };
@@ -977,7 +988,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     }
 
     // 3. Prénom connu, écrit avec une majuscule : Lucas Bernard, Paul GIRARD, Bonjour Paul, Marie-Odile Moreau.
-    if (estCapitalise(b) && this.estPrenom(b)) {
+    if ((estCapitalise(b) && this.estPrenom(b)) || this.prenomComposeMinuscule(b)) {
       if (apresMotDeRue(mots, genres, i)) return -1;
       return this.etendre(mots, genres, n, i, 2);
     }
@@ -2333,7 +2344,11 @@ var LISTES_ORIGINE = {
 "NIR",
 "PO",
 "ELE",
-"SWIFT"
+"SWIFT",
+"SSI",
+"CCDD",
+"DATATOOLS",
+"XXX"
 ],
 "dictionnaire": [
 {
