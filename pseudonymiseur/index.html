@@ -406,7 +406,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-apropos">
       <div class="carte">
         <h1>À propos</h1>
-        <p><strong>Pseudonymiseur</strong>, version web 1.5 du 20 octobre 2026. Reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et trois corrections (la troisième : un prénom composé dont la suite est en minuscules, Marie-odile MOREAU, est reconnu) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
+        <p><strong>Pseudonymiseur</strong>, version web 1.6 du 20 octobre 2026. Reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et trois corrections (la troisième : un prénom composé dont la suite est en minuscules, Marie-odile MOREAU, est reconnu) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
         <h2>Où vont les données</h2>
         <ul class="propre">
           <li>Nulle part. Cette page est un programme complet que le serveur livre à votre navigateur ; le traitement se fait ensuite sur votre poste. Le serveur ne voit ni le texte, ni la table de correspondance, ni vos listes.</li>
@@ -431,7 +431,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
 
 <footer class="pied">
   <span>Lyon 1 Université</span>
-  <span>Pseudonymiseur, version web 1.5 du 20 octobre 2026</span>
+  <span>Pseudonymiseur, version web 1.6 du 20 octobre 2026</span>
   <span>Traitement local, aucune donnée transmise</span>
 </footer>
 <div class="toast" id="toast"></div>
@@ -2562,7 +2562,8 @@ var LISTES_ORIGINE = {
 "Madrid",
 "Londres",
 "Berlin"
-]
+],
+"version": "1.6 du 20/10/2026"
 };
 </script>
 <script>
@@ -2585,20 +2586,39 @@ var LISTES_ORIGINE = {
     return {
       prenoms: LISTES_ORIGINE.prenoms.slice(), conserver: LISTES_ORIGINE.conserver.slice(), noms: [], villes: LISTES_ORIGINE.villes.slice(),
       dictionnaire: LISTES_ORIGINE.dictionnaire.map(function (l) { return { texte: l.texte, etiquette: l.etiquette, type: l.type }; }),
-      reglages: { prefixe: 'Pseudo', dates: 'oui', adresses: 'oui', seuil: '5' }
+      reglages: { prefixe: 'Pseudo', dates: 'oui', adresses: 'oui', seuil: '5' },
+      origine: LISTES_ORIGINE.version
     };
+  }
+  // Une nouvelle version de la page peut apporter de nouveaux mots d'origine (mots à conserver, prénoms, villes, dictionnaire) :
+  // ils sont ajoutés aux listes gardées dans le navigateur, sans toucher aux ajouts ni aux réglages de l'utilisateur.
+  function completerDepuisOrigine(l) {
+    if (l.origine === LISTES_ORIGINE.version) return 0;
+    var d = listesParDefaut(), ajouts = 0;
+    ['conserver', 'prenoms', 'villes'].forEach(function (k) {
+      var vus = {}; l[k].forEach(function (v) { vus[String(v).trim().toLowerCase()] = 1; });
+      d[k].forEach(function (v) { if (!vus[v.trim().toLowerCase()]) { l[k].push(v); ajouts++; } });
+    });
+    var textes = {}; l.dictionnaire.forEach(function (x) { textes[String(x.texte || '').trim().toLowerCase()] = 1; });
+    d.dictionnaire.forEach(function (x) { if (!textes[x.texte.trim().toLowerCase()]) { l.dictionnaire.push(x); ajouts++; } });
+    l.origine = LISTES_ORIGINE.version;
+    return ajouts;
   }
   function chargerListes() {
     var l = lireStock(localStorage, CLE_LISTES), d = listesParDefaut();
     if (!l || typeof l !== 'object') return d;
-    return {
+    var r = {
       prenoms: Array.isArray(l.prenoms) ? l.prenoms : d.prenoms,
       conserver: Array.isArray(l.conserver) ? l.conserver : d.conserver,
       noms: Array.isArray(l.noms) ? l.noms : d.noms,
       villes: Array.isArray(l.villes) ? l.villes : d.villes,
       dictionnaire: Array.isArray(l.dictionnaire) ? l.dictionnaire : d.dictionnaire,
-      reglages: Object.assign(d.reglages, l.reglages || {})
+      reglages: Object.assign(d.reglages, l.reglages || {}),
+      origine: l.origine || ''
     };
+    var ajouts = completerDepuisOrigine(r);
+    if (ajouts) { ecrireStock(localStorage, CLE_LISTES, r); setTimeout(function () { toast(ajouts + ' mot' + (ajouts > 1 ? 's' : '') + ' d\u2019origine ajouté' + (ajouts > 1 ? 's' : '') + ' à vos listes (nouvelle version de la page).'); }, 400); }
+    return r;
   }
   function sauverListes() { ecrireStock(localStorage, CLE_LISTES, etat.listes); majCompteurs(); }
   function sauverSession() {
@@ -2946,9 +2966,11 @@ var LISTES_ORIGINE = {
           noms: Array.isArray(l.noms) ? l.noms.map(String) : d.noms,
           villes: Array.isArray(l.villes) ? l.villes.map(String) : d.villes,
           dictionnaire: Array.isArray(l.dictionnaire) ? l.dictionnaire.map(function (x) { return { texte: String(x.texte || ''), etiquette: String(x.etiquette || ''), type: String(x.type || 'Texte') }; }) : d.dictionnaire,
-          reglages: Object.assign(d.reglages, l.reglages || {})
+          reglages: Object.assign(d.reglages, l.reglages || {}),
+          origine: typeof l.origine === 'string' ? l.origine : ''
         };
-        sauverListes(); afficherListes(); message('msg-reglages', 'ok', 'Réglages et listes chargés depuis le fichier.');
+        var ajouts = completerDepuisOrigine(etat.listes);
+        sauverListes(); afficherListes(); message('msg-reglages', 'ok', 'Réglages et listes chargés depuis le fichier.' + (ajouts ? ' ' + ajouts + ' mot' + (ajouts > 1 ? 's' : '') + ' d\u2019origine ajouté' + (ajouts > 1 ? 's' : '') + '.' : ''));
       } catch (e) { message('msg-reglages', 'erreur', 'Ce fichier n\u2019est pas un fichier de réglages du Pseudonymiseur.'); }
     });
   });
