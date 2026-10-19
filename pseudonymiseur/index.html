@@ -83,6 +83,10 @@ textarea.liste{min-height:260px;font-family:var(--police);font-size:.95rem}
 .message.ok{background:var(--vert-fond);color:var(--vert);border-color:#cfe8da}
 .message.attention{background:var(--ambre-fond);color:var(--ambre);border-color:#f1dca6}
 .message.erreur{background:var(--rouge-fond);color:var(--rouge-fonce);border-color:#f3c4c2}
+.message ul.occ{margin:8px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px}
+.message ul.occ li{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86rem;white-space:pre-wrap;word-break:break-word;color:var(--encre)}
+.message ul.occ button{font:inherit;color:var(--rouge-fonce);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;margin-right:6px}
+.message ul.occ mark{background:#fff;color:var(--rouge);font-weight:700;padding:0 2px;border-radius:3px;border:1px solid #f3c4c2}
 .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--encre);color:#fff;padding:10px 18px;border-radius:999px;font-size:.9rem;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:50;box-shadow:0 6px 24px rgba(0,0,0,.2)}
 .toast.visible{opacity:1;transform:translateX(-50%) translateY(0)}
 
@@ -400,7 +404,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-apropos">
       <div class="carte">
         <h1>À propos</h1>
-        <p><strong>Pseudonymiseur</strong>, version web 1.2 du 20 octobre 2026. Reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
+        <p><strong>Pseudonymiseur</strong>, version web 1.3 du 20 octobre 2026. Reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
         <h2>Où vont les données</h2>
         <ul class="propre">
           <li>Nulle part. Cette page est un programme complet que le serveur livre à votre navigateur ; le traitement se fait ensuite sur votre poste. Le serveur ne voit ni le texte, ni la table de correspondance, ni vos listes.</li>
@@ -425,7 +429,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
 
 <footer class="pied">
   <span>Lyon 1 Université</span>
-  <span>Pseudonymiseur, version web 1.2 du 20 octobre 2026</span>
+  <span>Pseudonymiseur, version web 1.3 du 20 octobre 2026</span>
   <span>Traitement local, aucune donnée transmise</span>
 </footer>
 <div class="toast" id="toast"></div>
@@ -2679,7 +2683,7 @@ var LISTES_ORIGINE = {
   $('btn-pseudonymiser').addEventListener('click', function () {
     lireFormulaires();
     var r = P.pseudonymiser(P.texteEnCellules($('entree').value), configuration());
-    if (!r.ok) { message('msg-entree', 'erreur', echapperHtml(r.erreur)); return; }
+    if (!r.ok) { if (!signalerPrefixe(configuration().prefixe)) message('msg-entree', 'erreur', echapperHtml(r.erreur)); return; }
     message('msg-entree', '', '');
     $('sortie').value = P.cellulesEnTexte(r.cellules);
     etat.correspondance = r.correspondance; etat.dateCorresp = new Date().toLocaleString('fr-FR');
@@ -2695,6 +2699,33 @@ var LISTES_ORIGINE = {
     afficherCorrespondance(); majEtapes(); sauverSession(); $('chk-couleur').checked = false; basculerApercu('sortie', false);
     montrer('sortie');
   });
+  // Préfixe déjà présent dans le texte collé : chaque occurrence est listée avec son numéro de ligne, en rouge, et un clic la sélectionne dans le texte.
+  function signalerPrefixe(prefixe) {
+    var texte = $('entree').value, re = new RegExp(echapper(prefixe) + '_[A-Za-z0-9_]*', 'gi'), occ = [], m;
+    while ((m = re.exec(texte)) !== null) { occ.push({ debut: m.index, fin: m.index + m[0].length, code: m[0] }); if (m[0].length === 0) re.lastIndex++; }
+    if (!occ.length) return false;
+    var lignes = texte.split('\n'), debuts = [], pos = 0;
+    for (var i = 0; i < lignes.length; i++) { debuts.push(pos); pos += lignes[i].length + 1; }
+    var html = 'Le texte collé contient déjà « ' + echapperHtml(prefixe) + '_ » à ' + occ.length + ' endroit' + (occ.length > 1 ? 's' : '') + ' (en rouge ci-dessous ; un clic sur le numéro de ligne le sélectionne dans le texte). Retirer ou modifier ces passages, ou changer le préfixe des codes dans les Réglages, puis relancer.<ul class="occ">';
+    occ.forEach(function (o, idx) {
+      var l = 0; while (l + 1 < debuts.length && debuts[l + 1] <= o.debut) l++;
+      var ligne = lignes[l], d = o.debut - debuts[l], f = d + o.code.length;
+      var avant = ligne.substring(Math.max(0, d - 40), d), apres = ligne.substring(f, f + 40);
+      html += '<li><button type="button" data-occ="' + idx + '">ligne ' + (l + 1) + '</button>' + (d > 40 ? '… ' : '') + echapperHtml(avant) + '<mark>' + echapperHtml(o.code) + '</mark>' + echapperHtml(apres) + (f + 40 < ligne.length ? ' …' : '') + '</li>';
+    });
+    message('msg-entree', 'erreur', html + '</ul>');
+    $('msg-entree').querySelectorAll('button[data-occ]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var o = occ[parseInt(b.dataset.occ, 10)], ta = $('entree');
+        var l = 0; while (l + 1 < debuts.length && debuts[l + 1] <= o.debut) l++;
+        ta.focus(); ta.setSelectionRange(o.debut, o.fin);
+        var h = parseFloat(getComputedStyle(ta).lineHeight) || 20;
+        ta.scrollTop = Math.max(0, (l - 3) * h);
+      });
+    });
+    return true;
+  }
+  function echapper(s) { return s.replace(/[\\^$.|?*+()[\]{}]/g, '\\$&'); }
   $('btn-coller-entree').addEventListener('click', function () { collerDans('entree'); });
   $('btn-effacer-entree').addEventListener('click', function () { $('entree').value = ''; message('msg-entree', '', ''); majEtapes(); sauverSession(); });
 
