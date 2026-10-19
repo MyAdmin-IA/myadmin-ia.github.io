@@ -86,6 +86,8 @@ textarea.liste{min-height:260px;font-family:var(--police);font-size:.95rem}
 .message ul.occ{margin:8px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px}
 .message ul.occ li{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86rem;white-space:pre-wrap;word-break:break-word;color:var(--encre)}
 .message ul.occ button{font:inherit;color:var(--rouge-fonce);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;margin-right:6px}
+.message p.occ-action{margin:12px 0 0;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.message p.occ-action small{color:var(--gris);font-size:.85rem;max-width:560px}
 .message ul.occ mark{background:#fff;color:var(--rouge);font-weight:700;padding:0 2px;border-radius:3px;border:1px solid #f3c4c2}
 .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--encre);color:#fff;padding:10px 18px;border-radius:999px;font-size:.9rem;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:50;box-shadow:0 6px 24px rgba(0,0,0,.2)}
 .toast.visible{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -404,7 +406,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-apropos">
       <div class="carte">
         <h1>À propos</h1>
-        <p><strong>Pseudonymiseur</strong>, version web 1.3 du 20 octobre 2026. Reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
+        <p><strong>Pseudonymiseur</strong>, version web 1.4 du 20 octobre 2026. Reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
         <h2>Où vont les données</h2>
         <ul class="propre">
           <li>Nulle part. Cette page est un programme complet que le serveur livre à votre navigateur ; le traitement se fait ensuite sur votre poste. Le serveur ne voit ni le texte, ni la table de correspondance, ni vos listes.</li>
@@ -429,7 +431,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
 
 <footer class="pied">
   <span>Lyon 1 Université</span>
-  <span>Pseudonymiseur, version web 1.3 du 20 octobre 2026</span>
+  <span>Pseudonymiseur, version web 1.4 du 20 octobre 2026</span>
   <span>Traitement local, aucune donnée transmise</span>
 </footer>
 <div class="toast" id="toast"></div>
@@ -2713,7 +2715,14 @@ var LISTES_ORIGINE = {
       var avant = ligne.substring(Math.max(0, d - 40), d), apres = ligne.substring(f, f + 40);
       html += '<li><button type="button" data-occ="' + idx + '">ligne ' + (l + 1) + '</button>' + (d > 40 ? '… ' : '') + echapperHtml(avant) + '<mark>' + echapperHtml(o.code) + '</mark>' + echapperHtml(apres) + (f + 40 < ligne.length ? ' …' : '') + '</li>';
     });
-    message('msg-entree', 'erreur', html + '</ul>');
+    var candidats = ['Masque', 'Code', 'Alias', 'Jeton'], autre = null;
+    for (var c = 0; c < candidats.length; c++) { if (texte.toLowerCase().indexOf(candidats[c].toLowerCase() + '_') < 0) { autre = candidats[c]; break; } }
+    if (autre) html += '</ul><p class="occ-action"><button type="button" class="btn principal" id="btn-autre-prefixe">Relancer avec le préfixe « ' + autre + ' »</button> <small>Les codes deviennent ' + autre + '_Personne_001 ; les « ' + echapperHtml(prefixe) + '_ » du texte restent écrits tels quels. Le préfixe reste réglé sur ' + autre + ' jusqu\u2019à ce que vous le changiez dans les Réglages.</small></p>';
+    else html += '</ul>';
+    message('msg-entree', 'erreur', html);
+    if (autre) $('btn-autre-prefixe').addEventListener('click', function () {
+      $('reg-prefixe').value = autre; lireFormulaires(); $('btn-pseudonymiser').click();
+    });
     $('msg-entree').querySelectorAll('button[data-occ]').forEach(function (b) {
       b.addEventListener('click', function () {
         var o = occ[parseInt(b.dataset.occ, 10)], ta = $('entree');
