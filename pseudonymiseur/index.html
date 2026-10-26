@@ -406,7 +406,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-apropos">
       <div class="carte">
         <h1>À propos</h1>
-        <p><strong>Pseudonymiseur</strong>, version web 1.7 du 26 octobre 2026. Reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et trois corrections (la troisième : un prénom composé dont la suite est en minuscules, Marie-odile MOREAU, est reconnu) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). La version 1.7 code en plus les téléphones étrangers (indicatif entre parenthèses, ou tout numéro écrit après Tel, Direct, Mobile, Fax), les adresses étrangères écrites sur une ligne qui finit par un pays, les entreprises suivies d'une forme juridique (Ltd, Inc, GmbH, SARL, SAS), le nom entier d'un bâtiment, et le numéro dans un nom de rue (boulevard du 11 novembre 1918) ; FAQ et CAUTION restent en clair. Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
+        <p><strong>Pseudonymiseur</strong>, version web 1.7 du 26 octobre 2026. Reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et trois corrections (la troisième : un prénom composé dont la suite est en minuscules, Marie-odile MOREAU, est reconnu) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). La version 1.7 code en plus les téléphones étrangers (indicatif entre parenthèses, ou tout numéro écrit après Tel, Direct, Mobile, Fax), les adresses étrangères écrites sur une ligne qui finit par un pays, les entreprises suivies d'une forme juridique (Ltd, Inc, GmbH, SARL, SAS), le nom entier d'un bâtiment, le numéro dans un nom de rue (boulevard du 11 novembre 1918), et le nom écrit avant une adresse mail ou avant « a écrit : », même avec un prénom inconnu ; FAQ et CAUTION restent en clair. Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
         <h2>Où vont les données</h2>
         <ul class="propre">
           <li>Nulle part. Cette page est un programme complet que le serveur livre à votre navigateur ; le traitement se fait ensuite sur votre poste. Le serveur ne voit ni le texte, ni la table de correspondance, ni vos listes.</li>
@@ -442,6 +442,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
 
    Ce que fait Pseudonymiser, dans l'ordre, cellule par cellule (une ligne du texte collé = une ligne, une tabulation = une colonne) :
      1. les adresses mail deviennent pseudo_mail_001@pseudo.invalid ; les liens deviennent https://pseudo.invalid/lien_001 ;
+        puis le nom écrit avant une adresse mail ou avant « a écrit : » est codé comme une personne (règle du 26/10/2026) ;
      2. les lignes du Dictionnaire sont appliquées : un texte tel quel (mot entier, casse ignorée), ou un motif (expression régulière) ;
      2 bis. les entreprises suivies d'une forme juridique (Ltd, Inc, GmbH, SARL, SAS...), règle du 26/10/2026 ;
      3. si le réglage Adresses est à Oui : adresses postales, adresses étrangères sur une ligne finissant par un pays,
@@ -683,6 +684,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     // Mails et liens d'abord : un terme du Dictionnaire (GEP) ne doit pas être remplacé à l'intérieur d'une adresse.
     txt = this.remplacerMotif(txt, '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}', 'Mail', true);
     txt = this.remplacerMotif(txt, '(https?://|www\\.)' + NS + '*[^ \\t\\r\\n\\f\\v.,;:)]', 'Lien', true);
+    txt = this.masquerNomsEnTete(txt);
     txt = this.appliquerDictionnaire(txt);
     txt = this.masquerEntreprises(txt);
     if (this.adresses) txt = this.masquerAdresses(txt);
@@ -1102,6 +1104,38 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   };
 
   // ------------------------------------------------------------------ personnes
+
+  // Nom dans un en-tête de mail (règle ajoutée le 26/10/2026, absente du module 4.1) : un à cinq mots, le premier avec majuscule,
+  // écrits juste avant une adresse mail déjà codée (De : Giulia Rossi <pseudo_mail_001@pseudo.invalid>) ou juste avant
+  // « a écrit : » ou « wrote: » (Le 12/10/2026, Giulia Rossi a écrit :). Le nom est codé comme une personne, même si le prénom
+  // est inconnu ; ses autres apparitions dans le texte reçoivent le même code au second passage.
+  var MOT_NOM = "(?:[A-ZÀ-Ý][A-Za-zÀ-ÿ'\u2019-]*|[a-zà-ÿ][a-zà-ÿ'\u2019-]+)";
+  Session.prototype.masquerNomsEnTete = function (txt) {
+    var moi = this, pm = echapper(lcase(this.prefixe));
+    var nom = "(?<![A-Za-zÀ-ÿ0-9_.@'\u2019-])([A-ZÀ-Ý][A-Za-zÀ-ÿ'\u2019-]*(?:[ \\t]+" + MOT_NOM + "){0,4})";
+    var apresMail = "(?=[ \\t]*[<(\\[](?:mailto:)?" + pm + "_mail_\\d{3}@" + pm + "\\.invalid)";
+    var apresEcrit = "(?=[ \\t]+(?:a [ée]crit|wrote)[ \\t]*:)";
+    var ecarte = function (w) {
+      return moi.conserver[normaliser(w)] || (motCourant(w) && !estParticule(w)) || estCivilite(w);
+    };
+    // Avant une adresse mail, le nom est codé seulement s'il commence par un prénom connu ou s'il compte au moins deux mots
+    // tous avec majuscule (Giulia Rossi) : Gestion collective ou Service Scolarité restent en clair. Avant « a écrit : »,
+    // le signal suffit (Mira vandersteen). Dans tous les cas, aucun mot courant ni aucun mot de la liste Conserver.
+    var garde = function (ecrit) {
+      return function (m, n) {
+        var mots = n.split(/[ \t]+/), i, majuscules = true;
+        for (i = 0; i < mots.length; i++) {
+          if (ecarte(mots[i]) && !estParticule(mots[i])) return m;
+          if (!(estCapitalise(mots[i]) || estMaj(mots[i]) || estParticule(mots[i]))) majuscules = false;
+        }
+        if (!ecrit && !moi.estPrenom(mots[0]) && !(mots.length >= 2 && majuscules)) return m;
+        return moi.codePersonne(n);
+      };
+    };
+    txt = txt.replace(new RegExp(nom + apresMail, 'g'), garde(false));
+    txt = txt.replace(new RegExp(nom + apresEcrit, 'g'), garde(true));
+    return txt;
+  };
 
   Session.prototype.remplacerPersonnes = function (txt) {
     var d = decouper(txt), mots = d.mots, genres = d.genres, n = d.n;
