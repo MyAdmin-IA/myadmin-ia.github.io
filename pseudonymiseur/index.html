@@ -406,7 +406,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-apropos">
       <div class="carte">
         <h1>À propos</h1>
-        <p><strong>Pseudonymiseur</strong>, version web 1.7 du 26 octobre 2026. Reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et trois corrections (la troisième : un prénom composé dont la suite est en minuscules, Marie-odile MOREAU, est reconnu) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). La version 1.7 code en plus les téléphones étrangers (indicatif entre parenthèses, ou tout numéro écrit après Tel, Direct, Mobile, Fax), les adresses étrangères écrites sur une ligne qui finit par un pays, les entreprises suivies d'une forme juridique (Ltd, Inc, GmbH, SARL, SAS), le nom entier d'un bâtiment, le numéro dans un nom de rue (boulevard du 11 novembre 1918), et le nom écrit avant une adresse mail ou avant « a écrit : », même avec un prénom inconnu ; FAQ et CAUTION restent en clair. Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
+        <p><strong>Pseudonymiseur</strong>, version web 1.8 du 26 octobre 2026. Reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et trois corrections (la troisième : un prénom composé dont la suite est en minuscules, Marie-odile MOREAU, est reconnu) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). La version 1.7 code en plus les téléphones étrangers (indicatif entre parenthèses, ou tout numéro écrit après Tel, Direct, Mobile, Fax), les adresses étrangères écrites sur une ligne qui finit par un pays, les entreprises suivies d'une forme juridique (Ltd, Inc, GmbH, SARL, SAS), le nom entier d'un bâtiment, le numéro dans un nom de rue (boulevard du 11 novembre 1918), et le nom écrit avant une adresse mail ou avant « a écrit : », même avec un prénom inconnu ; la version 1.8 ne prend plus pour une personne un intitulé en majuscules qui commence par un nom de lieu ou de service (QUAI CHARGEMENT devient un lieu, SERVICE COURRIER reste en clair) ni le sigle GLPI ; FAQ et CAUTION restent en clair. Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
         <h2>Où vont les données</h2>
         <ul class="propre">
           <li>Nulle part. Cette page est un programme complet que le serveur livre à votre navigateur ; le traitement se fait ensuite sur votre poste. Le serveur ne voit ni le texte, ni la table de correspondance, ni vos listes.</li>
@@ -431,7 +431,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
 
 <footer class="pied">
   <span>Lyon 1 Université</span>
-  <span>Pseudonymiseur, version web 1.7 du 26 octobre 2026</span>
+  <span>Pseudonymiseur, version web 1.8 du 26 octobre 2026</span>
   <span>Traitement local, aucune donnée transmise</span>
 </footer>
 <div class="toast" id="toast"></div>
@@ -1137,12 +1137,42 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     return txt;
   };
 
+  // Règle ajoutée le 26/10/2026 (absente du module 4.1) : un intitulé en majuscules qui commence par un nom de lieu ou d'entité
+  // n'est pas un nom de personne. Après un mot de lieu (QUAI, SALLE, BUREAU, BÂTIMENT), le groupe de mots en majuscules qui suit
+  // sur la même ligne devient un lieu (QUAI CHARGEMENT donne Pseudo_Lieu) ; après un nom d'entité (SERVICE, DIRECTION, ZONE),
+  // il reste en clair. Seul, le mot reste toujours en clair. Les titres de personne (DIRECTEUR, RESPONSABLE) ne sont pas concernés.
+  var MOTS_DE_LIEU = {}, MOTS_ENTITE = {};
+  ('rue avenue boulevard bd place allee chemin impasse quai cours route square batiment campus amphitheatre amphi salle bureau hall parking').split(' ')
+    .forEach(function (m) { MOTS_DE_LIEU[m] = 1; });
+  ('service direction laboratoire departement composante universite equipe projet plateforme application formation secretariat ' +
+    'cellule mission ecole faculte institut unite centre pole parcours commission conseil comite groupe reseau zone accueil')
+    .split(' ').forEach(function (m) { MOTS_ENTITE[m] = 1; });
+  Session.prototype.finGroupeCommun = function (mots, genres, n, i) {
+    var m = partieUtile(mots[i]), cle = normaliser(m);
+    if (!estMaj(m) || m.length < 2) return null;
+    var lieu = MOTS_DE_LIEU.hasOwnProperty(cle);
+    if (!lieu && !MOTS_ENTITE.hasOwnProperty(cle)) return null;
+    var fin = i;
+    while (fin + 2 < n && genres[fin + 1] === 'O' && mots[fin + 1] === ' ' && genres[fin + 2] === 'W' &&
+      estMaj(mots[fin + 2]) && mots[fin + 2].length >= 2 && !estCode(mots, genres, n, fin + 2)) fin += 2;
+    return { fin: fin, lieu: lieu && fin > i };
+  };
+
   Session.prototype.remplacerPersonnes = function (txt) {
     var d = decouper(txt), mots = d.mots, genres = d.genres, n = d.n;
     if (n === 0) return txt;
     var res = '', i = 0, fin, j, orig, debut;
     while (i < n) {
       fin = -1;
+      // Intitulé en majuscules qui commence par un nom de lieu ou d'entité (QUAI CHARGEMENT, SERVICE COURRIER) : jamais une personne.
+      var g = (genres[i] === 'W') ? this.finGroupeCommun(mots, genres, n, i) : null;
+      if (g) {
+        orig = '';
+        for (j = i; j <= g.fin; j++) orig += mots[j];
+        res += g.lieu ? this.codePour('Lieu', orig) : orig;
+        i = g.fin + 1;
+        continue;
+      }
       if (genres[i] === 'W') fin = this.finPersonne(mots, genres, n, i);
       if (fin >= 0) {
         debut = i;
@@ -2700,7 +2730,8 @@ var LISTES_ORIGINE = {
 "WARNING",
 "EXTERNAL",
 "NOTICE",
-"CONFIDENTIAL"
+"CONFIDENTIAL",
+"GLPI"
 ],
 "dictionnaire": [
 {
@@ -2915,7 +2946,7 @@ var LISTES_ORIGINE = {
 "Londres",
 "Berlin"
 ],
-"version": "1.7 du 26/10/2026"
+"version": "1.8 du 26/10/2026"
 };
 </script>
 <script>
