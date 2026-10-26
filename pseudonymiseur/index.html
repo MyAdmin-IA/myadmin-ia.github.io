@@ -193,9 +193,9 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         <p class="sous">Le Pseudonymiseur remplace, sur votre poste, les noms, adresses mail, téléphones, numéros, dates et adresses d'un texte par des codes. Vous confiez le texte codé à l'outil d'intelligence artificielle, puis vous remettez les vraies données dans sa réponse. La table de correspondance ne quitte jamais votre navigateur.</p>
         <div class="etapes">
           <div><b>Étape 1</b><strong>Coller le texte</strong><p>Un mail, un document, un tableau copié d'Excel. Puis cliquer sur Pseudonymiser.</p></div>
-          <div><b>Étape 2</b><strong>Relire et copier</strong><p>Vérifier la sortie, corriger à la main si besoin, puis Copier pour l'IA et coller dans l'outil.</p></div>
-          <div><b>Étape 3</b><strong>Coller la réponse</strong><p>Copier la réponse de l'outil, la coller ici, puis cliquer sur Dépseudonymiser.</p></div>
-          <div><b>Étape 4</b><strong>Récupérer le texte</strong><p>Relire le texte final, puis Copier le texte final vers votre mail ou votre document.</p></div>
+          <div><b>Étape 2</b><strong>Relire et copier</strong><p>La sortie est déjà copiée. La vérifier, la corriger à la main si besoin (puis Copier pour l'IA), et la coller dans l'outil.</p></div>
+          <div><b>Étape 3</b><strong>Coller la réponse</strong><p>Copier la réponse de l'outil, puis cliquer sur Coller et restituer : la réponse est collée et restituée en un clic.</p></div>
+          <div><b>Étape 4</b><strong>Récupérer le texte</strong><p>Relire le texte final, déjà copié, et le coller dans votre mail ou votre document.</p></div>
         </div>
         <div class="actions"><button class="btn principal" data-aller="entree">Commencer, étape 1</button></div>
       </div>
@@ -274,12 +274,13 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-reponse">
       <div class="carte">
         <h1>Étape 3, la réponse de l'outil</h1>
-        <p class="sous">Collez la réponse de l'outil d'intelligence artificielle. Les codes y sont reconnus même si l'outil a changé leur casse (pseudo_personne_001).</p>
+        <p class="sous">Copiez la réponse de l'outil d'intelligence artificielle, puis cliquez sur Coller et restituer. Les codes y sont reconnus même si l'outil a changé leur casse (pseudo_personne_001).</p>
         <label class="etiquette" for="reponse">Réponse reçue</label>
         <textarea id="reponse" spellcheck="false" placeholder="Coller ici la réponse de l'outil…"></textarea>
         <div class="message" id="msg-reponse"></div>
         <div class="actions">
-          <button class="btn principal" id="btn-depseudonymiser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 15.5-6.3L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.3L3 16"/><path d="M3 21v-5h5"/></svg>Dépseudonymiser</button>
+          <button class="btn principal" id="btn-coller-restituer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 15.5-6.3L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.3L3 16"/><path d="M3 21v-5h5"/></svg>Coller et restituer</button>
+          <button class="btn" id="btn-depseudonymiser">Dépseudonymiser</button>
           <button class="btn" id="btn-coller-reponse">Coller depuis le presse-papiers</button>
           <span class="esp"></span>
           <button class="btn discret" id="btn-effacer-reponse">Effacer ce texte</button>
@@ -406,7 +407,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-apropos">
       <div class="carte">
         <h1>À propos</h1>
-        <p><strong>Pseudonymiseur</strong>, version web 1.10 du 26 octobre 2026. Reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et trois corrections (la troisième : un prénom composé dont la suite est en minuscules, Marie-odile MOREAU, est reconnu) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). La version 1.7 code en plus les téléphones étrangers (indicatif entre parenthèses, ou tout numéro écrit après Tel, Direct, Mobile, Fax), les adresses étrangères écrites sur une ligne qui finit par un pays, les entreprises suivies d'une forme juridique (Ltd, Inc, GmbH, SARL, SAS), le nom entier d'un bâtiment, le numéro dans un nom de rue (boulevard du 11 novembre 1918), et le nom écrit avant une adresse mail ou avant « a écrit : », même avec un prénom inconnu ; la version 1.8 ne prend plus pour une personne un intitulé en majuscules qui commence par un nom de lieu ou de service (QUAI CHARGEMENT devient un lieu, SERVICE COURRIER reste en clair) ni le sigle GLPI ; la version 1.9 laisse en clair un sigle défini dans le texte entre parenthèses, quand ses lettres sont les initiales de sa définition (CAL, capacité d'accueil limitée) ; la version 1.10 code une signature réduite à une initiale collée au nom, seule sur sa ligne (J.Durand) ; FAQ et CAUTION restent en clair. Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
+        <p><strong>Pseudonymiseur</strong>, version web 1.11 du 26 octobre 2026. Reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et trois corrections (la troisième : un prénom composé dont la suite est en minuscules, Marie-odile MOREAU, est reconnu) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). La version 1.7 code en plus les téléphones étrangers (indicatif entre parenthèses, ou tout numéro écrit après Tel, Direct, Mobile, Fax), les adresses étrangères écrites sur une ligne qui finit par un pays, les entreprises suivies d'une forme juridique (Ltd, Inc, GmbH, SARL, SAS), le nom entier d'un bâtiment, le numéro dans un nom de rue (boulevard du 11 novembre 1918), et le nom écrit avant une adresse mail ou avant « a écrit : », même avec un prénom inconnu ; la version 1.8 ne prend plus pour une personne un intitulé en majuscules qui commence par un nom de lieu ou de service (QUAI CHARGEMENT devient un lieu, SERVICE COURRIER reste en clair) ni le sigle GLPI ; la version 1.9 laisse en clair un sigle défini dans le texte entre parenthèses, quand ses lettres sont les initiales de sa définition (CAL, capacité d'accueil limitée) ; la version 1.10 code une signature réduite à une initiale collée au nom, seule sur sa ligne (J.Durand) ; FAQ et CAUTION restent en clair ; la version 1.11 code un prénom connu écrit après une élision (d'Antoine), reconnaît un terme du Dictionnaire écrit sans accent (Génie Electrique), laisse en clair AAP, FOCAL, SYMPA et SUJET, copie la sortie dès la pseudonymisation et ajoute le bouton Coller et restituer. Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
         <h2>Où vont les données</h2>
         <ul class="propre">
           <li>Nulle part. Cette page est un programme complet que le serveur livre à votre navigateur ; le traitement se fait ensuite sur votre poste. Le serveur ne voit ni le texte, ni la table de correspondance, ni vos listes.</li>
@@ -431,7 +432,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
 
 <footer class="pied">
   <span>Lyon 1 Université</span>
-  <span>Pseudonymiseur, version web 1.10 du 26 octobre 2026</span>
+  <span>Pseudonymiseur, version web 1.11 du 26 octobre 2026</span>
   <span>Traitement local, aucune donnée transmise</span>
 </footer>
 <div class="toast" id="toast"></div>
@@ -615,8 +616,17 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   }
 
   // Motif qui reconnaît le texte tel quel, borné aux limites de mot quand il commence ou finit par une lettre ou un chiffre.
+  // Lettres accentuées et non accentuées confondues (règle ajoutée le 26/10/2026, absente du module 4.1) : un terme du
+  // Dictionnaire est reconnu même écrit sans accent (Génie Electrique pour Génie Électrique), fréquent avec les majuscules.
+  var LETTRES_ACCENTUEES = { a: 'aàáâãäå', c: 'cç', e: 'eèéêë', i: 'iìíîï', n: 'nñ', o: 'oòóôõöø', u: 'uùúûü', y: 'yýÿ' };
+  function classeLettre(ch) {
+    var base = sansAccents(lcase(ch));
+    if (!LETTRES_ACCENTUEES.hasOwnProperty(base)) return echapper(ch);
+    return '[' + LETTRES_ACCENTUEES[base] + ucase(LETTRES_ACCENTUEES[base]) + ']';
+  }
   function motifMotEntier(terme) {
-    var r = echapper(terme);
+    var r = '';
+    for (var i = 0; i < terme.length; i++) r += classeLettre(terme.charAt(i));
     if (estAlphanum(terme.charAt(0))) r = '\\b' + r;
     if (estAlphanum(terme.charAt(terme.length - 1))) r = r + '\\b';
     return r;
@@ -709,7 +719,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     textes = trierParLongueur(textes, function (x) { return x.texte; });
     var i, avant, matches, code, m;
     for (i = 0; i < textes.length; i++) {
-      if (lcase(txt).indexOf(lcase(textes[i].texte)) >= 0) {
+      if (normaliser(txt).indexOf(normaliser(textes[i].texte)) >= 0) {
         avant = this.map.size;
         matches = txt.match(new RegExp(motifMotEntier(textes[i].texte), 'gi')) || [];
         if (matches.length > 0) {
@@ -1195,6 +1205,11 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         if (estCivilite(partieUtile(mots[i]))) { res += mots[i] + mots[i + 1]; debut = i + 2; }
         orig = '';
         for (j = debut; j <= fin; j++) orig += mots[j];
+        if (motElide(mots[debut])) {
+          var utile = partieUtile(mots[debut]);
+          res += mots[debut].substring(0, mots[debut].length - utile.length);
+          orig = orig.substring(mots[debut].length - utile.length);
+        }
         res += this.codePersonne(orig);
         i = fin + 1;
       } else { res += mots[i]; i++; }
@@ -1323,7 +1338,12 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   Session.prototype.finPersonne = function (mots, genres, n, i) {
     var m = mots[i], b = partieUtile(m), k, k2 = 0, f;
     if (this.conserver[normaliser(b)]) return -1;
-    if (motElide(m)) return -1;
+    // Règle ajoutée le 26/10/2026 (absente du module 4.1) : un prénom connu écrit après une élision (d'Antoine, l'Amélie)
+    // est une personne ; l'élision reste en clair et seul le nom est codé. Les autres mots élidés restent en clair.
+    if (motElide(m)) {
+      if (estCapitalise(b) && this.estPrenom(b) && !motCourant(b) && !estCode(mots, genres, n, i) && !apresMotDeRue(mots, genres, i)) return this.etendre(mots, genres, n, i, 2);
+      return -1;
+    }
     if (estCode(mots, genres, n, i)) return -1;
 
     // 1. Civilité : Madame DELORME, M. Delorme, Mme Sophie Durand, Mme de La Tour, M. van Dijk.
@@ -2787,7 +2807,11 @@ var LISTES_ORIGINE = {
 "EXTERNAL",
 "NOTICE",
 "CONFIDENTIAL",
-"GLPI"
+"GLPI",
+"AAP",
+"FOCAL",
+"SYMPA",
+"SUJET"
 ],
 "dictionnaire": [
 {
@@ -2878,6 +2902,26 @@ var LISTES_ORIGINE = {
 {
 "texte": "COM BEF",
 "etiquette": "Fournisseur",
+"type": "Texte"
+},
+{
+"texte": "Génie Électrique et Procédés",
+"etiquette": "Service",
+"type": "Texte"
+},
+{
+"texte": "Directeur de la composante",
+"etiquette": "Fonction",
+"type": "Texte"
+},
+{
+"texte": "Directrice de la composante",
+"etiquette": "Fonction",
+"type": "Texte"
+},
+{
+"texte": "Responsable du Master EEEA",
+"etiquette": "Fonction",
 "type": "Texte"
 }
 ],
@@ -3002,7 +3046,7 @@ var LISTES_ORIGINE = {
 "Londres",
 "Berlin"
 ],
-"version": "1.10 du 26/10/2026"
+"version": "1.11 du 26/10/2026"
 };
 </script>
 <script>
@@ -3018,7 +3062,8 @@ var LISTES_ORIGINE = {
 
   var etat = {
     listes: null,   // {prenoms:[], conserver:[], noms:[], villes:[], dictionnaire:[{texte,etiquette,type}], reglages:{prefixe,dates,adresses,seuil}}
-    correspondance: [], dateCorresp: '', derniersCodes: []
+    correspondance: [], dateCorresp: '', derniersCodes: [],
+    dejaCopie: false, dejaRestitue: '', dejaCopieFinal: false   // copies et restitution automatiques (26/10/2026)
   };
 
   function listesParDefaut() {
@@ -3114,9 +3159,9 @@ var LISTES_ORIGINE = {
   }
 
   // ------------------------------------------------------------------ presse-papiers et fichiers
-  function copier(texte, ok) {
+  function copier(texte, ok, apres) {
     if (!texte) { toast('Rien à copier.'); return; }
-    var fini = function () { toast(ok); };
+    var fini = function () { toast(ok); if (apres) apres(); };
     var secours = function () {
       var ta = document.createElement('textarea'); ta.value = texte; ta.style.position = 'fixed'; ta.style.opacity = '0';
       document.body.appendChild(ta); ta.select();
@@ -3171,9 +3216,15 @@ var LISTES_ORIGINE = {
     ].map(function (x) { return '<div><b>' + x[0] + '</b><span>' + x[1] + '</span></div>'; }).join('');
     if (r.avertissements.length) message('msg-sortie', 'attention', r.avertissements.map(echapperHtml).join('<br>'));
     else message('msg-sortie', 'ok', 'Pseudonymisation faite : ' + s.lignes + ' ligne' + (s.lignes > 1 ? 's' : '') + ' dans la table de correspondance. Relire la sortie, puis Copier pour l\u2019IA.');
-    $('reponse').value = ''; $('restitue').value = ''; message('msg-restitue', '', '');
+    $('reponse').value = ''; $('restitue').value = ''; message('msg-reponse', '', ''); message('msg-restitue', '', '');
+    etat.dejaCopie = false; etat.dejaRestitue = ''; etat.dejaCopieFinal = false;
     afficherCorrespondance(); majEtapes(); sauverSession(); $('chk-couleur').checked = false; basculerApercu('sortie', false);
     montrer('sortie');
+    // Un clic de moins (26/10/2026) : la sortie est copiée dans le presse-papiers dès la pseudonymisation ; le bouton reste.
+    if (!r.avertissements.length) copier($('sortie').value, 'Texte pseudonymisé copié automatiquement : le coller dans l\u2019outil d\u2019intelligence artificielle avec Ctrl+V.', function () {
+      etat.dejaCopie = true;
+      message('msg-sortie', 'ok', 'Pseudonymisation faite : ' + s.lignes + ' ligne' + (s.lignes > 1 ? 's' : '') + ' dans la table de correspondance. Le texte est déjà copié : le coller dans l\u2019outil avec Ctrl+V après relecture.');
+    });
   });
   // Préfixe déjà présent dans le texte collé : chaque occurrence est listée avec son numéro de ligne, en rouge, et un clic la sélectionne dans le texte.
   function signalerPrefixe(prefixe) {
@@ -3248,29 +3299,49 @@ var LISTES_ORIGINE = {
   $('chk-couleur-final').addEventListener('change', function () { basculerApercu('restitue', this.checked); });
   $('btn-copier-sortie').addEventListener('click', function () {
     if (!$('sortie').value.trim()) { toast('Rien à copier : cliquer d\u2019abord sur Pseudonymiser.'); return; }
-    copier($('sortie').value, 'Texte pseudonymisé copié : le coller dans l\u2019outil d\u2019intelligence artificielle avec Ctrl+V.');
+    copier($('sortie').value, etat.dejaCopie ? 'Déjà copié automatiquement : copié de nouveau, le coller avec Ctrl+V.' : 'Texte pseudonymisé copié : le coller dans l\u2019outil d\u2019intelligence artificielle avec Ctrl+V.', function () { etat.dejaCopie = true; });
   });
 
   // ------------------------------------------------------------------ étape 3 : dépseudonymiser
-  $('btn-depseudonymiser').addEventListener('click', function () {
+  function restituer(automatique) {
     var r = P.depseudonymiser(P.texteEnCellules($('reponse').value), etat.correspondance);
-    if (!r.ok) { message('msg-reponse', 'erreur', echapperHtml(r.erreur) + (etat.correspondance.length ? '' : ' Faire d\u2019abord l\u2019étape 1, ou charger une table de correspondance.')); return; }
-    message('msg-reponse', '', '');
+    if (!r.ok) { message('msg-reponse', 'erreur', echapperHtml(r.erreur) + (etat.correspondance.length ? '' : ' Faire d\u2019abord l\u2019étape 1, ou charger une table de correspondance.')); return false; }
+    message('msg-reponse', automatique ? 'ok' : '', automatique ? 'Réponse collée et déjà restituée : le texte final est à l\u2019étape 4.' : '');
     var texte = P.cellulesEnTexte(r.cellules);
     $('restitue').value = texte;
+    etat.dejaRestitue = $('reponse').value; etat.dejaCopieFinal = false;
     var restants = P.codesRestants(texte, etat.listes.reglages.prefixe);
     if (restants.length) message('msg-restitue', 'attention', restants.length + ' code' + (restants.length > 1 ? 's' : '') + ' resté' + (restants.length > 1 ? 's' : '') + ' en place, absent' + (restants.length > 1 ? 's' : '') + ' de la table : ' + restants.map(echapperHtml).join(', ') + '. Vérifier la réponse de l\u2019outil, ou charger la bonne table.');
     else message('msg-restitue', 'ok', 'Réponse restituée. Aucun code ne reste en place.');
     majEtapes(); sauverSession(); $('chk-couleur-final').checked = false; basculerApercu('restitue', false);
     montrer('restitue');
+    // Un clic de moins (26/10/2026) : après Coller et restituer, le texte final est copié aussitôt ; le bouton reste.
+    if (automatique && !restants.length) copier(texte, 'Texte final copié automatiquement : le coller dans le mail ou le document avec Ctrl+V.', function () {
+      etat.dejaCopieFinal = true;
+      message('msg-restitue', 'ok', 'Réponse restituée, aucun code ne reste en place. Le texte final est déjà copié : le coller avec Ctrl+V après relecture.');
+    });
+    return true;
+  }
+  $('btn-depseudonymiser').addEventListener('click', function () {
+    if (etat.dejaRestitue && etat.dejaRestitue === $('reponse').value && $('restitue').value.trim()) { toast('Déjà restitué : voici le texte final.'); montrer('restitue'); return; }
+    restituer(false);
+  });
+  // Coller et restituer : lit le presse-papiers (la réponse copiée dans l'outil), la colle et la restitue en un clic.
+  $('btn-coller-restituer').addEventListener('click', function () {
+    if (!(navigator.clipboard && navigator.clipboard.readText)) { toast('Le navigateur ne donne pas accès au presse-papiers : coller la réponse avec Ctrl+V, puis Dépseudonymiser.'); $('reponse').focus(); return; }
+    navigator.clipboard.readText().then(function (t) {
+      if (!t.trim()) { toast('Le presse-papiers est vide : copier d\u2019abord la réponse de l\u2019outil.'); return; }
+      $('reponse').value = t; majEtapes(); sauverSession();
+      restituer(true);
+    }, function () { toast('Le navigateur ne donne pas accès au presse-papiers : coller la réponse avec Ctrl+V, puis Dépseudonymiser.'); $('reponse').focus(); });
   });
   $('btn-coller-reponse').addEventListener('click', function () { collerDans('reponse'); });
-  $('btn-effacer-reponse').addEventListener('click', function () { $('reponse').value = ''; message('msg-reponse', '', ''); majEtapes(); sauverSession(); });
+  $('btn-effacer-reponse').addEventListener('click', function () { $('reponse').value = ''; message('msg-reponse', '', ''); etat.dejaRestitue = ''; majEtapes(); sauverSession(); });
 
   // ------------------------------------------------------------------ étape 4 : texte final
   $('btn-copier-restitue').addEventListener('click', function () {
     if (!$('restitue').value.trim()) { toast('Rien à copier : cliquer d\u2019abord sur Dépseudonymiser.'); return; }
-    copier($('restitue').value, 'Texte final copié : le coller dans le mail ou le document avec Ctrl+V.');
+    copier($('restitue').value, etat.dejaCopieFinal ? 'Déjà copié automatiquement : copié de nouveau, le coller avec Ctrl+V.' : 'Texte final copié : le coller dans le mail ou le document avec Ctrl+V.', function () { etat.dejaCopieFinal = true; });
   });
   $('btn-telecharger-restitue').addEventListener('click', function () {
     if (!$('restitue').value.trim()) { toast('Rien à télécharger.'); return; }
@@ -3282,6 +3353,7 @@ var LISTES_ORIGINE = {
     ['entree', 'sortie', 'reponse', 'restitue'].forEach(function (id) { $(id).value = ''; });
     ['msg-entree', 'msg-sortie', 'msg-reponse', 'msg-restitue'].forEach(function (id) { message(id, '', ''); });
     etat.correspondance = []; etat.dateCorresp = ''; $('bilan').innerHTML = '';
+    etat.dejaCopie = false; etat.dejaRestitue = ''; etat.dejaCopieFinal = false;
     afficherCorrespondance(); majEtapes(); sauverSession(); toast('Tout est effacé.'); montrer('entree');
   }
 
