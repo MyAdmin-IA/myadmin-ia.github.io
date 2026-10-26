@@ -406,7 +406,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-apropos">
       <div class="carte">
         <h1>À propos</h1>
-        <p><strong>Pseudonymiseur</strong>, version web 1.9 du 26 octobre 2026. Reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et trois corrections (la troisième : un prénom composé dont la suite est en minuscules, Marie-odile MOREAU, est reconnu) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). La version 1.7 code en plus les téléphones étrangers (indicatif entre parenthèses, ou tout numéro écrit après Tel, Direct, Mobile, Fax), les adresses étrangères écrites sur une ligne qui finit par un pays, les entreprises suivies d'une forme juridique (Ltd, Inc, GmbH, SARL, SAS), le nom entier d'un bâtiment, le numéro dans un nom de rue (boulevard du 11 novembre 1918), et le nom écrit avant une adresse mail ou avant « a écrit : », même avec un prénom inconnu ; la version 1.8 ne prend plus pour une personne un intitulé en majuscules qui commence par un nom de lieu ou de service (QUAI CHARGEMENT devient un lieu, SERVICE COURRIER reste en clair) ni le sigle GLPI ; la version 1.9 laisse en clair un sigle défini dans le texte entre parenthèses, quand ses lettres sont les initiales de sa définition (CAL, capacité d'accueil limitée) ; FAQ et CAUTION restent en clair. Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
+        <p><strong>Pseudonymiseur</strong>, version web 1.10 du 26 octobre 2026. Reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et trois corrections (la troisième : un prénom composé dont la suite est en minuscules, Marie-odile MOREAU, est reconnu) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). La version 1.7 code en plus les téléphones étrangers (indicatif entre parenthèses, ou tout numéro écrit après Tel, Direct, Mobile, Fax), les adresses étrangères écrites sur une ligne qui finit par un pays, les entreprises suivies d'une forme juridique (Ltd, Inc, GmbH, SARL, SAS), le nom entier d'un bâtiment, le numéro dans un nom de rue (boulevard du 11 novembre 1918), et le nom écrit avant une adresse mail ou avant « a écrit : », même avec un prénom inconnu ; la version 1.8 ne prend plus pour une personne un intitulé en majuscules qui commence par un nom de lieu ou de service (QUAI CHARGEMENT devient un lieu, SERVICE COURRIER reste en clair) ni le sigle GLPI ; la version 1.9 laisse en clair un sigle défini dans le texte entre parenthèses, quand ses lettres sont les initiales de sa définition (CAL, capacité d'accueil limitée) ; la version 1.10 code une signature réduite à une initiale collée au nom, seule sur sa ligne (J.Durand) ; FAQ et CAUTION restent en clair. Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
         <h2>Où vont les données</h2>
         <ul class="propre">
           <li>Nulle part. Cette page est un programme complet que le serveur livre à votre navigateur ; le traitement se fait ensuite sur votre poste. Le serveur ne voit ni le texte, ni la table de correspondance, ni vos listes.</li>
@@ -431,7 +431,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
 
 <footer class="pied">
   <span>Lyon 1 Université</span>
-  <span>Pseudonymiseur, version web 1.9 du 26 octobre 2026</span>
+  <span>Pseudonymiseur, version web 1.10 du 26 octobre 2026</span>
   <span>Traitement local, aucune donnée transmise</span>
 </footer>
 <div class="toast" id="toast"></div>
@@ -685,6 +685,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     txt = this.remplacerMotif(txt, '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}', 'Mail', true);
     txt = this.remplacerMotif(txt, '(https?://|www\\.)' + NS + '*[^ \\t\\r\\n\\f\\v.,;:)]', 'Lien', true);
     txt = this.masquerNomsEnTete(txt);
+    txt = this.masquerSignatureInitiale(txt);
     txt = this.appliquerDictionnaire(txt);
     txt = this.masquerEntreprises(txt);
     if (this.adresses) txt = this.masquerAdresses(txt);
@@ -1156,6 +1157,21 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     while (fin + 2 < n && genres[fin + 1] === 'O' && mots[fin + 1] === ' ' && genres[fin + 2] === 'W' &&
       estMaj(mots[fin + 2]) && mots[fin + 2].length >= 2 && !estCode(mots, genres, n, fin + 2)) fin += 2;
     return { fin: fin, lieu: lieu && fin > i };
+  };
+
+  // Signature réduite à une initiale collée au nom (règle ajoutée le 26/10/2026, absente du module 4.1) : une ligne qui ne
+  // contient que « JDurand », « J.Durand » ou « J. Durand » est un nom de personne. Rien n'est codé si le nom est un mot courant,
+  // un mot de la liste Conserver, un prénom connu ou une ville de la liste Villes, ni après M (M. Durand est une civilité).
+  Session.prototype.masquerSignatureInitiale = function (txt) {
+    var moi = this, villes = {};
+    this.villes.forEach(function (v) { villes[normaliser(v)] = 1; });
+    return txt.replace(/(^|\n)([ \t]*)([A-ZÀ-Ý])(\.?[ ]?)([A-ZÀ-Ý][a-zà-ÿ]{2,}(?:-[A-ZÀ-Ý][a-zà-ÿ]+)?)([ \t]*)(?=$|\r?\n)/g,
+      function (m, debut, esp, ini, sep, nom, fin) {
+        var k = normaliser(nom);
+        if (sep === ' ' || estCivilite(ini)) return m;
+        if (motCourant(nom) || moi.conserver[k] || moi.prenoms[k] || villes[k]) return m;
+        return debut + esp + moi.codePersonne(ini + sep + nom) + fin;
+      });
   };
 
   Session.prototype.remplacerPersonnes = function (txt) {
@@ -2986,7 +3002,7 @@ var LISTES_ORIGINE = {
 "Londres",
 "Berlin"
 ],
-"version": "1.9 du 26/10/2026"
+"version": "1.10 du 26/10/2026"
 };
 </script>
 <script>
