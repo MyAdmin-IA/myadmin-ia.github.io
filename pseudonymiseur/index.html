@@ -406,7 +406,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-apropos">
       <div class="carte">
         <h1>À propos</h1>
-        <p><strong>Pseudonymiseur</strong>, version web 1.8 du 26 octobre 2026. Reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et trois corrections (la troisième : un prénom composé dont la suite est en minuscules, Marie-odile MOREAU, est reconnu) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). La version 1.7 code en plus les téléphones étrangers (indicatif entre parenthèses, ou tout numéro écrit après Tel, Direct, Mobile, Fax), les adresses étrangères écrites sur une ligne qui finit par un pays, les entreprises suivies d'une forme juridique (Ltd, Inc, GmbH, SARL, SAS), le nom entier d'un bâtiment, le numéro dans un nom de rue (boulevard du 11 novembre 1918), et le nom écrit avant une adresse mail ou avant « a écrit : », même avec un prénom inconnu ; la version 1.8 ne prend plus pour une personne un intitulé en majuscules qui commence par un nom de lieu ou de service (QUAI CHARGEMENT devient un lieu, SERVICE COURRIER reste en clair) ni le sigle GLPI ; FAQ et CAUTION restent en clair. Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
+        <p><strong>Pseudonymiseur</strong>, version web 1.9 du 26 octobre 2026. Reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et trois corrections (la troisième : un prénom composé dont la suite est en minuscules, Marie-odile MOREAU, est reconnu) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). La version 1.7 code en plus les téléphones étrangers (indicatif entre parenthèses, ou tout numéro écrit après Tel, Direct, Mobile, Fax), les adresses étrangères écrites sur une ligne qui finit par un pays, les entreprises suivies d'une forme juridique (Ltd, Inc, GmbH, SARL, SAS), le nom entier d'un bâtiment, le numéro dans un nom de rue (boulevard du 11 novembre 1918), et le nom écrit avant une adresse mail ou avant « a écrit : », même avec un prénom inconnu ; la version 1.8 ne prend plus pour une personne un intitulé en majuscules qui commence par un nom de lieu ou de service (QUAI CHARGEMENT devient un lieu, SERVICE COURRIER reste en clair) ni le sigle GLPI ; la version 1.9 laisse en clair un sigle défini dans le texte entre parenthèses, quand ses lettres sont les initiales de sa définition (CAL, capacité d'accueil limitée) ; FAQ et CAUTION restent en clair. Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
         <h2>Où vont les données</h2>
         <ul class="propre">
           <li>Nulle part. Cette page est un programme complet que le serveur livre à votre navigateur ; le traitement se fait ensuite sur votre poste. Le serveur ne voit ni le texte, ni la table de correspondance, ni vos listes.</li>
@@ -431,7 +431,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
 
 <footer class="pied">
   <span>Lyon 1 Université</span>
-  <span>Pseudonymiseur, version web 1.8 du 26 octobre 2026</span>
+  <span>Pseudonymiseur, version web 1.9 du 26 octobre 2026</span>
   <span>Traitement local, aucune donnée transmise</span>
 </footer>
 <div class="toast" id="toast"></div>
@@ -1425,6 +1425,45 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     return code;
   };
 
+  // Sigle défini dans le texte (règle ajoutée le 26/10/2026, absente du module 4.1) : un sigle en majuscules suivi ou précédé
+  // de sa définition entre parenthèses, dont les initiales forment le sigle, reste en clair dans tout le texte :
+  // « CAL (capacité d'accueil limitée) », « Capacité offerte limitée (COL) ». Les petits mots (de, la, et...) peuvent être
+  // comptés ou non. Un nom de personne ne peut pas remplir cette condition.
+  var PETITS_MOTS = { de: 1, du: 1, des: 1, d: 1, l: 1, la: 1, le: 1, les: 1, et: 1, en: 1, a: 1, au: 1, aux: 1, pour: 1, sur: 1, par: 1, of: 1, the: 1, and: 1, for: 1 };
+  function initialesCorrespondent(sigle, mots) {
+    var avec = '', sans = '';
+    for (var i = 0; i < mots.length; i++) {
+      var m = normaliser(mots[i]);
+      if (!m) continue;
+      avec += m.charAt(0);
+      if (!PETITS_MOTS.hasOwnProperty(m)) sans += m.charAt(0);
+    }
+    var x = normaliser(sigle);
+    return x.length >= 2 && (x === sans || x === avec);
+  }
+  function motsDe(t) { return t.split(/[ \t'\u2019-]+/).filter(function (m) { return /^[A-Za-zÀ-ÿ]/.test(m); }); }
+  Session.prototype.relever_sigles = function (cellules) {
+    var moi = this, r, c, t, m, mots, k;
+    var apres = /(?<![A-Za-zÀ-ÿ0-9_])([A-Z]{2,8})[ \t]*\(([^()\n]{3,120})\)/g;
+    var avant = /([A-Za-zÀ-ÿ'\u2019 \t-]{3,120})\([ \t]*([A-Z]{2,8})[ \t]*\)/g;
+    for (r = 0; r < cellules.length; r++) for (c = 0; c < cellules[r].length; c++) {
+      t = cellules[r][c];
+      if (!t || t.indexOf('(') < 0) continue;
+      apres.lastIndex = 0;
+      while ((m = apres.exec(t)) !== null) {
+        mots = motsDe(m[2]);
+        if (mots.length <= 12 && initialesCorrespondent(m[1], mots)) moi.conserver[normaliser(m[1])] = true;
+      }
+      avant.lastIndex = 0;
+      while ((m = avant.exec(t)) !== null) {
+        mots = motsDe(m[1]);
+        for (k = Math.max(0, mots.length - 12); k < mots.length; k++) {
+          if (initialesCorrespondent(m[2], mots.slice(k))) { moi.conserver[normaliser(m[2])] = true; break; }
+        }
+      }
+    }
+  };
+
   // ------------------------------------------------------------------ cellules
 
   // Comme un collage dans Excel : une ligne par ligne du texte, une colonne par tabulation.
@@ -1459,6 +1498,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     if (contientPrefixe(cellules, s.prefixe)) {
       return { ok: false, erreur: 'Le texte collé contient déjà « ' + s.prefixe + '_ ». Changer le préfixe des codes dans les Réglages, puis relancer.' };
     }
+    s.relever_sigles(cellules);
     var sortie = [];
     for (r = 0; r < cellules.length; r++) {
       sortie.push([]);
@@ -2946,7 +2986,7 @@ var LISTES_ORIGINE = {
 "Londres",
 "Berlin"
 ],
-"version": "1.8 du 26/10/2026"
+"version": "1.9 du 26/10/2026"
 };
 </script>
 <script>
