@@ -407,7 +407,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-apropos">
       <div class="carte">
         <h1>À propos</h1>
-        <p><strong>Pseudonymiseur</strong>, version web 1.11.1 du 26 octobre 2026. Reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et trois corrections (la troisième : un prénom composé dont la suite est en minuscules, Marie-odile MOREAU, est reconnu) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). La version 1.7 code en plus les téléphones étrangers (indicatif entre parenthèses, ou tout numéro écrit après Tel, Direct, Mobile, Fax), les adresses étrangères écrites sur une ligne qui finit par un pays, les entreprises suivies d'une forme juridique (Ltd, Inc, GmbH, SARL, SAS), le nom entier d'un bâtiment, le numéro dans un nom de rue (boulevard du 11 novembre 1918), et le nom écrit avant une adresse mail ou avant « a écrit : », même avec un prénom inconnu ; la version 1.8 ne prend plus pour une personne un intitulé en majuscules qui commence par un nom de lieu ou de service (QUAI CHARGEMENT devient un lieu, SERVICE COURRIER reste en clair) ni le sigle GLPI ; la version 1.9 laisse en clair un sigle défini dans le texte entre parenthèses, quand ses lettres sont les initiales de sa définition (CAL, capacité d'accueil limitée) ; la version 1.10 code une signature réduite à une initiale collée au nom, seule sur sa ligne (J.Durand) ; FAQ et CAUTION restent en clair ; la version 1.11 code un prénom connu écrit après une élision (d'Antoine), reconnaît un terme du Dictionnaire écrit sans accent (Génie Electrique), laisse en clair AAP, FOCAL, SYMPA et SUJET, copie la sortie dès la pseudonymisation et ajoute le bouton Coller et restituer ; la version 1.11.1 laisse en clair un titre suivi d'un mot courant au pluriel (Professeur des Universités) et un mot de remplissage fait d'une seule lettre répétée (XXXX). Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
+        <p><strong>Pseudonymiseur</strong>, version web 1.12 du 27 octobre 2026. Reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et trois corrections (la troisième : un prénom composé dont la suite est en minuscules, Marie-odile MOREAU, est reconnu) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). La version 1.7 code en plus les téléphones étrangers (indicatif entre parenthèses, ou tout numéro écrit après Tel, Direct, Mobile, Fax), les adresses étrangères écrites sur une ligne qui finit par un pays, les entreprises suivies d'une forme juridique (Ltd, Inc, GmbH, SARL, SAS), le nom entier d'un bâtiment, le numéro dans un nom de rue (boulevard du 11 novembre 1918), et le nom écrit avant une adresse mail ou avant « a écrit : », même avec un prénom inconnu ; la version 1.8 ne prend plus pour une personne un intitulé en majuscules qui commence par un nom de lieu ou de service (QUAI CHARGEMENT devient un lieu, SERVICE COURRIER reste en clair) ni le sigle GLPI ; la version 1.9 laisse en clair un sigle défini dans le texte entre parenthèses, quand ses lettres sont les initiales de sa définition (CAL, capacité d'accueil limitée) ; la version 1.10 code une signature réduite à une initiale collée au nom, seule sur sa ligne (J.Durand) ; FAQ et CAUTION restent en clair ; la version 1.11 code un prénom connu écrit après une élision (d'Antoine), reconnaît un terme du Dictionnaire écrit sans accent (Génie Electrique), laisse en clair AAP, FOCAL, SYMPA et SUJET, copie la sortie dès la pseudonymisation et ajoute le bouton Coller et restituer ; la version 1.11.1 laisse en clair un titre suivi d'un mot courant au pluriel (Professeur des Universités) et un mot de remplissage fait d'une seule lettre répétée (XXXX) ; la version 1.12 code une date écrite sans année (27 octobre, 27/10, lundi 12), une boîte fonctionnelle écrite avec un point devant son adresse (Cellule.Sifac), le nom d'un outil de gestion du Dictionnaire quelle que soit sa casse (Gestimmo) et la Doua, ajoutée à la liste Villes. Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
         <h2>Où vont les données</h2>
         <ul class="propre">
           <li>Nulle part. Cette page est un programme complet que le serveur livre à votre navigateur ; le traitement se fait ensuite sur votre poste. Le serveur ne voit ni le texte, ni la table de correspondance, ni vos listes.</li>
@@ -432,7 +432,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
 
 <footer class="pied">
   <span>Lyon 1 Université</span>
-  <span>Pseudonymiseur, version web 1.11.1 du 26 octobre 2026</span>
+  <span>Pseudonymiseur, version web 1.12 du 27 octobre 2026</span>
   <span>Traitement local, aucune donnée transmise</span>
 </footer>
 <div class="toast" id="toast"></div>
@@ -703,6 +703,13 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     return txt;
   };
 
+  // Remplacement motif par motif, chaque occurrence prise à sa place exacte (règle ajoutée le 27/10/2026) : utilisé par les
+  // règles dont le texte reconnu est court (27 octobre, 27/10) et ne doit pas être remplacé ailleurs dans le texte.
+  Session.prototype.remplacerParMotif = function (txt, motif, etiquette, ignorerCasse) {
+    var moi = this;
+    return txt.replace(new RegExp(motif, ignorerCasse ? 'gi' : 'g'), function (m) { return moi.codePour(etiquette, m); });
+  };
+
   Session.prototype.traiter = function (txt) {
     // Mails et liens d'abord : un terme du Dictionnaire (GEP) ne doit pas être remplacé à l'intérieur d'une adresse.
     txt = this.remplacerMotif(txt, '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}', 'Mail', true);
@@ -808,8 +815,15 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     txt = this.remplacerMotif(txt, '\\b\\d{4}-\\d{2}-\\d{2}\\b', 'Date', false);
     txt = this.remplacerMotif(txt, '\\b\\d{1,2}[/.-]\\d{1,2}[/.-](\\d{4}|\\d{2})\\b', 'Date', false);
     txt = this.remplacerMotif(txt, '\\b\\d{1,2}(er)?[ \\t]+(janvier|février|fevrier|mars|avril|mai|juin|juillet|août|aout|septembre|octobre|novembre|décembre|decembre|january|february|march|april|may|june|july|august|october|november|december)[ \\t]+\\d{4}\\b', 'Date', true);
+    // Règles ajoutées le 27/10/2026 (absentes du module 4.1) : une date écrite sans année (27 octobre, 1er novembre), un jour
+    // et un mois en chiffres (27/10) et un jour de la semaine suivi du numéro du jour (lundi 12) sont codés aussi. Les dates
+    // avec année, traitées juste avant, ne sont plus dans le texte à ce stade.
+    txt = this.remplacerParMotif(txt, '(?<![A-Za-zÀ-ÿ0-9_/-])(?:[1-9]|0[1-9]|[12][0-9]|3[01])(?:er)?[ \\t]+' + MOIS_SANS_ANNEE + '(?![A-Za-zÀ-ÿ0-9_-])', 'Date', true);
+    txt = this.remplacerParMotif(txt, '(?<![A-Za-z0-9_/.-])(?:0?[1-9]|[12][0-9]|3[01])/(?:0?[1-9]|1[0-2])(?![0-9/-]|\\.[0-9])', 'Date', false);
+    txt = this.remplacerParMotif(txt, '(?<![A-Za-zÀ-ÿ0-9_-])(?:lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche)[ \\t]+(?:[1-9]|0[1-9]|[12][0-9]|3[01])(?:er)?(?![0-9/-]|[ \\t]*[hH:]|\\.[0-9])', 'Date', true);
     return txt;
   };
+  var MOIS_SANS_ANNEE = '(?:janvier|février|fevrier|mars|avril|mai|juin|juillet|août|aout|septembre|octobre|novembre|décembre|decembre)';
 
   Session.prototype.masquerAdresses = function (txt) {
     txt = this.remplacerMotif(txt, "\\b\\d{1,4}[ \\t]*([Bb]is|[Tt]er|[Qq]uater)?[ \\t]*,?[ \\t]*([Rr]ue|[Aa]venue|[Aa]v\\.|[Bb]oulevard|[Bb]d|[Bb]ld|[Pp]lace|[Aa]ll[ée]e|[Cc]hemin|[Ii]mpasse|[Qq]uai|[Rr]oute|[Ff]aubourg|[Rr][ée]sidence|[Ll]otissement)(?=[ \\t]+(de[ \\t]|du[ \\t]|des[ \\t]|d'|d\u2019|la[ \\t]|le[ \\t]|l'|l\u2019|[A-ZÀ-Ý]))([ \\t]+([A-Za-zÀ-ÿ'\u2019-]+|\\d{1,4}(?![0-9])(?=[ \\t]+[A-Za-zÀ-ÿ]|[ \\t]*(,|$)))){1,6}", 'Adresse', false);
@@ -1156,6 +1170,10 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         return moi.codePersonne(n);
       };
     };
+    // Boîte fonctionnelle écrite en un mot avec un point (Cellule.Sifac, Direction.PGFDoua) devant une adresse déjà codée :
+    // un service, pas une personne (règle ajoutée le 27/10/2026). Un prénom connu devant le point (jean.dupont) n'est pas concerné.
+    txt = txt.replace(new RegExp("(?<![A-Za-zÀ-ÿ0-9_.@'\u2019-])([A-Za-zÀ-ÿ0-9-]+(?:\\.[A-Za-zÀ-ÿ0-9-]+)+)" + apresMail, 'g'),
+      function (m, n) { return moi.estPrenom(n.split('.')[0]) ? m : moi.codePour('Service', n); });
     txt = txt.replace(new RegExp(nom + apresMail, 'g'), garde(false));
     txt = txt.replace(new RegExp(nom + apresEcrit, 'g'), garde(true));
     return txt;
@@ -2936,6 +2954,11 @@ var LISTES_ORIGINE = {
 "texte": "Responsable du Master EEEA",
 "etiquette": "Fonction",
 "type": "Texte"
+},
+{
+"texte": "Gestimmo",
+"etiquette": "Outil",
+"type": "Texte"
 }
 ],
 "villes": [
@@ -3057,9 +3080,10 @@ var LISTES_ORIGINE = {
 "Barcelone",
 "Madrid",
 "Londres",
-"Berlin"
+"Berlin",
+"Doua"
 ],
-"version": "1.11 du 26/10/2026"
+"version": "1.12 du 27/10/2026"
 };
 </script>
 <script>
