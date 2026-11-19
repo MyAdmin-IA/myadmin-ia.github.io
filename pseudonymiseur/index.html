@@ -90,7 +90,7 @@ textarea.liste{min-height:260px;font-family:var(--police);font-size:.95rem}
 .btn.discret:hover{background:#ededf0;color:var(--encre)}
 .btn svg{width:16px;height:16px;flex:none}
 
-/* ----- dépôt d'un classeur Excel */
+/* ----- dépôt d'un fichier : classeur Excel, document Word, diaporama PowerPoint */
 .depot{border:1px dashed #c9c9ce;border-radius:8px;padding:12px 14px;margin-top:16px;background:#fbfbfc;transition:border-color .12s,background .12s}
 .depot.survol{border-color:var(--rouge);background:var(--rouge-fond)}
 .depot p{margin:4px 0}
@@ -213,10 +213,10 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         <h1>Mode d'emploi</h1>
         <p class="sous">Le Pseudonymiseur remplace, sur votre poste, les noms, adresses mail, téléphones, numéros, dates et adresses d'un texte par des codes. Vous confiez le texte codé à l'outil d'intelligence artificielle, puis vous remettez les vraies données dans sa réponse. La table de correspondance ne quitte jamais votre navigateur.</p>
         <div class="etapes">
-          <div><b>Étape 1</b><strong>Coller le texte</strong><p>Un mail, un document, un tableau copié d'Excel. Puis cliquer sur Pseudonymiser. Ou déposer un classeur Excel tel quel.</p></div>
+          <div><b>Étape 1</b><strong>Coller le texte</strong><p>Un mail, un document, un tableau copié d'Excel. Puis cliquer sur Pseudonymiser. Ou déposer tel quel un classeur Excel, un document Word ou un diaporama PowerPoint.</p></div>
           <div><b>Étape 2</b><strong>Relire et copier</strong><p>Relire la sortie, la corriger à la main si besoin, puis cliquer sur Copier pour l'IA. La coller dans l'outil, à la suite d'un prompt de la page Prompts.</p></div>
-          <div><b>Étape 3</b><strong>Coller la réponse</strong><p>Copier la réponse de l'outil, puis cliquer sur Coller et restituer. Ou déposer le classeur Excel renvoyé.</p></div>
-          <div><b>Étape 4</b><strong>Récupérer le texte</strong><p>Relire le texte final, déjà copié, et le coller dans votre mail ou votre document. Pour un classeur, le fichier restitué est téléchargé.</p></div>
+          <div><b>Étape 3</b><strong>Coller la réponse</strong><p>Copier la réponse de l'outil, puis cliquer sur Coller et restituer. Ou déposer le fichier renvoyé par l'outil.</p></div>
+          <div><b>Étape 4</b><strong>Récupérer le texte</strong><p>Relire le texte final, déjà copié, et le coller dans votre mail ou votre document. Pour un fichier déposé, le fichier restitué est téléchargé.</p></div>
         </div>
         <div class="actions"><button class="btn principal" data-aller="entree">Commencer, étape 1</button><button class="btn" data-aller="prompts">Prompts pour l'IA</button></div>
       </div>
@@ -230,6 +230,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
             <li>Les téléphones, IBAN, BIC, numéros de sécurité sociale, cartes, identifiants, SIRET et nombres longs : <code>Pseudo_Telephone_001</code>, <code>Pseudo_IBAN_001</code>, <code>Pseudo_BIC_001</code>, <code>Pseudo_SecuSociale_001</code>, <code>Pseudo_Carte_001</code>, <code>Pseudo_Identifiant_001</code>, <code>Pseudo_Numero_001</code>.</li>
             <li>Les dates, sous toutes leurs formes courantes : <code>Pseudo_Date_001</code>.</li>
             <li>Les termes de votre Dictionnaire : raison sociale, service, fonction, famille d'identifiants.</li>
+            <li>Dans un document Word ou un diaporama PowerPoint déposé, ce que le fichier dit de ses auteurs : auteur du fichier, auteurs des commentaires et des modifications (<code>Pseudo_Auteur_001</code>, <code>Pseudo_Initiales_001</code>), nom de compte dans un chemin de fichier (<code>Pseudo_Compte_001</code>).</li>
           </ul>
         </div>
         <div class="carte">
@@ -239,6 +240,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
             <li>Les montants avec espaces, pourcentages, formules et grandeurs physiques (12 500,00 €, 97,2 %, 1,5 kW).</li>
             <li>Les mots courants écrits avec une majuscule en début de phrase.</li>
             <li>Une situation décrite sans nom (« le chef d'agence est en arrêt ») : à retirer à la main dans la sortie.</li>
+            <li>Dans un fichier déposé, les images : une signature, une photo, une capture d'écran se retirent à la main avant le dépôt.</li>
           </ul>
           <h2>Quatre gestes de sûreté</h2>
           <ul class="propre">
@@ -255,7 +257,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-entree">
       <div class="carte">
         <h1>Étape 1, le texte à protéger</h1>
-        <p class="sous">Collez le texte tel quel : mail avec son en-tête, document, tableau copié d'Excel (les colonnes sont conservées). Les montants, dates et numéros restent écrits comme dans l'original. Un classeur Excel se dépose en bas de cette page.</p>
+        <p class="sous">Collez le texte tel quel : mail avec son en-tête, document, tableau copié d'Excel (les colonnes sont conservées). Les montants, dates et numéros restent écrits comme dans l'original. Un classeur Excel, un document Word ou un diaporama PowerPoint se dépose en bas de cette page.</p>
         <label class="etiquette" for="entree">Texte d'origine</label>
         <textarea id="entree" spellcheck="false" placeholder="Coller ici le texte à pseudonymiser…"></textarea>
         <div class="message" id="msg-entree"></div>
@@ -267,9 +269,10 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
           <button class="btn discret btn-tout-effacer">Tout effacer</button>
         </div>
         <div class="depot" id="depot-entree">
-          <input type="file" id="fichier-entree" accept=".xlsx,.xlsm" hidden>
-          <p><strong>Ou un classeur Excel</strong> (.xlsx, .xlsm) : le déposer ici, ou <button type="button" class="lien" id="btn-fichier-entree">choisir le fichier</button>. Il est pseudonymisé aussitôt et le classeur codé est téléchargé.</p>
-          <p class="sous">Le classeur est lu sur votre poste. Sont codés les textes (cellules, commentaires, en-têtes et pieds de page, zones de texte, auteur du fichier) et, quand le réglage « Pseudonymiser les dates » est sur Oui, les dates saisies dans les cellules. Onglets, formules, couleurs, largeurs et filtres restent tels quels. Restent en clair : les noms d'onglets, les cellules saisies comme nombres (un téléphone sans espace), le texte écrit dans une formule, les dates calculées par une formule, les listes déroulantes saisies à la main et, dans les propriétés du fichier, le champ Société.</p>
+          <input type="file" id="fichier-entree" accept=".xlsx,.xlsm,.docx,.docm,.dotx,.dotm,.pptx,.pptm,.ppsx,.ppsm,.potx,.potm" hidden>
+          <p><strong>Ou un fichier Excel, Word ou PowerPoint</strong> (.xlsx, .xlsm, .docx, .pptx) : le déposer ici, ou <button type="button" class="lien" id="btn-fichier-entree">choisir le fichier</button>. Il est pseudonymisé aussitôt et le fichier codé est téléchargé.</p>
+          <p class="sous"><strong>Classeur Excel.</strong> Le classeur est lu sur votre poste. Sont codés les textes (cellules, commentaires, en-têtes et pieds de page, zones de texte, auteur du fichier) et, quand le réglage « Pseudonymiser les dates » est sur Oui, les dates saisies dans les cellules. Onglets, formules, couleurs, largeurs et filtres restent tels quels. Restent en clair : les noms d'onglets, les cellules saisies comme nombres (un téléphone sans espace), le texte écrit dans une formule, les dates calculées par une formule, les listes déroulantes saisies à la main et, dans les propriétés du fichier, le champ Société.</p>
+          <p class="sous"><strong>Document Word, diaporama PowerPoint.</strong> Le fichier est lu sur votre poste. Sont codés ses textes (paragraphes, tableaux, en-têtes et pieds de page, notes, commentaires, zones de texte, notes de l'orateur, textes des graphiques et des schémas, texte supprimé que le suivi des modifications garde, liens) et ce que le fichier dit de ses auteurs (propriétés, auteurs des commentaires et des modifications, nom de compte dans un chemin de fichier). Mise en page, styles, images et animations restent tels quels ; l'image miniature du fichier est retirée. Restent en clair : les images (signature, photo, capture d'écran), le son et la vidéo, les équations, les nombres des graphiques, les dates et heures des modifications et des commentaires, les noms de styles et de signets, les macros. Un fichier à l'ancien format (.doc, .ppt) s'enregistre d'abord en .docx ou .pptx.</p>
         </div>
       </div>
     </section>
@@ -316,8 +319,9 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
           <button class="btn discret btn-tout-effacer">Tout effacer</button>
         </div>
         <div class="depot" id="depot-reponse">
-          <input type="file" id="fichier-reponse" accept=".xlsx,.xlsm" hidden>
-          <p><strong>Ou le classeur Excel renvoyé par l'outil</strong> : le déposer ici, ou <button type="button" class="lien" id="btn-fichier-reponse">choisir le fichier</button>. Les vraies données sont remises dans ses cellules et le classeur restitué est téléchargé.</p>
+          <input type="file" id="fichier-reponse" accept=".xlsx,.xlsm,.docx,.docm,.dotx,.dotm,.pptx,.pptm,.ppsx,.ppsm,.potx,.potm" hidden>
+          <p><strong>Ou le fichier renvoyé par l'outil</strong> (classeur Excel, document Word, diaporama PowerPoint) : le déposer ici, ou <button type="button" class="lien" id="btn-fichier-reponse">choisir le fichier</button>. Les vraies données y sont remises et le fichier restitué est téléchargé.</p>
+          <p class="sous">Document Word, diaporama PowerPoint : le texte revient exactement. La mise en forme d'origine revient aussi, pour chaque passage que l'outil d'intelligence artificielle n'a pas modifié, quand le fichier est restitué dans cette page avec la table du codage (gardée dans l'onglet, ou enregistrée puis rechargée). Dans un passage modifié, un nom dont les lettres n'avaient pas toutes la même mise en forme prend celle de son début.</p>
         </div>
       </div>
     </section>
@@ -364,12 +368,12 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-prompts">
       <div class="carte">
         <h1>Prompts pour l'outil d'intelligence artificielle</h1>
-        <p class="sous">Un prompt est la consigne donnée à l'outil. Ces deux modèles lui demandent votre travail et lui interdisent de toucher aux codes : un code modifié ne peut plus être remis en clair. Les parties <span class="enrouge">en rouge</span> sont les vôtres ; le texte en noir protège les codes et ne se modifie pas.</p>
+        <p class="sous">Un prompt est la consigne donnée à l'outil. Ces trois modèles lui demandent votre travail et lui interdisent de toucher aux codes : un code modifié ne peut plus être remis en clair. Les parties <span class="enrouge">en rouge</span> sont les vôtres ; le texte en noir protège les codes et ne se modifie pas.</p>
         <div class="etapes">
-          <div><b>D'abord</b><strong>Écrire le travail</strong><p>Une fois le texte ou le classeur codé (étapes 1 et 2), écrire le travail demandé dans la partie en rouge du modèle.</p></div>
+          <div><b>D'abord</b><strong>Écrire le travail</strong><p>Une fois le texte ou le fichier codé (étapes 1 et 2), écrire le travail demandé dans la partie en rouge du modèle.</p></div>
           <div><b>Ensuite</b><strong>Copier le prompt</strong><p>Cliquer sur Copier le prompt, puis le coller dans l'outil d'intelligence artificielle.</p></div>
-          <div><b>Puis</b><strong>Ajouter le texte codé</strong><p>Modèle 1 : à l'étape 2, cliquer sur Copier pour l'IA et coller la sortie à la suite du prompt. Modèle 2 : joindre le classeur codé.</p></div>
-          <div><b>Enfin</b><strong>Envoyer et restituer</strong><p>Envoyer. Rapporter la réponse, ou le classeur rendu, à l'étape 3, puis relire le résultat.</p></div>
+          <div><b>Puis</b><strong>Ajouter le texte codé</strong><p>Modèle 1 : à l'étape 2, cliquer sur Copier pour l'IA et coller la sortie à la suite du prompt. Modèles 2 et 3 : joindre le fichier codé.</p></div>
+          <div><b>Enfin</b><strong>Envoyer et restituer</strong><p>Envoyer. Rapporter la réponse, ou le fichier rendu, à l'étape 3, puis relire le résultat.</p></div>
         </div>
         <ul class="propre">
           <li>Ce qui est écrit en rouge part tel quel dans l'outil : aucun nom, aucune donnée personnelle. Pour désigner une personne ou une date, reprendre son code.</li>
@@ -397,6 +401,17 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
           <button class="btn principal" id="btn-copier-prompt-classeur">Copier le prompt</button>
           <span class="esp"></span>
           <button class="btn discret" id="btn-retablir-prompt-classeur">Rétablir le modèle d'origine</button>
+        </div>
+      </div>
+      <div class="carte">
+        <h1>Modèle 3, pour un document Word ou un diaporama PowerPoint</h1>
+        <p class="sous">Pour le fichier codé, celui dont le nom se termine par « _pseudonymisé.docx » ou « _pseudonymisé.pptx », à joindre dans l'outil.</p>
+        <div class="prompt-corps" id="prompt-document"></div>
+        <div class="message" id="msg-prompt-document"></div>
+        <div class="actions">
+          <button class="btn principal" id="btn-copier-prompt-document">Copier le prompt</button>
+          <span class="esp"></span>
+          <button class="btn discret" id="btn-retablir-prompt-document">Rétablir le modèle d'origine</button>
         </div>
       </div>
     </section>
@@ -484,24 +499,27 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         <h1>À propos</h1>
         <p>Cet outil est une aide. Il ne remplace pas la relecture : chaque utilisateur relit le texte codé avant tout envoi et reste responsable des données qu'il transmet.</p>
         <p>Il est fourni en l'état, sans garantie. Il n'est pas, à ce jour, un outil validé par Lyon 1 Université.</p>
-        <p><strong>Pseudonymiseur</strong>, version web 1.23 du 19 novembre 2026, mise à jour le 19 novembre 2026 à 9 h 37. Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
+        <p><strong>Pseudonymiseur</strong>, version web 1.30 du 19 novembre 2026, mise à jour le 19 novembre 2026 à 13 h 20. Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
         <h2>Où vont les données</h2>
         <ul class="propre">
           <li>Nulle part. Cette page est un programme complet que le serveur livre à votre navigateur ; le traitement se fait ensuite sur votre poste. Le serveur ne voit ni le texte, ni la table de correspondance, ni vos listes.</li>
-          <li>Le texte en cours et la table de correspondance sont gardés dans l'onglet ouvert, le temps de la session ; ils disparaissent à la fermeture de l'onglet. Un classeur Excel déposé reste en mémoire le temps de l'onglet et n'est jamais enregistré par la page. Vos listes, votre dictionnaire et vos réglages sont gardés dans ce navigateur, sur ce poste. Il en va de même, à la page Prompts, du rôle, de la forme et des consignes en plus ; le contexte et le travail demandé ne sont pas enregistrés.</li>
+          <li>Le texte en cours et la table de correspondance sont gardés dans l'onglet ouvert, le temps de la session ; ils disparaissent à la fermeture de l'onglet. Un fichier déposé (classeur Excel, document Word, diaporama PowerPoint) reste en mémoire le temps de l'onglet et n'est jamais enregistré par la page. Pour un document Word ou un diaporama PowerPoint, la page garde aussi dans l'onglet, avec la table de correspondance, les passages d'origine dont elle a besoin pour rendre la mise en forme à la restitution ; ils sont enregistrés avec la table quand vous l'enregistrez. Vos listes, votre dictionnaire et vos réglages sont gardés dans ce navigateur, sur ce poste. Il en va de même, à la page Prompts, du rôle, de la forme et des consignes en plus ; le contexte et le travail demandé ne sont pas enregistrés.</li>
           <li>« Tout effacer » vide le texte en cours et la table. Les listes et réglages se remettent d'origine depuis la page Réglages.</li>
         </ul>
         <h2>Ce que l'outil ne fait pas</h2>
         <ul class="propre">
           <li>Il ne reconnaît pas une formule ou un résultat scientifique confidentiel : rien ne le distingue d'une formule publique. Ajoutez-le au Dictionnaire, en texte ou en motif.</li>
-          <li>Il ne lit pas les images ni les pièces jointes : seul le texte collé est traité, ou les textes d'un classeur Excel déposé (pas les images qu'il contient).</li>
+          <li>Il ne lit pas les images ni les pièces jointes : seul le texte collé est traité, ou les textes d'un classeur Excel, d'un document Word ou d'un diaporama PowerPoint déposé (pas les images qu'il contient, ni le son, ni la vidéo, ni les équations).</li>
+          <li>Il ne lit ni les anciens formats (.doc, .xls, .ppt), ni les fichiers PDF : enregistrer le fichier au format actuel (.docx, .xlsx, .pptx), ou coller son texte à l'étape 1.</li>
+          <li>Dans un document Word ou un diaporama PowerPoint, il laisse en clair : les nombres des graphiques, les dates et heures des modifications et des commentaires, les noms de styles et de signets, l'image qui montre un objet inséré (un tableau Excel collé comme objet), le nom donné à une forme ou à une image quand la personne n'est citée nulle part ailleurs dans le fichier, et un identifiant de connexion écrit dans le texte (à ajouter au Dictionnaire). Il ne lit pas non plus les macros, le contenu d'un fichier inséré à un ancien format ou d'une page web insérée, ni les données internes de certains champs (bibliographie, formulaire) : l'étape 2 le signale quand le fichier déposé en contient.</li>
+          <li>À la restitution d'un document Word ou d'un diaporama PowerPoint, le texte revient exactement. La mise en forme revient exactement pour chaque passage que l'outil d'intelligence artificielle n'a pas modifié ; dans un passage modifié, ou si la table a été retapée à la main, un nom dont les lettres n'avaient pas toutes la même mise en forme (une partie en gras, par exemple) prend celle de son début. L'image miniature du fichier, retirée au codage, n'est pas remise.</li>
           <li>Il ne remplace pas la relecture : chaque envoi à l'outil d'intelligence artificielle se vérifie avant de partir.</li>
         </ul>
         <h2>Auteur</h2>
         <p>Outil créé par M. Manoël PYANET, directeur administratif du département composante Génie Électrique et des Procédés, Lyon 1 Université. Première version le 28 septembre 2026, sous la forme d'un classeur Excel ; version web depuis le 19 octobre 2026.</p>
         <h2>Ordre de traitement</h2>
         <p>Adresses mail et liens ; Dictionnaire ; adresses postales, codes postaux, bâtiments, campus et villes seules ; IBAN, BIC, sécurité sociale, cartes, suites de onze chiffres et plus, téléphones, plaques et identifiants, SIRET, nombres longs ; dates ; personnes (mots en majuscules, prénoms connus, civilité suivie d'un nom, avec ou sans particule) ; puis un second passage pour les noms de famille écrits seuls, vus dans un nom complet du même texte ou listés dans Noms du service. Chaque ligne du texte est traitée comme une ligne de tableau, chaque tabulation comme une colonne, exactement comme dans le classeur Excel.</p>
-        <details class="historique"><summary>Historique des versions</summary><p>Origine : classeur Excel « Anonymiseur à bouton » créé le 28 septembre 2026, en version 3 le 30 septembre 2026, renommé « Pseudonymiseur à bouton » en version 4 le 12 octobre 2026. Version web du 19 octobre 2026 : reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et trois corrections (la troisième : un prénom composé dont la suite est en minuscules, Marie-odile MORVELANG, est reconnu) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). La version 1.7 code en plus les téléphones étrangers (indicatif entre parenthèses, ou tout numéro écrit après Tel, Direct, Mobile, Fax), les adresses étrangères écrites sur une ligne qui finit par un pays, les entreprises suivies d'une forme juridique (Ltd, Inc, GmbH, SARL, SAS), le nom entier d'un bâtiment, le numéro dans un nom de rue (avenue du 8 mai 1945), et le nom écrit avant une adresse mail ou avant « a écrit : », même avec un prénom inconnu ; la version 1.8 ne prend plus pour une personne un intitulé en majuscules qui commence par un nom de lieu ou de service (QUAI CHARGEMENT devient un lieu, SERVICE COURRIER reste en clair) ni le sigle GLPI ; la version 1.9 laisse en clair un sigle défini dans le texte entre parenthèses, quand ses lettres sont les initiales de sa définition (CAL, capacité d'accueil limitée) ; la version 1.10 code une signature réduite à une initiale collée au nom, seule sur sa ligne (J.Tessharto) ; FAQ et CAUTION restent en clair ; la version 1.11 code un prénom connu écrit après une élision (d'Alice), reconnaît un terme du Dictionnaire écrit sans accent (Societe pour Société), laisse en clair quatre sigles et mots de plus, dont SUJET, copie la sortie dès la pseudonymisation et ajoute le bouton Coller et restituer ; la version 1.11.1 laisse en clair un titre suivi d'un mot courant au pluriel (Professeur des Universités) et un mot de remplissage fait d'une seule lettre répétée (XXXX) ; la version 1.12 code une date écrite sans année (27 octobre, 27/10, lundi 12), une boîte fonctionnelle écrite avec un point devant son adresse (Service.Achats), le nom d'un outil de gestion du Dictionnaire quelle que soit sa casse et un nom de campus, ajouté à la liste Villes ; la version 1.12.1 restitue la réponse déjà collée quand le navigateur refuse la lecture du presse-papiers ; la version 1.13 accepte un classeur Excel déposé tel quel (.xlsx, .xlsm) : seuls ses textes sont codés, le classeur codé est téléchargé avec ses onglets, formules et mises en forme intacts, et le classeur renvoyé par l'outil se restitue de la même façon, le tout sur le poste ; la version 1.13.1 code un nom écrit après une initiale (P. Valdoreth, L. Gauvernot), sauf après un mot ordinaire en minuscules, un chiffre, un symbole ou un point (125 °C. Équations) et dans une suite d'initiales (N. B.) ; la version 1.14 code aussi, dans un classeur Excel, les dates saisies dans les cellules, qu'Excel enregistre comme des nombres, et les remet en dates, avec leur format, à la restitution ; une date calculée par une formule reste en clair ; la version 1.15 code une suite de jours devant un mois (les 13, 14 et 15 octobre), un mois suivi de son année (avril 2026) et le nom écrit après Dr ou Pr (Dr El Valdoreth, Pr Le Gauvernot), laisse en clair un numéro de page ou de partie (page 3/12) et une fraction suivie d'une unité (1/2 journée), ne coupe plus un numéro long par le code d'un numéro plus court, restitue en entier une adresse dont une partie avait déjà reçu un code et, quand un même code couvre deux écritures d'un même élément, restitue toujours la première écrite ; la version 1.16 donne son propre code à chaque écriture d'une même personne ou d'un même terme du Dictionnaire (Paul TESSHARTO, puis TESSHARTO : Pseudo_Personne_001, puis Pseudo_PersonneB_001, même numéro et une lettre après l'étiquette), pour que la restitution rende chaque texte exactement comme il était, et contrôle à chaque pseudonymisation que chaque texte codé revient exactement au texte d'origine ; un texte qui n'y reviendrait pas est codé en entier, sous un seul code ; la version 1.16.1 ne livre plus dans le Dictionnaire que quatre lignes d'exemple, pour que chacun y écrive les siennes, sans rien changer aux listes déjà enregistrées dans un navigateur ; la version 1.16.2 précise, en tête de cette page, le statut de l'outil ; la version 1.20 reprend la version 1.16.2, range cet historique en bas de la rubrique, rappelle l'origine de l'outil, affiche l'heure de sa mise à jour et ajoute la page Prompts : deux modèles de consigne à copier, pour un texte et pour un classeur Excel, qui demandent à l'outil d'intelligence artificielle de ne pas toucher aux codes ; la version 1.21 remplace les exemples de la page par des exemples généraux, aux noms de personnes inventés, et ajoute EDF, ENGIE et SNCF à la liste d'origine des mots à conserver ; la version 1.22 reprend la version 1.21, sans changement de l'outil ; la version 1.23 ajoute au mode d'emploi un quatrième geste de sûreté : relire ce que l'outil d'intelligence artificielle a rendu.</p></details>
+        <details class="historique"><summary>Historique des versions</summary><p>Origine : classeur Excel « Anonymiseur à bouton » créé le 28 septembre 2026, en version 3 le 30 septembre 2026, renommé « Pseudonymiseur à bouton » en version 4 le 12 octobre 2026. Version web du 19 octobre 2026 : reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et trois corrections (la troisième : un prénom composé dont la suite est en minuscules, Marie-odile MORVELANG, est reconnu) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). La version 1.7 code en plus les téléphones étrangers (indicatif entre parenthèses, ou tout numéro écrit après Tel, Direct, Mobile, Fax), les adresses étrangères écrites sur une ligne qui finit par un pays, les entreprises suivies d'une forme juridique (Ltd, Inc, GmbH, SARL, SAS), le nom entier d'un bâtiment, le numéro dans un nom de rue (avenue du 8 mai 1945), et le nom écrit avant une adresse mail ou avant « a écrit : », même avec un prénom inconnu ; la version 1.8 ne prend plus pour une personne un intitulé en majuscules qui commence par un nom de lieu ou de service (QUAI CHARGEMENT devient un lieu, SERVICE COURRIER reste en clair) ni le sigle GLPI ; la version 1.9 laisse en clair un sigle défini dans le texte entre parenthèses, quand ses lettres sont les initiales de sa définition (CAL, capacité d'accueil limitée) ; la version 1.10 code une signature réduite à une initiale collée au nom, seule sur sa ligne (J.Tessharto) ; FAQ et CAUTION restent en clair ; la version 1.11 code un prénom connu écrit après une élision (d'Alice), reconnaît un terme du Dictionnaire écrit sans accent (Societe pour Société), laisse en clair quatre sigles et mots de plus, dont SUJET, copie la sortie dès la pseudonymisation et ajoute le bouton Coller et restituer ; la version 1.11.1 laisse en clair un titre suivi d'un mot courant au pluriel (Professeur des Universités) et un mot de remplissage fait d'une seule lettre répétée (XXXX) ; la version 1.12 code une date écrite sans année (27 octobre, 27/10, lundi 12), une boîte fonctionnelle écrite avec un point devant son adresse (Service.Achats), le nom d'un outil de gestion du Dictionnaire quelle que soit sa casse et un nom de campus, ajouté à la liste Villes ; la version 1.12.1 restitue la réponse déjà collée quand le navigateur refuse la lecture du presse-papiers ; la version 1.13 accepte un classeur Excel déposé tel quel (.xlsx, .xlsm) : seuls ses textes sont codés, le classeur codé est téléchargé avec ses onglets, formules et mises en forme intacts, et le classeur renvoyé par l'outil se restitue de la même façon, le tout sur le poste ; la version 1.13.1 code un nom écrit après une initiale (P. Valdoreth, L. Gauvernot), sauf après un mot ordinaire en minuscules, un chiffre, un symbole ou un point (125 °C. Équations) et dans une suite d'initiales (N. B.) ; la version 1.14 code aussi, dans un classeur Excel, les dates saisies dans les cellules, qu'Excel enregistre comme des nombres, et les remet en dates, avec leur format, à la restitution ; une date calculée par une formule reste en clair ; la version 1.15 code une suite de jours devant un mois (les 13, 14 et 15 octobre), un mois suivi de son année (avril 2026) et le nom écrit après Dr ou Pr (Dr El Valdoreth, Pr Le Gauvernot), laisse en clair un numéro de page ou de partie (page 3/12) et une fraction suivie d'une unité (1/2 journée), ne coupe plus un numéro long par le code d'un numéro plus court, restitue en entier une adresse dont une partie avait déjà reçu un code et, quand un même code couvre deux écritures d'un même élément, restitue toujours la première écrite ; la version 1.16 donne son propre code à chaque écriture d'une même personne ou d'un même terme du Dictionnaire (Paul TESSHARTO, puis TESSHARTO : Pseudo_Personne_001, puis Pseudo_PersonneB_001, même numéro et une lettre après l'étiquette), pour que la restitution rende chaque texte exactement comme il était, et contrôle à chaque pseudonymisation que chaque texte codé revient exactement au texte d'origine ; un texte qui n'y reviendrait pas est codé en entier, sous un seul code ; la version 1.16.1 ne livre plus dans le Dictionnaire que quatre lignes d'exemple, pour que chacun y écrive les siennes, sans rien changer aux listes déjà enregistrées dans un navigateur ; la version 1.16.2 précise, en tête de cette page, le statut de l'outil ; la version 1.20 reprend la version 1.16.2, range cet historique en bas de la rubrique, rappelle l'origine de l'outil, affiche l'heure de sa mise à jour et ajoute la page Prompts : deux modèles de consigne à copier, pour un texte et pour un classeur Excel, qui demandent à l'outil d'intelligence artificielle de ne pas toucher aux codes ; la version 1.21 remplace les exemples de la page par des exemples généraux, aux noms de personnes inventés, et ajoute EDF, ENGIE et SNCF à la liste d'origine des mots à conserver ; la version 1.22 reprend la version 1.21, sans changement de l'outil ; la version 1.23 ajoute au mode d'emploi un quatrième geste de sûreté : relire ce que l'outil d'intelligence artificielle a rendu ; la version 1.30 pseudonymise et restitue aussi les documents Word (.docx) et les diaporamas PowerPoint (.pptx), déposés comme un classeur Excel : textes, tableaux, en-têtes et pieds de page, notes, commentaires, zones de texte, graphiques, liens, propriétés et auteurs du fichier, sans toucher à la mise en page ni aux images ; elle ajoute un troisième modèle de prompt pour ces fichiers et affiche ce qui reste en clair ; la page reste utilisable quand le navigateur refuse l'enregistrement local, listes et réglages n'étant alors gardés que le temps de l'onglet ; les règles de remplacement et le traitement des classeurs Excel ne changent pas.</p></details>
       </div>
     </section>
 
@@ -510,7 +528,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
 
 <footer class="pied">
   <span>Lyon 1 Université</span>
-  <span>Pseudonymiseur, version web 1.23 du 19 novembre 2026, mise à jour le 19 novembre 2026 à 9 h 37</span>
+  <span>Pseudonymiseur, version web 1.30 du 19 novembre 2026, mise à jour le 19 novembre 2026 à 13 h 20</span>
   <span>Traitement local, aucune donnée transmise</span>
 </footer>
 <div class="toast" id="toast"></div>
@@ -2458,6 +2476,1317 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
 
 </script>
 <script>
+/* Pseudonymiseur, traitement d'un document Word (.docx, .docm, .dotx, .dotm) ou d'un diaporama PowerPoint (.pptx, .pptm,
+   .ppsx, .ppsm, .potx, .potm) dans le navigateur. Version 1.30 du 19 novembre 2026.
+   Un document Word ou PowerPoint est, comme un classeur Excel, une archive zip de fichiers XML. Seuls les textes sont passés
+   au moteur : paragraphes, tableaux, en-têtes et pieds de page, notes, commentaires, zones de texte, texte supprimé gardé par le
+   suivi des modifications, notes du présentateur, masques, graphiques et schémas, liens, propriétés du fichier et noms d'auteur.
+   Word et PowerPoint coupent souvent un texte en plusieurs morceaux à l'intérieur d'un paragraphe (un morceau par mise en
+   forme, par correction, par séance de travail). Un nom peut donc être coupé en deux. Chaque paragraphe est ici lu d'un seul
+   tenant, passé au moteur, puis chaque code est écrit dans le premier morceau que l'élément remplacé occupait ; les autres
+   morceaux gardent leur mise en forme. À la restitution, un paragraphe que l'outil d'intelligence artificielle n'a pas touché
+   retrouve ses morceaux d'origine, exactement.
+   Tout le reste (styles, mise en page, images, animations, macros) est recopié octet pour octet, sauf l'image miniature du
+   fichier, retirée parce qu'elle montre le texte d'origine.
+   Le moteur et le module Excel ne sont pas modifiés. Ce module reprend du module Excel la lecture et l'écriture de l'archive.
+   Aucune bibliothèque extérieure, aucun envoi : rien ne quitte le poste. */
+(function (racine) {
+  'use strict';
+  var X = racine.PseudonymiseurExcel || (typeof require === 'function' ? require('./excel.js').PseudonymiseurExcel : null);
+
+  var decodeur = new TextDecoder('utf-8', { ignoreBOM: true }), encodeur = new TextEncoder();
+  var DEBUT_COMMENTAIRE = '<!' + '--';      // écrit en deux morceaux : cette suite de signes ne doit pas figurer telle quelle dans une page web
+
+  // ------------------------------------------------------------------ compression (fournie par le navigateur)
+  function traverser(u8, flux) {
+    return new Response(new Blob([u8]).stream().pipeThrough(flux)).arrayBuffer().then(function (b) { return new Uint8Array(b); });
+  }
+  function decompresser(e) {
+    if (e.methode === 0) return Promise.resolve(e.comprime);
+    if (e.methode !== 8) return Promise.reject(new Error('Méthode de compression inconnue dans le document (' + e.nom + ').'));
+    if (typeof DecompressionStream === 'undefined') return Promise.reject(new Error('Ce navigateur ne sait pas décompresser le document : utiliser une version récente de Firefox, Chrome ou Edge.'));
+    return traverser(e.comprime, new DecompressionStream('deflate-raw'));
+  }
+  function compresser(u8) {
+    if (typeof CompressionStream === 'undefined') return Promise.resolve({ methode: 0, comprime: u8 });
+    return traverser(u8, new CompressionStream('deflate-raw')).then(function (c) { return { methode: 8, comprime: c }; });
+  }
+  function remplirEntree(entree, octets) {
+    return compresser(octets).then(function (c) {
+      entree.methode = c.methode; entree.comprime = c.comprime; entree.crc = X.crc32(octets); entree.taille = octets.length;
+      if (c.methode === 8 && entree.versionRequise < 20) entree.versionRequise = 20;
+    });
+  }
+
+  // ------------------------------------------------------------------ XML : entités
+  /* Décode un texte XML. Rend aussi, quand le texte porte des entités, la place de chaque caractère décodé dans le texte brut :
+     ce qui n'est pas remplacé est ainsi recopié tel qu'il était écrit. */
+  function decoder(brut) {
+    if (brut.indexOf('&') < 0) return { texte: brut, carte: null };
+    var texte = '', carte = [], re = /&(lt|gt|amp|quot|apos|#x[0-9A-Fa-f]+|#[0-9]+);/g, m, pos = 0, i;
+    while ((m = re.exec(brut)) !== null) {
+      var e = m[1], ch;
+      if (e === 'lt') ch = '<'; else if (e === 'gt') ch = '>'; else if (e === 'amp') ch = '&'; else if (e === 'quot') ch = '"'; else if (e === 'apos') ch = '\'';
+      else {
+        var code = e.charAt(1) === 'x' ? parseInt(e.slice(2), 16) : parseInt(e.slice(1), 10);
+        try { ch = String.fromCodePoint(code); } catch (err) { continue; }
+      }
+      for (i = pos; i < m.index; i++) carte.push(i);
+      texte += brut.slice(pos, m.index);
+      for (i = 0; i < ch.length; i++) carte.push(m.index);
+      texte += ch; pos = m.index + m[0].length;
+    }
+    for (i = pos; i < brut.length; i++) carte.push(i);
+    texte += brut.slice(pos); carte.push(brut.length);
+    return { texte: texte, carte: carte };
+  }
+  function encoderTexte(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function encoderAttribut(s, guillemet) {
+    s = encoderTexte(s).replace(/\n/g, '&#10;').replace(/\r/g, '&#13;').replace(/\t/g, '&#9;');
+    return guillemet === '\'' ? s.replace(/'/g, '&apos;') : s.replace(/"/g, '&quot;');
+  }
+  /* Écriture valable partout, dans un texte comme dans un attribut. */
+  function encoderPartout(s) { return encoderAttribut(s, '"').replace(/'/g, '&apos;'); }
+
+  // ------------------------------------------------------------------ règles de lecture
+  /* Un conteneur ouvre un texte lu d'un seul tenant (un paragraphe). Une pièce est un morceau de ce texte. Une coupure sépare
+     deux textes dans le même paragraphe (tabulation, saut de ligne, image posée dans la ligne, appel de note). Une image ou
+     une zone de texte flottante ne coupe pas le paragraphe auquel elle est ancrée : son texte est lu à part. Une pièce fixe est
+     un signe que Word écrit par une balise : il compte dans le texte lu, sans pouvoir recevoir de texte. */
+  var CONTENEURS = { 'w:p': 1, 'a:p': 1, 'w:rt': 1, 'w:rubyBase': 1 };
+  var PIECES = { 'w:t': 'texte', 'a:t': 'texte', 'w:delText': 'supprime', 'w:instrText': 'champ', 'w:delInstrText': 'champ' };
+  var FIXES = { 'w:noBreakHyphen': '-', 'w:softHyphen': '' };
+  var COUPURES = {
+    'w:tab': '\t', 'w:ptab': '\t', 'w:br': '\n', 'w:cr': '\n', 'a:br': '\n',
+    'w:sym': '', 'wp:inline': '', 'w:object': '',
+    'w:footnoteReference': '', 'w:endnoteReference': '', 'w:commentReference': '', 'w:ruby': '',
+    'm:oMath': '', 'm:oMathPara': '', 'a14:m': ''
+  };
+  var AVEC_ESPACE = { 'w:t': 1, 'w:delText': 1, 'w:instrText': 1, 'w:delInstrText': 1 };   // xml:space="preserve" quand le texte commence ou finit par un blanc
+  // propriétés du fichier : reconnues par leur nom sans préfixe (certains outils écrivent <lastModifiedBy> sans « cp: »)
+  var SIMPLES_PROPRIETES = { creator: 'auteur', lastModifiedBy: 'auteur', title: 'texte', subject: 'texte', description: 'texte', keywords: 'texte', category: 'texte', contentStatus: 'texte' };
+  var SIMPLES_APPLICATION = { Company: 'texte', Manager: 'auteur', lpstr: 'texte', lpwstr: 'texte', HyperlinkBase: 'cible', Template: 'texte' };
+  var CACHES_TEXTE = { 'c:strCache': 1, 'c:strLit': 1, 'c:multiLvlStrCache': 1, 'c15:dlblRangeCache': 1, 'c:tx': 1, 'cx:strDim': 1, 'cx:txData': 1 };
+  var DANS_UN_CACHE = { 'c:v': 1, 'cx:pt': 1, 'cx:v': 1 };
+  var ELEMENTS_A_ATTRIBUTS = { comment: 1, cmAuthor: 1, author: 1, presenceInfo: 1, person: 1, chgData: 1, cNvPr: 1, docPr: 1, section: 1, custShow: 1, hyperlink: 1,
+    hlinkClick: 1, hlinkHover: 1, hlinkMouseOver: 1, listItem: 1, listEntry: 1, connectString: 1, query: 1, udl: 1, fldSimple: 1, Relationship: 1,
+    docVar: 1, alias: 1, tag: 1, cSld: 1, oleObj: 1, property: 1, attr: 1, 'default': 1, helpText: 1, statusText: 1 };
+  var PROPRIETE_TECHNIQUE = /^(?:MSIP_Label_|ContentTypeId$|_)/;
+  var PARTIE_IGNOREE = /(?:^|\/)(?:theme\/|fontTable\.xml$|webSettings\.xml$|styles\.xml$|stylesWithEffects\.xml$|numbering\.xml$|tableStyles\.xml$|presProps\.xml$|viewProps\.xml$)|^\[Content_Types\]\.xml$|^customXml\/itemProps[^/]*\.xml$/;
+  /* Préfixes attendus des espaces de noms dont dépend la lecture : un fichier qui en emploie d'autres ne serait pas lu
+     entièrement, il est donc refusé. */
+  var ESPACES_ATTENDUS = {
+    'http://schemas.openxmlformats.org/wordprocessingml/2006/main': 'w', 'http://purl.oclc.org/ooxml/wordprocessingml/main': 'w',
+    'http://schemas.openxmlformats.org/drawingml/2006/main': 'a', 'http://purl.oclc.org/ooxml/drawingml/main': 'a',
+    'http://schemas.openxmlformats.org/presentationml/2006/main': 'p', 'http://purl.oclc.org/ooxml/presentationml/main': 'p',
+    'http://schemas.openxmlformats.org/drawingml/2006/chart': 'c', 'http://purl.oclc.org/ooxml/drawingml/chart': 'c',
+    'http://schemas.microsoft.com/office/drawing/2014/chartex': 'cx', 'urn:schemas-microsoft-com:vml': 'v',
+    'http://schemas.openxmlformats.org/markup-compatibility/2006': 'mc',
+    'http://schemas.openxmlformats.org/officeDocument/2006/math': 'm', 'http://purl.oclc.org/ooxml/officeDocument/math': 'm'
+  };
+  var RE_ESPACE = /\sxmlns(?::([A-Za-z_][\w.\-]*))?\s*=\s*(?:"([^"]*)"|'([^']*)')/g;
+  function prefixesInattendus(xml) {
+    var m; RE_ESPACE.lastIndex = 0;
+    while ((m = RE_ESPACE.exec(xml)) !== null) {
+      var uri = m[2] !== undefined ? m[2] : m[3];
+      if (ESPACES_ATTENDUS.hasOwnProperty(uri) && ESPACES_ATTENDUS[uri] !== m[1]) return true;
+    }
+    return false;
+  }
+
+  function nomLocal(n) { var i = n.indexOf(':'); return i < 0 ? n : n.slice(i + 1); }
+  function estXml(nom) { return /\.(?:xml|rels)$/i.test(nom); }
+  function estPartieLue(nom) { return estXml(nom) && !PARTIE_IGNOREE.test(nom); }
+
+  function valeurDe(attributs, nom) { var m = new RegExp('\\s' + nom + '\\s*=\\s*(?:"([^"]*)"|\'([^\']*)\')').exec(attributs); return m ? (m[1] !== undefined ? m[1] : m[2]) : ''; }
+  /* Classe d'un attribut : texte (passé au moteur), auteur (toujours codé), initiales, identifiant de compte, cible d'un lien,
+     chemin, champ, nom (nom d'une forme, d'une image, d'une disposition) et reserve (donnée technique d'un module ou d'un
+     formulaire). Un nom ou une donnée réservée n'est passé au moteur que s'il porte un prénom connu ou une adresse mail : un
+     mot technique en majuscules (TITRE) n'est ainsi jamais pris pour un nom de personne. Un élément déjà codé ailleurs dans le
+     document y est codé aussi. */
+  function classeAttribut(element, local, attribut, prefixe, nomPartie, attributs) {
+    switch (attribut) {
+      case 'author': return 'auteur';
+      case 'initials': return (local === 'comment' || local === 'cmAuthor' || local === 'author') ? 'initiales' : null;
+      case 'userId': return 'identifiant';
+      case 'name':
+        if (local === 'cmAuthor' || local === 'chgData' || (local === 'author' && /(?:^|\/)authors\.xml$/.test(nomPartie))) return 'auteur';
+        if (local === 'cNvPr' || local === 'docPr' || local === 'cSld' || local === 'oleObj') return 'nom';
+        if (local === 'section' || local === 'custShow') return 'texte';
+        if (local === 'property') return (nomPartie === 'docProps/custom.xml' && !PROPRIETE_TECHNIQUE.test(valeurDe(attributs, 'name'))) ? 'nom' : null;
+        return null;
+      case 'id': return element.slice(0, 2) === 'v:' && !/^_x0000_/.test(valeurDe(attributs, 'id')) ? 'nom' : null;      // nom d'une forme, dans la forme ancienne des dessins
+      case 'string': return element === 'v:textpath' ? 'texte' : null;                                                     // texte d'un filigrane
+      case 'descr': return (local === 'cNvPr' || local === 'docPr') ? 'texte' : null;
+      case 'title':
+        if (local === 'cNvPr' || local === 'docPr') return 'texte';
+        return (prefixe === 'o:' && element.slice(0, 2) === 'v:') ? 'texte' : null;
+      case 'alt': return element.slice(0, 2) === 'v:' ? 'texte' : null;
+      case 'tooltip': return (local === 'hyperlink' || local === 'hlinkClick' || local === 'hlinkHover' || local === 'hlinkMouseOver') ? 'texte' : null;
+      case 'displayText': return local === 'listItem' ? 'texte' : null;
+      case 'value': return local === 'listItem' ? 'reserve' : null;
+      case 'val':
+        if (local === 'listEntry' || local === 'default' || local === 'helpText' || local === 'statusText') return 'texte';
+        if (local === 'docVar' || local === 'alias' || local === 'attr') return 'reserve';
+        if (local === 'tag') return /^ppt\/tags\//.test(nomPartie) ? 'reserve' : null;
+        return (local === 'connectString' || local === 'query' || local === 'udl') ? 'chemin' : null;
+      case 'instr': return local === 'fldSimple' ? 'champ' : null;
+      case 'Target': return (local === 'Relationship' && /\bTargetMode\s*=\s*["']External["']/.test(attributs)) ? 'cible' : null;
+    }
+    return null;
+  }
+
+  var RE_NOM = /[^\s\/>]+/y;
+  var RE_ATTRIBUT = /(\s)((?:[A-Za-z_][\w.\-]*:)?)([A-Za-z_][\w.\-]*)\s*=\s*(?:"([^"]*)"|'([^']*)')/g;
+  /* Fin d'une balise ouverte en i - 1 : place du « > », ou -1. Les guillemets des attributs sont sautés. */
+  function finDeBalise(xml, i, n) {
+    for (; i < n; i++) {
+      var c = xml.charCodeAt(i);
+      if (c === 62) return i;
+      if (c === 34 || c === 39) { i = xml.indexOf(c === 34 ? '"' : '\'', i + 1); if (i < 0) return -1; }
+      else if (c === 60) return -1;
+    }
+    return -1;
+  }
+
+  /* Lit une partie XML. Rend { segments, evenements } ou { erreur } si le XML ne se lit pas.
+     Un segment est un texte lu d'un seul tenant : { genre, classe, pieces:[...] }. Une pièce donne sa place dans le XML. */
+  function analyser(xml, nomPartie) {
+    var segments = [], evenements = [], pile = [{ texte: null, supprime: null, champ: null }];
+    var ouverte = null, pos = 0, n = xml.length, m;
+    var estProprietes = nomPartie === 'docProps/core.xml', estApplication = nomPartie === 'docProps/app.xml', estPerso = nomPartie === 'docProps/custom.xml';
+    var toutTexte = /^customXml\/item[^/]*\.xml$/.test(nomPartie), estLiens = /\.rels$/i.test(nomPartie);
+    var cache = 0, tabulations = 0, replis = 0, formes = [], champs = [], proprieteCourante = '', objets = {};
+    var compte = { supprimes: 0, objets: 0, opaques: 0, donnees: 0 };
+
+    function contexte() { return pile[pile.length - 1]; }
+    function nouveauSegment(genre, classe, visible) {
+      var s = { genre: genre, classe: classe || 'texte', pieces: [], forme: formes.length ? formes[formes.length - 1] : null };
+      if (replis > 0) s.repli = true;        // forme ancienne d'une zone de texte, écrite en double dans le fichier
+      segments.push(s);
+      if (genre === 'texte') evenements.push({ s: s });
+      else if (visible) { s.visible = true; evenements.push({ s: s }); evenements.push({ e: 'p' }); }
+      return s;
+    }
+    function ajouter(type, piece) {
+      var c = contexte();
+      if (type === 'texte') { c.supprime = null; if (!c.texte) c.texte = nouveauSegment('texte'); c.texte.pieces.push(piece); }
+      else if (type === 'supprime') { if (!c.supprime) { c.supprime = nouveauSegment('supprime'); compte.supprimes++; } c.supprime.pieces.push(piece); }
+      else {
+        if (!c.champ) { c.champ = nouveauSegment('champ', 'champ'); c.champ.champ = champs.length ? champs[champs.length - 1] : { nom: null }; }
+        c.champ.pieces.push(piece);
+      }
+    }
+    function couper() { var c = contexte(); c.texte = null; c.supprime = null; }
+    function piece(nom, brut, d, f, extra) {
+      var dec = decoder(brut), p = { nom: nom, brut: brut, texte: dec.texte, carte: dec.carte, d: d, f: f };
+      if (extra) for (var k in extra) if (extra.hasOwnProperty(k)) p[k] = extra[k];
+      return p;
+    }
+
+    while (pos < n) {
+      var lt = xml.indexOf('<', pos);
+      if (lt < 0) lt = n;
+      if (toutTexte && !ouverte && lt > pos) {
+        var libre = xml.slice(pos, lt);
+        // Donnée interne du fichier (page de garde, fiche du document) : montrée dans l'aperçu dès qu'elle porte des mots ; un
+        // identifiant technique ou une valeur sans lettres n'y est montré que s'il est codé.
+        if (/\S/.test(libre)) { var sl = nouveauSegment('simple', 'texte'); sl.discret = !/[A-Za-z\u00C0-\u024F]{2}/.test(libre) || /^\s*\{?[0-9A-Fa-f]{8}-[0-9A-Fa-f-]{20,}\}?\s*$/.test(libre); sl.pieces.push(piece('', libre, pos, lt)); }
+      }
+      if (lt >= n) break;
+      if (xml.startsWith(DEBUT_COMMENTAIRE, lt)) { var fc = xml.indexOf('-->', lt + 4); if (fc < 0) return { erreur: true }; pos = fc + 3; if (ouverte) ouverte.opaque = true; continue; }
+      if (xml.startsWith('<![CDATA[', lt)) { var fd = xml.indexOf(']]>', lt + 9); if (fd < 0) return { erreur: true }; pos = fd + 3; if (ouverte) ouverte.opaque = true; else if (toutTexte && fd > lt + 9) compte.opaques++; continue; }
+      if (xml.startsWith('<?', lt)) { var fp = xml.indexOf('?>', lt + 2); if (fp < 0) return { erreur: true }; pos = fp + 2; if (ouverte) ouverte.opaque = true; continue; }
+      if (xml.startsWith('<!', lt)) { var fx = xml.indexOf('>', lt + 2); if (fx < 0) return { erreur: true }; pos = fx + 1; continue; }
+      var fermante = xml.charCodeAt(lt + 1) === 47, debutNom = lt + (fermante ? 2 : 1), sup = finDeBalise(xml, debutNom, n);
+      if (sup < 0) return { erreur: true };
+      RE_NOM.lastIndex = debutNom; m = RE_NOM.exec(xml);
+      if (!m || !/^[A-Za-z_]/.test(m[0])) return { erreur: true };
+      var nom = m[0], finBalise = sup + 1, attributs = xml.slice(debutNom + nom.length, sup);
+      var autoFermante = !fermante && xml.charCodeAt(sup - 1) === 47;
+      pos = finBalise;
+
+      if (fermante) {
+        if (ouverte && ouverte.nom === nom) {
+          if (ouverte.opaque) { couper(); compte.opaques++; }       // un texte écrit d'une façon inhabituelle (balise ou section littérale à l'intérieur) n'est pas lu
+          else {
+            var p = piece(nom, xml.slice(ouverte.d, lt), ouverte.d, lt, { baliseD: ouverte.baliseD, baliseF: ouverte.baliseF, e: finBalise });
+            if (ouverte.type === 'simple') { var ss = nouveauSegment('simple', ouverte.classe, ouverte.visible); ss.pieces.push(p); if (ouverte.discret) ss.discret = true; }
+            else ajouter(ouverte.type, p);
+          }
+          ouverte = null; continue;
+        }
+        if (ouverte) { ouverte.opaque = true; continue; }
+        if (CONTENEURS.hasOwnProperty(nom)) { if (pile.length > 1) pile.pop(); evenements.push({ e: 'p' }); continue; }
+        if (COUPURES.hasOwnProperty(nom)) { couper(); continue; }
+        if (CACHES_TEXTE.hasOwnProperty(nom)) { if (cache > 0) cache--; continue; }
+        if (nom === 'w:tabs') { if (tabulations > 0) tabulations--; continue; }
+        if (nom === 'mc:Fallback') { if (replis > 0) replis--; continue; }
+        if (nom === 'w:tc' || nom === 'a:tc') evenements.push({ e: 'c1' });
+        else if (nom === 'w:tr' || nom === 'a:tr') evenements.push({ e: 'l1' });
+        else if (nom === 'w:tbl' || nom === 'a:tbl') evenements.push({ e: 't1' });
+        else if (nom === 'p:sp') formes.pop();
+        else if (nom === 'property') proprieteCourante = '';
+        continue;
+      }
+
+      if (ouverte) { ouverte.opaque = true; continue; }
+      var local = nomLocal(nom);
+
+      // attributs porteurs de texte
+      if (attributs.length > 3 && (ELEMENTS_A_ATTRIBUTS.hasOwnProperty(local) || (nom.charCodeAt(0) === 118 && nom.charCodeAt(1) === 58) || attributs.indexOf('author=') >= 0 || attributs.indexOf('userId=') >= 0)) {
+        var debutAttributs = debutNom + nom.length, ma;
+        RE_ATTRIBUT.lastIndex = 0;
+        while ((ma = RE_ATTRIBUT.exec(attributs)) !== null) {
+          var guillemet = ma[4] !== undefined ? '"' : '\'', valeur = ma[4] !== undefined ? ma[4] : ma[5];
+          if (valeur === '') continue;
+          var classe = classeAttribut(nom, local, ma[3], ma[2], nomPartie, attributs);
+          if (!classe || (classe === 'cible' && !estLiens)) continue;
+          var dv = debutAttributs + ma.index + ma[0].length - 1 - valeur.length;
+          var sa = nouveauSegment('simple', classe);
+          sa.pieces.push(piece(nom, valeur, dv, dv + valeur.length, { attribut: guillemet }));
+          if (classe === 'champ') sa.champ = { nom: null };
+        }
+      }
+      if (local === 'property' && estPerso) { var np = /\sname\s*=\s*(?:"([^"]*)"|'([^']*)')/.exec(attributs); proprieteCourante = np ? (np[1] !== undefined ? np[1] : np[2]) : ''; }
+      if (nom === 'w:fldData' || nom === 'w:binData') compte.donnees++;
+      if (local === 'OLEObject' || local === 'oleObj') {
+        var ro = /\sr:id\s*=\s*["']([^"']*)["']/.exec(attributs), cleObjet = ro ? ro[1] : 'sans' + compte.objets;
+        if (!objets.hasOwnProperty(cleObjet)) { objets[cleObjet] = 1; compte.objets++; }
+      }
+
+      if (CONTENEURS.hasOwnProperty(nom)) {
+        if (autoFermante) evenements.push({ e: 'p' });
+        else { if (pile.length > 1) evenements.push({ e: 'p0' }); pile.push({ texte: null, supprime: null, champ: null }); }
+        continue;
+      }
+      if (PIECES.hasOwnProperty(nom)) {
+        if (autoFermante) ajouter(PIECES[nom], piece(nom, '', lt, finBalise, { vide: true, baliseD: lt, baliseF: finBalise, e: finBalise }));
+        else ouverte = { nom: nom, type: PIECES[nom], d: finBalise, baliseD: lt, baliseF: finBalise };
+        continue;
+      }
+      if (FIXES.hasOwnProperty(nom) && autoFermante) {
+        var c0 = contexte();
+        if (!c0.texte) c0.texte = nouveauSegment('texte');
+        c0.supprime = null;
+        c0.texte.pieces.push({ nom: nom, fixe: true, texte: FIXES[nom], brut: '', carte: null, d: lt, f: finBalise });
+        continue;
+      }
+      if (COUPURES.hasOwnProperty(nom)) {
+        if (nom === 'w:tab' && tabulations > 0) continue;
+        couper();
+        if (COUPURES[nom]) evenements.push({ e: COUPURES[nom] === '\t' ? 'tab' : 'br' });
+        continue;
+      }
+      if (nom === 'w:fldChar') {
+        contexte().champ = null;
+        var tf = /\sw:fldCharType\s*=\s*["']([^"']*)["']/.exec(attributs);
+        if (tf && tf[1] === 'begin') champs.push({ nom: null });
+        else if (tf && tf[1] === 'end' && champs.length) champs.pop();
+        continue;
+      }
+      if (CACHES_TEXTE.hasOwnProperty(nom)) { if (!autoFermante) cache++; continue; }
+      if (nom === 'w:tabs') { if (!autoFermante) tabulations++; continue; }
+      if (nom === 'mc:Fallback') { if (!autoFermante) replis++; continue; }
+      if (nom === 'w:tc' || nom === 'a:tc') { if (!autoFermante) evenements.push({ e: 'c0' }); continue; }
+      if (nom === 'w:tbl' || nom === 'a:tbl') { if (!autoFermante) evenements.push({ e: 't0' }); continue; }
+      if (nom === 'p:sp') { if (!autoFermante) formes.push({ ph: null }); continue; }
+      if (nom === 'p:ph') { if (formes.length) { var tp = /\stype\s*=\s*"([^"]*)"/.exec(attributs); formes[formes.length - 1].ph = tp ? tp[1] : 'body'; } continue; }
+      if (autoFermante) continue;
+
+      // éléments dont tout le contenu est un texte
+      var classeSimple = null, visible = false, discret = false;
+      if (cache > 0 && DANS_UN_CACHE.hasOwnProperty(nom)) { classeSimple = 'texte'; visible = true; }
+      else if (nom === 'p:text') { classeSimple = 'texte'; visible = true; }
+      else if (estProprietes && SIMPLES_PROPRIETES.hasOwnProperty(local)) classeSimple = SIMPLES_PROPRIETES[local];
+      else if (estApplication && SIMPLES_APPLICATION.hasOwnProperty(local)) { classeSimple = SIMPLES_APPLICATION[local]; if (local === 'lpstr' || local === 'lpwstr' || local === 'Template') { classeSimple = 'reserve'; discret = true; } }
+      else if (estPerso && local === 'lpwstr') { classeSimple = PROPRIETE_TECHNIQUE.test(proprieteCourante) ? 'technique' : 'texte'; discret = classeSimple === 'technique'; }
+      if (classeSimple) ouverte = { nom: nom, type: 'simple', classe: classeSimple, visible: visible, discret: discret, d: finBalise, baliseD: lt, baliseF: finBalise };
+    }
+    if (ouverte) return { erreur: true };
+    segments.forEach(function (s) {
+      var t = ''; for (var i = 0; i < s.pieces.length; i++) t += s.pieces[i].texte;
+      s.texte = t;
+      if (s.champ) {            // nom du champ : lu dans son premier morceau, valable pour les suivants
+        if (s.champ.nom === null && /\S/.test(t)) { var mc = /^\s*([A-Za-z]+)/.exec(t); s.champ.nom = mc ? mc[1].toUpperCase() : ''; s.motCle = !!mc; }
+        s.nomChamp = s.champ.nom || '';
+      }
+      if (s.classe === 'chemin') {   // chaîne de connexion ou requête d'un publipostage : seules les valeurs sont des textes
+        var rz = /(?:Data Source|DBQ|Initial Catalog|Database|DefaultDir|User ID|UID|Extended Properties)\s*=\s*([^;]*[^;\s])|'([^']+)'|"([^"]+)"/gi, mz; s.zones = [];
+        while ((mz = rz.exec(t)) !== null) { var vz = mz[1] !== undefined ? mz[1] : (mz[2] !== undefined ? mz[2] : mz[3]), dz = mz.index + mz[0].lastIndexOf(vz); s.zones.push([dz, dz + vz.length]); }
+      }
+      if (s.classe === 'reserve') { s.discret = true; s.reserve = true; s.zones = [[0, t.length]]; }
+      if (s.classe === 'nom') {   // nom d'une forme ou d'une image : le numéro que Word et PowerPoint posent à la fin n'est pas une donnée
+        s.discret = true; s.reserve = true;
+        var mn = /^([\s\S]*?[^\d\s])\s*\d+$/.exec(t);
+        s.zones = /^Google Shape;/.test(t) || /^\s*\d*\s*$/.test(t) ? [] : [[0, mn ? mn[1].length : t.length]];
+      }
+    });
+    return { segments: segments, evenements: evenements, supprimes: compte.supprimes, objets: compte.objets, opaques: compte.opaques, donnees: compte.donnees };
+  }
+
+  // ------------------------------------------------------------------ alignement : où sont les remplacements
+  function echapper(s) { return s.replace(/[\\^$.|?*+()[\]{}]/g, '\\$&'); }
+  /* Un seul remplacement, entre le début commun et la fin commune des deux textes. Toujours juste. */
+  function remplacementUnique(S, R) {
+    var p = 0, max = Math.min(S.length, R.length), s = 0;
+    while (p < max && S.charCodeAt(p) === R.charCodeAt(p)) p++;
+    while (s < max - p && S.charCodeAt(S.length - 1 - s) === R.charCodeAt(R.length - 1 - s)) s++;
+    return [[p, S.length - s, R.slice(p, R.length - s)]];
+  }
+  /* Pseudonymisation : les codes sont dans le texte rendu R. Chaque code y remplace son élément d'origine, lu dans S. */
+  function alignerCodage(S, R, table) {
+    if (!table.reCodes) return null;
+    var edits = [], posS = 0, posR = 0, m, re = table.reCodes; re.lastIndex = 0;
+    while ((m = re.exec(R)) !== null) {
+      var lit = R.slice(posR, m.index);
+      if (S.substr(posS, lit.length) !== lit) return null;
+      posS += lit.length;
+      var o = table.origines[m[0]];
+      if (o === undefined || o === '' || S.substr(posS, o.length) !== o) return null;
+      edits.push([posS, posS + o.length, m[0]]);
+      posS += o.length; posR = m.index + m[0].length;
+    }
+    return S.slice(posS) === R.slice(posR) ? edits : null;
+  }
+  /* Restitution : les codes sont dans le texte reçu S. */
+  function alignerRestitution(S, R, table) {
+    if (!table.reCodesSansCasse) return null;
+    var edits = [], pos = 0, sortie = '', m, re = table.reCodesSansCasse; re.lastIndex = 0;
+    while ((m = re.exec(S)) !== null) {
+      var o = table.originesBas[m[0].toLowerCase()];
+      if (o === undefined) continue;
+      sortie += S.slice(pos, m.index) + o; edits.push([m.index, m.index + m[0].length, o]); pos = m.index + m[0].length;
+    }
+    sortie += S.slice(pos);
+    return sortie === R ? edits : null;
+  }
+  /* Prépare, à partir de la table de correspondance, la recherche des codes et l'élément d'origine de chacun
+     (restitué par le moteur lui-même, pour suivre exactement sa règle). */
+  function preparerTable(correspondance, P) {
+    var vus = {}, codes = [], i;
+    for (i = 0; i < correspondance.length; i++) { var c = String(correspondance[i][1]); if (c !== '' && !vus.hasOwnProperty(c)) { vus[c] = 1; codes.push(c); } }
+    var table = { origines: {}, originesBas: {}, reCodes: null, reCodesSansCasse: null, reOrigines: null, codeDe: {} };
+    if (!codes.length) return table;
+    var r = P.depseudonymiser(codes.map(function (c) { return [c]; }), correspondance);
+    if (!r.ok) return table;
+    codes.forEach(function (c, k) { table.origines[c] = r.cellules[k][0]; if (!table.originesBas.hasOwnProperty(c.toLowerCase())) table.originesBas[c.toLowerCase()] = r.cellules[k][0]; });
+    var motif = codes.slice().sort(function (a, b) { return b.length - a.length; }).map(echapper).join('|');
+    table.reCodes = new RegExp(motif, 'g'); table.reCodesSansCasse = new RegExp(motif, 'gi');
+    // éléments d'origine de quatre caractères au moins, pour coder dans un nom technique ce qui est déjà codé ailleurs
+    var connus = [];
+    codes.forEach(function (c) { var o = table.origines[c]; if (typeof o === 'string' && o.length >= 4 && !table.codeDe.hasOwnProperty(o)) { table.codeDe[o] = c; connus.push(o); } });
+    if (connus.length) table.reOrigines = new RegExp('(?<![A-Za-z0-9\\u00C0-\\u024F])(?:' + connus.sort(function (a, b) { return b.length - a.length; }).map(echapper).join('|') + ')(?![A-Za-z0-9\\u00C0-\\u024F])', 'g');
+    return table;
+  }
+
+  /* Code dans un texte les éléments déjà présents dans la table, écrits exactement de la même façon. Rien de nouveau n'est reconnu. */
+  function propager(texte, table) {
+    if (!table.reOrigines) return texte;
+    table.reOrigines.lastIndex = 0;
+    return texte.replace(table.reOrigines, function (m) { return table.codeDe.hasOwnProperty(m) ? table.codeDe[m] : m; });
+  }
+
+  // ------------------------------------------------------------------ répartition d'un texte rendu dans les pièces d'un segment
+  /* edits : remplacements [debut, fin, texte] sur le texte entier du segment. Rend, pour chaque pièce, son nouveau texte
+     (null pour une pièce fixe retirée) et ses remplacements locaux. Le code va dans la première pièce que l'élément occupait. */
+  function repartir(seg, edits) {
+    var pieces = seg.pieces, debuts = [], i, o = 0, locaux = [], retirees = [], croise = false;
+    for (i = 0; i < pieces.length; i++) { debuts.push(o); o += pieces[i].texte.length; locaux.push([]); retirees.push(false); }
+    function touche(i, a, b) {
+      var d = debuts[i], f = d + pieces[i].texte.length;
+      return d === f ? (a < d && d < b) : (d < b && f > a);       // une pièce sans texte n'est touchée que si elle est à l'intérieur
+    }
+    for (var k = 0; k < edits.length; k++) {
+      var a = edits[k][0], b = edits[k][1], rep = edits[k][2], hote = -1, touchees = 0;
+      if (a < b) for (i = 0; i < pieces.length; i++) if (touche(i, a, b)) { touchees++; if (hote < 0 && !pieces[i].fixe) hote = i; }
+      if (hote < 0) {      // insertion pure, ou élément qui ne couvre que des pièces fixes : pièce modifiable la plus proche
+        for (i = 0; i < pieces.length; i++) if (!pieces[i].fixe && debuts[i] <= a && a <= debuts[i] + pieces[i].texte.length) { hote = i; break; }
+        if (hote < 0) for (i = pieces.length - 1; i >= 0; i--) if (!pieces[i].fixe && debuts[i] + pieces[i].texte.length <= a) { hote = i; break; }
+        if (hote < 0) for (i = 0; i < pieces.length; i++) if (!pieces[i].fixe) { hote = i; break; }
+        if (hote < 0) return null;
+        var x = Math.max(0, Math.min(pieces[hote].texte.length, a - debuts[hote]));
+        locaux[hote].push([x, x, rep]);
+        if (touchees) croise = true;
+        if (a < b) for (i = 0; i < pieces.length; i++) if (touche(i, a, b)) { if (pieces[i].fixe) retirees[i] = true; }
+        continue;
+      }
+      if (touchees > 1) croise = true;
+      for (i = 0; i < pieces.length; i++) {
+        if (!touche(i, a, b)) continue;
+        if (pieces[i].fixe) { retirees[i] = true; continue; }
+        locaux[i].push([Math.max(a, debuts[i]) - debuts[i], Math.min(b, debuts[i] + pieces[i].texte.length) - debuts[i], i === hote ? rep : '']);
+      }
+    }
+    var textes = [];
+    for (i = 0; i < pieces.length; i++) {
+      if (pieces[i].fixe) { textes.push(retirees[i] ? null : pieces[i].texte); continue; }
+      var l = locaux[i].sort(function (u, v) { return u[0] - v[0] || u[1] - v[1]; }), t = pieces[i].texte, s = '', q = 0;
+      for (var j = 0; j < l.length; j++) { s += t.slice(q, l[j][0]) + l[j][2]; q = l[j][1]; }
+      textes.push(s + t.slice(q));
+    }
+    return { textes: textes, locaux: locaux, croise: croise };
+  }
+  function jointure(textes) { var s = ''; for (var i = 0; i < textes.length; i++) if (textes[i] !== null) s += textes[i]; return s; }
+  /* Solution de repli : tout le texte rendu dans la première pièce modifiable, les autres vidées. */
+  function toutDansLaPremiere(seg, R) {
+    var fait = false, textes = seg.pieces.map(function (p) {
+      if (p.fixe) return null;
+      if (!fait) { fait = true; return R; }
+      return '';
+    });
+    return fait ? { textes: textes, locaux: null, croise: true } : null;
+  }
+  /* Rend la répartition du texte rendu R dans le segment, d'après les remplacements trouvés ; vérifie le résultat. */
+  function repartirTexte(seg, R, edits) {
+    var r = edits ? repartir(seg, edits) : null;
+    if (r && jointure(r.textes) === R) return r;
+    r = repartir(seg, remplacementUnique(seg.texte, R));
+    if (r && jointure(r.textes) === R) return r;
+    return toutDansLaPremiere(seg, R);
+  }
+
+  // ------------------------------------------------------------------ écriture d'une pièce
+  function encodeurDe(p) { return p.attribut ? function (s) { return encoderAttribut(s, p.attribut); } : encoderTexte; }
+  /* Texte brut d'une pièce après ses remplacements : ce qui n'est pas remplacé est recopié tel qu'il était écrit. */
+  function brutDeLaPiece(p, nouveau, locaux) {
+    var enc = encodeurDe(p);
+    if (locaux && locaux.length) {
+      var s = '', q = 0, brut = p.brut, carte = p.carte, valable = true;
+      for (var j = 0; j < locaux.length; j++) {
+        var ra = carte ? carte[locaux[j][0]] : locaux[j][0], rb = carte ? carte[locaux[j][1]] : locaux[j][1];
+        if (ra === undefined || rb === undefined || ra < q) { valable = false; break; }
+        s += brut.slice(q, ra) + enc(locaux[j][2]); q = rb;
+      }
+      if (valable) { s += brut.slice(q); if (decoder(s).texte === nouveau) return s; }
+    }
+    return enc(nouveau);
+  }
+  function avecEspace(balise) { return /\sxml:space\s*=/.test(balise); }
+  /* Remplacements à faire dans le XML pour donner à la pièce son nouveau texte brut. etatEspace : true pour poser
+     xml:space="preserve", false pour le retirer (retour exact à l'original), undefined pour décider d'après le texte. */
+  function ecrirePiece(xml, p, brut, texte, etatEspace, sortie) {
+    var balise = p.baliseD !== undefined ? xml.slice(p.baliseD, p.baliseF) : '';
+    var veutEspace = AVEC_ESPACE.hasOwnProperty(p.nom) && (etatEspace === true || (etatEspace === undefined && /^\s|\s$/.test(texte)));
+    if (p.vide) {
+      if (brut === '') return;
+      var ouvrante = balise.replace(/\s*\/>$/, '');
+      if (veutEspace && !avecEspace(ouvrante)) ouvrante += ' xml:space="preserve"';
+      sortie.push([p.d, p.f, ouvrante + '>' + brut + '</' + p.nom + '>']);
+      return;
+    }
+    if (brut !== p.brut) sortie.push([p.d, p.f, brut]);
+    if (p.attribut || !AVEC_ESPACE.hasOwnProperty(p.nom)) return;
+    if (veutEspace && !avecEspace(balise)) sortie.push([p.baliseD, p.baliseF, balise.slice(0, -1) + ' xml:space="preserve">']);
+    else if (etatEspace === false && avecEspace(balise)) sortie.push([p.baliseD, p.baliseF, balise.replace(/\s+xml:space\s*=\s*(?:"[^"]*"|'[^']*')/, '')]);
+  }
+  function appliquer(xml, remplacements) {
+    if (!remplacements.length) return xml;
+    remplacements.sort(function (a, b) { return a[0] - b[0] || a[1] - b[1]; });
+    var s = '', q = 0;
+    for (var i = 0; i < remplacements.length; i++) {
+      if (remplacements[i][0] < q) throw new Error('Contrôle interne : deux remplacements se chevauchent. Rien n’a été produit.');
+      s += xml.slice(q, remplacements[i][0]) + remplacements[i][2]; q = remplacements[i][1];
+    }
+    return s + xml.slice(q);
+  }
+  /* Écrit dans le XML la répartition d'un segment. Une pièce fixe retirée laisse à sa place un morceau de texte vide :
+     la restitution sait ainsi où la remettre. */
+  function ecrireRepartition(xml, seg, rep, sortie) {
+    seg.pieces.forEach(function (x, i) {
+      if (x.fixe) { if (rep.textes[i] === null) sortie.push([x.d, x.f, '<w:t></w:t>']); return; }
+      if (rep.textes[i] === x.texte) return;
+      ecrirePiece(xml, x, brutDeLaPiece(x, rep.textes[i], rep.locaux ? rep.locaux[i] : null), rep.textes[i], undefined, sortie);
+    });
+  }
+
+  // ------------------------------------------------------------------ archive : ouverture
+  var TYPES = {
+    docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', docm: 'application/vnd.ms-word.document.macroEnabled.12',
+    dotx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.template', dotm: 'application/vnd.ms-word.template.macroEnabled.12',
+    pptx: 'application/vnd.openxmlformats-officedocument.presentationml.presentation', pptm: 'application/vnd.ms-powerpoint.presentation.macroEnabled.12',
+    ppsx: 'application/vnd.openxmlformats-officedocument.presentationml.slideshow', ppsm: 'application/vnd.ms-powerpoint.slideshow.macroEnabled.12',
+    potx: 'application/vnd.openxmlformats-officedocument.presentationml.template', potm: 'application/vnd.ms-powerpoint.template.macroEnabled.12'
+  };
+  var RE_EXTENSION = /\.(docx|docm|dotx|dotm|pptx|pptm|ppsx|ppsm|potx|potm)$/i;
+  function extension(nom) { var m = RE_EXTENSION.exec(nom || ''); return m ? m[1].toLowerCase() : ''; }
+  function typeMime(nom, genre) { return TYPES[extension(nom)] || (genre === 'powerpoint' ? TYPES.pptx : TYPES.docx); }
+  function nomSortie(nom, suffixe, genre) {
+    var ext = extension(nom), base = ext ? nom.slice(0, nom.length - ext.length - 1) : (nom || 'document');
+    return base + suffixe + '.' + (ext || (genre === 'powerpoint' ? 'pptx' : 'docx'));
+  }
+  var ANCIEN_FORMAT = 'Ce fichier est à l’ancien format (.doc, .ppt) ou protégé par un mot de passe. L’enregistrer au format .docx ou .pptx (Fichier, Enregistrer sous), sans mot de passe, puis le déposer de nouveau.';
+  var EST_UN_CLASSEUR = 'Ce fichier est un classeur Excel : lui donner l’extension .xlsx, puis le déposer de nouveau.';
+  function messageArchive(e) {
+    var t = e && e.message ? e.message : String(e);
+    return t.replace('Ce fichier n’est pas un classeur Excel (.xlsx) : fin d’archive introuvable.', 'Ce fichier ne se lit pas comme un document Word (.docx) ou PowerPoint (.pptx) : il est abîmé, ou ce n’est pas un document de ce format.')
+      .replace('Classeur trop volumineux', 'Document trop volumineux').replace('Archive du classeur abîmée', 'Archive du document abîmée');
+  }
+  function estAncienFormat(u8) { return u8.length > 8 && u8[0] === 0xD0 && u8[1] === 0xCF && u8[2] === 0x11 && u8[3] === 0xE0; }
+
+  var RE_IMAGE = /\/media\/[^/]+\.(?:png|jpe?g|jfif|gif|bmp|tiff?|emf|wmf|svg|webp|ico|wdp|heic)$|\/ink\/[^/]+\.xml$/i, RE_MEDIA = /\/media\/[^/]+$/i;
+  var RE_INCORPORE = /\/embeddings\/[^/]+$/i, RE_ARCHIVE_INCORPOREE = /\.(?:xlsx|xlsm|docx|docm|dotx|pptx|pptm|ppsx|sldx)$/i;
+  var RE_MINIATURE = /^docProps\/thumbnail\.[A-Za-z0-9]+$/i, RE_TEXTE_IMPORTE = /\.(?:html?|mht|mhtml|rtf|txt|odt)$/i;
+  var PARTIE_DE_CLASSEUR = /^xl\/(?:sharedStrings\.xml$|worksheets\/|comments|threadedComments\/|persons\/|tables\/|drawings\/|charts\/)|^docProps\/core\.xml$/;
+  var COMPTES = ['images', 'medias', 'objets', 'montres', 'macros', 'supprimes', 'miniatures', 'donnees'];
+
+  /* Ouvre une archive Word ou PowerPoint (ou un classeur incorporé). Rend une promesse de
+     { genre, entrees, parties:[{entree, nom, xml, analyse | morceaux}], incorporees:[{entree, archive}], autres, compte, illisibles } */
+  function ouvrirArchive(u8, restitution, profondeur) {
+    var entrees;
+    try { entrees = X.lireZip(u8); } catch (e) { return Promise.reject(new Error(messageArchive(e))); }
+    var noms = {}; entrees.forEach(function (e) { noms[e.nom] = e; });
+    var genre = noms.hasOwnProperty('xl/workbook.xml') ? 'excel' : null;
+    if (!genre) entrees.some(function (e) {
+      if (/^word\/document[^/]*\.xml$/.test(e.nom)) { genre = 'word'; return true; }
+      if (e.nom === 'ppt/presentation.xml') { genre = 'powerpoint'; return true; }
+      return false;
+    });
+    if (!genre) return Promise.reject(new Error('Ce fichier n’est ni un document Word (.docx) ni un diaporama PowerPoint (.pptx).'));
+    var archive = { genre: genre, entrees: entrees, parties: [], incorporees: [], autres: [], illisibles: [], nonDecodees: [], restitution: !!restitution, miniature: null, types: null,
+      compte: { images: 0, medias: 0, objets: 0, montres: 0, macros: 0, supprimes: 0, miniatures: 0, donnees: 0 } };
+    var aLire = [], aOuvrir = [], aGarder = [];
+    entrees.forEach(function (e) {
+      if (/\/$/.test(e.nom)) return;
+      if (RE_ARCHIVE_INCORPOREE.test(e.nom) && profondeur < 3) { aOuvrir.push(e); return; }
+      if (RE_INCORPORE.test(e.nom) || RE_ARCHIVE_INCORPOREE.test(e.nom)) { archive.compte.objets++; return; }
+      if (genre !== 'excel' && RE_MINIATURE.test(e.nom)) { archive.miniature = e; return; }
+      if (RE_IMAGE.test(e.nom)) { archive.compte.images++; return; }
+      if (RE_MEDIA.test(e.nom)) { archive.compte.medias++; return; }
+      if (/vbaProject[^/]*\.bin$/i.test(e.nom)) { archive.compte.macros++; return; }
+      if (genre !== 'excel' && RE_TEXTE_IMPORTE.test(e.nom)) { archive.compte.objets++; return; }
+      if (genre === 'excel' ? PARTIE_DE_CLASSEUR.test(e.nom) : estPartieLue(e.nom)) aLire.push(e);
+      else if (estXml(e.nom) && genre !== 'excel' && (restitution || e.nom === '[Content_Types].xml')) aGarder.push(e);
+    });
+    return Promise.all(aLire.concat(aGarder).map(decompresser)).then(function (contenus) {
+      aLire.forEach(function (e, i) {
+        var o = contenus[i];
+        if (o.length >= 2 && ((o[0] === 0xFF && o[1] === 0xFE) || (o[0] === 0xFE && o[1] === 0xFF))) { archive.illisibles.push(e.nom); archive.nonDecodees.push(e.nom); return; }   // UTF-16 : partie non lue
+        var xml = decodeur.decode(o);
+        if (genre === 'excel') {
+          var morceaux = X.decouperXml(xml, e.nom, !!restitution, null);
+          if (morceaux.some(function (m) { return m.texte !== undefined; }) || e.nom === 'xl/sharedStrings.xml' || /^xl\/worksheets\/sheet[^/]*\.xml$/.test(e.nom)) archive.parties.push({ entree: e, nom: e.nom, xml: xml, morceaux: morceaux });
+          return;
+        }
+        // Au codage, une partie que le navigateur ne lit pas comme un XML bien formé n'est pas traitée : le fichier est refusé.
+        var a = (prefixesInattendus(xml) || (!restitution && bienForme(xml) === false)) ? { erreur: true } : analyser(xml, e.nom);
+        if (a.erreur || (a.opaques && !restitution)) {
+          archive.illisibles.push(e.nom);
+          if (restitution) archive.autres.push({ entree: e, nom: e.nom, xml: xml });       // le filet de la restitution s'en charge
+          return;
+        }
+        archive.compte.supprimes += a.supprimes; archive.compte.montres += a.objets; archive.compte.donnees += a.donnees;
+        a.segments.forEach(function (s) { if (s.champ) s.zones = zonesDuChamp(s.texte, s.nomChamp, s.motCle); });
+        archive.parties.push({ entree: e, nom: e.nom, xml: xml, analyse: a });
+      });
+      aGarder.forEach(function (e, i) {
+        var o = contenus[aLire.length + i];
+        if (o.length >= 2 && ((o[0] === 0xFF && o[1] === 0xFE) || (o[0] === 0xFE && o[1] === 0xFF))) return;
+        var autre = { entree: e, nom: e.nom, xml: decodeur.decode(o) };
+        if (e.nom === '[Content_Types].xml') archive.types = autre;
+        archive.autres.push(autre);
+      });
+      return Promise.all(aOuvrir.map(function (e) {
+        return decompresser(e).then(function (o) { return ouvrirArchive(o, restitution, profondeur + 1); })
+          .then(function (sous) {
+            archive.incorporees.push({ entree: e, archive: sous });
+            COMPTES.forEach(function (k) { archive.compte[k] += sous.compte[k]; });
+            sous.illisibles.forEach(function (n) { archive.illisibles.push(e.nom + ' : ' + n); });
+            sous.nonDecodees.forEach(function (n) { archive.nonDecodees.push(e.nom + ' : ' + n); });
+          }, function () { archive.compte.objets++; });
+      }));
+    }).then(function () {
+      if (genre === 'excel') return completerClasseur(archive, noms).then(function () { return archive; });
+      ordonner(archive);
+      return archive;
+    });
+  }
+  /* Classeur incorporé : les parties utiles à son aperçu (liste des onglets) sont lues aussi. */
+  function completerClasseur(archive, noms) {
+    var besoin = ['xl/workbook.xml', 'xl/_rels/workbook.xml.rels', 'xl/sharedStrings.xml', 'xl/styles.xml'].filter(function (n) { return noms.hasOwnProperty(n); });
+    archive.pourApercu = {};
+    return Promise.all(besoin.map(function (n) { return decompresser(noms[n]); })).then(function (contenus) {
+      besoin.forEach(function (n, i) { archive.pourApercu[n] = decodeur.decode(contenus[i]); });
+    });
+  }
+  /* Range les parties dans l'ordre de lecture : le numéro des codes suit ainsi le texte, comme pour un texte collé. */
+  function ordonner(archive) {
+    var parNom = {}, rang = {}, i;
+    archive.parties.forEach(function (p) { parNom[p.nom] = p; });
+    if (archive.genre === 'powerpoint') {
+      ordreDesDiapositives(parNom).forEach(function (nom, k) { rang[nom] = 100 + 2 * k; var notes = notesDe(nom, parNom); if (notes) rang[notes.nom] = 101 + 2 * k; });
+    }
+    function rangDe(nom) {
+      if (rang.hasOwnProperty(nom)) return rang[nom];
+      if (/^word\/document[^/]*\.xml$/.test(nom)) return 0;
+      if (/^word\/(?:header|footer)[^/]*\.xml$/.test(nom)) return 1;
+      if (/^word\/(?:footnotes|endnotes)[^/]*\.xml$/.test(nom)) return 2;
+      if (/^word\/comments[^/]*\.xml$/.test(nom) || /^ppt\/comments\/[^/]+\.xml$/.test(nom)) return 100000;
+      if (/^(?:word|ppt)\/(?:charts|diagrams|drawings)\/[^/]+\.xml$/.test(nom)) return 100001;
+      if (/^ppt\/(?:slideMasters|slideLayouts|notesMasters|handoutMasters)\/[^/]+\.xml$/.test(nom)) return 100002;
+      if (/^docProps\//.test(nom)) return 100004;
+      if (/\.rels$/i.test(nom)) return 100005;
+      return 100003;
+    }
+    var ordre = archive.parties.map(function (p, k) { return { p: p, r: rangDe(p.nom), k: k }; });
+    ordre.sort(function (a, b) { return a.r - b.r || a.k - b.k; });
+    for (i = 0; i < ordre.length; i++) archive.parties[i] = ordre[i].p;
+  }
+
+  /* Toutes les parties d'une archive et de ses fichiers incorporés, dans l'ordre. */
+  function parcourir(archive, fonction) {
+    archive.parties.forEach(function (p) { fonction(p, archive); });
+    archive.incorporees.forEach(function (i) { parcourir(i.archive, fonction); });
+  }
+  function parcourirArchives(archive, fonction) {
+    fonction(archive);
+    archive.incorporees.forEach(function (i) { parcourirArchives(i.archive, fonction); });
+  }
+
+  /* L'image miniature du fichier (aperçu de la première page ou de la première diapositive) montre le texte d'origine :
+     elle est retirée de l'archive, avec le lien qui y mène. Rend true si elle est retirée. */
+  function retirerMiniature(archive) {
+    var e = archive.miniature;
+    if (!e) return false;
+    var liens = null; archive.parties.forEach(function (p) { if (p.nom === '_rels/.rels') liens = p; });
+    if (!liens) return false;
+    var re = /<Relationship\b(?:[^>"']|"[^"]*"|'[^']*')*?(?:\/>|>\s*<\/Relationship>)/g, m, retraits = [];
+    while ((m = re.exec(liens.xml)) !== null) {
+      var cible = /\sTarget\s*=\s*["']([^"']*)["']/.exec(m[0]);
+      if (cible && cible[1].replace(/^\//, '') === e.nom) retraits.push([m.index, m.index + m[0].length, '']);
+    }
+    if (!retraits.length) return false;
+    liens.retraits = retraits;
+    if (archive.types) {
+      var avant = archive.types.xml, apres = avant.replace(/<Override\b(?:[^>"']|"[^"]*"|'[^']*')*?\/>/g, function (o) {
+        var pn = /\sPartName\s*=\s*["']([^"']*)["']/.exec(o);
+        return pn && pn[1].replace(/^\//, '') === e.nom ? '' : o;
+      });
+      if (apres !== avant) archive.types.nouveau = apres;
+    }
+    archive.entrees = archive.entrees.filter(function (x) { return x !== e; });
+    archive.modifiee = true; archive.compte.miniatures++;
+    return true;
+  }
+
+  // ------------------------------------------------------------------ archive : fermeture
+  /* Recompresse les parties modifiées (p.nouveau) et réécrit l'archive, fichiers incorporés d'abord. */
+  function refermerArchive(archive) {
+    return Promise.all(archive.incorporees.map(function (i) {
+      return refermerArchive(i.archive).then(function (octets) { return i.archive.modifiee ? remplirEntree(i.entree, octets).then(function () { archive.modifiee = true; }) : null; });
+    })).then(function () {
+      var promesses = [];
+      archive.parties.concat(archive.autres).forEach(function (p) {
+        if (p.nouveau === undefined || p.nouveau === p.xml) return;
+        archive.modifiee = true;
+        promesses.push(remplirEntree(p.entree, encodeur.encode(p.nouveau)));
+      });
+      return Promise.all(promesses);
+    }).then(function () { return X.ecrireZip(archive.entrees); });
+  }
+  /* Vérifie qu'une partie réécrite se relit et porte les textes attendus, segment par segment. */
+  function controlerPartie(p, attendus, tolerees) {
+    var a = analyser(p.nouveau, p.nom);
+    if (a.erreur || a.segments.length !== attendus.length) throw new Error('Contrôle interne : la partie ' + p.nom + ' ne se relit pas après écriture. Rien n’a été produit.');
+    for (var i = 0; i < attendus.length; i++) {
+      if (a.segments[i].texte !== attendus[i]) throw new Error('Contrôle interne : un texte de la partie ' + p.nom + ' n’est pas celui attendu après écriture. Rien n’a été produit.');
+    }
+    controlerXml(p.nouveau, p.nom, p.xml, tolerees);
+  }
+  /* true ou false ; null quand le programme ne tourne pas dans un navigateur (pas d'analyseur XML à disposition). */
+  function bienForme(xml) {
+    if (typeof DOMParser === 'undefined') return null;
+    var doc = new DOMParser().parseFromString(xml.charCodeAt(0) === 0xFEFF ? xml.slice(1) : xml, 'application/xml');
+    return !doc.getElementsByTagName('parsererror').length;
+  }
+  /* La partie réécrite doit rester un XML bien formé. avant : la partie telle que reçue. Si elle était déjà mal formée (un autre
+     outil l'a mal écrite), ce n'est pas une faute d'écriture de ce module : au codage, le fichier est refusé avec un message
+     clair ; à la restitution (tolerees fournie), la partie est rendue telle quelle avec ses codes restitués, et elle est signalée. */
+  function controlerXml(xml, nom, avant, tolerees) {
+    if (bienForme(xml) !== false) return;
+    if (avant !== undefined && bienForme(avant) === false) {
+      if (tolerees) { if (tolerees.indexOf(nom) < 0) tolerees.push(nom); return; }
+      throw new Error(messageIllisible([nom]));
+    }
+    throw new Error('Contrôle interne : la partie ' + nom + ' n’est plus un XML valide après écriture. Rien n’a été produit.');
+  }
+
+  // ------------------------------------------------------------------ aperçu lisible
+  function propre(t) { return t.replace(/\r\n?|\n/g, ' '); }
+  function texteCourant(s) { return s.nouveau !== undefined ? s.nouveau : s.texte; }
+  /* Texte d'une partie, paragraphe par paragraphe ; une ligne de tableau sur une ligne, cellules séparées par une tabulation. */
+  function apercuPartie(analyse, filtre) {
+    var lignes = [], courante = '', tableaux = [];
+    function finir() { lignes.push(courante); courante = ''; }
+    analyse.evenements.forEach(function (ev) {
+      if (ev.s) { if (!ev.s.repli && (!filtre || filtre(ev.s))) courante += propre(texteCourant(ev.s)); return; }
+      switch (ev.e) {
+        case 'p0': if (courante !== '') finir(); break;
+        case 'tab': courante += '\t'; break;
+        case 'br': finir(); break;
+        case 'p': finir(); break;
+        case 't0': if (courante !== '') finir(); tableaux.push({ cellules: [], debut: lignes.length }); break;
+        case 'c0': if (courante !== '') finir(); if (tableaux.length) tableaux[tableaux.length - 1].debut = lignes.length; break;
+        case 'c1':
+          if (courante !== '') finir();
+          if (tableaux.length) { var t = tableaux[tableaux.length - 1]; t.cellules.push(lignes.splice(t.debut).filter(function (l) { return l !== ''; }).join(' ').replace(/\t/g, ' ')); }
+          break;
+        case 'l1': if (tableaux.length) { var u = tableaux[tableaux.length - 1]; lignes.push(u.cellules.join('\t').replace(/\t+$/, '')); u.cellules = []; u.debut = lignes.length; } break;
+        case 't1': tableaux.pop(); if (tableaux.length) tableaux[tableaux.length - 1].debut = Math.min(tableaux[tableaux.length - 1].debut, lignes.length); break;
+      }
+    });
+    if (courante !== '') finir();
+    var sortie = [], vide = false;
+    lignes.forEach(function (l) {
+      if (l.replace(/[ \t]+$/, '') === '') { if (!vide && sortie.length) sortie.push(''); vide = true; } else { sortie.push(l.replace(/[ \t]+$/, '')); vide = false; }
+    });
+    while (sortie.length && sortie[sortie.length - 1] === '') sortie.pop();
+    return sortie.join('\n');
+  }
+  function numeroDe(nom) { var m = /(\d+)\.xml$/.exec(nom); return m ? parseInt(m[1], 10) : 0; }
+  function relations(xml) {
+    var res = {}, re = /<Relationship\b[^>]*>/g, m;
+    while (xml && (m = re.exec(xml)) !== null) {
+      var id = /\bId="([^"]*)"/.exec(m[0]), cible = /\bTarget="([^"]*)"/.exec(m[0]), type = /\bType="([^"]*)"/.exec(m[0]);
+      if (id && cible) res[id[1]] = { cible: cible[1], type: type ? type[1] : '' };
+    }
+    return res;
+  }
+  function resoudre(base, cible) {
+    if (cible.charAt(0) === '/') return cible.slice(1);
+    var morceaux = base.split('/'); morceaux.pop();
+    cible.split('/').forEach(function (c) { if (c === '..') morceaux.pop(); else if (c !== '.') morceaux.push(c); });
+    return morceaux.join('/');
+  }
+  /* Ordre des diapositives, lu dans la présentation. Rend la liste des noms de parties. */
+  function ordreDesDiapositives(parNom) {
+    var pres = parNom['ppt/presentation.xml'], rels = parNom['ppt/_rels/presentation.xml.rels'], ordre = [];
+    if (pres && rels) {
+      var r = relations(rels.xml), re = /<p:sldId\b[^>]*>/g, m;
+      while ((m = re.exec(pres.xml)) !== null) {
+        var id = /\br:id="([^"]*)"/.exec(m[0]);
+        if (id && r[id[1]]) { var nom = resoudre('ppt/presentation.xml', r[id[1]].cible); if (parNom[nom] && ordre.indexOf(nom) < 0) ordre.push(nom); }
+      }
+    }
+    Object.keys(parNom).filter(function (n) { return /^ppt\/slides\/[^/]+\.xml$/.test(n) && ordre.indexOf(n) < 0; })
+      .sort(function (a, b) { return numeroDe(a) - numeroDe(b); }).forEach(function (n) { ordre.push(n); });
+    return ordre;
+  }
+  function notesDe(nomDiapositive, parNom) {
+    var rels = parNom[nomDiapositive.replace(/([^/]+)$/, '_rels/$1.rels')];
+    if (!rels) return null;
+    var r = relations(rels.xml), trouve = null;
+    Object.keys(r).forEach(function (id) { if (/\/notesSlide$/.test(r[id].type)) trouve = resoudre(nomDiapositive, r[id].cible); });
+    return trouve && parNom[trouve] ? parNom[trouve] : null;
+  }
+  function sansNumero(s) { return !s.forme || (s.forme.ph !== 'sldNum' && s.forme.ph !== 'sldImg'); }
+  function corpsDesNotes(s) { return !s.forme || s.forme.ph === null || s.forme.ph === 'body'; }
+  function horsGabarit(s) { return !s.forme || s.forme.ph === null || s.forme.ph === 'ftr' || s.forme.ph === 'hdr'; }
+  function bloc(titre, texte) { return texte ? '### ' + titre + '\n' + texte : ''; }
+  function listeSansDoublon(textes) {
+    var vus = {}, res = [];
+    textes.forEach(function (t) { t = propre(t).trim(); if (t !== '' && !vus.hasOwnProperty(t)) { vus[t] = 1; res.push(t); } });
+    return res.join('\n');
+  }
+  /* Aperçu d'une archive : le texte visible d'abord, puis ce qui ne se voit pas à l'écran (propriétés, auteurs, liens). */
+  function apercuArchive(archive) {
+    if (archive.genre === 'excel') {
+      var parties = {}; Object.keys(archive.pourApercu || {}).forEach(function (n) { parties[n] = archive.pourApercu[n]; });
+      archive.parties.forEach(function (p) { parties[p.nom] = p.nouveau !== undefined ? p.nouveau : p.xml; });
+      return X.apercuClasseur(parties);
+    }
+    var parNom = {}, blocs = [], vues = {};
+    archive.parties.forEach(function (p) { parNom[p.nom] = p; });
+    function ap(p, filtre) { vues[p.nom] = 1; return apercuPartie(p.analyse, filtre); }
+    function groupe(titre, test, filtre) {
+      var textes = [];
+      archive.parties.filter(function (p) { return !vues[p.nom] && test(p.nom); }).sort(function (a, b) { return numeroDe(a.nom) - numeroDe(b.nom) || (a.nom < b.nom ? -1 : 1); })
+        .forEach(function (p) { var t = ap(p, filtre); if (t) textes.push(t); });
+      if (textes.length) blocs.push(bloc(titre, filtre === horsGabarit ? listeSansDoublon(textes.join('\n').split('\n')) : textes.join('\n')));
+    }
+    if (archive.genre === 'word') {
+      archive.parties.filter(function (p) { return /^word\/document[^/]*\.xml$/.test(p.nom); }).forEach(function (p) { var t = ap(p); if (t) blocs.push(t); });
+      groupe('En-têtes et pieds de page', function (n) { return /^word\/(?:header|footer)[^/]*\.xml$/.test(n); });
+      groupe('Notes', function (n) { return /^word\/(?:footnotes|endnotes)[^/]*\.xml$/.test(n); });
+      groupe('Commentaires', function (n) { return /^word\/comments[^/]*\.xml$/.test(n); });
+      groupe('Graphiques et schémas', function (n) { return /^word\/(?:charts|diagrams|drawings)\/[^/]+\.xml$/.test(n); });
+    } else {
+      ordreDesDiapositives(parNom).forEach(function (nom, i) {
+        var t = ap(parNom[nom], sansNumero), notes = notesDe(nom, parNom), tn = notes ? ap(notes, corpsDesNotes) : '';
+        blocs.push('### Diapositive ' + (i + 1) + (t ? '\n' + t : '') + (tn ? '\nNotes : ' + tn.replace(/\n/g, '\nNotes : ') : ''));
+      });
+      groupe('Commentaires', function (n) { return /^ppt\/comments\/[^/]+\.xml$/.test(n); });
+      groupe('Graphiques et schémas', function (n) { return /^ppt\/(?:charts|diagrams|drawings)\/[^/]+\.xml$/.test(n); });
+      groupe('Masques et dispositions', function (n) { return /^ppt\/(?:slideMasters|slideLayouts|notesMasters|handoutMasters)\/[^/]+\.xml$/.test(n); }, horsGabarit);
+      archive.parties.forEach(function (p) { if (/^ppt\/notesSlides\//.test(p.nom)) vues[p.nom] = 1; });
+    }
+    // textes visibles des parties non rangées plus haut
+    var autres = [];
+    archive.parties.forEach(function (p) { if (!vues[p.nom]) { var t = apercuPartie(p.analyse); if (t) autres.push(t); } });
+    if (autres.length) blocs.push(bloc('Autres textes', autres.join('\n')));
+    // ce qui ne se voit pas à l'écran
+    var caches = [], supprimes = [];
+    archive.parties.forEach(function (p) {
+      p.analyse.segments.forEach(function (s) {
+        if (s.genre === 'supprime') supprimes.push(texteCourant(s));
+        else if (s.genre === 'champ' || (s.genre === 'simple' && !s.visible)) {
+          if (s.zones ? !s.zones.length : s.genre === 'champ') return;
+          if (!s.discret || s.nouveau !== undefined) caches.push(texteCourant(s));
+        }
+      });
+    });
+    var ts = listeSansDoublon(supprimes), tc = listeSansDoublon(caches);
+    if (ts) blocs.push(bloc('Texte supprimé, gardé par le suivi des modifications', ts));
+    if (tc) blocs.push(bloc('Propriétés, auteurs et liens du fichier', tc));
+    archive.incorporees.forEach(function (i) {
+      var t = apercuArchive(i.archive);
+      if (t) blocs.push('### Fichier incorporé : ' + i.entree.nom.replace(/^.*\//, '') + '\n' + t);
+    });
+    return blocs.filter(function (b) { return b; }).join('\n\n');
+  }
+
+  // ------------------------------------------------------------------ codes posés par ce module
+  /* Quatre données ne sont pas des textes pour le moteur, mais désignent une personne : un nom d'auteur que le moteur n'a pas
+     reconnu (un identifiant de connexion), les initiales d'un auteur de commentaire, l'identifiant de son compte, et le nom de
+     compte dans un chemin de fichier (C:\Users\nom). Ce module leur donne un code de la même forme, ajouté à la table de
+     correspondance. Un texte dont le codage ne reviendrait pas exactement est codé en entier, comme le fait le moteur. */
+  var RE_COMPTE = /([\\\/]+(?:Users|Utilisateurs|Documents and Settings|home)[\\\/]+)([^\\\/"<>|?*\r\n\t]+)/gi;
+  var RE_CHEMIN = /[\\\/](?:Users|Utilisateurs|Documents and Settings|home)[\\\/]/i;
+  var COMPTE_COMMUN = /^(?:Public|Default|Default User|All Users|Shared|Partag[ée])$/i;
+  function Maison(prefixe, correspondance) {
+    this.prefixe = prefixe; this.correspondance = correspondance; this.codes = {}; this.nouvelles = []; this.inserees = 0; this.suivants = {};
+    this.nb = { Auteur: 0, Initiales: 0, Compte: 0, Texte: 0 };
+  }
+  Maison.prototype.code = function (etiquette, valeur) {
+    var cle = 'v' + valeur;
+    if (this.codes.hasOwnProperty(cle)) return this.codes[cle];
+    if (!this.connus) {        // une valeur que le moteur a déjà codée ailleurs garde son code : une personne, un code
+      var connus = this.connus = {};
+      this.correspondance.forEach(function (c) { var o = 'v' + String(c[0]); if (!connus.hasOwnProperty(o)) connus[o] = String(c[1]); });
+    }
+    if (this.connus.hasOwnProperty(cle)) { this.codes[cle] = this.connus[cle]; return this.codes[cle]; }
+    if (!this.suivants.hasOwnProperty(etiquette)) {
+      var re = new RegExp('^' + echapper(this.prefixe) + '_' + etiquette + '[A-Z]*_(\\d+)$', 'i'), max = 0;
+      this.correspondance.forEach(function (c) { var m = re.exec(String(c[1])); if (m) max = Math.max(max, parseInt(m[1], 10)); });
+      this.suivants[etiquette] = max + 1;
+    }
+    var num = String(this.suivants[etiquette]++); while (num.length < 3) num = '0' + num;
+    var code = this.prefixe + '_' + etiquette + '_' + num;
+    this.codes[cle] = code; this.nouvelles.push([valeur, code]); this.nb[etiquette]++;
+    return code;
+  };
+  Maison.prototype.dejaCode = function (valeur) { return valeur.toLowerCase().indexOf(this.prefixe.toLowerCase() + '_') >= 0; };
+  /* Ajoute les lignes nouvelles à la table, rangée du plus long au plus court comme celle du moteur. */
+  Maison.prototype.completer = function () {
+    var t = this.correspondance;
+    for (; this.inserees < this.nouvelles.length; this.inserees++) {
+      var n = this.nouvelles[this.inserees], p = 0;
+      while (p < t.length && String(t[p][0]).length >= n[0].length) p++;
+      t.splice(p, 0, n);
+    }
+  };
+  /* Noms de compte dans les chemins d'un texte. S : texte d'origine ; R : texte rendu par le moteur. Seul le nom de compte est
+     remplacé, le chemin garde sa forme ; si le moteur avait codé une partie du nom, le nom entier reçoit un seul code.
+     Rend le texte rendu, ou null si la place des codes du moteur ne se retrouve pas (le texte est alors codé en entier). */
+  function coderChemins(S, R, table, maison) {
+    var zones = [], m; RE_COMPTE.lastIndex = 0;
+    while ((m = RE_COMPTE.exec(S)) !== null) {
+      var debut = m.index + m[1].length, compte = m[2], suite = S.charAt(debut + compte.length);
+      if (suite !== '\\' && suite !== '/') {       // pas de barre après le nom : il s'arrête au premier blanc
+        var blanc = compte.search(/\s/); if (blanc >= 0) compte = compte.slice(0, blanc);
+        compte = compte.replace(/[.,;:!)\]»’']+$/, '');
+      }
+      if (compte === '' || COMPTE_COMMUN.test(compte) || maison.dejaCode(compte)) continue;
+      zones.push([debut, debut + compte.length]);
+    }
+    if (!zones.length) return R;
+    var edits = R === S ? [] : alignerCodage(S, R, table);
+    if (edits === null) return null;
+    var sortie = [], retires = [];
+    zones.forEach(function (z) {
+      var a = z[0], b = z[1];
+      edits.forEach(function (e, k) { if (e[0] < b && e[1] > a) { a = Math.min(a, e[0]); b = Math.max(b, e[1]); retires[k] = true; } });
+      sortie.push([a, b, maison.code('Compte', S.slice(a, b))]);
+    });
+    edits.forEach(function (e, k) { if (!retires[k]) sortie.push(e); });
+    sortie.sort(function (u, v) { return u[0] - v[0] || u[1] - v[1]; });
+    var t = '', q = 0;
+    for (var i = 0; i < sortie.length; i++) {
+      if (sortie[i][0] < q) return null;
+      t += S.slice(q, sortie[i][0]) + sortie[i][2]; q = sortie[i][1];
+    }
+    return t + S.slice(q);
+  }
+
+  // ------------------------------------------------------------------ champs de Word
+  /* Un champ (lien, inclusion d'un fichier, entrée d'index, question posée à la fusion) porte des textes dans son instruction.
+     Seuls ces textes sont passés au moteur : jamais le nom du champ ni ses commutateurs. */
+  var CHAMPS_A_TEXTE = { HYPERLINK: 1, INCLUDETEXT: 1, INCLUDEPICTURE: 1, INCLUDE: 1, IMPORT: 1, LINK: 1, RD: 1, DDE: 1, DDEAUTO: 1, DATABASE: 1,
+    QUOTE: 1, SET: 1, ASK: 1, FILLIN: 1, IF: 1, COMPARE: 1, NEXTIF: 1, SKIPIF: 1, XE: 1, TC: 1, TA: 1, AUTHOR: 1, USERNAME: 1, USERINITIALS: 1,
+    USERADDRESS: 1, TITLE: 1, SUBJECT: 1, KEYWORDS: 1, COMMENTS: 1, MACROBUTTON: 1, GOTOBUTTON: 1, ADDRESSBLOCK: 1, GREETINGLINE: 1, PRINT: 1 };
+  function estBlanc(c) { return c === ' ' || c === '\t' || c === '\n' || c === '\r' || c === '\u00A0'; }
+  function zonesDuChamp(texte, nomChamp, avecMotCle) {
+    var zones = [];
+    if (!CHAMPS_A_TEXTE.hasOwnProperty(nomChamp)) return zones;
+    var i = 0, n = texte.length, debut = -1, dansGuillemets = false, c;
+    if (avecMotCle) { var m = /^\s*[A-Za-z]+/.exec(texte); if (m) i = m[0].length; }
+    function fermer(fin) {
+      if (debut < 0) return;
+      var a = debut, b = fin; debut = -1;
+      while (a < b && estBlanc(texte.charAt(a))) a++;
+      while (b > a && estBlanc(texte.charAt(b - 1))) b--;
+      if (b > a && /[A-Za-z0-9\u00C0-\u024F]/.test(texte.slice(a, b))) zones.push([a, b]);
+    }
+    for (; i < n; i++) {
+      c = texte.charAt(i);
+      if (c === '"') { fermer(i); dansGuillemets = !dansGuillemets; continue; }
+      if (!dansGuillemets && c === '\\' && (i === 0 || estBlanc(texte.charAt(i - 1))) && i + 1 < n && /[A-Za-z@#*!]/.test(texte.charAt(i + 1))) {
+        fermer(i);
+        var j = i + 2, commutateur = texte.charAt(i + 1);
+        while (j < n && !estBlanc(texte.charAt(j)) && texte.charAt(j) !== '"') j++;
+        if (commutateur === '@' || commutateur === '#' || commutateur === '*') {       // image de date ou de nombre, mise en forme : pas un texte
+          while (j < n && estBlanc(texte.charAt(j))) j++;
+          if (texte.charAt(j) === '"') { var q = texte.indexOf('"', j + 1); j = q < 0 ? n : q + 1; }
+          else while (j < n && !estBlanc(texte.charAt(j))) j++;
+        }
+        i = j - 1; continue;
+      }
+      if (debut < 0) debut = i;
+    }
+    fermer(n);
+    return zones;
+  }
+
+  // ------------------------------------------------------------------ pseudonymisation
+  function cibleWeb(t) { return /^\s*(?:https?:|mailto:|ftp:|tel:)/i.test(t); }
+  function modifiable(x) { return !x.fixe; }
+  /* Prénoms connus du moteur, pour décider si un nom technique lui est passé. */
+  function prenomsConnus(config, P) {
+    var connus = {};
+    ((config && config.prenoms) || []).forEach(function (v) { v = P.normaliser(String(v).replace(/^ +| +$/g, '')); if (v) connus[v] = 1; });
+    return function (texte) {
+      if (texte.indexOf('@') >= 0) return true;
+      var mots = texte.match(/[A-Za-z\u00C0-\u024F]{2,}(?:-[A-Za-z\u00C0-\u024F]{2,})*/g) || [];
+      for (var i = 0; i < mots.length; i++) {
+        if (connus.hasOwnProperty(P.normaliser(mots[i]))) return true;
+        var parties = mots[i].split('-');
+        if (parties.length > 1) for (var j = 0; j < parties.length; j++) if (connus.hasOwnProperty(P.normaliser(parties[j]))) return true;
+      }
+      return false;
+    };
+  }
+  /* Rend la liste des demandes au moteur : chaque demande est un texte, rattaché à un segment (ou à une zone de ce segment). */
+  function demandesDeCodage(archive, aUnPrenom) {
+    var demandes = [];
+    parcourir(archive, function (p) {
+      if (p.morceaux) { p.morceaux.forEach(function (m) { if (m.texte !== undefined && m.texte !== '') demandes.push({ morceau: m, texte: m.texte }); }); return; }
+      p.analyse.segments.forEach(function (s) {
+        if (s.texte === '' || !s.pieces.some(modifiable)) return;
+        if (s.zones) {
+          s.plan = s.zones.map(function (z) {
+            var t = s.texte.slice(z[0], z[1]), d = null;
+            if (!s.reserve || aUnPrenom(t)) { d = { segment: s, zone: z, texte: t }; demandes.push(d); }
+            return { zone: z, texte: t, demande: d };
+          });
+          return;
+        }
+        if (s.genre === 'champ') return;
+        if (s.classe === 'initiales' || s.classe === 'identifiant') return;
+        if (s.classe === 'technique' && s.texte.indexOf('@') < 0) return;
+        demandes.push({ segment: s, texte: s.texte });
+      });
+    });
+    return demandes;
+  }
+  function compterTextes(archive) {
+    var nb = 0;
+    parcourir(archive, function (p) { if (p.morceaux) p.morceaux.forEach(function (m) { if (m.texte) nb++; }); else p.analyse.segments.forEach(function (s) { if (s.texte !== '') nb++; }); });
+    return nb;
+  }
+  function messageIllisible(noms) {
+    return (noms.length > 1 ? 'Des parties de ce fichier ne se lisent pas (' : 'Une partie de ce fichier ne se lit pas (') + noms.slice(0, 3).join(', ') + (noms.length > 3 ? '…' : '') +
+      ') : il est écrit d’une façon que l’outil ne connaît pas. Rien n’a été produit. L’ouvrir dans Word ou PowerPoint, l’enregistrer sous un nouveau nom, puis déposer ce nouveau fichier.';
+  }
+  var STATS_VIDES = { personnes: 0, mails: 0, liens: 0, adresses: 0, dates: 0, numeros: 0, dictionnaire: 0, lignes: 0, controle: { textes: 0, entiers: 0, ecarts: 0 } };
+
+  /* Note, pour la restitution, les morceaux d'origine d'un segment codé. Clé : les textes codés de ses morceaux, tels qu'ils
+     seront relus. Un segment à un seul morceau, écrit de la façon habituelle, n'a pas besoin de note : il revient exactement. */
+  function noter(memo, xml, s, rep) {
+    var cles = [null], valeurs = [], trivial = true, nb = 0;
+    s.pieces.forEach(function (x, i) {
+      if (x.fixe) { if (rep.textes[i] === null) { cles.push(''); valeurs.push([null, x.nom]); trivial = false; nb++; } return; }
+      nb++;
+      if (cles[0] === null) cles[0] = x.attribut || 't';
+      var espace = x.baliseD !== undefined && !x.attribut && avecEspace(xml.slice(x.baliseD, x.baliseF)) ? 1 : 0;
+      cles.push(rep.textes[i]);
+      valeurs.push(x.vide ? [x.brut, espace, xml.slice(x.baliseD, x.baliseF)] : [x.brut, espace]);
+      if (x.brut !== encodeurDe(x)(x.texte)) trivial = false;
+      if (AVEC_ESPACE.hasOwnProperty(x.nom) && !espace && /^\s|\s$/.test(x.texte)) trivial = false;
+    });
+    if (nb > 1) trivial = false;
+    var cle = JSON.stringify(cles), js = JSON.stringify(valeurs);
+    if (memo.ambigus.hasOwnProperty(cle)) return;
+    if (memo.vus.hasOwnProperty(cle)) { if (memo.vus[cle] !== js) { memo.ambigus[cle] = 1; delete memo.segments[cle]; } return; }
+    memo.vus[cle] = js;
+    if (!trivial) memo.segments[cle] = valeurs;
+  }
+
+  /* Pseudonymise un document Word ou PowerPoint. u8 : octets du fichier ; config : celle du moteur ; moteur : window.Pseudonymiseur.
+     Rend une promesse de { ok, erreur, octets, nom, type, genre, correspondance, stats, avertissements, informations, memoire,
+     apercuEntree, apercuSortie, nbTextes }. memoire : ce qu'il faut pour rendre aux paragraphes non modifiés leurs morceaux d'origine. */
+  function pseudonymiser(u8, nomFichier, config, moteur) {
+    var P = moteur || racine.Pseudonymiseur;
+    if (estAncienFormat(u8)) return Promise.resolve({ ok: false, erreur: ANCIEN_FORMAT });
+    return ouvrirArchive(u8, false, 0).then(function (archive) {
+      if (archive.genre === 'excel') return { ok: false, erreur: EST_UN_CLASSEUR };
+      if (archive.illisibles.length) return { ok: false, erreur: messageIllisible(archive.illisibles) };
+      var nbTextes = compterTextes(archive);
+      if (!nbTextes) return { ok: false, erreur: 'Ce document ne contient aucun texte : rien à pseudonymiser.' };
+      var apercuEntree = apercuArchive(archive), demandes = demandesDeCodage(archive, prenomsConnus(config, P));
+      var prefixe = String((config && config.prefixe) || '').replace(/^ +| +$/g, '') || 'Pseudo';
+      var r = demandes.length ? P.pseudonymiser(demandes.map(function (d) { return [d.texte]; }), config)
+        : { ok: true, cellules: [], correspondance: [], avertissements: [], stats: JSON.parse(JSON.stringify(STATS_VIDES)) };
+      if (!r.ok) return { ok: false, erreur: r.erreur.replace('Le texte collé', 'Le document') };
+      var maison = new Maison(prefixe, r.correspondance), tableMoteur = preparerTable(r.correspondance, P);
+      function avecChemins(S, R) {
+        if (!RE_CHEMIN.test(S)) return R;
+        var t = coderChemins(S, R, tableMoteur, maison);
+        return t === null ? maison.code('Texte', S) : t;
+      }
+
+      // texte rendu de chaque segment : le moteur d'abord, puis les codes de ce module
+      demandes.forEach(function (d, i) {
+        d.rendu = r.cellules[i][0];
+        if (d.morceau) d.morceau.rendu = d.rendu;
+        else if (!d.zone) d.segment.rendu = d.rendu;
+      });
+      var codes = [];
+      parcourir(archive, function (p) {
+        if (p.morceaux) return;
+        p.analyse.segments.forEach(function (s) {
+          if (s.texte === '' || !s.pieces.some(modifiable)) { delete s.rendu; return; }
+          if (s.plan) {          // texte lu par zones : le moteur pour les unes, les éléments déjà codés ailleurs pour les autres
+            var tz = '', q = 0;
+            s.plan.forEach(function (z) { tz += s.texte.slice(q, z.zone[0]) + (z.demande ? avecChemins(z.texte, z.demande.rendu) : propager(z.texte, tableMoteur)); q = z.zone[1]; });
+            s.rendu = tz + s.texte.slice(q);
+          } else if (s.genre !== 'champ') {
+            var t = s.rendu !== undefined ? s.rendu : s.texte, libre = /\S/.test(s.texte) && !maison.dejaCode(s.texte);
+            if (s.classe === 'initiales') { if (libre) t = maison.code('Initiales', s.texte); }
+            else if (s.classe === 'identifiant') { if (libre) t = maison.code('Compte', s.texte); }
+            else if (s.classe === 'auteur' && t === s.texte) { if (libre) t = maison.code('Auteur', s.texte); }
+            else if (!(s.classe === 'cible' && cibleWeb(s.texte))) t = avecChemins(s.texte, t);
+            s.rendu = t;
+          }
+          if (s.rendu === undefined || s.rendu === s.texte) delete s.rendu; else codes.push(s);
+        });
+      });
+      // contrôle du retour, comme le fait le moteur : chaque texte codé est restitué avec la table et comparé à l'original
+      maison.completer();
+      var entiers = 0;
+      if (codes.length) {
+        var retour = P.depseudonymiser(codes.map(function (s) { return [s.rendu]; }), r.correspondance), aReprendre = [];
+        codes.forEach(function (s, i) { if (!retour.ok || retour.cellules[i][0] !== s.texte) aReprendre.push(s); });
+        if (aReprendre.length) {
+          aReprendre.forEach(function (s) { s.rendu = maison.code('Texte', s.texte); });
+          maison.completer(); entiers = aReprendre.length;
+          retour = P.depseudonymiser(aReprendre.map(function (s) { return [s.rendu]; }), r.correspondance);
+          aReprendre.forEach(function (s, i) { if (!retour.ok || retour.cellules[i][0] !== s.texte) throw new Error('Contrôle interne : un texte ne reviendrait pas exactement à la restitution. Rien n’a été produit.'); });
+        }
+      }
+      r.stats.lignes = r.correspondance.length; r.stats.personnes += maison.nb.Auteur;
+      if (r.stats.controle) r.stats.controle.entiers += maison.nb.Texte;
+      var table = preparerTable(r.correspondance, P);
+
+      // écriture de chaque partie
+      var memo = { segments: {}, vus: {}, ambigus: {} }, nbCroises = 0, miniatures = 0, miniaturesGardees = 0;
+      parcourirArchives(archive, function (a) { if (a.miniature) { if (retirerMiniature(a)) miniatures++; else miniaturesGardees++; } });
+      parcourir(archive, function (p) {
+        if (p.morceaux) {
+          var textes = [], change = false;
+          p.morceaux.forEach(function (m) { if (m.texte === undefined) return; var t = m.rendu !== undefined ? m.rendu : m.texte; if (t !== m.texte) change = true; textes.push(t); });
+          if (change) p.nouveau = X.recomposerXml(p.morceaux, textes);
+          return;
+        }
+        var remplacements = (p.retraits || []).slice(), attendus = [];
+        p.analyse.segments.forEach(function (s) {
+          if (s.rendu === undefined) { attendus.push(s.texte); return; }
+          var rep = repartirTexte(s, s.rendu, alignerCodage(s.texte, s.rendu, table));
+          if (!rep) throw new Error('Contrôle interne : un texte de la partie ' + p.nom + ' n’a pas pu être écrit. Rien n’a été produit.');
+          s.nouveau = s.rendu; attendus.push(s.rendu);
+          if (rep.croise) nbCroises++;
+          ecrireRepartition(p.xml, s, rep, remplacements);
+          noter(memo, p.xml, s, rep);
+        });
+        if (remplacements.length) { p.nouveau = appliquer(p.xml, remplacements); controlerPartie(p, attendus); }
+      });
+      parcourirArchives(archive, function (a) { if (a.types && a.types.nouveau !== undefined) controlerXml(a.types.nouveau, a.types.nom, a.types.xml); });
+      return refermerArchive(archive).then(function (octets) {
+        var c = archive.compte, avertissements = r.avertissements.slice(), informations = [];
+        if (entiers) avertissements.push(entiers + (entiers > 1 ? ' textes sont codés en entier, chacun sous un seul code : leur codage par élément ne serait pas revenu' : ' texte est codé en entier, sous un seul code : son codage par élément ne serait pas revenu') + ' exactement au texte d’origine.');
+        if (c.objets) avertissements.push(c.objets + (c.objets > 1 ? ' fichiers insérés dans le document ne sont pas lus (objets d’un ancien format, pages web, textes importés) : leur contenu reste en clair.'
+          : ' fichier inséré dans le document n’est pas lu (objet d’un ancien format, page web, texte importé) : son contenu reste en clair.'));
+        if (c.montres) avertissements.push(c.montres + (c.montres > 1 ? ' objets insérés (un tableau Excel collé comme objet, par exemple) sont montrés dans le document par une image : ces images ne sont pas lues et restent en clair.'
+          : ' objet inséré (un tableau Excel collé comme objet, par exemple) est montré dans le document par une image : cette image n’est pas lue et reste en clair.'));
+        if (miniaturesGardees) avertissements.push('L’image miniature du fichier (aperçu de la première page) n’a pas pu être retirée : elle montre le texte d’origine.');
+        if (c.images) informations.push(c.images + (c.images > 1 ? ' images ne sont pas lues' : ' image n’est pas lue') + ' : vérifier qu’aucune ne montre un nom, une signature ou un visage.');
+        if (c.medias) informations.push(c.medias + (c.medias > 1 ? ' fichiers de son ou de vidéo ne sont pas lus.' : ' fichier de son ou de vidéo n’est pas lu.'));
+        if (c.macros) informations.push('Les macros du fichier ne sont pas lues.');
+        if (c.donnees) informations.push(c.donnees + (c.donnees > 1 ? ' champs portent des données internes que l’outil ne lit pas (bibliographie, formulaire).' : ' champ porte des données internes que l’outil ne lit pas (bibliographie, formulaire).'));
+        if (c.supprimes) informations.push('Le texte supprimé que le suivi des modifications garde dans le fichier est codé aussi.');
+        if (miniatures) informations.push('L’image miniature du fichier (aperçu de la première page) est retirée : elle montrait le texte d’origine.');
+        return {
+          ok: true, octets: octets, nom: nomSortie(nomFichier, '_pseudonymisé', archive.genre), type: typeMime(nomFichier, archive.genre), genre: archive.genre,
+          correspondance: r.correspondance, stats: r.stats, avertissements: avertissements, informations: informations,
+          memoire: { version: 1, segments: memo.segments }, nbCroises: nbCroises,
+          apercuEntree: apercuEntree, apercuSortie: apercuArchive(archive), nbTextes: nbTextes
+        };
+      });
+    }).catch(function (e) { return { ok: false, erreur: e && e.message ? e.message : String(e) }; });
+  }
+
+  // ------------------------------------------------------------------ restitution
+  var RE_BALISE_VIDE = /^<[A-Za-z_][\w:.\-]*(?:\s+[A-Za-z_][\w:.\-]*\s*=\s*(?:"[^"<]*"|'[^'<]*'))*\s*\/>$/;
+  /* Rend les morceaux d'origine d'un segment que l'outil n'a pas touché. Rend true si c'est fait. */
+  function rendreLesMorceaux(xml, s, segmentsMemoire, sortie) {
+    var modifiables = s.pieces.filter(modifiable);
+    if (!modifiables.length) return false;
+    var cle = JSON.stringify([modifiables[0].attribut || 't'].concat(modifiables.map(function (x) { return x.texte; })));
+    var v = segmentsMemoire.hasOwnProperty(cle) ? segmentsMemoire[cle] : null;
+    if (!Array.isArray(v) || v.length !== modifiables.length) return false;
+    var k = 0, attendu = '', valable = true;
+    s.pieces.forEach(function (x) {
+      if (x.fixe) { attendu += x.texte; return; }
+      var e = v[k++];
+      if (!Array.isArray(e)) { valable = false; return; }
+      if (e[0] === null) { if (!FIXES.hasOwnProperty(e[1]) || x.attribut || x.nom !== 'w:t' || x.texte !== '' || x.baliseD === undefined) valable = false; else attendu += FIXES[e[1]]; return; }
+      if (typeof e[0] !== 'string' || e[0].indexOf('<') >= 0 || (x.attribut && e[0].indexOf(x.attribut) >= 0)) { valable = false; return; }
+      if (e.length > 2 && (e[0] !== '' || typeof e[2] !== 'string' || !RE_BALISE_VIDE.test(e[2]) || e[2].indexOf('<' + x.nom) !== 0)) { valable = false; return; }
+      attendu += decoder(e[0]).texte;
+    });
+    if (!valable || attendu !== s.rendu) return false;
+    modifiables.forEach(function (x, i) {
+      var e = v[i];
+      if (e[0] === null) sortie.push([x.baliseD, x.e, '<' + e[1] + '/>']);
+      else if (e.length > 2) { if (!x.vide) sortie.push([x.baliseD, x.e, e[2]]); }
+      else ecrirePiece(xml, x, e[0], decoder(e[0]).texte, !!e[1], sortie);
+    });
+    return true;
+  }
+
+  /* Restitue les vraies données dans un document renvoyé par l'outil. memoire : ce que pseudonymiser a rendu ; absente, un
+     élément qui occupait plusieurs morceaux revient en entier dans le premier (même texte, mise en forme du premier morceau).
+     Rend une promesse de { ok, erreur, octets, nom, type, genre, apercuRecu, apercu, restants, avertissements, nbTextes }. */
+  function depseudonymiser(u8, nomFichier, correspondance, prefixe, moteur, memoire) {
+    var P = moteur || racine.Pseudonymiseur;
+    if (estAncienFormat(u8)) return Promise.resolve({ ok: false, erreur: ANCIEN_FORMAT });
+    if (!correspondance || !correspondance.length) return Promise.resolve({ ok: false, erreur: 'Aucune correspondance : rien à restituer.' });
+    return ouvrirArchive(u8, true, 0).then(function (archive) {
+      if (archive.genre === 'excel') return { ok: false, erreur: EST_UN_CLASSEUR };
+      var apercuRecu = apercuArchive(archive), cellules = [], index = [];
+      // une demande par segment (texte entier) et une par pièce (pour garder chaque texte dans son morceau)
+      parcourir(archive, function (p) {
+        if (p.morceaux) { p.morceaux.forEach(function (m) { if (m.texte !== undefined && m.texte !== '') { index.push({ morceau: m }); cellules.push([m.texte]); } }); return; }
+        p.analyse.segments.forEach(function (s) {
+          if (s.texte === '') return;
+          index.push({ segment: s }); cellules.push([s.texte]);
+          if (s.pieces.length > 1) s.pieces.forEach(function (x) { if (!x.fixe && x.texte !== '') { index.push({ piece: x }); cellules.push([x.texte]); } });
+        });
+      });
+      if (!cellules.length) return { ok: false, erreur: 'Ce document ne contient aucun texte : rien à restituer.' };
+      var r = P.depseudonymiser(cellules, correspondance);
+      if (!r.ok) return { ok: false, erreur: r.erreur };
+      index.forEach(function (d, i) { var t = r.cellules[i][0]; if (d.morceau) d.morceau.rendu = t; else if (d.segment) d.segment.rendu = t; else d.piece.rendu = t; });
+      var table = preparerTable(correspondance, P), segmentsMemoire = (memoire && memoire.segments && typeof memoire.segments === 'object') ? memoire.segments : {};
+      var nbTextes = 0, nbExacts = 0, nbFusions = 0, nbFilet = 0, malFormees = [];
+      parcourir(archive, function (p) {
+        if (p.morceaux) {
+          var textes = [], change = false;
+          p.morceaux.forEach(function (m) { if (m.texte === undefined) return; if (m.texte !== '') nbTextes++; var t = m.rendu !== undefined ? m.rendu : m.texte; if (t !== m.texte) change = true; textes.push(t); });
+          if (change) p.nouveau = X.recomposerXml(p.morceaux, textes);
+          return;
+        }
+        var remplacements = [], attendus = [];
+        p.analyse.segments.forEach(function (s) {
+          if (s.texte !== '') nbTextes++;
+          if (s.rendu === undefined || s.rendu === s.texte) { attendus.push(s.texte); return; }
+          s.nouveau = s.rendu; attendus.push(s.rendu);
+          // 1. paragraphe que l'outil n'a pas touché : ses morceaux d'origine, exactement
+          if (rendreLesMorceaux(p.xml, s, segmentsMemoire, remplacements)) { nbExacts++; return; }
+          // 2. chaque morceau restitué à sa place
+          var parPiece = s.pieces.length === 1 ? [s.rendu] : s.pieces.map(function (x) { return x.fixe ? x.texte : (x.rendu !== undefined ? x.rendu : x.texte); });
+          if (parPiece.join('') === s.rendu) {
+            s.pieces.forEach(function (x, i) {
+              if (x.fixe || parPiece[i] === x.texte) return;
+              var e = alignerRestitution(x.texte, parPiece[i], table) || remplacementUnique(x.texte, parPiece[i]);
+              ecrirePiece(p.xml, x, brutDeLaPiece(x, parPiece[i], e), parPiece[i], undefined, remplacements);
+            });
+            return;
+          }
+          // 3. un code coupé entre deux morceaux : les morceaux voisins sont réunis dans le premier
+          var rep = repartirTexte(s, s.rendu, alignerRestitution(s.texte, s.rendu, table));
+          if (!rep) { attendus[attendus.length - 1] = s.texte; s.nouveau = undefined; return; }
+          nbFusions++;
+          ecrireRepartition(p.xml, s, rep, remplacements);
+        });
+        if (remplacements.length) { p.nouveau = appliquer(p.xml, remplacements); controlerPartie(p, attendus, malFormees); }
+      });
+      /* Filet : un code que l'outil aurait écrit ailleurs que dans un texte lu (un nom de style, un signet) est restitué là où
+         il est, si la partie reste un XML lisible. Puis tout le fichier est relu à la recherche de codes restants. */
+      var tout = [];
+      parcourirArchives(archive, function (a) {
+        a.parties.concat(a.autres).forEach(function (p) {
+          if (p.morceaux) { tout.push(p.nouveau !== undefined ? p.nouveau : p.xml); return; }
+          var xml = p.nouveau !== undefined ? p.nouveau : p.xml;
+          if (a.genre !== 'excel' && table.reCodesSansCasse) {
+            var nb = 0, essai = xml.replace(table.reCodesSansCasse, function (m) { var o = table.originesBas[m.toLowerCase()]; if (o === undefined) return m; nb++; return encoderPartout(o); });
+            if (nb && !analyser(essai, p.nom).erreur) {
+              var valide = true; try { controlerXml(essai, p.nom, xml, malFormees); } catch (e) { valide = false; }
+              if (valide) { xml = essai; p.nouveau = essai; nbFilet += nb; }
+            }
+          }
+          tout.push(xml);
+        });
+      });
+      return refermerArchive(archive).then(function (octets) {
+        var avertissements = [];
+        if (archive.nonDecodees.length) avertissements.push((archive.nonDecodees.length > 1 ? 'Des parties du fichier reçu ne se lisent pas et sont laissées telles quelles' : 'Une partie du fichier reçu ne se lit pas et est laissée telle quelle') + ' (' + archive.nonDecodees.slice(0, 3).join(', ') + (archive.nonDecodees.length > 3 ? '…' : '') + ') : des codes peuvent y rester.');
+        var inhabituelles = archive.illisibles.filter(function (n) { return archive.nonDecodees.indexOf(n) < 0; });
+        if (inhabituelles.length) avertissements.push((inhabituelles.length > 1 ? 'Des parties du fichier reçu sont écrites d’une façon inhabituelle' : 'Une partie du fichier reçu est écrite d’une façon inhabituelle')
+          + ' (' + inhabituelles.slice(0, 3).join(', ') + (inhabituelles.length > 3 ? '…' : '') + ') : ' + (inhabituelles.length > 1 ? 'leurs textes ne sont pas montrés' : 'ses textes ne sont pas montrés')
+          + ' dans l’aperçu. Les codes y sont restitués là où ils sont écrits : vérifier le document à l’ouverture.');
+        if (malFormees.length) avertissements.push((malFormees.length > 1 ? 'Des parties du fichier reçu étaient déjà mal écrites' : 'Une partie du fichier reçu était déjà mal écrite') + ' par l’outil qui l’a rendu ('
+          + malFormees.slice(0, 3).join(', ') + (malFormees.length > 3 ? '…' : '') + ') : les codes y sont restitués, mais Word ou PowerPoint peut proposer de réparer le fichier à l’ouverture.');
+        return {
+          ok: true, octets: octets, nom: nomSortie(nomFichier, '_restitué', archive.genre), type: typeMime(nomFichier, archive.genre), genre: archive.genre,
+          apercuRecu: apercuRecu, apercu: apercuArchive(archive), restants: P.codesRestants(tout.join('\n'), prefixe), avertissements: avertissements,
+          nbTextes: nbTextes, nbExacts: nbExacts, nbFusions: nbFusions, nbFilet: nbFilet
+        };
+      });
+    }).catch(function (e) { return { ok: false, erreur: e && e.message ? e.message : String(e) }; });
+  }
+
+  /* Lecture seule : l'aperçu d'un document, pour l'afficher avant traitement. */
+  function apercu(u8) {
+    if (estAncienFormat(u8)) return Promise.resolve({ ok: false, erreur: ANCIEN_FORMAT });
+    return ouvrirArchive(u8, false, 0).then(function (archive) {
+      if (archive.genre === 'excel') return { ok: false, erreur: EST_UN_CLASSEUR };
+      if (archive.illisibles.length) return { ok: false, erreur: messageIllisible(archive.illisibles) };
+      var diapositives = 0;
+      archive.parties.forEach(function (p) { if (/^ppt\/slides\/[^/]+\.xml$/.test(p.nom)) diapositives++; });
+      return { ok: true, apercu: apercuArchive(archive), nbTextes: compterTextes(archive), genre: archive.genre, diapositives: diapositives, images: archive.compte.images };
+    }).catch(function (e) { return { ok: false, erreur: e && e.message ? e.message : String(e) }; });
+  }
+
+  racine.PseudonymiseurDocuments = {
+    version: '1.30 du 19/11/2026',
+    pseudonymiser: pseudonymiser, depseudonymiser: depseudonymiser, apercu: apercu, extension: extension,
+    analyser: analyser, decoder: decoder, repartir: repartir, alignerCodage: alignerCodage, alignerRestitution: alignerRestitution,
+    remplacementUnique: remplacementUnique, zonesDuChamp: zonesDuChamp, coderChemins: coderChemins, Maison: Maison
+  };
+})(typeof module !== 'undefined' && module.exports ? module.exports : window);
+
+</script>
+<script>
 var LISTES_ORIGINE = {
 "prenoms": [
 "Aaron",
@@ -3828,16 +5157,31 @@ var LISTES_ORIGINE = {
   'use strict';
   var P = window.Pseudonymiseur;
   var $ = function (id) { return document.getElementById(id); };
-  var CLE_LISTES = 'pseudonymiseur.listes.v1', CLE_SESSION = 'pseudonymiseur.session.v1';
+  var CLE_LISTES = 'pseudonymiseur.listes.v1', CLE_SESSION = 'pseudonymiseur.session.v1', CLE_MEMOIRE = 'pseudonymiseur.memoire.v1';
 
   // ------------------------------------------------------------------ stockage
+  // Version 1.30 : si le navigateur refuse l'accès à son enregistrement (réglage strict, page ouverte dans un cadre bridé),
+  // la page garde ses données en mémoire, le temps de l'onglet, au lieu de s'arrêter à l'ouverture.
+  var stockRefuse = false;
+  function stockage(nom) {
+    try { var s = window[nom]; if (s && typeof s.getItem === 'function') return s; } catch (e) { /* accès refusé */ }
+    stockRefuse = true;
+    var m = {};
+    return {
+      getItem: function (c) { return Object.prototype.hasOwnProperty.call(m, c) ? m[c] : null; },
+      setItem: function (c, v) { m[c] = String(v); },
+      removeItem: function (c) { delete m[c]; }
+    };
+  }
+  var stockLocal = stockage('local' + 'Storage'), stockSession = stockage('session' + 'Storage');
   function lireStock(stock, cle) { try { var v = stock.getItem(cle); return v ? JSON.parse(v) : null; } catch (e) { return null; } }
   function ecrireStock(stock, cle, val) { try { stock.setItem(cle, JSON.stringify(val)); } catch (e) { /* stockage indisponible */ } }
 
   var etat = {
     listes: null,   // {prenoms:[], conserver:[], noms:[], villes:[], dictionnaire:[{texte,etiquette,type}], reglages:{prefixe,dates,adresses,seuil}}
     correspondance: [], dateCorresp: '', derniersCodes: [],
-    dejaCopie: false, dejaRestitue: '', dejaCopieFinal: false   // copies et restitution automatiques (26/10/2026)
+    dejaCopie: false, dejaRestitue: '', dejaCopieFinal: false,  // copies et restitution automatiques (26/10/2026)
+    memoireDocument: null                                        // mise en forme d'origine d'un document codé (version 1.30)
   };
 
   function listesParDefaut() {
@@ -3863,7 +5207,7 @@ var LISTES_ORIGINE = {
     return ajouts;
   }
   function chargerListes() {
-    var l = lireStock(localStorage, CLE_LISTES), d = listesParDefaut();
+    var l = lireStock(stockLocal, CLE_LISTES), d = listesParDefaut();
     if (!l || typeof l !== 'object') return d;
     var r = {
       prenoms: Array.isArray(l.prenoms) ? l.prenoms : d.prenoms,
@@ -3875,22 +5219,36 @@ var LISTES_ORIGINE = {
       origine: l.origine || ''
     };
     var ajouts = completerDepuisOrigine(r);
-    if (ajouts) { ecrireStock(localStorage, CLE_LISTES, r); setTimeout(function () { toast(ajouts + ' mot' + (ajouts > 1 ? 's' : '') + ' d\u2019origine ajouté' + (ajouts > 1 ? 's' : '') + ' à vos listes (nouvelle version de la page).'); }, 400); }
+    if (ajouts) { ecrireStock(stockLocal, CLE_LISTES, r); setTimeout(function () { toast(ajouts + ' mot' + (ajouts > 1 ? 's' : '') + ' d\u2019origine ajouté' + (ajouts > 1 ? 's' : '') + ' à vos listes (nouvelle version de la page).'); }, 400); }
     return r;
   }
-  function sauverListes() { ecrireStock(localStorage, CLE_LISTES, etat.listes); majCompteurs(); }
+  function sauverListes() { ecrireStock(stockLocal, CLE_LISTES, etat.listes); majCompteurs(); }
   function sauverSession() {
-    ecrireStock(sessionStorage, CLE_SESSION, {
+    var s = {
       entree: $('entree').value, sortie: $('sortie').value, reponse: $('reponse').value, restitue: $('restitue').value,
       correspondance: etat.correspondance, dateCorresp: etat.dateCorresp, bilan: $('bilan').innerHTML, datesEnTexte: etat.datesEnTexte || null
-    });
+    };
+    // La session passe avant la mémoire de mise en forme (version 1.30) : si la place manque, c'est la mémoire qui cède.
+    try { stockSession.setItem(CLE_SESSION, JSON.stringify(s)); }
+    catch (e) { try { stockSession.removeItem(CLE_MEMOIRE); stockSession.setItem(CLE_SESSION, JSON.stringify(s)); } catch (e2) { /* stockage indisponible */ } }
+  }
+  // Mémoire de mise en forme d'un document Word ou PowerPoint (version 1.30) : gardée à part de la session, le temps de l'onglet.
+  var TAILLE_MEMOIRE_MAX = 1500000;
+  function fixerMemoire(m) {
+    etat.memoireDocument = (m && typeof m === 'object' && m.segments && typeof m.segments === 'object') ? m : null;
+    try {
+      var t = etat.memoireDocument ? JSON.stringify(etat.memoireDocument) : '';
+      if (t && t.length <= TAILLE_MEMOIRE_MAX) stockSession.setItem(CLE_MEMOIRE, t); else stockSession.removeItem(CLE_MEMOIRE);
+    } catch (e) { try { stockSession.removeItem(CLE_MEMOIRE); } catch (e2) { /* stockage indisponible */ } }
   }
   function restaurerSession() {
-    var s = lireStock(sessionStorage, CLE_SESSION);
+    var s = lireStock(stockSession, CLE_SESSION);
     if (!s) return;
     $('entree').value = s.entree || ''; $('sortie').value = s.sortie || ''; $('reponse').value = s.reponse || ''; $('restitue').value = s.restitue || '';
     etat.correspondance = Array.isArray(s.correspondance) ? s.correspondance : []; etat.dateCorresp = s.dateCorresp || '';
     etat.datesEnTexte = s.datesEnTexte || null;
+    var m = lireStock(stockSession, CLE_MEMOIRE);
+    etat.memoireDocument = (m && typeof m === 'object' && m.segments && typeof m.segments === 'object') ? m : null;
     $('bilan').innerHTML = s.bilan || '';
     afficherCorrespondance(); majEtapes();
   }
@@ -3919,6 +5277,7 @@ var LISTES_ORIGINE = {
   document.querySelectorAll('[data-aller]').forEach(function (b) { b.addEventListener('click', function () { montrer(b.dataset.aller); }); });
 
   function majEtapes() {
+    majBoutonsFichier();
     $('nav-entree').classList.toggle('fait', $('entree').value.trim() !== '');
     $('nav-sortie').classList.toggle('fait', $('sortie').value.trim() !== '');
     $('nav-reponse').classList.toggle('fait', $('reponse').value.trim() !== '');
@@ -3984,7 +5343,7 @@ var LISTES_ORIGINE = {
     if (!r.ok) { if (!signalerPrefixe(configuration().prefixe)) message('msg-entree', 'erreur', echapperHtml(r.erreur)); return; }
     message('msg-entree', '', '');
     $('sortie').value = P.cellulesEnTexte(r.cellules);
-    etat.correspondance = r.correspondance; etat.dateCorresp = new Date().toLocaleString('fr-FR'); etat.datesEnTexte = null;
+    etat.correspondance = r.correspondance; etat.dateCorresp = new Date().toLocaleString('fr-FR'); etat.datesEnTexte = null; fixerMemoire(null);
     var s = r.stats; afficherBilan(s);
     if (r.avertissements.length) message('msg-sortie', 'attention', r.avertissements.map(echapperHtml).join('<br>'));
     else message('msg-sortie', 'ok', 'Pseudonymisation faite : ' + s.lignes + ' ligne' + (s.lignes > 1 ? 's' : '') + ' dans la table de correspondance.' + phraseControle(s) + ' Relire la sortie, puis Copier pour l\u2019IA.');
@@ -4145,7 +5504,7 @@ var LISTES_ORIGINE = {
     if (!confirm('Effacer le texte d\u2019origine, la sortie, la réponse, le texte final et la table de correspondance ?')) return;
     ['entree', 'sortie', 'reponse', 'restitue'].forEach(function (id) { $(id).value = ''; });
     ['msg-entree', 'msg-sortie', 'msg-reponse', 'msg-restitue'].forEach(function (id) { message(id, '', ''); });
-    etat.correspondance = []; etat.dateCorresp = ''; etat.datesEnTexte = null; $('bilan').innerHTML = '';
+    etat.correspondance = []; etat.dateCorresp = ''; etat.datesEnTexte = null; fixerMemoire(null); $('bilan').innerHTML = '';
     etat.dejaCopie = false; etat.dejaRestitue = ''; etat.dejaCopieFinal = false;
     etat.classeurEntree = null; etat.classeurSortie = null; etat.classeurFinal = null;
     $('btn-telecharger-sortie').style.display = 'none'; $('btn-telecharger-final').style.display = 'none';
@@ -4188,10 +5547,11 @@ var LISTES_ORIGINE = {
   }
   function pseudonymiserClasseur() {
     var ce = etat.classeurEntree; if (!ce) return;
+    if (ce.genre) { pseudonymiserDocument(); return; }          // document Word ou diaporama PowerPoint (version 1.30)
     lireFormulaires();
     X.pseudonymiser(ce.octets, ce.nom, configuration(), P).then(function (r) {
       if (!r.ok) { message('msg-entree', 'erreur', echapperHtml(r.erreur)); return; }
-      etat.classeurSortie = { nom: r.nom, octets: r.octets, type: r.type }; etat.datesEnTexte = r.datesEnTexte || null;
+      etat.classeurSortie = { nom: r.nom, octets: r.octets, type: r.type }; etat.datesEnTexte = r.datesEnTexte || null; fixerMemoire(null);
       $('sortie').value = r.apercuSortie;
       etat.correspondance = r.correspondance; etat.dateCorresp = new Date().toLocaleString('fr-FR');
       afficherBilan(r.stats);
@@ -4226,12 +5586,97 @@ var LISTES_ORIGINE = {
       });
     });
   }
-  zoneDepot('depot-entree', 'fichier-entree', 'btn-fichier-entree', chargerClasseurEntree);
-  zoneDepot('depot-reponse', 'fichier-reponse', 'btn-fichier-reponse', restituerClasseur);
-  $('btn-telecharger-sortie').addEventListener('click', function () { if (etat.classeurSortie) telechargerClasseur(etat.classeurSortie); else toast('Aucun classeur codé en mémoire : déposer de nouveau le classeur à l’étape 1.'); });
-  $('btn-telecharger-final').addEventListener('click', function () { if (etat.classeurFinal) telechargerClasseur(etat.classeurFinal); else toast('Aucun classeur restitué en mémoire : déposer de nouveau le classeur à l’étape 3.'); });
+
+  // ------------------------------------------------------------------ documents Word et diaporamas PowerPoint (version 1.30, 19/11/2026)
+  // Même parcours que pour un classeur : le fichier est lu sur le poste, ses textes passent dans le même moteur, le fichier codé
+  // est téléchargé ; le fichier renvoyé par l'outil se restitue de la même façon. La page garde en plus, le temps de l'onglet, les
+  // morceaux d'origine des paragraphes codés (etat.memoireDocument) : un passage que l'outil n'a pas touché retrouve ainsi sa mise
+  // en forme exacte. Un classeur Excel suit le chemin d'avant, sans changement.
+  var D = window.PseudonymiseurDocuments;
+  var MOTS = {
+    word: { nom: 'document', Nom: 'Document', le: 'le document', Le: 'Le document', logiciel: 'Word' },
+    powerpoint: { nom: 'diaporama', Nom: 'Diaporama', le: 'le diaporama', Le: 'Le diaporama', logiciel: 'PowerPoint' }
+  };
+  function motsDe(genre) { return MOTS[genre] || MOTS.word; }
+  function estDocument(f) { return !!f && D.extension(f.name) !== ''; }
+  function refusDeFichier(f) {
+    var n = (f && f.name) || '';
+    if (/\.(doc|dot|ppt|pps|pot|xls|xlt)$/i.test(n)) return 'Ce fichier est à un ancien format (.doc, .xls, .ppt), que l’outil ne lit pas. L’ouvrir dans Word, Excel ou PowerPoint, l’enregistrer au format actuel (.docx, .xlsx, .pptx), puis le déposer de nouveau.';
+    if (/\.pdf$/i.test(n)) return 'Un fichier PDF ne se dépose pas ici : copier son texte et le coller dans la zone de texte.';
+    return 'Seuls un classeur Excel (.xlsx, .xlsm), un document Word (.docx) ou un diaporama PowerPoint (.pptx) peuvent être déposés ici.';
+  }
+  function majBoutonsFichier() {
+    var s = etat.classeurSortie, f = etat.classeurFinal;
+    $('btn-telecharger-sortie').textContent = 'Télécharger de nouveau ' + (s && s.genre ? motsDe(s.genre).le : 'le classeur') + ' codé';
+    $('btn-telecharger-final').textContent = 'Télécharger de nouveau ' + (f && f.genre ? motsDe(f.genre).le : 'le classeur') + ' restitué';
+  }
+  function chargerDocumentEntree(f) {
+    lireOctets(f, function (u8) {
+      D.apercu(u8).then(function (a) {
+        if (!a.ok) { message('msg-entree', 'erreur', echapperHtml(a.erreur)); return; }
+        var m = motsDe(a.genre);
+        etat.classeurEntree = { nom: f.name, octets: u8, apercu: a.apercu, genre: a.genre };
+        $('entree').value = a.apercu; majEtapes(); sauverSession();
+        message('msg-entree', 'ok', m.Nom + ' « ' + echapperHtml(f.name) + ' » lu sur votre poste : ' + (a.genre === 'powerpoint' ? pluriel(a.diapositives, 'diapositive') + ', ' : '') + pluriel(a.nbTextes, 'texte') + '. Ci-dessous, l’aperçu de ses textes. Pseudonymiser traite ' + m.le + '.');
+        pseudonymiserDocument();
+      });
+    });
+  }
+  function pseudonymiserDocument() {
+    var ce = etat.classeurEntree; if (!ce || !ce.genre) return;
+    lireFormulaires();
+    D.pseudonymiser(ce.octets, ce.nom, configuration(), P).then(function (r) {
+      if (!r.ok) { message('msg-entree', 'erreur', echapperHtml(r.erreur)); return; }
+      var m = motsDe(r.genre);
+      etat.classeurSortie = { nom: r.nom, octets: r.octets, type: r.type, genre: r.genre }; etat.datesEnTexte = null;
+      $('sortie').value = r.apercuSortie;
+      etat.correspondance = r.correspondance; etat.dateCorresp = new Date().toLocaleString('fr-FR'); fixerMemoire(r.memoire);
+      afficherBilan(r.stats);
+      var texte = m.Nom + ' pseudonymisé : ' + pluriel(r.stats.lignes, 'ligne') + ' dans la table de correspondance.' + phraseControle(r.stats) + ' ' + m.Le + ' « ' + echapperHtml(r.nom) + ' » est téléchargé : le relire dans ' + m.logiciel + ', puis le déposer dans l’outil d’intelligence artificielle. Ci-dessous, l’aperçu des textes codés ; ce qui a été manqué s’ajoute au Dictionnaire, puis Pseudonymiser à l’étape 1 reprend ' + m.le + '.';
+      // le résultat d'abord, puis ce qui demande l'attention, puis ce qui est à savoir : une ligne par point
+      var notes = r.avertissements.concat(r.informations).map(echapperHtml);
+      message('msg-sortie', r.avertissements.length ? 'attention' : 'ok', texte + (notes.length ? '<br>' + notes.join('<br>') : ''));
+      $('reponse').value = ''; $('restitue').value = ''; message('msg-reponse', '', ''); message('msg-restitue', '', '');
+      etat.dejaCopie = false; etat.dejaRestitue = ''; etat.dejaCopieFinal = false; etat.classeurFinal = null; $('btn-telecharger-final').style.display = 'none';
+      $('btn-telecharger-sortie').style.display = '';
+      afficherCorrespondance(); majEtapes(); sauverSession(); $('chk-couleur').checked = false; basculerApercu('sortie', false);
+      montrer('sortie'); telechargerClasseur(etat.classeurSortie);
+    });
+  }
+  function restituerDocument(f) {
+    if (!etat.correspondance.length) { message('msg-reponse', 'erreur', 'Aucune correspondance : rien à restituer. Faire d’abord l’étape 1, ou charger une table de correspondance.'); return; }
+    lireOctets(f, function (u8) {
+      D.depseudonymiser(u8, f.name, etat.correspondance, etat.listes.reglages.prefixe, P, etat.memoireDocument).then(function (r) {
+        if (!r.ok) { message('msg-reponse', 'erreur', echapperHtml(r.erreur)); return; }
+        var m = motsDe(r.genre), n = r.restants.length;
+        $('reponse').value = r.apercuRecu;
+        etat.classeurFinal = { nom: r.nom, octets: r.octets, type: r.type, genre: r.genre };
+        $('restitue').value = r.apercu; etat.dejaRestitue = $('reponse').value; etat.dejaCopieFinal = false;
+        message('msg-reponse', 'ok', m.Nom + ' « ' + echapperHtml(f.name) + ' » déposé et restitué : ' + m.le + ' final est à l’étape 4.');
+        var notes = r.avertissements.map(echapperHtml);
+        if (r.nbFusions) notes.push('Dans ' + pluriel(r.nbFusions, 'passage') + ', un code était coupé entre deux mises en forme : le texte y est remis en entier, avec la mise en forme du début du passage.');
+        if (n) message('msg-restitue', 'attention', pluriel(n, 'code') + ' resté' + (n > 1 ? 's' : '') + ' en place, absent' + (n > 1 ? 's' : '') + ' de la table : ' + r.restants.map(echapperHtml).join(', ') + '. Vérifier ' + m.le + ' renvoyé, ou charger la bonne table. ' + m.Le + ' « ' + echapperHtml(r.nom) + ' » est téléchargé tel quel.' + (notes.length ? '<br>' + notes.join('<br>') : ''));
+        else message('msg-restitue', notes.length ? 'attention' : 'ok', m.Nom + ' restitué, aucun code ne reste en place. ' + m.Le + ' « ' + echapperHtml(r.nom) + ' » est téléchargé : le relire dans ' + m.logiciel + ' avant usage. Ci-dessous, l’aperçu de ses textes.' + (notes.length ? '<br>' + notes.join('<br>') : ''));
+        $('btn-telecharger-final').style.display = '';
+        majEtapes(); sauverSession(); $('chk-couleur-final').checked = false; basculerApercu('restitue', false);
+        montrer('restitue'); telechargerClasseur(etat.classeurFinal);
+      });
+    });
+  }
+  // Aiguillage : un classeur suit le chemin d'avant ; un document Word ou PowerPoint, le chemin ci-dessus ; tout autre fichier est refusé.
+  function deposerEntree(f) {
+    if (estClasseur(f)) chargerClasseurEntree(f); else if (estDocument(f)) chargerDocumentEntree(f); else message('msg-entree', 'erreur', refusDeFichier(f));
+  }
+  function deposerReponse(f) {
+    if (estClasseur(f)) restituerClasseur(f); else if (estDocument(f)) restituerDocument(f); else message('msg-reponse', 'erreur', refusDeFichier(f));
+  }
+  zoneDepot('depot-entree', 'fichier-entree', 'btn-fichier-entree', deposerEntree);
+  zoneDepot('depot-reponse', 'fichier-reponse', 'btn-fichier-reponse', deposerReponse);
+  $('btn-telecharger-sortie').addEventListener('click', function () { if (etat.classeurSortie) telechargerClasseur(etat.classeurSortie); else toast('Aucun fichier codé en mémoire : déposer de nouveau le fichier à l’étape 1.'); });
+  $('btn-telecharger-final').addEventListener('click', function () { if (etat.classeurFinal) telechargerClasseur(etat.classeurFinal); else toast('Aucun fichier restitué en mémoire : déposer de nouveau le fichier à l’étape 3.'); });
 
   // ------------------------------------------------------------------ correspondance
+  var LIGNE_MEMOIRE = 'Mise en forme d\u2019origine du document (ne pas modifier cette ligne)';
   function afficherCorrespondance() {
     var tb = $('tbody-corresp'); tb.innerHTML = '';
     etat.correspondance.forEach(function (c) {
@@ -4245,20 +5690,23 @@ var LISTES_ORIGINE = {
   $('btn-enregistrer-corresp').addEventListener('click', function () {
     if (!etat.correspondance.length) { toast('Aucune correspondance à enregistrer.'); return; }
     var lignes = ['Élément d\u2019origine\tCode'].concat(etat.correspondance.map(function (c) { return c[0] + '\t' + c[1]; }));
+    // Document Word ou PowerPoint (version 1.30) : la mise en forme d'origine des passages codés suit la table, sur une dernière ligne.
+    if (etat.memoireDocument) lignes.push(LIGNE_MEMOIRE + '\t' + JSON.stringify(etat.memoireDocument));
     telecharger('Correspondance_' + horodatage() + '.txt', lignes.join('\r\n'));
     toast('Table enregistrée. À garder sur votre poste, jamais à transmettre.');
   });
   $('btn-charger-corresp').addEventListener('click', function () { $('fichier-corresp').click(); });
   $('fichier-corresp').addEventListener('change', function () {
     lireFichier(this, function (contenu) {
-      var lignes = contenu.replace(/\r\n?/g, '\n').split('\n'), table = [];
+      var lignes = contenu.replace(/\r\n?/g, '\n').split('\n'), table = [], memoire = null;
       lignes.forEach(function (l, i) {
         var p = l.split('\t'); if (p.length < 2) return;
         if (i === 0 && /^(élément|element)/i.test(p[0])) return;
+        if (p[0] === LIGNE_MEMOIRE) { try { memoire = JSON.parse(l.slice(LIGNE_MEMOIRE.length + 1)); } catch (e) { memoire = null; } return; }
         table.push([p[0], p[1]]);
       });
       if (!table.length) { toast('Ce fichier ne contient pas de table de correspondance.'); return; }
-      etat.correspondance = table; etat.datesEnTexte = null; etat.dateCorresp = 'chargée le ' + new Date().toLocaleString('fr-FR');
+      etat.correspondance = table; etat.datesEnTexte = null; fixerMemoire(memoire); etat.dateCorresp = 'chargée le ' + new Date().toLocaleString('fr-FR');
       afficherCorrespondance(); sauverSession(); toast(table.length + ' ligne' + (table.length > 1 ? 's' : '') + ' chargée' + (table.length > 1 ? 's' : '') + '.');
     });
   });
@@ -4365,14 +5813,16 @@ var LISTES_ORIGINE = {
   etat.listes = chargerListes();
   afficherListes(); restaurerSession(); afficherCorrespondance(); majEtapes();
   var h = (location.hash || '').replace('#', '');
-  montrer(document.getElementById('vue-' + h) ? h : (sessionStorage.getItem(CLE_SESSION) ? 'entree' : 'accueil'));
+  montrer(document.getElementById('vue-' + h) ? h : (stockSession.getItem(CLE_SESSION) ? 'entree' : 'accueil'));
+  if (stockRefuse) setTimeout(function () { toast('Ce navigateur refuse l\u2019enregistrement local : vos listes et vos réglages ne sont gardés que le temps de cet onglet.'); }, 600);
   window.addEventListener('beforeunload', function (e) {
     if (etat.correspondance.length && !$('restitue').value.trim()) { e.preventDefault(); e.returnValue = ''; }
   });
 })();
 </script>
 <script>
-/* Page « Prompts » : deux modèles de consigne à copier, pour un texte et pour un classeur Excel.
+/* Page « Prompts » : trois modèles de consigne à copier, pour un texte, pour un classeur Excel et pour un document Word ou
+   un diaporama PowerPoint (le troisième depuis la version 1.30).
    Bloc indépendant du programme principal. Il lit le préfixe des codes dans le champ des réglages, affiche le texte des modèles,
    copie le prompt dans le presse-papiers et garde dans ce navigateur le rôle, la forme et les consignes en plus (clé à part).
    Il n'envoie rien, ne charge rien et ne touche ni aux listes, ni à la table de correspondance, ni aux textes en cours. */
@@ -4443,6 +5893,34 @@ var LISTES_ORIGINE = {
         "Le classeur codé est joint à ce message."
       ],
       copie: "Prompt copié. Le coller dans l'outil et joindre le classeur codé."
+    },
+    document: {
+      champs: [
+        { cle: 'role', intitule: 'Rôle', garde: true, defaut: "Tu es un assistant administratif expérimenté, à l'aise avec Word et PowerPoint. Tu écris en français, en phrases courtes, avec des mots simples, sans jargon." },
+        { cle: 'contexte', intitule: 'Contexte', facultatif: true, aide: "Ce qu'est le fichier et à quoi il sert, sans aucun nom réel. Exemple : compte rendu d'une réunion d'agence ; diaporama de présentation d'un projet." },
+        { cle: 'travail', intitule: 'Travail demandé', requis: true, aide: "Ce que l'outil doit faire. Exemples : corrige l'orthographe sans changer le sens ; raccourcis la deuxième partie de moitié ; ajoute à la fin une diapositive de synthèse." },
+        { cle: 'forme', intitule: 'Forme du résultat', garde: true, defaut: "Le fichier modifié, au même format que le fichier joint, à télécharger." },
+        { cle: 'plus', intitule: 'Consignes en plus', garde: true, facultatif: true, aide: "Exemple : ne touche ni aux titres ni aux tableaux." }
+      ],
+      fixe: [
+        "Le fichier joint à ce message, un document Word ou un diaporama PowerPoint, a été pseudonymisé. Dans ses textes, ses tableaux, ses en-têtes et ses pieds de page, ses notes et ses commentaires, les noms de personnes, les adresses mail, les liens, les téléphones, les numéros, les dates et les adresses sont remplacés par des codes. Exemples de codes : {P}_Personne_001, {P}_PersonneB_001, {P}_Date_002, {P}_Numero_003, {P}_Adresse_004, {p}_mail_001@{p}.invalid, https://{p}.invalid/lien_001. La mise en page et les images n'ont pas été modifiées. Je remettrai les vraies données moi-même, après ton travail, avec un outil qui reconnaît ces codes.",
+        "",
+        "Règles sur les codes, à respecter avant toute autre consigne :",
+        REGLES_CODES[0], REGLES_CODES[1], REGLES_CODES[2],
+        "4. Un code ne dit rien de ce qu'il remplace : ni si une personne est un homme ou une femme, ni le jour d'une date. N'ajoute donc pas « Madame » ou « Monsieur » de toi-même, et ne calcule ni délai ni durée à partir d'un code.",
+        "5. Pour citer une personne, une date, un numéro, une adresse ou un lien, reprends son code tel qu'il figure dans le fichier.",
+        "6. Écris chaque code d'un seul tenant et dans une seule mise en forme : ne mets pas une partie d'un code en gras, en italique ou en couleur, et ne le coupe pas par un retour à la ligne.",
+        "",
+        "Règles sur le fichier :",
+        "7. Travaille sur le fichier joint lui-même et rends-moi un fichier du même format (.docx ou .pptx) à télécharger, pas un texte recopié dans la conversation.",
+        "8. Ne change que ce que mon travail demande. Ne touche à rien d'autre : ni mise en page, ni styles, ni images, ni tableaux, ni en-têtes et pieds de page, ni commentaires, ni notes.",
+        "9. Si tu passes par du code Python, modifie le fichier existant avec python-docx ou python-pptx. Ne le reconstruis pas à partir de zéro et ne le convertis pas dans un autre format.",
+        "10. N'invente aucune donnée, aucun nom, aucune date, aucun montant. Si un élément indispensable manque, pose-moi la question au lieu de supposer.",
+        "11. À la fin, écris en quelques lignes ce que tu as modifié ou ajouté, ce que tu n'as pas pu faire ou conserver (image, tableau, mise en forme) et ce qui est à vérifier avant usage.",
+        "",
+        "Le fichier codé est joint à ce message."
+      ],
+      copie: "Prompt copié. Le coller dans l'outil et joindre le fichier codé."
     }
   };
   var A_COMPLETER = "[à compléter avant d'envoyer]";
@@ -4511,7 +5989,7 @@ var LISTES_ORIGINE = {
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(texte).then(function () { fini(true); }, secours); else secours();
   }
 
-  // ---- construction des deux modèles
+  // ---- construction des modèles
   var gardes = lireGardes();
   Object.keys(MODELES).forEach(function (nom) {
     var m = MODELES[nom], corps = $('prompt-' + nom), g = (gardes[nom] && typeof gardes[nom] === 'object') ? gardes[nom] : {};
