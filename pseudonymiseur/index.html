@@ -499,7 +499,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         <h1>À propos</h1>
         <p>Cet outil est une aide. Il ne remplace pas la relecture : chaque utilisateur relit le texte codé avant tout envoi et reste responsable des données qu'il transmet.</p>
         <p>Il est fourni en l'état, sans garantie. Il n'est pas, à ce jour, un outil validé par Lyon 1 Université.</p>
-        <p><strong>Pseudonymiseur</strong>, version web 1.31 du 19 novembre 2026, mise à jour le 19 novembre 2026 à 15 h 15. Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
+        <p><strong>Pseudonymiseur</strong>, version web 1.32 du 19 novembre 2026, mise à jour le 19 novembre 2026 à 19h00. Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
         <h2>Où vont les données</h2>
         <ul class="propre">
           <li>Nulle part. Cette page est un programme complet que le serveur livre à votre navigateur ; le traitement se fait ensuite sur votre poste. Le serveur ne voit ni le texte, ni la table de correspondance, ni vos listes.</li>
@@ -519,7 +519,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         <p>Outil créé par M. Manoël PYANET, directeur administratif du département composante Génie Électrique et des Procédés, Lyon 1 Université. Première version le 28 septembre 2026, sous la forme d'un classeur Excel ; version web depuis le 19 octobre 2026.</p>
         <h2>Ordre de traitement</h2>
         <p>Adresses mail et liens ; Dictionnaire ; adresses postales, codes postaux, bâtiments, campus et villes seules ; IBAN, BIC, sécurité sociale, cartes, suites de onze chiffres et plus, téléphones, plaques et identifiants, SIRET, nombres longs ; dates ; personnes (mots en majuscules, prénoms connus, civilité suivie d'un nom, avec ou sans particule) ; puis un second passage pour les noms de famille écrits seuls, vus dans un nom complet du même texte ou listés dans Noms du service. Chaque ligne du texte est traitée comme une ligne de tableau, chaque tabulation comme une colonne, exactement comme dans le classeur Excel.</p>
-        <details class="historique"><summary>Historique des versions</summary><p>Origine : classeur Excel « Anonymiseur à bouton » créé le 28 septembre 2026, en version 3 le 30 septembre 2026, renommé « Pseudonymiseur à bouton » en version 4 le 12 octobre 2026. Version web du 19 octobre 2026 : reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et trois corrections (la troisième : un prénom composé dont la suite est en minuscules, Marie-odile MORVELANG, est reconnu) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). La version 1.7 code en plus les téléphones étrangers (indicatif entre parenthèses, ou tout numéro écrit après Tel, Direct, Mobile, Fax), les adresses étrangères écrites sur une ligne qui finit par un pays, les entreprises suivies d'une forme juridique (Ltd, Inc, GmbH, SARL, SAS), le nom entier d'un bâtiment, le numéro dans un nom de rue (avenue du 8 mai 1945), et le nom écrit avant une adresse mail ou avant « a écrit : », même avec un prénom inconnu ; la version 1.8 ne prend plus pour une personne un intitulé en majuscules qui commence par un nom de lieu ou de service (QUAI CHARGEMENT devient un lieu, SERVICE COURRIER reste en clair) ni le sigle GLPI ; la version 1.9 laisse en clair un sigle défini dans le texte entre parenthèses, quand ses lettres sont les initiales de sa définition (CAL, capacité d'accueil limitée) ; la version 1.10 code une signature réduite à une initiale collée au nom, seule sur sa ligne (J.Tessharto) ; FAQ et CAUTION restent en clair ; la version 1.11 code un prénom connu écrit après une élision (d'Alice), reconnaît un terme du Dictionnaire écrit sans accent (Societe pour Société), laisse en clair quatre sigles et mots de plus, dont SUJET, copie la sortie dès la pseudonymisation et ajoute le bouton Coller et restituer ; la version 1.11.1 laisse en clair un titre suivi d'un mot courant au pluriel (Professeur des Universités) et un mot de remplissage fait d'une seule lettre répétée (XXXX) ; la version 1.12 code une date écrite sans année (27 octobre, 27/10, lundi 12), une boîte fonctionnelle écrite avec un point devant son adresse (Service.Achats), le nom d'un outil de gestion du Dictionnaire quelle que soit sa casse et un nom de campus, ajouté à la liste Villes ; la version 1.12.1 restitue la réponse déjà collée quand le navigateur refuse la lecture du presse-papiers ; la version 1.13 accepte un classeur Excel déposé tel quel (.xlsx, .xlsm) : seuls ses textes sont codés, le classeur codé est téléchargé avec ses onglets, formules et mises en forme intacts, et le classeur renvoyé par l'outil se restitue de la même façon, le tout sur le poste ; la version 1.13.1 code un nom écrit après une initiale (P. Valdoreth, L. Gauvernot), sauf après un mot ordinaire en minuscules, un chiffre, un symbole ou un point (125 °C. Équations) et dans une suite d'initiales (N. B.) ; la version 1.14 code aussi, dans un classeur Excel, les dates saisies dans les cellules, qu'Excel enregistre comme des nombres, et les remet en dates, avec leur format, à la restitution ; une date calculée par une formule reste en clair ; la version 1.15 code une suite de jours devant un mois (les 13, 14 et 15 octobre), un mois suivi de son année (avril 2026) et le nom écrit après Dr ou Pr (Dr El Valdoreth, Pr Le Gauvernot), laisse en clair un numéro de page ou de partie (page 3/12) et une fraction suivie d'une unité (1/2 journée), ne coupe plus un numéro long par le code d'un numéro plus court, restitue en entier une adresse dont une partie avait déjà reçu un code et, quand un même code couvre deux écritures d'un même élément, restitue toujours la première écrite ; la version 1.16 donne son propre code à chaque écriture d'une même personne ou d'un même terme du Dictionnaire (Paul TESSHARTO, puis TESSHARTO : Pseudo_Personne_001, puis Pseudo_PersonneB_001, même numéro et une lettre après l'étiquette), pour que la restitution rende chaque texte exactement comme il était, et contrôle à chaque pseudonymisation que chaque texte codé revient exactement au texte d'origine ; un texte qui n'y reviendrait pas est codé en entier, sous un seul code ; la version 1.16.1 ne livre plus dans le Dictionnaire que quatre lignes d'exemple, pour que chacun y écrive les siennes, sans rien changer aux listes déjà enregistrées dans un navigateur ; la version 1.16.2 précise, en tête de cette page, le statut de l'outil ; la version 1.20 reprend la version 1.16.2, range cet historique en bas de la rubrique, rappelle l'origine de l'outil, affiche l'heure de sa mise à jour et ajoute la page Prompts : deux modèles de consigne à copier, pour un texte et pour un classeur Excel, qui demandent à l'outil d'intelligence artificielle de ne pas toucher aux codes ; la version 1.21 remplace les exemples de la page par des exemples généraux, aux noms de personnes inventés, et ajoute EDF, ENGIE et SNCF à la liste d'origine des mots à conserver ; la version 1.22 reprend la version 1.21, sans changement de l'outil ; la version 1.23 ajoute au mode d'emploi un quatrième geste de sûreté : relire ce que l'outil d'intelligence artificielle a rendu ; la version 1.30 pseudonymise et restitue aussi les documents Word (.docx) et les diaporamas PowerPoint (.pptx), déposés comme un classeur Excel : textes, tableaux, en-têtes et pieds de page, notes, commentaires, zones de texte, graphiques, liens, propriétés et auteurs du fichier, sans toucher à la mise en page ni aux images ; elle ajoute un troisième modèle de prompt pour ces fichiers et affiche ce qui reste en clair ; la page reste utilisable quand le navigateur refuse l'enregistrement local, listes et réglages n'étant alors gardés que le temps de l'onglet ; les règles de remplacement et le traitement des classeurs Excel ne changent pas ; la version 1.31 lit une espace insécable comme une espace ordinaire, dans un texte collé comme dans un fichier déposé : les numéros de téléphone, les dates en lettres, les IBAN, les numéros de sécurité sociale, les adresses et les noms écrits avec des espaces insécables, qui restaient en clair en tout ou en partie, sont codés, et la restitution remet chaque espace insécable à sa place ; un même élément écrit des deux façons garde son numéro et reçoit une lettre (Pseudo_TelephoneB_001) ; un texte sans espace insécable est codé exactement comme avant.</p></details>
+        <details class="historique"><summary>Historique des versions</summary><p>Origine : classeur Excel « Anonymiseur à bouton » créé le 28 septembre 2026, en version 3 le 30 septembre 2026, renommé « Pseudonymiseur à bouton » en version 4 le 12 octobre 2026. Version web du 19 octobre 2026 : reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et trois corrections (la troisième : un prénom composé dont la suite est en minuscules, Marie-odile MORVELANG, est reconnu) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). La version 1.7 code en plus les téléphones étrangers (indicatif entre parenthèses, ou tout numéro écrit après Tel, Direct, Mobile, Fax), les adresses étrangères écrites sur une ligne qui finit par un pays, les entreprises suivies d'une forme juridique (Ltd, Inc, GmbH, SARL, SAS), le nom entier d'un bâtiment, le numéro dans un nom de rue (avenue du 8 mai 1945), et le nom écrit avant une adresse mail ou avant « a écrit : », même avec un prénom inconnu ; la version 1.8 ne prend plus pour une personne un intitulé en majuscules qui commence par un nom de lieu ou de service (QUAI CHARGEMENT devient un lieu, SERVICE COURRIER reste en clair) ni le sigle GLPI ; la version 1.9 laisse en clair un sigle défini dans le texte entre parenthèses, quand ses lettres sont les initiales de sa définition (CAL, capacité d'accueil limitée) ; la version 1.10 code une signature réduite à une initiale collée au nom, seule sur sa ligne (J.Tessharto) ; FAQ et CAUTION restent en clair ; la version 1.11 code un prénom connu écrit après une élision (d'Alice), reconnaît un terme du Dictionnaire écrit sans accent (Societe pour Société), laisse en clair quatre sigles et mots de plus, dont SUJET, copie la sortie dès la pseudonymisation et ajoute le bouton Coller et restituer ; la version 1.11.1 laisse en clair un titre suivi d'un mot courant au pluriel (Professeur des Universités) et un mot de remplissage fait d'une seule lettre répétée (XXXX) ; la version 1.12 code une date écrite sans année (27 octobre, 27/10, lundi 12), une boîte fonctionnelle écrite avec un point devant son adresse (Service.Achats), le nom d'un outil de gestion du Dictionnaire quelle que soit sa casse et un nom de campus, ajouté à la liste Villes ; la version 1.12.1 restitue la réponse déjà collée quand le navigateur refuse la lecture du presse-papiers ; la version 1.13 accepte un classeur Excel déposé tel quel (.xlsx, .xlsm) : seuls ses textes sont codés, le classeur codé est téléchargé avec ses onglets, formules et mises en forme intacts, et le classeur renvoyé par l'outil se restitue de la même façon, le tout sur le poste ; la version 1.13.1 code un nom écrit après une initiale (P. Valdoreth, L. Gauvernot), sauf après un mot ordinaire en minuscules, un chiffre, un symbole ou un point (125 °C. Équations) et dans une suite d'initiales (N. B.) ; la version 1.14 code aussi, dans un classeur Excel, les dates saisies dans les cellules, qu'Excel enregistre comme des nombres, et les remet en dates, avec leur format, à la restitution ; une date calculée par une formule reste en clair ; la version 1.15 code une suite de jours devant un mois (les 13, 14 et 15 octobre), un mois suivi de son année (avril 2026) et le nom écrit après Dr ou Pr (Dr El Valdoreth, Pr Le Gauvernot), laisse en clair un numéro de page ou de partie (page 3/12) et une fraction suivie d'une unité (1/2 journée), ne coupe plus un numéro long par le code d'un numéro plus court, restitue en entier une adresse dont une partie avait déjà reçu un code et, quand un même code couvre deux écritures d'un même élément, restitue toujours la première écrite ; la version 1.16 donne son propre code à chaque écriture d'une même personne ou d'un même terme du Dictionnaire (Paul TESSHARTO, puis TESSHARTO : Pseudo_Personne_001, puis Pseudo_PersonneB_001, même numéro et une lettre après l'étiquette), pour que la restitution rende chaque texte exactement comme il était, et contrôle à chaque pseudonymisation que chaque texte codé revient exactement au texte d'origine ; un texte qui n'y reviendrait pas est codé en entier, sous un seul code ; la version 1.16.1 ne livre plus dans le Dictionnaire que quatre lignes d'exemple, pour que chacun y écrive les siennes, sans rien changer aux listes déjà enregistrées dans un navigateur ; la version 1.16.2 précise, en tête de cette page, le statut de l'outil ; la version 1.20 reprend la version 1.16.2, range cet historique en bas de la rubrique, rappelle l'origine de l'outil, affiche l'heure de sa mise à jour et ajoute la page Prompts : deux modèles de consigne à copier, pour un texte et pour un classeur Excel, qui demandent à l'outil d'intelligence artificielle de ne pas toucher aux codes ; la version 1.21 remplace les exemples de la page par des exemples généraux, aux noms de personnes inventés, et ajoute EDF, ENGIE et SNCF à la liste d'origine des mots à conserver ; la version 1.22 reprend la version 1.21, sans changement de l'outil ; la version 1.23 ajoute au mode d'emploi un quatrième geste de sûreté : relire ce que l'outil d'intelligence artificielle a rendu ; la version 1.30 pseudonymise et restitue aussi les documents Word (.docx) et les diaporamas PowerPoint (.pptx), déposés comme un classeur Excel : textes, tableaux, en-têtes et pieds de page, notes, commentaires, zones de texte, graphiques, liens, propriétés et auteurs du fichier, sans toucher à la mise en page ni aux images ; elle ajoute un troisième modèle de prompt pour ces fichiers et affiche ce qui reste en clair ; la page reste utilisable quand le navigateur refuse l'enregistrement local, listes et réglages n'étant alors gardés que le temps de l'onglet ; les règles de remplacement et le traitement des classeurs Excel ne changent pas ; la version 1.31 lit une espace insécable comme une espace ordinaire, dans un texte collé comme dans un fichier déposé : les numéros de téléphone, les dates en lettres, les IBAN, les numéros de sécurité sociale, les adresses et les noms écrits avec des espaces insécables, qui restaient en clair en tout ou en partie, sont codés, et la restitution remet chaque espace insécable à sa place ; un même élément écrit des deux façons garde son numéro et reçoit une lettre (Pseudo_TelephoneB_001) ; un texte sans espace insécable est codé exactement comme avant ; la version 1.32 lit de même un trait d'union insécable ou un tiret court comme un trait d'union ordinaire, et ne tient pas compte, pour lire, des caractères invisibles qu'un copier-coller glisse dans un numéro, une date, une adresse ou un nom (césure invisible, espace sans chasse, marques de sens d'écriture) : l'élément est codé en entier, et la restitution remet chaque caractère à sa place.</p></details>
       </div>
     </section>
 
@@ -528,7 +528,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
 
 <footer class="pied">
   <span>Lyon 1 Université</span>
-  <span>Pseudonymiseur, version web 1.31 du 19 novembre 2026, mise à jour le 19 novembre 2026 à 15 h 15</span>
+  <span>Pseudonymiseur, version web 1.32 du 19 novembre 2026, mise à jour le 19 novembre 2026 à 19h00</span>
   <span>Traitement local, aucune donnée transmise</span>
 </footer>
 <div class="toast" id="toast"></div>
@@ -3787,35 +3787,58 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
 
 </script>
 <script>
-/* Pseudonymiseur, espaces insécables. Version 1.31 du 19 novembre 2026.
+/* Pseudonymiseur, espaces insécables, traits d'union particuliers et caractères invisibles. Version 1.32 du 19 novembre 2026.
 
    Le défaut corrigé. Les règles du moteur (moteur.js) reconnaissent un numéro de téléphone, une date en lettres, un IBAN,
-   une adresse ou un nom d'après les espaces ordinaires qui en séparent les parties. Un traitement de texte, une messagerie
-   ou un tableur écrivent souvent ces mêmes éléments avec des espaces insécables (U+00A0 ou U+202F entre les chiffres d'un numéro).
-   Le moteur ne les reconnaissait alors pas, ou n'en codait qu'une partie : l'élément restait lisible dans la sortie.
+   une adresse ou un nom d'après les espaces ordinaires et les traits d'union ordinaires qui en séparent les parties. Or un
+   traitement de texte, une messagerie, un tableur ou une page web écrivent souvent ces éléments autrement :
+   - avec des espaces insécables (U+00A0 ou U+202F entre les chiffres d'un numéro) : version 1.31 ;
+   - avec un trait d'union insécable ou un tiret court (U+2010 à U+2013) à la place du trait d'union : version 1.32 ;
+   - avec un caractère invisible glissé dans l'élément par un copier-coller (césure invisible U+00AD, espace sans chasse
+     U+200B, marques de sens d'écriture, U+FEFF) : version 1.32.
+   Le moteur ne reconnaissait alors pas l'élément, ou n'en codait qu'une partie : il restait lisible dans la sortie.
 
    La correction, sans toucher au moteur. Ce module enveloppe la fonction pseudonymiser du moteur :
-   0. aucun texte ne porte d'espace insécable : le moteur seul, sans rien d'autre (résultat de la version 1.30) ;
-   1. sinon, le moteur code une copie des textes où chaque espace insécable est remplacée par une espace ordinaire, de même
-      longueur. Il lit donc ces textes comme s'ils étaient écrits avec des espaces ordinaires, avec toutes ses règles ;
-   2. chaque texte qui portait une espace insécable est ensuite récrit à partir du texte tel qu'il est : ce que le moteur a
-      laissé en clair est repris caractère pour caractère, espaces insécables comprises, et chaque passage codé garde son code ;
-   3. la table rend le passage tel qu'il est écrit. Quand le passage porte une espace insécable, la ligne de la table prend
-      cette écriture ; si le même élément est aussi écrit autrement (avec des espaces ordinaires ailleurs), l'autre écriture
-      reçoit le même numéro et une lettre (Pseudo_TelephoneB_001), comme le moteur le fait pour deux écritures d'un nom ;
+   0. aucun texte ne porte un de ces caractères : le moteur seul, sans rien d'autre (résultat de la version 1.30) ;
+   1. sinon, le moteur code une copie des textes où chaque espace particulière est remplacée par une espace ordinaire, chaque
+      trait d'union particulier par un trait d'union ordinaire, et d'où les caractères invisibles sont retirés. Il lit donc
+      ces textes comme s'ils étaient écrits simplement, avec toutes ses règles ;
+   2. chaque texte qui portait un de ces caractères est ensuite récrit à partir du texte tel qu'il est : ce que le moteur a
+      laissé en clair est repris caractère pour caractère, et chaque passage codé garde son code ;
+   3. la table rend le passage tel qu'il est écrit, caractères particuliers compris. Si le même élément est aussi écrit
+      autrement ailleurs, l'autre écriture reçoit le même numéro et une lettre (Pseudo_TelephoneB_001), comme le moteur le
+      fait pour deux écritures d'un nom ;
    4. contrôle du retour, comme le fait le moteur : tous les textes codés sont restitués avec la table finale et comparés aux
       textes d'origine. Un texte qui ne reviendrait pas exactement est codé en entier, sous un seul code.
+   La liste des codes restés en place après une restitution suit la règle du moteur, et lit en entier le code à lettre d'une
+   adresse mail ou d'un lien (pseudo_mailB_001@pseudo.invalid), que le moteur seul ne forme pas.
    Aucune donnée ne sort de la page. */
 (function (racine) {
   'use strict';
 
   var SPECIALES = '   -   　';
-  var RE_SPECIALE = new RegExp('[' + SPECIALES + ']'), RE_SPECIALES = new RegExp('[' + SPECIALES + ']', 'g');
+  // Traits d'union particuliers (trait d'union, trait d'union insécable, tiret numérique, tiret court) : lus comme « - ».
+  var TRAITS = '\u2010-\u2013';
+  // Caractères invisibles (césure invisible, espaces et liants sans chasse, marques de sens d'écriture, U+FEFF) : retirés pour lire.
+  var INVISIBLES = '\u00ad\u200b-\u200f\u202a-\u202e\u2060-\u2064\u2066-\u2069\ufeff';
+  var RE_SPECIALE = new RegExp('[' + SPECIALES + TRAITS + INVISIBLES + ']'), RE_SPECIALES = new RegExp('[' + SPECIALES + ']', 'g');
+  var RE_TRAITS = new RegExp('[' + TRAITS + ']', 'g'), RE_INVISIBLE = new RegExp('[' + INVISIBLES + ']'), RE_INVISIBLES = new RegExp('[' + INVISIBLES + ']', 'g');
   // Les mêmes espaces écrites par leur numéro dans un motif du Dictionnaire ( , \xa0,  ,  ).
   var RE_ECRITES = /\\u00a0|\\xa0|\\u202f|\\u2009/gi;
+  // Les traits d'union particuliers écrits par leur numéro dans un motif (\\u2010 à \\u2013) : le texte étant lu avec « - », le motif aussi.
+  var RE_TRAITS_ECRITS = /\\u201[0-3]/gi;
 
   function aSpeciale(s) { return RE_SPECIALE.test(s); }
-  function lisser(s) { return s.replace(RE_SPECIALES, ' '); }
+  function lisserEspaces(s) { return s.replace(RE_SPECIALES, ' '); }
+  // Copie lue par le moteur : espaces particulières en espaces ordinaires, traits d'union particuliers en « - », caractères invisibles retirés.
+  function lisser(s) { return s.replace(RE_SPECIALES, ' ').replace(RE_TRAITS, '-').replace(RE_INVISIBLES, ''); }
+  // Place, dans le texte tel qu'il est, de chaque caractère de la copie lue par le moteur (utile quand des caractères en sont retirés).
+  function places(t) {
+    var p = new Int32Array(t.length + 1), k = 0, i;
+    for (i = 0; i < t.length; i++) if (!RE_INVISIBLE.test(t.charAt(i))) p[k++] = i;
+    p[k] = t.length;
+    return p;
+  }
   function copie(o) { var c = {}, k; for (k in (o || {})) if (Object.prototype.hasOwnProperty.call(o, k)) c[k] = o[k]; return c; }
   function echapper(s) { return s.replace(/[\\^$.|?*+()[\]{}\/-]/g, '\\$&'); }
   function pad3(n) { var s = String(n); while (s.length < 3) s = '0' + s; return s; }
@@ -3924,21 +3947,32 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   function reglagesLisses(config) {
     var c = copie(config);
     ['prenoms', 'noms', 'conserver', 'villes'].forEach(function (k) {
-      if (Array.isArray(c[k])) c[k] = c[k].map(function (v) { return typeof v === 'string' ? lisser(v) : v; });
+      if (Array.isArray(c[k])) c[k] = c[k].map(function (v) { return typeof v === 'string' && lisser(v) !== '' ? lisser(v) : v; });
     });
     if (Array.isArray(c.dictionnaire)) {
       c.dictionnaire = c.dictionnaire.map(function (l) {
         if (!l || typeof l.texte !== 'string') return l;
         var motif = String(l.type == null ? '' : l.type).replace(/^ +| +$/g, '').toLowerCase() === 'motif';
-        var t = lisser(l.texte);
-        if (motif) t = t.replace(RE_ECRITES, ' ');
-        if (t === l.texte) return l;
+        var t = motif ? lisserEspaces(l.texte).replace(RE_ECRITES, ' ').replace(RE_TRAITS, '-').replace(RE_TRAITS_ECRITS, '-') : lisser(l.texte);
+        if (t === l.texte || t === '') return l;
         var n = copie(l); n.texte = t; return n;
       });
     }
     return c;
   }
 
+  // Vrai si une liste ou le Dictionnaire porte un de ces caractères (mot collé depuis un traitement de texte ou une page web).
+  function reglagesParticuliers(config) {
+    var cles = ['prenoms', 'noms', 'conserver', 'villes'], i, j, l;
+    if (!config) return false;
+    for (i = 0; i < cles.length; i++) {
+      l = config[cles[i]];
+      if (Array.isArray(l)) for (j = 0; j < l.length; j++) if (typeof l[j] === 'string' && aSpeciale(l[j])) return true;
+    }
+    l = config.dictionnaire;
+    if (Array.isArray(l)) for (j = 0; j < l.length; j++) if (l[j] && typeof l[j].texte === 'string' && aSpeciale(l[j].texte)) return true;
+    return false;
+  }
   function messageEntiers(n) {
     return n + (n > 1 ? ' textes sont codés en entier, chacun sous un seul code : leur codage par élément ne serait pas revenu'
       : ' texte est codé en entier, sous un seul code : son codage par élément ne serait pas revenu') + ' exactement au texte d’origine.';
@@ -3958,21 +3992,32 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     for (r = 0; r < cellules.length && !speciales; r++) for (c = 0; c < cellules[r].length; c++) {
       if (typeof cellules[r][c] === 'string' && aSpeciale(cellules[r][c])) { speciales = true; break; }
     }
-    if (!speciales) return P.pseudonymiser(cellules, config);                    // étape 0 : le moteur seul
+    if (!speciales) return P.pseudonymiser(cellules, reglagesParticuliers(config) ? reglagesLisses(config) : config);                    // étape 0 : le moteur seul
 
-    var lisses = cellules.map(function (ligne) { return ligne.map(function (t) { return typeof t === 'string' ? lisser(t) : t; }); });
+    var ou = {};                                                                  // texte aux caractères invisibles : place de chaque caractère lu
+    var lisses = cellules.map(function (ligne, lr) {
+      return ligne.map(function (t, lc) {
+        if (typeof t !== 'string' || !aSpeciale(t)) return t;
+        if (RE_INVISIBLE.test(t)) ou[lr + ':' + lc] = places(t);
+        return lisser(t);
+      });
+    });
     var res = P.pseudonymiser(lisses, reglagesLisses(config));                    // étape 1
     if (!res || !res.ok) return res;
 
     var prefixe = String((config && config.prefixe) == null ? '' : config.prefixe).replace(/^ +| +$/g, '') || 'Pseudo';
-    var table = new Table(res.correspondance), plans = [], autres = [], t, rendu;
+    var table = new Table(res.correspondance), plans = [], autres = [], t, rendu, els, pl;
+    function enPlace(x) { x.d = pl[x.d]; x.f = pl[x.f - 1] + 1; }                // du texte lu au texte tel qu'il est
     for (r = 0; r < cellules.length; r++) for (c = 0; c < cellules[r].length; c++) {
       t = cellules[r][c];
       if (typeof t !== 'string' || t === '') continue;
       rendu = res.cellules[r][c];
       if (!aSpeciale(t)) { if (rendu !== t) autres.push(rendu); continue; }
-      if (rendu === lisses[r][c]) { res.cellules[r][c] = t; continue; }           // rien de codé : le texte tel qu'il est
-      plans.push({ r: r, c: c, els: passagesCodes(rendu, lisses[r][c], table) }); // els null : texte que le module ne sait pas suivre
+      if (rendu === lisses[r][c] || lisses[r][c] === '') { res.cellules[r][c] = t; continue; }   // rien de codé : le texte tel qu'il est
+      els = passagesCodes(rendu, lisses[r][c], table);                           // null : texte que le module ne sait pas suivre
+      pl = ou[r + ':' + c];
+      if (els && pl) els.forEach(enPlace);
+      plans.push({ r: r, c: c, els: els });
     }
     var bilan = { textes: plans.length, ecritures: 0, entiers: 0 };
     if (!plans.length) { res.espaces = bilan; return res; }
@@ -4097,16 +4142,35 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     return res;
   }
 
-  // Rend un moteur dont seule la fonction pseudonymiser est enveloppée ; tout le reste est celui du moteur.
+  // Minuscules, comme le moteur : un caractère dont la minuscule tient en plusieurs caractères est gardé tel quel.
+  function minuscules(s) {
+    var r = '', i, c, u;
+    for (i = 0; i < s.length; i++) { c = s.charAt(i); u = c.toLowerCase(); r += u.length === 1 ? u : c; }
+    return r;
+  }
+  /* Codes restés en place dans un texte restitué. C'est la règle du moteur (codesRestants), à une différence près : le code à
+     lettre d'une adresse mail ou d'un lien (pseudo_mailB_001@pseudo.invalid, https://pseudo.invalid/lienB_001), que ce module
+     donne à une seconde écriture, est lu en entier. Sans un tel code dans le texte, la liste est celle du moteur. */
+  function codesRestants(texte, prefixe) {
+    var pl = echapper(minuscules(prefixe));
+    var re = new RegExp(pl + '_mail[a-z]*_\\d{3}@' + pl + '\\.invalid|https://' + pl + '\\.invalid/lien[a-z]*_\\d{3}|\\b' + echapper(prefixe) + '_[A-Za-z]+_\\d{3}\\b', 'gi');
+    var m = texte.match(re) || [], uniques = [];
+    m.forEach(function (x) { if (uniques.indexOf(x) < 0) uniques.push(x); });
+    return uniques;
+  }
+
+  // Rend un moteur dont la fonction pseudonymiser est enveloppée et dont la liste des codes restés en place lit les codes à
+  // lettre d'une adresse mail ou d'un lien ; tout le reste est celui du moteur.
   function envelopper(moteur) {
     var P = moteur || racine.Pseudonymiseur, m = {}, k;
     for (k in P) if (Object.prototype.hasOwnProperty.call(P, k)) m[k] = P[k];
     m.pseudonymiser = function (cellules, config) { return pseudonymiser(P, cellules, config); };
+    if (typeof P.codesRestants === 'function') m.codesRestants = codesRestants;
     m.moteurSeul = P;
     return m;
   }
 
-  racine.PseudonymiseurEspaces = { version: '1.31 du 19/11/2026', envelopper: envelopper, reperer: reperer, suivre: suivre, passagesCodes: passagesCodes, Table: Table, lisser: lisser };
+  racine.PseudonymiseurEspaces = { version: '1.32 du 19/11/2026', envelopper: envelopper, reperer: reperer, suivre: suivre, passagesCodes: passagesCodes, Table: Table, lisser: lisser, places: places };
 })(typeof module !== 'undefined' && module.exports ? module.exports : window);
 
 </script>
@@ -5479,7 +5543,7 @@ var LISTES_ORIGINE = {
 <script>
 (function () {
   'use strict';
-  // Version 1.31 : le moteur est enveloppé par le module des espaces insécables. Les trois flux (texte collé, classeur Excel,
+  // Depuis la version 1.31 : le moteur est enveloppé par le module des espaces insécables (et, depuis la 1.32, des traits d'union particuliers et des caractères invisibles). Les trois flux (texte collé, classeur Excel,
   // document Word ou PowerPoint) passent par cette enveloppe ; le moteur lui-même n'est pas modifié.
   var P = window.PseudonymiseurEspaces.envelopper(window.Pseudonymiseur);
   var $ = function (id) { return document.getElementById(id); };
@@ -5736,7 +5800,7 @@ var LISTES_ORIGINE = {
   // ------------------------------------------------------------------ étape 2 : sortie
   function surligner(texte, prefixe, mode) {
     var p = prefixe.replace(/[\\^$.|?*+()[\]{}]/g, '\\$&'), pl = prefixe.toLowerCase().replace(/[\\^$.|?*+()[\]{}]/g, '\\$&');
-    var re = new RegExp('(' + pl + '_mail_\\d{3}@' + pl + '\\.invalid|https://' + pl + '\\.invalid/lien_\\d{3}|' + p + '_[A-Za-z]+_\\d{3})', 'gi');
+    var re = new RegExp('(' + pl + '_mail[a-z]*_\\d{3}@' + pl + '\\.invalid|https://' + pl + '\\.invalid/lien[a-z]*_\\d{3}|' + p + '_[A-Za-z]+_\\d{3})', 'gi');
     return echapperHtml(texte).replace(re, function (m) { return '<mark class="' + mode + '">' + m + '</mark>'; });
   }
   function basculerApercu(zone, actif) {
