@@ -98,7 +98,7 @@ textarea.liste{min-height:260px;font-family:var(--police);font-size:.95rem}
 button.lien{font:inherit;color:var(--rouge-fonce);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
 
 /* ----- messages */
-.message{display:none;border-radius:8px;padding:10px 14px;margin-top:12px;font-size:.93rem;border:1px solid transparent}
+.message{display:none;border-radius:8px;padding:10px 14px;margin-top:12px;font-size:.93rem;border:1px solid transparent;overflow-wrap:anywhere}
 .message.visible{display:block}
 .message.ok{background:var(--vert-fond);color:var(--vert);border-color:#cfe8da}
 .message.attention{background:var(--ambre-fond);color:var(--ambre);border-color:#f1dca6}
@@ -169,6 +169,11 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   .bandeau img{height:40px}
   .bandeau .droite{display:none}
   .carte{padding:16px}
+  .btn{white-space:normal;text-align:left}
+  code{overflow-wrap:anywhere}
+}
+@media (max-width:400px){
+  th,td{padding:8px 5px}
 }
 @media print{.bandeau,.menu,.actions,.pied{display:none}}
 </style>
@@ -271,7 +276,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         <div class="depot" id="depot-entree">
           <input type="file" id="fichier-entree" accept=".xlsx,.xlsm,.docx,.docm,.dotx,.dotm,.pptx,.pptm,.ppsx,.ppsm,.potx,.potm" hidden>
           <p><strong>Ou un fichier Excel, Word ou PowerPoint</strong> (.xlsx, .xlsm, .docx, .pptx) : le déposer ici, ou <button type="button" class="lien" id="btn-fichier-entree">choisir le fichier</button>. Il est pseudonymisé aussitôt et le fichier codé est téléchargé ; son nom est codé comme son contenu.</p>
-          <p class="sous"><strong>Classeur Excel.</strong> Le classeur est lu sur votre poste. Sont codés les textes (cellules, commentaires, en-têtes et pieds de page, zones de texte, texte écrit entre guillemets dans une formule, listes déroulantes et messages de validation, textes que les graphiques et les tableaux croisés dynamiques gardent en mémoire, liens et infobulles, scénarios, texte de remplacement des images, propriétés et auteur du fichier, chemin d'enregistrement) et, quand le réglage « Pseudonymiser les dates » est sur Oui, les dates saisies dans les cellules. Onglets, formules, couleurs, largeurs et filtres restent tels quels. Restent en clair : les noms d'onglets, les noms définis, les noms de tableaux, les cellules saisies comme nombres (un téléphone sans espace), les dates calculées par une formule, les dates qu'un tableau croisé dynamique garde en mémoire, le texte d'un format de nombre, les images, les macros et les requêtes de données. Quand un de ces endroits porte un nom que l'outil reconnaît, ou un élément codé ailleurs dans le classeur, l'étape 2 le signale.</p>
+          <p class="sous"><strong>Classeur Excel.</strong> Le classeur est lu sur votre poste. Sont codés les textes (cellules, commentaires, en-têtes et pieds de page, zones de texte, texte écrit entre guillemets dans une formule, listes déroulantes et messages de validation, texte cherché par une mise en forme conditionnelle, textes que les graphiques et les tableaux croisés dynamiques gardent en mémoire, liens et infobulles, scénarios, texte de remplacement des images, propriétés et auteur du fichier, chemin d'enregistrement) et, quand le réglage « Pseudonymiser les dates » est sur Oui, les dates saisies dans les cellules. Onglets, formules, couleurs, largeurs et filtres restent tels quels. Restent en clair : les noms d'onglets, les noms définis, les noms de tableaux, les cellules saisies comme nombres (un téléphone sans espace), les dates calculées par une formule, les dates qu'un tableau croisé dynamique garde en mémoire, le texte d'un format de nombre, les images, les macros et les requêtes de données. Quand un de ces endroits porte un nom que l'outil reconnaît, ou un élément codé ailleurs dans le classeur, l'étape 2 le signale.</p>
           <p class="sous"><strong>Document Word, diaporama PowerPoint.</strong> Le fichier est lu sur votre poste. Sont codés ses textes (paragraphes, tableaux, titre et description d'un tableau, en-têtes et pieds de page, notes, commentaires, zones de texte, notes de l'orateur, textes des graphiques et des schémas, texte supprimé que le suivi des modifications garde, liens) et ce que le fichier dit de ses auteurs (propriétés, auteurs des commentaires et des modifications, nom de compte dans un chemin de fichier). Mise en page, styles, images et animations restent tels quels ; l'image miniature du fichier est retirée. Restent en clair : les images (signature, photo, capture d'écran), le son et la vidéo, les équations, les nombres des graphiques, les dates et heures des modifications et des commentaires, les noms de styles et de signets, le nom d'un champ de fusion, les macros. Quand un de ces endroits porte un élément codé ailleurs dans le fichier, l'étape 2 le signale. Un fichier à l'ancien format (.doc, .ppt) s'enregistre d'abord en .docx ou .pptx.</p>
         </div>
       </div>
@@ -502,7 +507,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         <h1>À propos</h1>
         <p>Cet outil est une aide. Il ne remplace pas la relecture : chaque utilisateur relit le texte codé avant tout envoi et reste responsable des données qu'il transmet.</p>
         <p>Il est fourni en l'état, sans garantie. Il n'est pas, à ce jour, un outil validé par Lyon 1 Université.</p>
-        <p><strong>Pseudonymiseur</strong>, version web 1.34 du 20 novembre 2026, mise à jour le 20 novembre 2026 à 18h26. Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
+        <p><strong>Pseudonymiseur</strong>, version web 1.35 du 20 novembre 2026, mise à jour le 20 novembre 2026 à 23h30. Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
         <h2>Où vont les données</h2>
         <ul class="propre">
           <li>Nulle part. Cette page est un programme complet que le serveur livre à votre navigateur ; le traitement se fait ensuite sur votre poste. Le serveur ne voit ni le texte, ni la table de correspondance, ni vos listes.</li>
@@ -514,10 +519,11 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
           <li>Il ne reconnaît pas une formule ou un résultat scientifique confidentiel : rien ne le distingue d'une formule publique. Ajoutez-le au Dictionnaire, en texte ou en motif.</li>
           <li>Il ne lit pas les images ni les pièces jointes : seul le texte collé est traité, ou les textes d'un classeur Excel, d'un document Word ou d'un diaporama PowerPoint déposé (pas les images qu'il contient, ni le son, ni la vidéo, ni les équations).</li>
           <li>Il ne lit ni les anciens formats (.doc, .xls, .ppt), ni les fichiers PDF, ni un fichier protégé par un mot de passe à l'ouverture : enregistrer le fichier au format actuel (.docx, .xlsx, .pptx), sans mot de passe, ou coller son texte à l'étape 1.</li>
-          <li>Il ne reconnaît pas tout. Restent en clair : un nom de famille écrit seul, qui ne figure nulle part avec un prénom ou une civilité ; c'est le cas, dans un tableau, d'un nom placé dans une autre cellule que le prénom (une colonne Nom, une colonne Prénom), et d'un nom écrit avant le prénom (Tessharto Paul), sauf si le nom est écrit en majuscules (TESSHARTO) ; un nom écrit tout en minuscules ; un prénom absent de la liste Prénoms, écrit seul ou devant un nom qui n'est pas en majuscules (le nom reste alors en clair lui aussi) ; un nom collé à un autre mot par un tiret bas (Dossier_Tessharto) ; après un prénom, un nom précédé de « des », « le », « la » ou « de l' » écrits en minuscules (Alice des Morvelang) ; un nom écrit après une fonction, même précédée d'une civilité (la directrice Tessharto, Monsieur le Président Tessharto) ; un nom écrit dans un autre alphabet que l'alphabet latin (grec, cyrillique, arabe, chinois) ; un nom à majuscule intérieure (Paul McTessharto) ; des initiales (P. T., Paul T.) ; un identifiant fait du prénom et du nom (paul.tessharto). Les ajouter à la liste Noms du service, où une colonne de noms copiée d'un tableau se colle telle quelle, et un prénom à la liste Prénoms. Ces deux listes ne reconnaissent qu'un mot écrit avec une majuscule, en lettres latines : un nom écrit tout en minuscules, dans un autre alphabet ou à majuscule intérieure, des initiales et un identifiant s'ajoutent au Dictionnaire. Chaque ligne est lue à part : un élément coupé par un saut de ligne, dans un texte, une cellule ou un paragraphe (le prénom sur une ligne et le nom sur la suivante, un numéro écrit sur deux lignes), peut rester en clair en tout ou en partie. Reste aussi en clair un mot dont l'accent est un signe à part, posé à côté de la lettre (Ame´lie, fe´vrier), comme en donne le texte copié de certains fichiers PDF : corriger le texte avant de le coder.</li>
+          <li>Il ne reconnaît pas tout. Restent en clair : un nom de famille écrit seul, qui ne figure nulle part avec un prénom ou une civilité ; c'est le cas, dans un tableau, d'un nom placé dans une autre cellule que le prénom (une colonne Nom, une colonne Prénom), et d'un nom écrit avant le prénom (Tessharto Paul), sauf si le nom est écrit en majuscules (TESSHARTO) ; un nom écrit tout en minuscules ; un prénom absent de la liste Prénoms, écrit seul ou devant un nom qui n'est pas en majuscules (le nom reste alors en clair lui aussi) ; un nom collé à un autre mot par un tiret bas (Dossier_Tessharto) ; après un prénom, un nom précédé de « des », « le », « la » ou « de l' » écrits en minuscules (Alice des Morvelang) ; un nom écrit après une fonction, même précédée d'une civilité (la directrice Tessharto, Monsieur le Président Tessharto) ; un nom écrit dans un autre alphabet que l'alphabet latin (grec, cyrillique, arabe, chinois) ; un nom à majuscule intérieure (Paul McTessharto) ; des initiales (P. T., Paul T.) ; un identifiant fait du prénom et du nom (paul.tessharto). Les ajouter à la liste Noms du service, où une colonne de noms copiée d'un tableau se colle telle quelle, et un prénom à la liste Prénoms. Un nom ou un prénom écrit en plusieurs mots (Thu Ha) s'y écrit sur une seule ligne : il est reconnu par chacun de ses mots. Ces deux listes ne reconnaissent qu'un mot écrit avec une majuscule, en lettres latines : un nom écrit tout en minuscules, dans un autre alphabet ou à majuscule intérieure, des initiales et un identifiant s'ajoutent au Dictionnaire. Chaque ligne est lue à part : un élément coupé par un saut de ligne, dans un texte, une cellule ou un paragraphe (le prénom sur une ligne et le nom sur la suivante, un numéro écrit sur deux lignes), peut rester en clair en tout ou en partie. Reste aussi en clair un mot dont l'accent est un signe à part, posé à côté de la lettre (Ame´lie, fe´vrier), comme en donne le texte copié de certains fichiers PDF : corriger le texte avant de le coder.</li>
         <li>Il code parfois un mot de trop. Après un prénom, une particule (« de », « du », « van ») et le mot à majuscule qui la suit sont lus comme un nom de famille : dans « Alice de Gauvernot », où Gauvernot serait une entreprise, ce mot est codé avec le prénom, puis partout où il est écrit seul. La restitution rend le texte exact. Pour que ce mot reste lisible par l'outil d'intelligence artificielle, l'inscrire à la liste Mots à conserver. De même, un sigle ou un mot écrit en majuscules, que l'outil code quand il est écrit seul parce qu'il est absent de cette liste, est codé aussi après « d' », devant la marque anglaise « 's » (ABCD's report), et après toute apostrophe quand il est déjà codé ailleurs dans le texte. Une ville de la liste Villes est reconnue même écrite en minuscules : « qu'il vienne » ou « la valence du carbone » sont codés comme un lieu ; retirer Vienne ou Valence de la liste Villes si ces mots comptent. Enfin, des chiffres sont parfois lus comme une coordonnée : un nombre entre parenthèses suivi de groupes de chiffres (« Dotation (2026) 125 000 € », « Total (1) 12 500 € ») est codé comme un téléphone, et trois groupes de quatre chiffres écrits à la suite (« Exercices 2024 2025 2026 », « Années 2024-2025-2026 ») comme un numéro de carte ; écrits « Dotation 2026 : 125 000 € » ou « Exercices 2024, 2025 et 2026 », ils restent lisibles.</li>
-        <li>Dans un classeur Excel, il laisse en clair : les noms d'onglets, les noms définis, les noms de tableaux et de tableaux croisés dynamiques, les noms de plages protégées, les cellules saisies comme nombres, les dates calculées par une formule, les dates qu'un tableau croisé dynamique garde en mémoire, le texte d'un format de nombre, le texte cherché par une mise en forme conditionnelle, les nombres des graphiques, les macros, les requêtes de données (Power Query), le modèle de données et les objets incorporés. L'étape 2 le signale quand un de ces endroits porte un nom que l'outil reconnaît ou un élément codé ailleurs dans le classeur. Là où Excel n'accepte qu'un texte court (255 caractères pour une liste déroulante, un message de validation ou un texte de formule, 32 pour le titre d'un message), un texte que son code rendrait trop long reste en clair, et l'étape 2 le dit.</li>
-        <li>À la restitution d'un classeur Excel, le texte revient exactement. Dans une cellule dont une partie seulement est en gras ou en couleur, la mise en forme revient exactement si l'outil d'intelligence artificielle n'a pas modifié la cellule ; sinon, un nom qui passait d'une mise en forme à l'autre prend celle de son début. Un onglet dont le nom porte un code retrouve son nom quand Excel l'accepte (31 caractères au plus, sans aucun des signes / \ [ ] : ? *, et pas déjà pris) ; sinon il garde son code et l'étape 4 le dit. Quand l'outil a réécrit le classeur et que le texte d'une formule ou le nom d'un onglet y est restitué, Excel recalcule le classeur à son ouverture.</li>
+        <li>Dans un classeur Excel, il laisse en clair : les noms d'onglets, les noms définis, les noms de tableaux et de tableaux croisés dynamiques, les noms de plages protégées, les cellules saisies comme nombres, les dates calculées par une formule, les dates qu'un tableau croisé dynamique garde en mémoire, le texte d'un format de nombre, les nombres des graphiques, les macros, les requêtes de données (Power Query), le modèle de données et les objets incorporés. L'étape 2 le signale quand un de ces endroits porte un nom que l'outil reconnaît ou un élément codé ailleurs dans le classeur. Là où Excel n'accepte qu'un texte court (255 caractères pour une liste déroulante, un message de validation ou un texte de formule, 32 pour le titre d'un message), un texte que son code rendrait trop long reste en clair, et l'étape 2 le dit.</li>
+        <li>À la restitution d'un classeur Excel, le texte revient exactement. Dans une cellule dont une partie seulement est en gras ou en couleur, la mise en forme revient exactement si l'outil d'intelligence artificielle n'a pas modifié la cellule ; sinon, un nom qui passait d'une mise en forme à l'autre prend celle de son début. Un onglet dont le nom porte un code retrouve son nom quand Excel l'accepte (31 caractères au plus, sans aucun des signes / \ [ ] : ? *, et pas déjà pris) ; sinon il garde son code et l'étape 4 le dit. Une date que l'outil d'intelligence artificielle a recopiée dans une autre cellule ou dans un classeur neuf revient en vraie date si cette cellule a un format de date ; sinon elle revient sous forme de texte (12/03/2026), et une formule qui s'en sert peut ne pas calculer : le modèle de prompt pour un classeur demande à l'outil de donner un format de date à ces cellules. Quand l'outil a réécrit un classeur qui porte des formules et qu'une donnée y est restituée, le classeur rendu demande à Excel de tout recalculer à son ouverture : un résultat que l'outil avait calculé sur un code (longueur d'un texte, majuscules, premières lettres) reprend ainsi sa vraie valeur. Après le chargement d'une table de correspondance depuis un fichier, la page ne sait plus reconnaître un classeur réécrit : elle ne demande ce recalcul que si le texte d'une formule ou le nom d'un onglet est restitué ; dans Excel, Ctrl+Alt+F9 recalcule alors toutes les formules.</li>
+        <li>Ce que l'outil d'intelligence artificielle règle d'après la longueur du texte est calculé sur les codes, qui n'ont pas la longueur du texte d'origine : après la restitution, une colonne dont il a ajusté la largeur peut être trop étroite ou trop large, une zone de texte ou une bulle de commentaire un peu trop haute. Le texte, lui, revient en entier : ajuster ces dimensions dans le fichier rendu.</li>
         <li>Un grand fichier demande du temps, pendant lequel la page ne répond pas : lors des essais, de trente à quarante secondes pour un classeur de 10 000 lignes ou pour un document Word de 6 000 paragraphes, et de deux à un peu plus de trois minutes pour un classeur de 30 000 lignes. Ces durées changent d'une mesure à l'autre et dépendent de l'ordinateur.</li>
         <li>Le nom du fichier est codé comme un texte, et l'outil y cherche aussi le nom de famille des personnes codées dans le contenu. Un nom que le contenu ne porte pas, ou que l'outil n'y a pas reconnu comme une personne, reste dans le nom du fichier : le vérifier avant d'envoyer le fichier. Un nom de fichier qui porte déjà un code n'est pas codé une seconde fois : l'étape 2 signale ce qui y reste en clair.</li>
         <li>Il ne sait pas dire si la table chargée est bien celle du fichier déposé à l'étape 3 : un fichier restitué avec la table d'un autre travail recevrait les données de cet autre travail. Garder chaque table enregistrée avec le fichier qu'elle accompagne.</li>
@@ -529,7 +535,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         <p>Outil créé par M. Manoël PYANET, directeur administratif du département composante Génie Électrique et des Procédés, Lyon 1 Université. Première version le 28 septembre 2026, sous la forme d'un classeur Excel ; version web depuis le 19 octobre 2026.</p>
         <h2>Ordre de traitement</h2>
         <p>Adresses mail et liens ; Dictionnaire ; adresses postales, codes postaux, bâtiments, campus et villes seules ; IBAN, BIC, sécurité sociale, cartes, suites de onze chiffres et plus, téléphones, plaques et identifiants, SIRET, nombres longs ; dates ; personnes (mots en majuscules, prénoms connus, civilité suivie d'un nom, avec ou sans particule) ; puis un second passage pour les noms de famille écrits seuls, vus dans un nom complet du même texte ou listés dans Noms du service. Chaque ligne du texte est traitée comme une ligne de tableau, chaque tabulation comme une colonne, exactement comme dans le classeur Excel.</p>
-        <details class="historique"><summary>Historique des versions</summary><p>Origine : classeur Excel « Anonymiseur à bouton » créé le 28 septembre 2026, en version 3 le 30 septembre 2026, renommé « Pseudonymiseur à bouton » en version 4 le 12 octobre 2026. Version web du 19 octobre 2026 : reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et trois corrections (la troisième : un prénom composé dont la suite est en minuscules, Marie-odile MORVELANG, est reconnu) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). La version 1.7 code en plus les téléphones étrangers (indicatif entre parenthèses, ou tout numéro écrit après Tel, Direct, Mobile, Fax), les adresses étrangères écrites sur une ligne qui finit par un pays, les entreprises suivies d'une forme juridique (Ltd, Inc, GmbH, SARL, SAS), le nom entier d'un bâtiment, le numéro dans un nom de rue (avenue du 8 mai 1945), et le nom écrit avant une adresse mail ou avant « a écrit : », même avec un prénom inconnu ; la version 1.8 ne prend plus pour une personne un intitulé en majuscules qui commence par un nom de lieu ou de service (QUAI CHARGEMENT devient un lieu, SERVICE COURRIER reste en clair) ni le sigle GLPI ; la version 1.9 laisse en clair un sigle défini dans le texte entre parenthèses, quand ses lettres sont les initiales de sa définition (CAL, capacité d'accueil limitée) ; la version 1.10 code une signature réduite à une initiale collée au nom, seule sur sa ligne (J.Tessharto) ; FAQ et CAUTION restent en clair ; la version 1.11 code un prénom connu écrit après une élision (d'Alice), reconnaît un terme du Dictionnaire écrit sans accent (Societe pour Société), laisse en clair quatre sigles et mots de plus, dont SUJET, copie la sortie dès la pseudonymisation et ajoute le bouton Coller et restituer ; la version 1.11.1 laisse en clair un titre suivi d'un mot courant au pluriel (Professeur des Universités) et un mot de remplissage fait d'une seule lettre répétée (XXXX) ; la version 1.12 code une date écrite sans année (27 octobre, 27/10, lundi 12), une boîte fonctionnelle écrite avec un point devant son adresse (Service.Achats), le nom d'un outil de gestion du Dictionnaire quelle que soit sa casse et un nom de campus, ajouté à la liste Villes ; la version 1.12.1 restitue la réponse déjà collée quand le navigateur refuse la lecture du presse-papiers ; la version 1.13 accepte un classeur Excel déposé tel quel (.xlsx, .xlsm) : seuls ses textes sont codés, le classeur codé est téléchargé avec ses onglets, formules et mises en forme intacts, et le classeur renvoyé par l'outil se restitue de la même façon, le tout sur le poste ; la version 1.13.1 code un nom écrit après une initiale (P. Valdoreth, L. Gauvernot), sauf après un mot ordinaire en minuscules, un chiffre, un symbole ou un point (125 °C. Équations) et dans une suite d'initiales (N. B.) ; la version 1.14 code aussi, dans un classeur Excel, les dates saisies dans les cellules, qu'Excel enregistre comme des nombres, et les remet en dates, avec leur format, à la restitution ; une date calculée par une formule reste en clair ; la version 1.15 code une suite de jours devant un mois (les 13, 14 et 15 octobre), un mois suivi de son année (avril 2026) et le nom écrit après Dr ou Pr (Dr El Valdoreth, Pr Le Gauvernot), laisse en clair un numéro de page ou de partie (page 3/12) et une fraction suivie d'une unité (1/2 journée), ne coupe plus un numéro long par le code d'un numéro plus court, restitue en entier une adresse dont une partie avait déjà reçu un code et, quand un même code couvre deux écritures d'un même élément, restitue toujours la première écrite ; la version 1.16 donne son propre code à chaque écriture d'une même personne ou d'un même terme du Dictionnaire (Paul TESSHARTO, puis TESSHARTO : Pseudo_Personne_001, puis Pseudo_PersonneB_001, même numéro et une lettre après l'étiquette), pour que la restitution rende chaque texte exactement comme il était, et contrôle à chaque pseudonymisation que chaque texte codé revient exactement au texte d'origine ; un texte qui n'y reviendrait pas est codé en entier, sous un seul code ; la version 1.16.1 ne livre plus dans le Dictionnaire que quatre lignes d'exemple, pour que chacun y écrive les siennes, sans rien changer aux listes déjà enregistrées dans un navigateur ; la version 1.16.2 précise, en tête de cette page, le statut de l'outil ; la version 1.20 reprend la version 1.16.2, range cet historique en bas de la rubrique, rappelle l'origine de l'outil, affiche l'heure de sa mise à jour et ajoute la page Prompts : deux modèles de consigne à copier, pour un texte et pour un classeur Excel, qui demandent à l'outil d'intelligence artificielle de ne pas toucher aux codes ; la version 1.21 remplace les exemples de la page par des exemples généraux, aux noms de personnes inventés, et ajoute EDF, ENGIE et SNCF à la liste d'origine des mots à conserver ; la version 1.22 reprend la version 1.21, sans changement de l'outil ; la version 1.23 ajoute au mode d'emploi un quatrième geste de sûreté : relire ce que l'outil d'intelligence artificielle a rendu ; la version 1.30 pseudonymise et restitue aussi les documents Word (.docx) et les diaporamas PowerPoint (.pptx), déposés comme un classeur Excel : textes, tableaux, en-têtes et pieds de page, notes, commentaires, zones de texte, graphiques, liens, propriétés et auteurs du fichier, sans toucher à la mise en page ni aux images ; elle ajoute un troisième modèle de prompt pour ces fichiers et affiche ce qui reste en clair ; la page reste utilisable quand le navigateur refuse l'enregistrement local, listes et réglages n'étant alors gardés que le temps de l'onglet ; les règles de remplacement et le traitement des classeurs Excel ne changent pas ; la version 1.31 lit une espace insécable comme une espace ordinaire, dans un texte collé comme dans un fichier déposé : les numéros de téléphone, les dates en lettres, les IBAN, les numéros de sécurité sociale, les adresses et les noms écrits avec des espaces insécables, qui restaient en clair en tout ou en partie, sont codés, et la restitution remet chaque espace insécable à sa place ; un même élément écrit des deux façons garde son numéro et reçoit une lettre (Pseudo_TelephoneB_001) ; un texte sans espace insécable est codé exactement comme avant ; la version 1.32 lit de même un trait d'union insécable ou un tiret court comme un trait d'union ordinaire, et ne tient pas compte, pour lire, des caractères invisibles qu'un copier-coller glisse dans un numéro, une date, une adresse ou un nom (césure invisible, espace sans chasse, marques de sens d'écriture) : l'élément est codé en entier, et la restitution remet chaque caractère à sa place ; la version 1.33 garde une seule table pour tout ce qui est codé dans l'onglet : deux fichiers codés à la suite se restituent chacun avec leurs propres données ; elle lit une lettre accentuée écrite en deux caractères, la lettre puis son accent (texte copié de certains fichiers PDF, fichier venu d'un Mac), comme la même lettre écrite en un seul : les prénoms, les noms, les dates en lettres et les villes écrits ainsi, qui restaient en clair, sont codés, et la restitution rend l'écriture d'origine ; dans un classeur Excel, elle code aussi le texte écrit entre guillemets dans une formule, les listes déroulantes et les messages de validation, les textes que les graphiques et les tableaux croisés dynamiques gardent en mémoire, les scénarios, les infobulles, le texte de remplacement des images, les propriétés du fichier et le chemin d'enregistrement, lit d'un seul tenant un nom coupé par la mise en forme d'une cellule, et restitue les codes que l'outil a écrits à ces endroits ou dans le nom d'un onglet ; elle reconnaît un code que l'outil a rendu sous une autre écriture (Pseudo\_Personne\_001) et signale celui qu'elle ne reconnaît pas, y compris quand la table porte un autre préfixe que celui des réglages ; elle code le nom du fichier, où elle cherche aussi le nom de famille des personnes codées dans le contenu ; dans un document Word, elle code le titre et la description d'un tableau, ainsi que l'infobulle d'un lien et le nom d'une forme tels que les écrit LibreOffice ; à l'étape 2, elle signale ce qui reste en clair à un endroit qu'elle ne code pas ; quand le navigateur n'a plus la place de garder le travail de l'onglet, elle garde la table avant les textes, ne laisse plus revenir une table plus ancienne après un rechargement de la page, et prévient quand la table elle-même ne tient plus ; la version 1.34 code le nom à particule écrit après un prénom connu ou une civilité, que la particule soit en minuscules ou porte une majuscule (Alice de Morvelang, Paul van der Gauvernot, Paul Van Der Gauvernot, Mme de la Morvelang), et le nom à apostrophe (Mme d'Orvelang, Paul N'Gauvernot, D'ORVELANG Alice), qui restaient en clair en tout ou en partie ; elle les code aussi dans le nom du fichier ; après « de », « du » ou « de la », elle ne prend pas pour un nom un mot courant, un service, une discipline, un mois, une ville de la liste Villes ni un mot à conserver (Paul de la Scolarité) ; dans la liste Noms du service, un nom écrit en plusieurs mots, qui restait sans effet, est reconnu par chacun de ses mots ; elle code aussi le nom écrit après « Professeure », « Docteure » ou « Dre », et les noms qui suivent une civilité au pluriel, séparés par une virgule ou par « et » (MM. Tessharto, Valdoreth et Morvelang) ; elle code aussi le nom déjà connu écrit après une apostrophe (le dossier d'Orvelang, puisqu'Orvelang), le mot en majuscules écrit après « d' » (le dossier d'ORVELANG), les noms écrits avec des lettres latines d'autres langues (Mme Şorvelang, M. Yıldoreth, Mme Valdorếth) et le nom ou le prénom suivi de la marque anglaise « 's » (Tessharto's team, Alice's report), qui restaient en clair en tout ou en partie ; elle code aussi le téléphone écrit avec l'indicatif « 00 33 » (0033 4 00 00 00 05), qui n'était codé qu'après le mot Tél, Portable ou Fax, et le téléphone écrit avec l'indicatif entre parenthèses ((+33) 4 00 00 00 04), qui restait en clair ; un texte qui ne porte aucune de ces écritures est codé exactement comme avant.</p></details>
+        <details class="historique"><summary>Historique des versions</summary><p>Origine : classeur Excel « Anonymiseur à bouton » créé le 28 septembre 2026, en version 3 le 30 septembre 2026, renommé « Pseudonymiseur à bouton » en version 4 le 12 octobre 2026. Version web du 19 octobre 2026 : reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et trois corrections (la troisième : un prénom composé dont la suite est en minuscules, Marie-odile MORVELANG, est reconnu) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). La version 1.7 code en plus les téléphones étrangers (indicatif entre parenthèses, ou tout numéro écrit après Tel, Direct, Mobile, Fax), les adresses étrangères écrites sur une ligne qui finit par un pays, les entreprises suivies d'une forme juridique (Ltd, Inc, GmbH, SARL, SAS), le nom entier d'un bâtiment, le numéro dans un nom de rue (avenue du 8 mai 1945), et le nom écrit avant une adresse mail ou avant « a écrit : », même avec un prénom inconnu ; la version 1.8 ne prend plus pour une personne un intitulé en majuscules qui commence par un nom de lieu ou de service (QUAI CHARGEMENT devient un lieu, SERVICE COURRIER reste en clair) ni le sigle GLPI ; la version 1.9 laisse en clair un sigle défini dans le texte entre parenthèses, quand ses lettres sont les initiales de sa définition (CAL, capacité d'accueil limitée) ; la version 1.10 code une signature réduite à une initiale collée au nom, seule sur sa ligne (J.Tessharto) ; FAQ et CAUTION restent en clair ; la version 1.11 code un prénom connu écrit après une élision (d'Alice), reconnaît un terme du Dictionnaire écrit sans accent (Societe pour Société), laisse en clair quatre sigles et mots de plus, dont SUJET, copie la sortie dès la pseudonymisation et ajoute le bouton Coller et restituer ; la version 1.11.1 laisse en clair un titre suivi d'un mot courant au pluriel (Professeur des Universités) et un mot de remplissage fait d'une seule lettre répétée (XXXX) ; la version 1.12 code une date écrite sans année (27 octobre, 27/10, lundi 12), une boîte fonctionnelle écrite avec un point devant son adresse (Service.Achats), le nom d'un outil de gestion du Dictionnaire quelle que soit sa casse et un nom de campus, ajouté à la liste Villes ; la version 1.12.1 restitue la réponse déjà collée quand le navigateur refuse la lecture du presse-papiers ; la version 1.13 accepte un classeur Excel déposé tel quel (.xlsx, .xlsm) : seuls ses textes sont codés, le classeur codé est téléchargé avec ses onglets, formules et mises en forme intacts, et le classeur renvoyé par l'outil se restitue de la même façon, le tout sur le poste ; la version 1.13.1 code un nom écrit après une initiale (P. Valdoreth, L. Gauvernot), sauf après un mot ordinaire en minuscules, un chiffre, un symbole ou un point (125 °C. Équations) et dans une suite d'initiales (N. B.) ; la version 1.14 code aussi, dans un classeur Excel, les dates saisies dans les cellules, qu'Excel enregistre comme des nombres, et les remet en dates, avec leur format, à la restitution ; une date calculée par une formule reste en clair ; la version 1.15 code une suite de jours devant un mois (les 13, 14 et 15 octobre), un mois suivi de son année (avril 2026) et le nom écrit après Dr ou Pr (Dr El Valdoreth, Pr Le Gauvernot), laisse en clair un numéro de page ou de partie (page 3/12) et une fraction suivie d'une unité (1/2 journée), ne coupe plus un numéro long par le code d'un numéro plus court, restitue en entier une adresse dont une partie avait déjà reçu un code et, quand un même code couvre deux écritures d'un même élément, restitue toujours la première écrite ; la version 1.16 donne son propre code à chaque écriture d'une même personne ou d'un même terme du Dictionnaire (Paul TESSHARTO, puis TESSHARTO : Pseudo_Personne_001, puis Pseudo_PersonneB_001, même numéro et une lettre après l'étiquette), pour que la restitution rende chaque texte exactement comme il était, et contrôle à chaque pseudonymisation que chaque texte codé revient exactement au texte d'origine ; un texte qui n'y reviendrait pas est codé en entier, sous un seul code ; la version 1.16.1 ne livre plus dans le Dictionnaire que quatre lignes d'exemple, pour que chacun y écrive les siennes, sans rien changer aux listes déjà enregistrées dans un navigateur ; la version 1.16.2 précise, en tête de cette page, le statut de l'outil ; la version 1.20 reprend la version 1.16.2, range cet historique en bas de la rubrique, rappelle l'origine de l'outil, affiche l'heure de sa mise à jour et ajoute la page Prompts : deux modèles de consigne à copier, pour un texte et pour un classeur Excel, qui demandent à l'outil d'intelligence artificielle de ne pas toucher aux codes ; la version 1.21 remplace les exemples de la page par des exemples généraux, aux noms de personnes inventés, et ajoute EDF, ENGIE et SNCF à la liste d'origine des mots à conserver ; la version 1.22 reprend la version 1.21, sans changement de l'outil ; la version 1.23 ajoute au mode d'emploi un quatrième geste de sûreté : relire ce que l'outil d'intelligence artificielle a rendu ; la version 1.30 pseudonymise et restitue aussi les documents Word (.docx) et les diaporamas PowerPoint (.pptx), déposés comme un classeur Excel : textes, tableaux, en-têtes et pieds de page, notes, commentaires, zones de texte, graphiques, liens, propriétés et auteurs du fichier, sans toucher à la mise en page ni aux images ; elle ajoute un troisième modèle de prompt pour ces fichiers et affiche ce qui reste en clair ; la page reste utilisable quand le navigateur refuse l'enregistrement local, listes et réglages n'étant alors gardés que le temps de l'onglet ; les règles de remplacement et le traitement des classeurs Excel ne changent pas ; la version 1.31 lit une espace insécable comme une espace ordinaire, dans un texte collé comme dans un fichier déposé : les numéros de téléphone, les dates en lettres, les IBAN, les numéros de sécurité sociale, les adresses et les noms écrits avec des espaces insécables, qui restaient en clair en tout ou en partie, sont codés, et la restitution remet chaque espace insécable à sa place ; un même élément écrit des deux façons garde son numéro et reçoit une lettre (Pseudo_TelephoneB_001) ; un texte sans espace insécable est codé exactement comme avant ; la version 1.32 lit de même un trait d'union insécable ou un tiret court comme un trait d'union ordinaire, et ne tient pas compte, pour lire, des caractères invisibles qu'un copier-coller glisse dans un numéro, une date, une adresse ou un nom (césure invisible, espace sans chasse, marques de sens d'écriture) : l'élément est codé en entier, et la restitution remet chaque caractère à sa place ; la version 1.33 garde une seule table pour tout ce qui est codé dans l'onglet : deux fichiers codés à la suite se restituent chacun avec leurs propres données ; elle lit une lettre accentuée écrite en deux caractères, la lettre puis son accent (texte copié de certains fichiers PDF, fichier venu d'un Mac), comme la même lettre écrite en un seul : les prénoms, les noms, les dates en lettres et les villes écrits ainsi, qui restaient en clair, sont codés, et la restitution rend l'écriture d'origine ; dans un classeur Excel, elle code aussi le texte écrit entre guillemets dans une formule, les listes déroulantes et les messages de validation, les textes que les graphiques et les tableaux croisés dynamiques gardent en mémoire, les scénarios, les infobulles, le texte de remplacement des images, les propriétés du fichier et le chemin d'enregistrement, lit d'un seul tenant un nom coupé par la mise en forme d'une cellule, et restitue les codes que l'outil a écrits à ces endroits ou dans le nom d'un onglet ; elle reconnaît un code que l'outil a rendu sous une autre écriture (Pseudo\_Personne\_001) et signale celui qu'elle ne reconnaît pas, y compris quand la table porte un autre préfixe que celui des réglages ; elle code le nom du fichier, où elle cherche aussi le nom de famille des personnes codées dans le contenu ; dans un document Word, elle code le titre et la description d'un tableau, ainsi que l'infobulle d'un lien et le nom d'une forme tels que les écrit LibreOffice ; à l'étape 2, elle signale ce qui reste en clair à un endroit qu'elle ne code pas ; quand le navigateur n'a plus la place de garder le travail de l'onglet, elle garde la table avant les textes, ne laisse plus revenir une table plus ancienne après un rechargement de la page, et prévient quand la table elle-même ne tient plus ; la version 1.34 code le nom à particule écrit après un prénom connu ou une civilité, que la particule soit en minuscules ou porte une majuscule (Alice de Morvelang, Paul van der Gauvernot, Paul Van Der Gauvernot, Mme de la Morvelang), et le nom à apostrophe (Mme d'Orvelang, Paul N'Gauvernot, D'ORVELANG Alice), qui restaient en clair en tout ou en partie ; elle les code aussi dans le nom du fichier ; après « de », « du » ou « de la », elle ne prend pas pour un nom un mot courant, un service, une discipline, un mois, une ville de la liste Villes ni un mot à conserver (Paul de la Scolarité) ; dans la liste Noms du service, un nom écrit en plusieurs mots, qui restait sans effet, est reconnu par chacun de ses mots ; elle code aussi le nom écrit après « Professeure », « Docteure » ou « Dre », et les noms qui suivent une civilité au pluriel, séparés par une virgule ou par « et » (MM. Tessharto, Valdoreth et Morvelang) ; elle code aussi le nom déjà connu écrit après une apostrophe (le dossier d'Orvelang, puisqu'Orvelang), le mot en majuscules écrit après « d' » (le dossier d'ORVELANG), les noms écrits avec des lettres latines d'autres langues (Mme Şorvelang, M. Yıldoreth, Mme Valdorếth) et le nom ou le prénom suivi de la marque anglaise « 's » (Tessharto's team, Alice's report), qui restaient en clair en tout ou en partie ; elle code aussi le téléphone écrit avec l'indicatif « 00 33 » (0033 4 00 00 00 05), qui n'était codé qu'après le mot Tél, Portable ou Fax, et le téléphone écrit avec l'indicatif entre parenthèses ((+33) 4 00 00 00 04), qui restait en clair ; un texte qui ne porte aucune de ces écritures est codé exactement comme avant ; la version 1.35 reconnaît, dans la liste Prénoms, un prénom écrit en plusieurs mots (Thu Ha) par chacun de ses mots, alors qu'une telle ligne restait sans effet ; elle code en entier une adresse mail qui porte une lettre accentuée (amélie.morvelang@univ-exemple.fr), dont le début restait en clair ; dans un classeur Excel, elle code et restitue le texte cherché par une mise en forme conditionnelle, qui restait en clair au codage et gardait son code à la restitution ; le modèle de prompt pour un classeur demande à l'outil de donner un format de date à la cellule où il recopie une date codée, pour qu'elle y revienne en vraie date, et les limites disent ce que deviennent une date recopiée sans format de date et les dimensions que l'outil règle d'après la longueur des codes ; un document Word ou un diaporama PowerPoint qui porte plusieurs fichiers incorporés (les classeurs de ses graphiques) reçoit les mêmes codes à chaque codage, alors que leurs numéros pouvaient changer d'une fois à l'autre ; un classeur que l'outil a réécrit et qui porte des formules demande à Excel de tout recalculer à son ouverture dès qu'une donnée y est restituée, alors qu'un résultat calculé par l'outil sur un code (longueur d'un texte, majuscules, premières lettres) pouvait rester affiché ; quand le navigateur ne peut pas lire le fichier déposé (fichier déplacé ou supprimé entre-temps), la page le dit au lieu de rester sans réponse ; sur un écran étroit, un nom de fichier très long, un bouton au texte long et le tableau du Dictionnaire ne dépassent plus de la page ; un mot qui est aussi le nom d'une fonction interne du langage de la page (constructor, hasOwnProperty, toString) est traité comme tout autre mot, où qu'il soit écrit (texte, listes, Dictionnaire, table de correspondance, fichier), alors que « Constructor » n'était jamais codé comme un nom de personne et que le terme « hasOwnProperty » inscrit au Dictionnaire arrêtait le codage ; le code de la page est repris à quatre endroits pour sa relecture (accès au stockage du navigateur écrit en toutes lettres, bilan chiffré repris comme du texte après un rechargement de la page, seuls les réglages connus repris d'un fichier de réglages, deux fonctions qui ne servaient plus retirées), sans effet sur les textes et les fichiers traités ; un texte, une liste ou un fichier qui ne porte rien de cela est traité exactement comme avant.</p></details>
       </div>
     </section>
 
@@ -538,7 +544,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
 
 <footer class="pied">
   <span>Lyon 1 Université</span>
-  <span>Pseudonymiseur, version web 1.34 du 20 novembre 2026, mise à jour le 20 novembre 2026 à 18h26</span>
+  <span>Pseudonymiseur, version web 1.35 du 20 novembre 2026, mise à jour le 20 novembre 2026 à 23h30</span>
   <span>Traitement local, aucune donnée transmise</span>
 </footer>
 <div class="toast" id="toast"></div>
@@ -562,6 +568,14 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
    Les mots de la liste Conserver ne sont jamais touchés. */
 (function (racine) {
   'use strict';
+  // Version 1.35 : une table est toujours interrogée par cette fonction, qui appelle la fonction du langage elle-même. Écrite
+  // « table.hasOwnProperty(clé) », la question passait par la table : une clé venue du texte et nommée « hasOwnProperty »
+  // (un terme du Dictionnaire, un code de la table) lui ôtait sa réponse et arrêtait le traitement.
+  function possede(table, cle) { return Object.prototype.hasOwnProperty.call(table, cle); }
+  // Version 1.35 : une table vide, sans rien d'hérité. Une table écrite « {} » répond aussi aux noms que le langage donne à
+  // tout objet (constructor) : lue par sa clé seule, elle faisait passer le mot « Constructor » pour un mot à conserver,
+  // qui n'était jamais codé comme un nom. Les tables lues par leur clé seule sont créées par cette fonction.
+  function tableVide() { return Object.create(null); }
 
   var MODE_NOMS = 'code';
 
@@ -613,11 +627,6 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   }
 
   function echapper(s) { return s.replace(/[\\^$.|?*+()[\]{}]/g, '\\$&'); }
-
-  function remplacerToutSansCasse(txt, k, code) {
-    if (k === '') return txt;
-    return txt.replace(new RegExp(echapper(k), 'gi'), function () { return code; });
-  }
 
   // Tri par longueur décroissante, même algorithme que le module (échange quand strictement plus long).
   function trierParLongueur(arr, cle) {
@@ -705,22 +714,22 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   }
 
   var PARTICULES = { de: 1, du: 1, des: 1, "d'": 1, le: 1, la: 1, van: 1, von: 1, da: 1, di: 1, del: 1, della: 1, ben: 1, el: 1, al: 1 };
-  function estParticule(m) { return PARTICULES.hasOwnProperty(normaliser(m)); }
+  function estParticule(m) { return possede(PARTICULES, normaliser(m)); }
 
   /* Version 1.34 : nom à particule écrit en minuscules après un prénom connu ou une civilité (Alice de Morvelang, Paul van der
      Gauvernot, Mme de la Morvelang) et nom à apostrophe (Mme d'Orvelang, Paul N'Gauvernot, O'TESSHARTO Alice). Jusque-là, le
      nom restait en clair : seule une particule écrite avec une majuscule, ou une seule particule après une civilité, était lue. */
   var PARTICULES_APRES_PRENOM = { de: 1, du: 1, van: 1, von: 1, da: 1, di: 1, del: 1, della: 1, ben: 1, el: 1, al: 1 };
   var SECONDES_PARTICULES = { la: 1, le: 1, der: 1, den: 1 };
-  function particuleMinuscule(m, table) { return m === lcase(m) && table.hasOwnProperty(normaliser(m)); }
+  function particuleMinuscule(m, table) { return m === lcase(m) && possede(table, normaliser(m)); }
   // Mots courants écrits après une élision, qui ne sont jamais un nom (D'ACCORD, d'Abord, D'APRÈS).
-  var APRES_ELISION = {};
+  var APRES_ELISION = tableVide();
   ('accord abord apres ailleurs autant autre autres ici ou un une entre avance avoir etre origine ordre office urgence habitude ores ' +
     'ensemble exception experience honneur importance information inscription intention interet objet occasion usage ouverture').split(' ')
     .forEach(function (m) { APRES_ELISION[m] = 1; });
   // Mots de l'administration et de l'enseignement écrits avec une majuscule après « de », « du », « de la » (Paul de la
   // Scolarité, Alice du Patrimoine, Lucas de Chimie) : un service, une discipline ou un mois, jamais le nom de la personne.
-  var APRES_PARTICULE = {};
+  var APRES_PARTICULE = tableVide();
   ('scolarite patrimoine recherche reprographie mecanique chimie physique electronique electrotechnique informatique mathematiques ' +
     'biologie medecine pharmacie droit lettres langues histoire geographie economie gestion comptabilite logistique maintenance ' +
     'communication prevention securite accueil science technologie genie energie environnement sante sport culture ressources ' +
@@ -730,8 +739,8 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     .forEach(function (m) { APRES_PARTICULE[m] = 1; });
   function motApresParticule(m) {
     var k = normaliser(m);
-    if (APRES_PARTICULE.hasOwnProperty(k)) return true;
-    return k.length > 3 && k.charAt(k.length - 1) === 's' && APRES_PARTICULE.hasOwnProperty(k.substring(0, k.length - 1));
+    if (possede(APRES_PARTICULE, k)) return true;
+    return k.length > 3 && k.charAt(k.length - 1) === 's' && possede(APRES_PARTICULE, k.substring(0, k.length - 1));
   }
   // Forme d'un nom à apostrophe : une lettre (d, D, N, M, O, L), une apostrophe, puis au moins trois lettres (quatre après d, D
   // ou L) écrites avec une majuscule ou en majuscules (d'Orvelang, D'ORVELANG, N'Gauvernot, O'Tessharto). « l' » en minuscule
@@ -752,13 +761,13 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   // Version 1.34 : une civilité au pluriel annonce plusieurs noms (MM. Tessharto, Valdoreth et Morvelang). « MM » ne compte
   // qu'écrit en majuscules (« mm » est une unité).
   var CIVILITES_PLURIEL = { mmes: 1, mlles: 1, mesdames: 1, messieurs: 1, mesdemoiselles: 1 };
-  function civilitePlurielle(m) { return m === 'MM' || CIVILITES_PLURIEL.hasOwnProperty(normaliser(m)); }
-  function estCivilite(m) { return m === 'MM' || CIVILITES.hasOwnProperty(normaliser(m)); }
+  function civilitePlurielle(m) { return m === 'MM' || possede(CIVILITES_PLURIEL, normaliser(m)); }
+  function estCivilite(m) { return m === 'MM' || possede(CIVILITES, normaliser(m)); }
 
   // Mots qui suivent « Pr » ou « Dr » sans être un nom (version 1.15).
   var SUITE_DE_TITRE = { emerite: 1, emerites: 1, honoraire: 1, honoraires: 1, associe: 1, associee: 1, agrege: 1, agregee: 1, invite: 1, invitee: 1 };
 
-  var COURANTS = {};
+  var COURANTS = tableVide();
   ('le la les l un une des du de d au aux et ou en par pour sur avec chez dans vers sans ' +
     'objet bonjour bonsoir merci cordialement ref tel mail cc cci a envoye sujet ' +
     'laboratoire batiment service direction bureau departement composante master licence doctorat universite ' +
@@ -774,8 +783,8 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   // « Professeur des Universités » est un titre, pas une personne.
   function motCourant(m) {
     var k = normaliser(m);
-    if (COURANTS.hasOwnProperty(k)) return true;
-    return k.length > 3 && k.charAt(k.length - 1) === 's' && COURANTS.hasOwnProperty(k.substring(0, k.length - 1));
+    if (possede(COURANTS, k)) return true;
+    return k.length > 3 && k.charAt(k.length - 1) === 's' && possede(COURANTS, k.substring(0, k.length - 1));
   }
 
   var MOTS_DE_RUE = { rue: 1, avenue: 1, boulevard: 1, bd: 1, place: 1, allee: 1, chemin: 1, impasse: 1, quai: 1, cours: 1, route: 1, square: 1, batiment: 1, campus: 1, amphitheatre: 1, amphi: 1, salle: 1 };
@@ -796,7 +805,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   var LETTRES_ACCENTUEES = { a: 'aàáâãäå', c: 'cç', e: 'eèéêë', i: 'iìíîï', n: 'nñ', o: 'oòóôõöø', u: 'uùúûü', y: 'yýÿ' };
   function classeLettre(ch) {
     var base = sansAccents(lcase(ch));
-    if (!LETTRES_ACCENTUEES.hasOwnProperty(base)) return echapper(ch);
+    if (!possede(LETTRES_ACCENTUEES, base)) return echapper(ch);
     return '[' + LETTRES_ACCENTUEES[base] + ucase(LETTRES_ACCENTUEES[base]) + ']';
   }
   function motifMotEntier(terme) {
@@ -819,8 +828,17 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     this.adresses = config.adresses !== false;
     var seuil = parseInt(config.seuil, 10);
     this.seuil = (!isNaN(seuil) && seuil >= 4 && seuil <= 12) ? seuil : 5;
-    this.prenoms = {}; this.noms = {}; this.conserver = {};
-    (config.prenoms || []).forEach(function (v) { v = normaliser(trim(v)); if (v) this.prenoms[v] = true; }, this);
+    this.prenoms = tableVide(); this.noms = tableVide(); this.conserver = tableVide();
+    // Version 1.35 : un prénom écrit en plusieurs mots (Thu Ha) est reconnu par chacun de ses mots qui n'est pas une
+    // particule, comme un nom de la liste Noms du service depuis la version 1.34. Jusque-là, une ligne de plusieurs mots restait
+    // sans effet. Une ligne d'un seul mot est lue exactement comme avant.
+    (config.prenoms || []).forEach(function (v) {
+      v = normaliser(trim(v)); if (!v) return;
+      this.prenoms[v] = true;
+      if (/[ \t\u00a0]/.test(v)) v.split(/[ \t\u00a0]+/).forEach(function (w) {
+        if (w.length >= 2 && !possede(PARTICULES, w) && !possede(SECONDES_PARTICULES, w)) this.prenoms[w] = true;
+      }, this);
+    }, this);
     // Version 1.34 : un nom à apostrophe est reconnu quelle que soit l'apostrophe ; un nom écrit en plusieurs mots (de Gauvernot,
     // Van Der Gauvernot, Morvelang Tessharto) l'est par chacun de ses mots qui n'est pas une particule. Jusque-là, une ligne de
     // plusieurs mots restait sans effet.
@@ -828,13 +846,13 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       var inscrire = function (w) { if (w) { this.noms[w] = true; if (w.indexOf('\u2019') >= 0) this.noms[w.replace(/\u2019/g, "'")] = true; } };
       v = normaliser(trim(v)); inscrire.call(this, v);
       if (/[ \t\u00a0]/.test(v)) v.split(/[ \t\u00a0]+/).forEach(function (w) {
-        if (w.length >= 2 && !PARTICULES.hasOwnProperty(w) && !SECONDES_PARTICULES.hasOwnProperty(w)) inscrire.call(this, w);
+        if (w.length >= 2 && !possede(PARTICULES, w) && !possede(SECONDES_PARTICULES, w)) inscrire.call(this, w);
       }, this);
     }, this);
     (config.conserver || []).forEach(function (v) { v = normaliser(trim(v)); if (v) this.conserver[v] = true; }, this);
     // Villes reconnues seules (règle ajoutée le 19/10/2026, absente du module 4.1) : un mot de la liste Conserver n'est jamais codé.
     this.villes = [];
-    var vuesVilles = {};
+    var vuesVilles = tableVide();
     (config.villes || []).forEach(function (v) {
       v = trim(v); var k = normaliser(v);
       if (k && !vuesVilles[k] && !this.conserver[k]) { vuesVilles[k] = true; this.villes.push(v); }
@@ -844,11 +862,11 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       return { texte: trim(l.texte), etiquette: trim(l.etiquette), motif: normaliser(trim(l.type)) === 'motif', ligne: idx + 2 };
     }).filter(function (l) { return l.texte.length > 0; });
     this.map = new Map();          // forme d'origine -> code
-    this.codeParCle = {};          // clé normalisée -> code
-    this.compteurs = {};
-    this.formes = {};            // code de base -> nombre d'écritures différentes déjà codées (version 1.16)
-    this.codesPris = {};         // codes déjà attribués, en minuscules
-    this.baseDictionnaire = {};  // terme du Dictionnaire -> code de base
+    this.codeParCle = tableVide(); // clé normalisée -> code
+    this.compteurs = tableVide();
+    this.formes = tableVide();   // code de base -> nombre d'écritures différentes déjà codées (version 1.16)
+    this.codesPris = tableVide(); // codes déjà attribués, en minuscules
+    this.baseDictionnaire = tableVide(); // terme du Dictionnaire -> code de base
     this.nbPersonnes = 0;
     this.avertissements = [];
   }
@@ -906,10 +924,10 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     // Les codes sont attribués dans l'ordre du texte, comme avant. Le remplacement se fait ensuite du plus long au plus court
     // (correction du 18/11/2026, version 1.15) : un élément contenu dans un autre (12345678 dans 123456789AB) ne coupe plus
     // le plus long en deux. Quand aucun élément n'en contient un autre, le résultat est le même qu'avant.
-    var paires = [], vus = {}, i;
+    var paires = [], vus = tableVide(), i;
     for (i = 0; i < matches.length; i++) {
       var k = matches[i], code = this.codePour(etiquette, k);
-      if (!vus.hasOwnProperty(k)) { vus[k] = true; paires.push({ k: k, code: code, rang: paires.length }); }
+      if (!possede(vus, k)) { vus[k] = true; paires.push({ k: k, code: code, rang: paires.length }); }
     }
     paires.sort(function (x, y) { return y.k.length - x.k.length || x.rang - y.rang; });
     for (i = 0; i < paires.length; i++) txt = remplacerTout(txt, paires[i].k, paires[i].code);
@@ -923,9 +941,13 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     return txt.replace(new RegExp(motif, ignorerCasse ? 'gi' : 'g'), function (m) { return moi.codePour(etiquette, m); });
   };
 
+  var LETTRES_MAIL = '\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u024F\\u1E00-\\u1EFF';   // lettres latines accentuées, sans les signes × et ÷
   Session.prototype.traiter = function (txt) {
     // Mails et liens d'abord : un terme du Dictionnaire (Biolab) ne doit pas être remplacé à l'intérieur d'une adresse.
-    txt = this.remplacerMotif(txt, '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}', 'Mail', true);
+    // Version 1.35 : une lettre accentuée compte dans une adresse mail (amélie.morvelang@univ-exemple.fr). Jusque-là, l'adresse
+    // n'était codée qu'à partir de la lettre qui suit l'accent, et son début restait en clair. Une adresse sans accent est lue
+    // exactement comme avant.
+    txt = this.remplacerMotif(txt, '[A-Za-z0-9' + LETTRES_MAIL + '._%+-]+@[A-Za-z0-9' + LETTRES_MAIL + '.-]+\\.[A-Za-z]{2,}', 'Mail', true);
     txt = this.remplacerMotif(txt, '(https?://|www\\.)' + NS + '*[^ \\t\\r\\n\\f\\v.,;:)]', 'Lien', true);
     txt = this.masquerNomsEnTete(txt);
     txt = this.masquerSignatureInitiale(txt);
@@ -958,7 +980,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         if (matches.length > 0) {
           // Version 1.16 : chaque écriture du terme (Biolab, biolab, BIOLAB) reçoit son code, pour revenir exactement comme elle était.
           var t = textes[i].texte;
-          if (this.baseDictionnaire.hasOwnProperty(t)) code = this.baseDictionnaire[t];
+          if (possede(this.baseDictionnaire, t)) code = this.baseDictionnaire[t];
           else {
             if (this.map.has(t)) code = this.map.get(t); else { code = this.nouveauCode(textes[i].etiq); this.compterDictionnaire(1); }
             this.baseDictionnaire[t] = code;
@@ -1416,7 +1438,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   // n'est pas un nom de personne. Après un mot de lieu (QUAI, SALLE, BUREAU, BÂTIMENT), le groupe de mots en majuscules qui suit
   // sur la même ligne devient un lieu (QUAI CHARGEMENT donne Pseudo_Lieu) ; après un nom d'entité (SERVICE, DIRECTION, ZONE),
   // il reste en clair. Seul, le mot reste toujours en clair. Les titres de personne (DIRECTEUR, RESPONSABLE) ne sont pas concernés.
-  var MOTS_DE_LIEU = {}, MOTS_ENTITE = {};
+  var MOTS_DE_LIEU = tableVide(), MOTS_ENTITE = tableVide();
   ('rue avenue boulevard bd place allee chemin impasse quai cours route square batiment campus amphitheatre amphi salle bureau hall parking').split(' ')
     .forEach(function (m) { MOTS_DE_LIEU[m] = 1; });
   ('service direction laboratoire departement composante universite equipe projet plateforme application formation secretariat ' +
@@ -1425,8 +1447,8 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   Session.prototype.finGroupeCommun = function (mots, genres, n, i) {
     var m = partieUtile(mots[i]), cle = normaliser(m);
     if (!estMaj(m) || m.length < 2) return null;
-    var lieu = MOTS_DE_LIEU.hasOwnProperty(cle);
-    if (!lieu && !MOTS_ENTITE.hasOwnProperty(cle)) return null;
+    var lieu = possede(MOTS_DE_LIEU, cle);
+    if (!lieu && !possede(MOTS_ENTITE, cle)) return null;
     var fin = i;
     while (fin + 2 < n && genres[fin + 1] === 'O' && mots[fin + 1] === ' ' && genres[fin + 2] === 'W' &&
       estMaj(mots[fin + 2]) && mots[fin + 2].length >= 2 && !estCode(mots, genres, n, fin + 2)) fin += 2;
@@ -1437,7 +1459,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   // contient que « JTessharto », « J.Tessharto » ou « J. Tessharto » est un nom de personne. Rien n'est codé si le nom est un mot courant,
   // un mot de la liste Conserver, un prénom connu ou une ville de la liste Villes, ni après M (M. Tessharto est une civilité).
   Session.prototype.masquerSignatureInitiale = function (txt) {
-    var moi = this, villes = {};
+    var moi = this, villes = tableVide();
     this.villes.forEach(function (v) { villes[normaliser(v)] = 1; });
     return txt.replace(/(^|\n)([ \t]*)([A-ZÀ-Ý])(\.?[ ]?)([A-ZÀ-Ý][a-zà-ÿ]{2,}(?:-[A-ZÀ-Ý][a-zà-ÿ]+)?)([ \t]*)(?=$|\r?\n)/g,
       function (m, debut, esp, ini, sep, nom, fin) {
@@ -1561,11 +1583,11 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   };
 
   Session.prototype.nomVu = function (cle) {
-    if (this.codeParCle.hasOwnProperty('N:' + cle)) return this.codeParCle['N:' + cle];
+    if (possede(this.codeParCle, 'N:' + cle)) return this.codeParCle['N:' + cle];
     var parts = cle.split('-');
     if (parts.length > 1) {
       for (var i = 0; i < parts.length; i++) {
-        if (parts[i].length && this.codeParCle.hasOwnProperty('N:' + parts[i])) return this.codeParCle['N:' + parts[i]];
+        if (parts[i].length && possede(this.codeParCle, 'N:' + parts[i])) return this.codeParCle['N:' + parts[i]];
       }
     }
     return '';
@@ -1575,7 +1597,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     var parts = cle.split('-');
     if (parts.length === 1) return;
     for (var i = 0; i < parts.length; i++) {
-      if (parts[i].length && !this.prenoms[parts[i]] && !this.codeParCle.hasOwnProperty('N:' + parts[i])) this.codeParCle['N:' + parts[i]] = code;
+      if (parts[i].length && !this.prenoms[parts[i]] && !possede(this.codeParCle, 'N:' + parts[i])) this.codeParCle['N:' + parts[i]] = code;
     }
   };
 
@@ -1587,7 +1609,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     if (motElide(m)) {                                             // version 1.34 : nom à apostrophe déjà codé dans le texte, ou inscrit à la liste Noms
       if (this.nomApostropheLibre(m)) {
         cle = cleSansTypo(m);
-        if (this.codeParCle.hasOwnProperty('N:' + cle) || this.noms[cle] || this.noms[normaliser(m)]) return 1;
+        if (possede(this.codeParCle, 'N:' + cle) || this.noms[cle] || this.noms[normaliser(m)]) return 1;
       }
       return this.nomConnuApresApostrophe(m) ? 2 : 0;
     }
@@ -1607,10 +1629,10 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   };
 
   Session.prototype.nomConnu = function (cle) {
-    if (this.codeParCle.hasOwnProperty('N:' + cle) || this.noms[cle]) return true;
+    if (possede(this.codeParCle, 'N:' + cle) || this.noms[cle]) return true;
     var parts = cle.split('-');
     for (var i = 0; i < parts.length; i++) {
-      if (parts[i].length && (this.codeParCle.hasOwnProperty('N:' + parts[i]) || this.noms[parts[i]])) return true;
+      if (parts[i].length && (possede(this.codeParCle, 'N:' + parts[i]) || this.noms[parts[i]])) return true;
     }
     return false;
   };
@@ -1640,7 +1662,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   function apresMotDeRue(mots, genres, i) {
     if (i < 2) return false;
     if (genres[i - 1] !== 'O' || mots[i - 1] !== ' ') return false;
-    return MOTS_DE_RUE.hasOwnProperty(normaliser(mots[i - 2]));
+    return possede(MOTS_DE_RUE, normaliser(mots[i - 2]));
   }
 
   Session.prototype.etendre = function (mots, genres, n, i, max) {
@@ -1657,7 +1679,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   };
 
   Session.prototype.estVille = function (m) {
-    if (!this.villesCle) { var v = {}; this.villes.forEach(function (x) { v[normaliser(x)] = 1; }); this.villesCle = v; }
+    if (!this.villesCle) { var v = tableVide(); this.villes.forEach(function (x) { v[normaliser(x)] = 1; }); this.villesCle = v; }
     return !!this.villesCle[normaliser(m)];
   };
 
@@ -1665,7 +1687,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   Session.prototype.nomApostropheLibre = function (m) {
     if (!nomApostrophe(m)) return false;
     var reste = partieUtile(m), k = normaliser(reste);
-    if (motCourant(reste) || APRES_ELISION.hasOwnProperty(k) || estRemplissage(reste)) return false;
+    if (motCourant(reste) || possede(APRES_ELISION, k) || estRemplissage(reste)) return false;
     if (this.conserver[k] || this.conserver[normaliser(m)] || this.conserver[cleSansTypo(m)]) return false;
     return !this.estVille(reste) && !this.estPrenom(reste);
   };
@@ -1687,7 +1709,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     var j, k, k2, k3, prises = 0;
     for (j = i; j <= f; j += 2) {
       if (prises === 0 && (this.estPrenom(partieUtile(mots[j])) || this.prenomComposeMinuscule(mots[j]))) continue;
-      if ((j > i || apresCivilite) && estCapitalise(mots[j]) && (estParticule(mots[j]) || SECONDES_PARTICULES.hasOwnProperty(normaliser(mots[j])))) { prises++; continue; }
+      if ((j > i || apresCivilite) && estCapitalise(mots[j]) && (estParticule(mots[j]) || possede(SECONDES_PARTICULES, normaliser(mots[j])))) { prises++; continue; }
       return f;
     }
     k = motSuivant(mots, genres, n, f, false);
@@ -1695,13 +1717,13 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     if (prises === 0) {
       if (this.nomApostropheLibre(mots[k]) && !estCode(mots, genres, n, k)) return this.etendre(mots, genres, n, k, 1);
       // première particule : en minuscules, ou avec une majuscule quand un mot à conserver l'a tenue à l'écart du prénom (Du)
-      if (!(PARTICULES_APRES_PRENOM.hasOwnProperty(normaliser(mots[k])) && (mots[k] === lcase(mots[k]) || estCapitalise(mots[k])))) return f;
+      if (!(possede(PARTICULES_APRES_PRENOM, normaliser(mots[k])) && (mots[k] === lcase(mots[k]) || estCapitalise(mots[k])))) return f;
       k2 = motSuivant(mots, genres, n, k, false);
     } else k2 = k;
     // seconde particule, en minuscules ou avec une majuscule (de la Morvelang, de La Morvelang, van der Gauvernot)
     // Le nom s'écrit ici avec une majuscule, pas tout en majuscules : un mot en majuscules est déjà codé à part (règle 2), et
     // un sigle (Paul de la DSI) ne doit pas être réuni au prénom.
-    if (k2 >= 0 && SECONDES_PARTICULES.hasOwnProperty(normaliser(mots[k2])) && (mots[k2] === lcase(mots[k2]) || estCapitalise(mots[k2]))) {
+    if (k2 >= 0 && possede(SECONDES_PARTICULES, normaliser(mots[k2])) && (mots[k2] === lcase(mots[k2]) || estCapitalise(mots[k2]))) {
       k3 = motSuivant(mots, genres, n, k2, false);
       if (k3 >= 0 && !estMaj(mots[k3]) && this.nomApresParticule(mots, genres, n, k3)) return this.etendre(mots, genres, n, k3, 1);
     }
@@ -1735,7 +1757,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       }
       if (motElide(mots[k2]) && !estCode(mots, genres, n, k2)) {
         var apres = partieUtile(mots[k2]), ka = normaliser(apres);
-        if (/^[lLdD]['\u2019]/.test(mots[k2]) && apres.length >= 3 && (estCapitalise(apres) || estMaj(apres)) && !motCourant(apres) && !APRES_ELISION.hasOwnProperty(ka) &&
+        if (/^[lLdD]['\u2019]/.test(mots[k2]) && apres.length >= 3 && (estCapitalise(apres) || estMaj(apres)) && !motCourant(apres) && !possede(APRES_ELISION, ka) &&
           !this.conserver[ka] && !this.estVille(apres) && !this.estPrenom(apres)) return this.etendre(mots, genres, n, k2, 2);
       }
     }
@@ -1754,7 +1776,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       if (kt >= 0 && !estCode(mots, genres, n, kt) && !estCivilite(mots[kt])) {
         if (estParticule(mots[kt])) titreCourt = true; // la suite est contrôlée par la règle des civilités
         else if ((estMaj(mots[kt]) || estCapitalise(mots[kt])) && mots[kt].length >= 2 && !motCourant(mots[kt]) && !estRemplissage(mots[kt]) &&
-          !this.conserver[normaliser(mots[kt])] && !SUITE_DE_TITRE.hasOwnProperty(normaliser(mots[kt]))) titreCourt = true;
+          !this.conserver[normaliser(mots[kt])] && !possede(SUITE_DE_TITRE, normaliser(mots[kt]))) titreCourt = true;
       }
     }
     if (!titreCourt && b !== 'MM' && (this.conserver[normaliser(b)] || estRemplissage(b))) return -1;
@@ -1771,7 +1793,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       // Version 1.34 : mot en majuscules écrit après « d' » en minuscules (le dossier d'ORVELANG, l'avis d'ALICE) : lu comme le
       // même mot écrit après « de » ; « d' » reste en clair et le mot est codé. « D' » en majuscules est laissé de côté : c'est
       // l'écriture des titres (ATTESTATION D'INSCRIPTION).
-      if (/^d['\u2019]/.test(m) && b.length === m.length - 2 && estMaj(b) && b.length >= 3 && !motCourant(b) && !APRES_ELISION.hasOwnProperty(normaliser(b)) &&
+      if (/^d['\u2019]/.test(m) && b.length === m.length - 2 && estMaj(b) && b.length >= 3 && !motCourant(b) && !possede(APRES_ELISION, normaliser(b)) &&
         !estCode(mots, genres, n, i) && !apresMotDeRue(mots, genres, i)) { this.elisionEnClair = i; return this.etendre(mots, genres, n, i, 3); }
       return -1;
     }
@@ -1863,19 +1885,19 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     }
     if (utiles.length === 0) return orig;
     var complet = 'S:' + cleTriee(utiles);
-    if (this.codeParCle.hasOwnProperty(complet)) code = this.codeParCle[complet];
+    if (possede(this.codeParCle, complet)) code = this.codeParCle[complet];
     if (!code) {
       for (i = 0; i < utiles.length; i++) {
         if (!this.prenoms[utiles[i]]) { code = this.nomVu(utiles[i]); if (code) break; }
       }
     }
     if (!code && utiles.length === 1) {
-      if (this.codeParCle.hasOwnProperty('P:' + utiles[0])) code = this.codeParCle['P:' + utiles[0]];
+      if (possede(this.codeParCle, 'P:' + utiles[0])) code = this.codeParCle['P:' + utiles[0]];
     }
     if (!code && utiles.length > 1) {
       for (i = 0; i < utiles.length; i++) {
-        if (this.codeParCle.hasOwnProperty('P1:' + utiles[i])) {
-          if (!this.codeParCle.hasOwnProperty('B:' + this.codeParCle['P1:' + utiles[i]])) { code = this.codeParCle['P1:' + utiles[i]]; break; }
+        if (possede(this.codeParCle, 'P1:' + utiles[i])) {
+          if (!possede(this.codeParCle, 'B:' + this.codeParCle['P1:' + utiles[i]])) { code = this.codeParCle['P1:' + utiles[i]]; break; }
         }
       }
     }
@@ -1886,13 +1908,13 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         code = trim(code);
       } else code = this.prefixe + '_Personne_' + pad3(this.nbPersonnes);
     }
-    if (!this.codeParCle.hasOwnProperty(complet)) this.codeParCle[complet] = code;
+    if (!possede(this.codeParCle, complet)) this.codeParCle[complet] = code;
     if (utiles.length === 1) {
-      if (!this.codeParCle.hasOwnProperty('P1:' + utiles[0])) this.codeParCle['P1:' + utiles[0]] = code;
+      if (!possede(this.codeParCle, 'P1:' + utiles[0])) this.codeParCle['P1:' + utiles[0]] = code;
     } else this.codeParCle['B:' + code] = true;
     for (i = 0; i < utiles.length; i++) {
-      if (this.estPrenomCle(utiles[i])) { if (!this.codeParCle.hasOwnProperty('P:' + utiles[i])) this.codeParCle['P:' + utiles[i]] = code; }
-      else { if (!this.codeParCle.hasOwnProperty('N:' + utiles[i])) this.codeParCle['N:' + utiles[i]] = code; }
+      if (this.estPrenomCle(utiles[i])) { if (!possede(this.codeParCle, 'P:' + utiles[i])) this.codeParCle['P:' + utiles[i]] = code; }
+      else { if (!possede(this.codeParCle, 'N:' + utiles[i])) this.codeParCle['N:' + utiles[i]] = code; }
       this.enregistrerParties(utiles[i], code);
     }
     // Version 1.16 : chaque écriture de la personne reçoit son code (même numéro, une lettre en plus à partir de la deuxième).
@@ -1910,7 +1932,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       var m = normaliser(mots[i]);
       if (!m) continue;
       avec += m.charAt(0);
-      if (!PETITS_MOTS.hasOwnProperty(m)) sans += m.charAt(0);
+      if (!possede(PETITS_MOTS, m)) sans += m.charAt(0);
     }
     var x = normaliser(sigle);
     return x.length >= 2 && (x === sans || x === avec);
@@ -1967,8 +1989,8 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
      en clair dans la table : chaque code y est remplacé par son élément d'origine (correction du 18/11/2026, version 1.15).
      L'ordre de la table ne change pas. */
   function developperOrigines(correspondance) {
-    var parCode = {}, i, tour;
-    for (i = 0; i < correspondance.length; i++) if (!parCode.hasOwnProperty(correspondance[i][1])) parCode[correspondance[i][1]] = i;
+    var parCode = tableVide(), i, tour;
+    for (i = 0; i < correspondance.length; i++) if (!possede(parCode, correspondance[i][1])) parCode[correspondance[i][1]] = i;
     var codes = trierParLongueur(Object.keys(parCode), function (c) { return c; });
     for (i = 0; i < correspondance.length; i++) {
       for (tour = 0; tour < 5; tour++) {
@@ -2044,10 +2066,10 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
 
   /* Prépare la restitution : une ligne par code (la première de la table), du code le plus long au plus court. */
   function preparerPaires(correspondance) {
-    var vus = {}, paires = [], i;
+    var vus = tableVide(), paires = [], i;
     for (i = 0; i < correspondance.length; i++) {
       var code = String(correspondance[i][1]), orig = String(correspondance[i][0]);
-      if (!vus.hasOwnProperty(code)) { vus[code] = true; paires.push({ code: code, orig: orig }); }
+      if (!possede(vus, code)) { vus[code] = true; paires.push({ code: code, orig: orig }); }
     }
     paires = trierParLongueur(paires, function (p) { return p.code; });
     // Version 1.16, même résultat, plus vite : chaque code est préparé une seule fois, et un code absent du texte (cherché en
@@ -2101,7 +2123,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   }
 
   racine.Pseudonymiseur = {
-    version: '1.34 (web) du 20/11/2026, reprise du module Excel 4.1 du 16/10/2026, règles ajoutées depuis',
+    version: '1.35 (web) du 20/11/2026, reprise du module Excel 4.1 du 16/10/2026, règles ajoutées depuis',
     pseudonymiser: pseudonymiser,
     depseudonymiser: depseudonymiser,
     texteEnCellules: texteEnCellules,
@@ -2113,7 +2135,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
 
 </script>
 <script>
-/* Pseudonymiseur, traitement d'un classeur Excel (.xlsx, .xlsm) dans le navigateur. Version 1.34 du 20 novembre 2026.
+/* Pseudonymiseur, traitement d'un classeur Excel (.xlsx, .xlsm) dans le navigateur. Version 1.35 du 20 novembre 2026.
    Un classeur Excel est une archive zip de fichiers XML. Seuls les textes sont passés au moteur : cellules (chaînes partagées,
    chaînes en ligne, résultats de formules en texte), commentaires et leurs auteurs, en-têtes et pieds de page, zones de texte
    et titres de graphiques, noms de colonnes des tableaux structurés, liens externes, propriétés du document (auteur, titre).
@@ -2128,11 +2150,22 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
    cherche aussi, en dehors des textes codés, chaque élément de la table, et dit où il reste. À la restitution, un onglet dont
    le nom porte un code est renommé avec ses renvois, et tout code resté ailleurs est signalé avec l'endroit. Le nom du fichier
    est codé comme un texte.
+   Depuis la version 1.35, le texte cherché par une mise en forme conditionnelle est codé et restitué comme la formule de la règle.
+   Depuis la version 1.35 aussi, un classeur que l'outil a réécrit et qui porte des formules demande à Excel de tout recalculer à
+   l'ouverture dès qu'une donnée y est restituée : un résultat gardé en mémoire a pu être calculé sur un code.
    Tout le reste (onglets, formules, styles, largeurs, filtres, protections, images) est recopié octet pour octet.
    Aucune bibliothèque extérieure : la décompression et la compression passent par DecompressionStream et CompressionStream,
    fournis par le navigateur. Rien ne quitte le poste. */
 (function (racine) {
   'use strict';
+  // Version 1.35 : une table est toujours interrogée par cette fonction, qui appelle la fonction du langage elle-même. Écrite
+  // « table.hasOwnProperty(clé) », la question passait par la table : une clé venue du texte et nommée « hasOwnProperty »
+  // (un terme du Dictionnaire, un code de la table) lui ôtait sa réponse et arrêtait le traitement.
+  function possede(table, cle) { return Object.prototype.hasOwnProperty.call(table, cle); }
+  // Version 1.35 : une table vide, sans rien d'hérité. Une table écrite « {} » répond aussi aux noms que le langage donne à
+  // tout objet (constructor) : lue par sa clé seule, elle faisait passer le mot « Constructor » pour un mot à conserver,
+  // qui n'était jamais codé comme un nom. Les tables lues par leur clé seule sont créées par cette fonction.
+  function tableVide() { return Object.create(null); }
 
   // ------------------------------------------------------------------ outils d'octets
   var TABLE_CRC = (function () {
@@ -2259,7 +2292,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   function stylesDeDate(xmlStyles) {
     var res = [];
     if (!xmlStyles) return res;
-    var perso = {}, re = /<numFmt\b[^>]*>/g, m;
+    var perso = tableVide(), re = /<numFmt\b[^>]*>/g, m;
     while ((m = re.exec(xmlStyles)) !== null) {
       var id = /\bnumFmtId="(\d+)"/.exec(m[0]), code = /\bformatCode="([^"]*)"/.exec(m[0]);
       if (id && code) perso[id[1]] = formatAfficheUneDate(decoderXml(code[1]));
@@ -2269,7 +2302,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     var re2 = /<xf\b[^>]*>/g;
     while ((m = re2.exec(bloc[1])) !== null) {
       var n = /\bnumFmtId="(\d+)"/.exec(m[0]), num = n ? n[1] : '0';
-      res.push(perso.hasOwnProperty(num) ? perso[num] : FORMATS_DATE_FIXES.hasOwnProperty(num));
+      res.push(possede(perso, num) ? perso[num] : possede(FORMATS_DATE_FIXES, num));
     }
     return res;
   }
@@ -2306,7 +2339,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   /* Ce qu'il faut savoir du classeur pour traiter ses dates : styles de date, calendrier 1904, chaînes partagées. */
   function contexteDates(parties) {
     var wb = parties['xl/workbook.xml'] || '', pr = /<workbookPr\b[^>]*>/.exec(wb), d1904 = pr ? /\bdate1904="(1|true)"/.exec(pr[0]) : null;
-    return { styles: stylesDeDate(parties['xl/styles.xml']), base1904: !!d1904, chaines: null, parties: parties, formules: 0, saisies: {}, ecrites: {}, cellulesEcrites: {}, exclues: {}, cellulesExclues: {}, series: {}, avecType: false };
+    return { styles: stylesDeDate(parties['xl/styles.xml']), base1904: !!d1904, chaines: null, parties: parties, formules: 0, saisies: tableVide(), ecrites: tableVide(), cellulesEcrites: tableVide(), exclues: tableVide(), cellulesExclues: tableVide(), series: tableVide(), avecType: false };
   }
   function styleDeDate(attributs, ctx) {
     var s = /\bs="(\d+)"/.exec(attributs);
@@ -2338,7 +2371,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         texte = serieEnTexte(m[2], ctx.base1904); if (!texte) continue;
         zones.push({ debut: m.index, fin: m.index + m[0].length, texte: texte, date: { sens: 'coder', brut: m[0], attributs: m[1] } });
         ctx.saisies[texte] = true;
-        if (/\./.test(m[2]) && !ctx.series.hasOwnProperty(texte)) ctx.series[texte] = m[2];   // date avec heure : nombre exact gardé
+        if (/\./.test(m[2]) && !possede(ctx.series, texte)) ctx.series[texte] = m[2];   // date avec heure : nombre exact gardé
         if (/\bt="n"/.test(m[1])) ctx.avecType = true;
       }
       if (ctx.chaines === null) ctx.chaines = ctx.parties['xl/sharedStrings.xml'] ? chainesPartagees(ctx.parties['xl/sharedStrings.xml']) : [];
@@ -2361,19 +2394,19 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     while ((m = CELLULE_PARTAGEE.exec(xml)) !== null) {
       if (!styleDeDate(m[1], ctx)) continue;
       texte = ctx.chaines[parseInt(m[2], 10)]; if (!texte) continue;
-      zones.push({ debut: m.index, fin: m.index + m[0].length, texte: texte, date: { sens: 'rendre', brut: m[0], attributs: m[1], base1904: ctx.base1904, garder: ctx.cellulesExclues.hasOwnProperty(referenceCellule(nom, m[1])), exclues: ctx.exclues, series: ctx.series, avecType: ctx.avecType } });
+      zones.push({ debut: m.index, fin: m.index + m[0].length, texte: texte, date: { sens: 'rendre', brut: m[0], attributs: m[1], base1904: ctx.base1904, garder: possede(ctx.cellulesExclues, referenceCellule(nom, m[1])), exclues: ctx.exclues, series: ctx.series, avecType: ctx.avecType } });
     }
     CELLULE_EN_LIGNE.lastIndex = 0;
     while ((m = CELLULE_EN_LIGNE.exec(xml)) !== null) {
       if (!styleDeDate(m[2], ctx) || m[3] === '') continue;
-      zones.push({ debut: m.index, fin: m.index + m[0].length, texte: decoderXml(m[3]), date: { sens: 'rendre', avant: m[1], apres: m[4], attributs: m[2], base1904: ctx.base1904, garder: ctx.cellulesExclues.hasOwnProperty(referenceCellule(nom, m[2])), exclues: ctx.exclues, series: ctx.series, avecType: ctx.avecType } });
+      zones.push({ debut: m.index, fin: m.index + m[0].length, texte: decoderXml(m[3]), date: { sens: 'rendre', avant: m[1], apres: m[4], attributs: m[2], base1904: ctx.base1904, garder: possede(ctx.cellulesExclues, referenceCellule(nom, m[2])), exclues: ctx.exclues, series: ctx.series, avecType: ctx.avecType } });
     }
     return zones;
   }
   /* Vrai si le texte restitué d'une cellule doit redevenir un nombre : un code a été remplacé, le texte est exactement une date,
      et cette date n'était pas écrite en texte dans le classeur d'origine. */
   function redevientNombre(m, nouveau) {
-    return nouveau !== m.texte && !m.date.garder && !m.date.exclues.hasOwnProperty(nouveau.trim()) && texteEnSerie(nouveau, m.date.base1904) !== '';
+    return nouveau !== m.texte && !m.date.garder && !possede(m.date.exclues, nouveau.trim()) && texteEnSerie(nouveau, m.date.base1904) !== '';
   }
   /* Écrit la cellule d'une zone de date, d'après le texte rendu par le moteur. */
   function ecrireCelluleDate(m, nouveau) {
@@ -2383,7 +2416,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       return '<c' + sansType(d.attributs) + ' t="inlineStr"><is><t>' + encoderTexte(nouveau) + '</t></is></c>';
     }
     var serie = redevientNombre(m, nouveau) ? texteEnSerie(nouveau, d.base1904) : '';
-    if (serie && d.series.hasOwnProperty(nouveau.trim()) && Math.abs(Number(d.series[nouveau.trim()]) - Number(serie)) < 1e-5) serie = d.series[nouveau.trim()];
+    if (serie && possede(d.series, nouveau.trim()) && Math.abs(Number(d.series[nouveau.trim()]) - Number(serie)) < 1e-5) serie = d.series[nouveau.trim()];
     if (serie) return '<c' + sansType(d.attributs) + (d.avecType ? ' t="n"' : '') + '><v>' + serie + '</v></c>';
     return d.brut !== undefined ? d.brut : d.avant + encoderTexte(nouveau) + d.apres;
   }
@@ -2460,6 +2493,9 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     { f: 'feuille', re: motifAttribut('scenario', 'name'), a: 1, limite: 255 }, { f: 'feuille', re: motifAttribut('scenario', 'user'), a: 1, classe: 'auteur' },
     { f: 'feuille', re: motifAttribut('scenario', 'comment'), a: 1, limite: 255 }, { f: 'feuille', re: motifAttribut('inputCells', 'val'), a: 1 },
     { f: 'feuille|tableau', re: motifAttribut('filter', 'val'), a: 1 }, { f: 'feuille|tableau', re: motifAttribut('customFilter', 'val'), a: 1 },
+    // Version 1.35 : le texte cherché par une mise en forme conditionnelle (« le texte contient… ») est codé et restitué comme la
+    // formule de la même règle, qui l'était déjà. Jusque-là il restait en clair au codage, et un code y restait à la restitution.
+    { f: 'feuille', re: motifAttribut('(?:x14:)?cfRule', 'text'), a: 1, limite: 255 },
     { f: 'classeur', re: motifAttribut('x15ac:absPath', 'url'), a: 1, chemin: 2 }, { f: 'classeur', re: motifAttribut('fileSharing', 'userName'), a: 1, classe: 'auteur' },
     { f: 'classeur', re: motifAttribut('customWorkbookView', 'name'), a: 1 }, { f: 'classeur', re: motifAttribut('definedName', 'comment'), a: 1, limite: 255 },
     { f: 'personnes', re: motifAttribut('person', 'userId'), a: 1, maison: 'Compte' },
@@ -2748,7 +2784,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   /* Retrouve, dans deux textes, les éléments remplacés l'un par l'autre d'après la table. paires : [écrit dans l'ancien, écrit
      dans le nouveau]. insensible : l'ancien se lit sans tenir compte de la casse (un code renvoyé par l'outil). */
   function Aligneur(paires, insensible) {
-    var index = {}, self = this;
+    var index = tableVide(), self = this;
     this.insensible = !!insensible; this.index = index;
     paires.forEach(function (p) {
       var a = String(p[0]), b = String(p[1]);
@@ -2804,7 +2840,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   }
   function ecrireMulti(m, t, outil, precedent) {
     var mu = m.multi, n = mu.textes.length, coupes = [], p = 0, k;
-    if (outil && outil.memoire && outil.memoire.hasOwnProperty(m.origine)) {     // passage que l'outil n'a pas touché : ses morceaux d'origine
+    if (outil && outil.memoire && possede(outil.memoire, m.origine)) {     // passage que l'outil n'a pas touché : ses morceaux d'origine
       var o = outil.memoire[m.origine];
       if (o && o[1] === t) return o[0];
     }
@@ -2861,7 +2897,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   function ongletsDuClasseur(parties) {
     var wb = parties['xl/workbook.xml'], rels = parties['xl/_rels/workbook.xml.rels'], res = [];
     if (!wb || !rels) return res;
-    var cibles = {}, re = /<Relationship\b[^>]*>/g, m;
+    var cibles = tableVide(), re = /<Relationship\b[^>]*>/g, m;
     while ((m = re.exec(rels)) !== null) {
       var id = /\bId="([^"]*)"/.exec(m[0]), cible = /\bTarget="([^"]*)"/.exec(m[0]);
       if (id && cible) cibles[id[1]] = cible[1].replace(/^\/?(xl\/)?/, 'xl/');
@@ -2874,7 +2910,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     return res;
   }
   function apercuFeuille(xml, chaines, ctx) {
-    var lignes = {}, maxLigne = 0, re = /<c\b([^>]*?)(?:\/>|>([\s\S]*?)<\/c>)/g, m;
+    var lignes = tableVide(), maxLigne = 0, re = /<c\b([^>]*?)(?:\/>|>([\s\S]*?)<\/c>)/g, m;
     while ((m = re.exec(xml)) !== null) {
       var ref = /\br="([A-Z]+)(\d+)"/.exec(m[1]); if (!ref) continue;
       var type = /\bt="([^"]*)"/.exec(m[1]), contenu = m[2] || '', val = '';
@@ -2886,7 +2922,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       else if (v) { val = decoderXml(v[1]); if (ctx && estNombre(m[1]) && styleDeDate(m[1], ctx)) val = serieEnTexte(val, ctx.base1904) || val; }
       if (val === '') continue;
       var r = parseInt(ref[2], 10), c = colonneEnNumero(ref[1]);
-      if (!lignes[r]) lignes[r] = {}; lignes[r][c] = val.replace(/\r?\n/g, ' '); if (r > maxLigne) maxLigne = r;
+      if (!lignes[r]) lignes[r] = tableVide(); lignes[r][c] = val.replace(/\r?\n/g, ' '); if (r > maxLigne) maxLigne = r;
     }
     var sortie = [], r2;
     for (r2 = 1; r2 <= maxLigne; r2++) {
@@ -2919,7 +2955,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     var utiles = entrees.filter(function (e) { return RE_TEXTUELLE.test(e.nom) && e.nom !== 'xl/calcChain.xml'; });
     if (!entrees.some(function (e) { return e.nom === 'xl/workbook.xml'; })) return Promise.reject(new Error('Ce fichier n’est pas un classeur Excel (.xlsx) : xl/workbook.xml absent.'));
     return Promise.all(utiles.map(decompresser)).then(function (contenus) {
-      var parties = {}, textuelles = [], illisibles = [];
+      var parties = tableVide(), textuelles = [], illisibles = [];
       utiles.forEach(function (e, i) {
         var o = contenus[i];
         if (o.length >= 2 && ((o[0] === 0xFF && o[1] === 0xFE) || (o[0] === 0xFE && o[1] === 0xFF))) { illisibles.push(e.nom); return; }   // UTF-16 : partie non lue
@@ -2938,14 +2974,14 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       });
       /* Dates écrites en texte seulement : reconnues par leur texte. Dates présentes sous les deux formes : par leur cellule. */
       var enTexte = {
-        textes: Object.keys(ctx.ecrites).filter(function (t) { return !ctx.saisies.hasOwnProperty(t); }),
-        cellules: Object.keys(ctx.cellulesEcrites).filter(function (c) { return ctx.saisies.hasOwnProperty(ctx.cellulesEcrites[c]); }),
+        textes: Object.keys(ctx.ecrites).filter(function (t) { return !possede(ctx.saisies, t); }),
+        cellules: Object.keys(ctx.cellulesEcrites).filter(function (c) { return possede(ctx.saisies, ctx.cellulesEcrites[c]); }),
         series: ctx.series, avecType: ctx.avecType, erreurs: restitution ? 0 : formulesEnErreur(parties)
       };
       var compte = { incorpores: 0, macros: 0 };
       entrees.forEach(function (e) { if (/^xl\/embeddings\/[^/]+$/.test(e.nom)) compte.incorpores++; else if (/vbaProject[^/]*\.bin$/i.test(e.nom)) compte.macros++; });
       return { entrees: entrees, textuelles: textuelles, parties: parties, datesParFormule: ctx.formules, datesEnTexte: enTexte, restitution: !!restitution,
-        erreursAvant: datesEnTexte && typeof datesEnTexte.erreurs === 'number' ? datesEnTexte.erreurs : 0, illisibles: illisibles, compte: compte, changees: {} };
+        erreursAvant: datesEnTexte && typeof datesEnTexte.erreurs === 'number' ? datesEnTexte.erreurs : 0, illisibles: illisibles, compte: compte, changees: tableVide() };
     });
   }
   /* Un classeur écrit d'une façon que ce module ne lit pas serait rendu avec ses cellules en clair : il est refusé. */
@@ -2960,7 +2996,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       var type = /\bType="([^"]*)"/.exec(m[0]), cible = /\bTarget="([^"]*)"/.exec(m[0]);
       if (!type || !cible || /\bTargetMode="External"/.test(m[0])) continue;
       var nom = cible[1].replace(/^\/?(xl\/)?/, 'xl/');
-      if (/\/worksheet$/.test(type[1]) && !(estFeuille(nom) && parties.hasOwnProperty(nom))) return message;
+      if (/\/worksheet$/.test(type[1]) && !(estFeuille(nom) && possede(parties, nom))) return message;
       if (/\/sharedStrings$/.test(type[1]) && nom !== 'xl/sharedStrings.xml') return message;
     }
     return '';
@@ -3002,6 +3038,9 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     noms.forEach(function (n) { h = (Math.imul(h, 31) + crc32(encodeur.encode(parties[n]))) >>> 0; });
     return noms.length + ':' + h;
   }
+  function porteDesFormules(parties) {
+    return Object.keys(parties).some(function (nom) { return estFeuille(nom) && /<f[\s>\/]/.test(parties[nom]); });
+  }
   function formulesEnErreur(parties) {
     var n = 0;
     Object.keys(parties).forEach(function (nom) {
@@ -3011,8 +3050,9 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   }
   function demanderRecalcul(ouvert, formulesChangees) {
     if (!ouvert.restitution) return;
-    /* Deux cas : des dates restituées ont laissé plus de formules en erreur que dans le classeur d'origine ; ou (version 1.33) le
-       texte d'une formule ou le nom d'un onglet vient d'être restitué, et les résultats gardés en mémoire datent du classeur codé. */
+    /* Trois cas : des dates restituées ont laissé plus de formules en erreur que dans le classeur d'origine ; ou (version 1.33) le
+       texte d'une formule ou le nom d'un onglet vient d'être restitué, et les résultats gardés en mémoire datent du classeur codé ;
+       ou (version 1.35) l'outil a réécrit un classeur qui porte des formules, et des données y sont restituées. */
     var enErreur = !!ouvert.nbDates && formulesEnErreur(ouvert.parties) > ouvert.erreursAvant;
     var xml = ouvert.parties['xl/workbook.xml'];
     if (!(enErreur || formulesChangees) || !xml) return;
@@ -3031,13 +3071,13 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   }
   /* Les textes à passer au moteur. Un même texte de formule n'est passé qu'une fois (index : la place de chaque morceau). */
   function grille(ouvert) {
-    var cellules = [], premiers = [], index = [], partages = {};
+    var cellules = [], premiers = [], index = [], partages = tableVide();
     ouvert.textuelles.forEach(function (t) {
       t.morceaux.forEach(function (m) {
         if (m.texte === undefined) return;
         if (m.partage) {
           var cle = 'p' + m.texte;
-          if (partages.hasOwnProperty(cle)) { index.push(partages[cle]); return; }
+          if (possede(partages, cle)) { index.push(partages[cle]); return; }
           partages[cle] = cellules.length;
         }
         index.push(cellules.length); cellules.push([m.texte]); premiers.push(m);
@@ -3052,23 +3092,23 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
      texte garde son code ; une date nouvelle reçoit le numéro suivant. La table et le bilan du moteur sont complétés sur place. */
   function coderLesDates(morceaux, r, config) {
     var prefixe = prefixeDe(config);
-    var actif = !config || config.dates !== false, codes = {}, dernier = 0, nouvelles = [], i = 0;
+    var actif = !config || config.dates !== false, codes = tableVide(), dernier = 0, nouvelles = [], i = 0;
     // Version 1.33 : dans une séance, le numéro d'une date nouvelle suit ceux de la séance, et une date déjà codée garde son code.
     var seance = config && config.seance && typeof config.seance.codePour === 'function' ? config.seance : null, presents = null;
     var re = new RegExp('^' + prefixe.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '_Date_(\\d+)$');
     r.correspondance.forEach(function (c) {
       var m = re.exec(String(c[1]));
-      if (m) { dernier = Math.max(dernier, parseInt(m[1], 10)); if (!codes.hasOwnProperty(c[0])) codes[c[0]] = c[1]; }
+      if (m) { dernier = Math.max(dernier, parseInt(m[1], 10)); if (!possede(codes, c[0])) codes[c[0]] = c[1]; }
     });
     var sortie = morceaux.map(function (m) {
       if (m.maison) return [m.texte];                                          // valeur codée en entier par ce module (poserLesCodes)
       if (!m.date) return r.cellules[i++];
       if (!actif) return [m.texte];
       var jour = m.texte.slice(0, 10), heure = m.texte.slice(10);
-      if (!codes.hasOwnProperty(jour)) {
+      if (!possede(codes, jour)) {
         if (seance) {
           codes[jour] = seance.codePour(jour, 'Date', prefixe).code;
-          if (presents === null) { presents = {}; r.correspondance.forEach(function (c) { presents['c' + c[1]] = 1; }); }
+          if (presents === null) { presents = tableVide(); r.correspondance.forEach(function (c) { presents['c' + c[1]] = 1; }); }
           if (presents['c' + codes[jour]] !== 1) { presents['c' + codes[jour]] = 1; nouvelles.push([jour, codes[jour]]); }
         } else {
           dernier++; var num = String(dernier); while (num.length < 3) num = '0' + num;
@@ -3089,19 +3129,19 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   /* Une valeur que le moteur ne sait pas lire reçoit un code entier : le chemin d'enregistrement du classeur (Chemin), un
      identifiant de compte (Compte), un nom d'auteur qu'il n'a pas reconnu (Auteur). Une valeur déjà dans la table garde son code. */
   function Maison(prefixe, r, seance) {
-    this.prefixe = prefixe; this.r = r; this.codes = {}; this.nouvelles = []; this.suivants = {}; this.connus = null; this.auteurs = 0;
+    this.prefixe = prefixe; this.r = r; this.codes = tableVide(); this.nouvelles = []; this.suivants = tableVide(); this.connus = null; this.auteurs = 0;
     this.seance = seance && typeof seance.codePour === 'function' ? seance : null;
   }
   Maison.prototype.dejaCode = function (valeur) { return valeur.toLowerCase().indexOf(this.prefixe.toLowerCase() + '_') >= 0; };
   Maison.prototype.code = function (etiquette, valeur) {
     var cle = 'v' + valeur, t = this.r.correspondance;
-    if (this.codes.hasOwnProperty(cle)) return this.codes[cle];
-    if (!this.connus) { var connus = this.connus = {}; t.forEach(function (c) { var o = 'v' + String(c[0]); if (!connus.hasOwnProperty(o)) connus[o] = String(c[1]); }); }
-    if (this.connus.hasOwnProperty(cle)) { this.codes[cle] = this.connus[cle]; return this.codes[cle]; }
+    if (possede(this.codes, cle)) return this.codes[cle];
+    if (!this.connus) { var connus = this.connus = tableVide(); t.forEach(function (c) { var o = 'v' + String(c[0]); if (!possede(connus, o)) connus[o] = String(c[1]); }); }
+    if (possede(this.connus, cle)) { this.codes[cle] = this.connus[cle]; return this.codes[cle]; }
     var code;
     if (this.seance) code = this.seance.codePour(valeur, etiquette, this.prefixe).code;
     else {
-      if (!this.suivants.hasOwnProperty(etiquette)) {
+      if (!possede(this.suivants, etiquette)) {
         var re = new RegExp('^' + this.prefixe.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '_' + etiquette + '[A-Z]*_(\\d+)$', 'i'), max = 0;
         t.forEach(function (c) { var m = re.exec(String(c[1])); if (m) max = Math.max(max, parseInt(m[1], 10)); });
         this.suivants[etiquette] = max + 1;
@@ -3172,7 +3212,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   /* À la pseudonymisation : chaque élément de la table est cherché dans ce reste (mot entier, sans tenir compte de la casse,
      dans un texte ou une valeur, jamais dans un nom de balise). Rend [{ origine, lieux }]. */
   function indexerOrigines(correspondance) {
-    var index = new Map(), premiers = new Uint8Array(65536), vus = {};
+    var index = new Map(), premiers = new Uint8Array(65536), vus = tableVide();
     correspondance.forEach(function (c) {
       var o = String(c[0]), bas = o.toLowerCase();
       if (o.length < 3 || bas.length !== o.length || vus['o' + o]) return;
@@ -3224,7 +3264,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     }
   }
   function chercherEnClair(ouvert, correspondance) {
-    var idx = indexerOrigines(correspondance), trouves = [], parOrigine = {};
+    var idx = indexerOrigines(correspondance), trouves = [], parOrigine = tableVide();
     if (!idx) return trouves;
     ouvert.textuelles.forEach(function (t) {
       if (t.entree.nom === '[Content_Types].xml' || /^xl\/theme\//.test(t.entree.nom)) return;
@@ -3248,7 +3288,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       else if (fam === 'tableau') { lire(nom, motifAttribut('table', 'name'), 'nom de tableau'); lire(nom, motifAttribut('table', 'displayName'), 'nom de tableau'); }
       else if (fam === 'croiseTab') lire(nom, motifAttribut('pivotTableDefinition', 'name'), 'nom de tableau croisé dynamique');
       else if (fam === 'croiseDef') lire(nom, motifAttribut('cacheField', 'name'), 'nom de champ de tableau croisé dynamique');
-      else if (fam === 'feuille') { lire(nom, motifAttribut('protectedRange', 'name'), 'nom de plage protégée'); lire(nom, motifAttribut('cfRule', 'text'), 'texte cherché par une mise en forme conditionnelle'); }
+      else if (fam === 'feuille') lire(nom, motifAttribut('protectedRange', 'name'), 'nom de plage protégée');
       else if (nom === 'xl/styles.xml') {                                    // texte écrit entre guillemets dans un format de nombre
         var re = motifAttribut('numFmt', 'formatCode'), m, l, reTexte = /"([^"]*)"/g;
         while ((m = re.exec(parties[nom])) !== null) { var code = decoderXml(m[2]); reTexte.lastIndex = 0; while ((l = reTexte.exec(code)) !== null) if (/[A-Za-zÀ-ÿ]{3}/.test(l[1])) res.push({ texte: l[1].trim(), lieu: 'format de nombre' }); }
@@ -3262,7 +3302,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     var notes = [], parties = ouvert.parties, n;
     // 1. noms qui ne se codent pas : ce que le moteur y reconnaît
     var bas = prefixeDe(config).toLowerCase() + '_';
-    var noms = nomsNonCodes(parties).filter(function (x) { return x.texte.toLowerCase().indexOf(bas) < 0; }), dits = {};     // un nom déjà codé n'est plus à lire
+    var noms = nomsNonCodes(parties).filter(function (x) { return x.texte.toLowerCase().indexOf(bas) < 0; }), dits = tableVide();     // un nom déjà codé n'est plus à lire
     if (noms.length) {
       var sans = configAPart(config, r.correspondance, P, true);
       var e = null; try { e = P.pseudonymiser(noms.map(function (x) { return [x.texte]; }), sans); } catch (x) { e = null; }
@@ -3298,8 +3338,8 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   var RE_NOM_SIMPLE = /^[A-Za-z_À-\uFFFF][\w.À-\uFFFF]*$/;
   var RE_RENVOI_SIMPLE = /(?<![\w.'\]:À-\uFFFF])(\[[^\[\]<>'"]*\])?([A-Za-z_À-\uFFFF][\w.À-\uFFFF]*)(?::([A-Za-z_À-\uFFFF][\w.À-\uFFFF]*))?!/g;
   function renommerPartie(nom, xml, plan) {
-    var carte = {}; plan.forEach(function (p) { carte['n' + p[0]] = p[1]; });
-    function nouveau(n) { return carte.hasOwnProperty('n' + n) ? carte['n' + n] : null; }
+    var carte = tableVide(); plan.forEach(function (p) { carte['n' + p[0]] = p[1]; });
+    function nouveau(n) { return possede(carte, 'n' + n) ? carte['n' + n] : null; }
     if (nom === 'xl/workbook.xml') xml = xml.replace(/(<sheet\b[^>]*?\sname=")([^"]*)(")/g, function (t, a, n, b) { var v = nouveau(decoderXml(n)); return v === null ? t : a + encoderAttribut(v) + b; });
     if (nom === 'docProps/app.xml') xml = xml.replace(/(<vt:lpstr>)([^<]*)(<\/vt:lpstr>)/g, function (t, a, n, b) { var v = nouveau(decoderXml(n)); return v === null ? t : a + encoderTexte(v) + b; });
     xml = xml.replace(/(<worksheetSource\b[^>]*?\ssheet=")([^"]*)(")/g, function (t, a, n, b) { var v = nouveau(decoderXml(n)); return v === null ? t : a + encoderAttribut(v) + b; });
@@ -3340,7 +3380,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       finals[i] = nv; plan.push([n, nv]);
     });
     while (plan.length) {
-      var essai = {}, noms2 = Object.keys(ouvert.parties);
+      var essai = tableVide(), noms2 = Object.keys(ouvert.parties);
       noms2.forEach(function (nom) {
         var xml = ouvert.parties[nom];
         if (!plan.some(function (p) { return xml.indexOf(p[0]) >= 0; })) return;
@@ -3362,7 +3402,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     // le préfixe réglé, et chaque autre préfixe que porte la table (table d'un autre réglage, préfixe changé en cours de travail)
     var prefixes = [prefixe];
     if (correspondance && typeof P.prefixesDe === 'function') P.prefixesDe(correspondance).forEach(function (x) { if (prefixes.indexOf(x) < 0) prefixes.push(x); });
-    var codes = [], lieux = [], vus = {}, re = new RegExp(prefixes.map(function (x) { return x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }).join('|'), 'i');
+    var codes = [], lieux = [], vus = tableVide(), re = new RegExp(prefixes.map(function (x) { return x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }).join('|'), 'i');
     function noter(c, lieu) { if (!vus['c' + c]) { vus['c' + c] = 1; codes.push(c); } if (lieux.indexOf(lieu) < 0) lieux.push(lieu); }
     ouvert.textuelles.forEach(function (t) {
       var reste = resteDe(t), nom = t.entree.nom;
@@ -3395,7 +3435,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   var RE_PARTICULE_NOM = /^(?:de|du|van|von|da|di|del|della|ben|el|al|la|le|der|den)$/;
   var RE_APOSTROPHE_NOM = /^[dDNMOL]['\u2019][A-Z\u00C0-\u00D6\u00D8-\u00DE][A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F\u1E00-\u1EFF]{2,}$/;
   function nomsDeFamille(correspondance, config, P) {
-    var res = [], vus = {}, prenoms = {};
+    var res = [], vus = tableVide(), prenoms = tableVide();
     try {
       var cle = function (m) { return typeof P.normaliser === 'function' ? P.normaliser(m) : String(m).toLowerCase(); };
       ((config && config.prenoms) || []).forEach(function (v) { v = cle(String(v).replace(/^ +| +$/g, '')); if (v) prenoms['p' + v] = 1; });
@@ -3438,7 +3478,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   }
   /* La configuration donnée au moteur pour lire un texte à part du contenu : sans la séance si demandé, avec les noms de famille de la table. */
   function configAPart(config, correspondance, P, sansSeance) {
-    var c = {}, k; for (k in config) if (Object.prototype.hasOwnProperty.call(config, k) && !(sansSeance && k === 'seance')) c[k] = config[k];
+    var c = tableVide(), k; for (k in config) if (Object.prototype.hasOwnProperty.call(config, k) && !(sansSeance && k === 'seance')) c[k] = config[k];
     var noms = nomsDeFamille(correspondance, config, P);
     if (noms.length) c.noms = ((config && config.noms) || []).concat(noms);
     return c;
@@ -3458,7 +3498,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         var c2 = configAPart(config || {}, table, P, false); c2.seance = seance;
         var e = P.pseudonymiser([[lu]], c2);
         if (e && e.ok && e.cellules[0][0] !== lu) {
-          var connus = {}, nouvelles = [];
+          var connus = tableVide(), nouvelles = [];
           table.forEach(function (l) { connus['c' + l[1]] = 1; });
           e.correspondance.forEach(function (l) { if (!connus['c' + l[1]]) { connus['c' + l[1]] = 1; nouvelles.push([String(l[0]), String(l[1])]); } });
           nouvelles.forEach(function (n) { var p = 0; while (p < table.length && String(table[p][0]).length >= n[0].length) p++; table.splice(p, 0, n); });
@@ -3469,9 +3509,9 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       // ce qui est déjà dans la table et que le moteur n'a pas reconnu ici
       var idx = indexerOrigines(table), occupes = [];
       if (idx) {
-        var masque = lu.split(''), codeDe = {};
+        var masque = lu.split(''), codeDe = tableVide();
         zones.forEach(function (x) { for (var q = x[0]; q < x[1]; q++) masque[q] = '\u0001'; });
-        table.forEach(function (l) { if (!codeDe.hasOwnProperty('o' + l[0])) codeDe['o' + l[0]] = String(l[1]); });
+        table.forEach(function (l) { if (!possede(codeDe, 'o' + l[0])) codeDe['o' + l[0]] = String(l[1]); });
         chercherOrigines(masque.join(''), idx, function (origine, h, i) {
           var trouve = lu.substr(i, origine.length), c = codeDe['o' + origine];
           if (c && !dejaCode && !RE_INTERDIT_NOM.test(c)) zones.push([i, i + origine.length, c]);    // écrit autrement (Tessharto pour TESSHARTO) : même code
@@ -3480,7 +3520,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       }
       // un nom de famille de la table que le moteur ne lit pas ici, parce qu'il est écrit tout en minuscules (« cv_tessharto »)
       if (dejaCode || (seance && typeof seance.codePour === 'function')) {
-        var cleDe = function (m) { return typeof P.normaliser === 'function' ? P.normaliser(m) : String(m).toLowerCase(); }, famille = {}, garder = {};
+        var cleDe = function (m) { return typeof P.normaliser === 'function' ? P.normaliser(m) : String(m).toLowerCase(); }, famille = tableVide(), garder = tableVide();
         nomsDeFamille(table, config, P).forEach(function (m) { famille['n' + cleDe(m)] = 1; });
         ((config && config.conserver) || []).forEach(function (m) { garder['n' + cleDe(String(m).replace(/^ +| +$/g, ''))] = 1; });
         var reMot = new RegExp(RE_MOT_NOM.source, 'g'), mm;
@@ -3543,11 +3583,13 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       if (!r.ok) return { ok: false, erreur: r.erreur.replace('Le texte collé', 'Le classeur').replace('coller d’abord le texte', 'le classeur ne contient aucun texte') };
       r = { ok: true, cellules: coderLesDates(morceaux, r, config), correspondance: r.correspondance, stats: r.stats, avertissements: r.avertissements };
       poserLesCodes(morceaux, r, config, P);
-      var riches = {}, nbRiches = 0;
-      var outil = { aligneur: new Aligneur(r.correspondance, false), refus: 0, noter: function (ecrit, m) { if (!riches.hasOwnProperty(ecrit)) nbRiches++; riches[ecrit] = [m.origine, m.texte]; } };
+      var riches = tableVide(), nbRiches = 0;
+      var outil = { aligneur: new Aligneur(r.correspondance, false), refus: 0, noter: function (ecrit, m) { if (!possede(riches, ecrit)) nbRiches++; riches[ecrit] = [m.origine, m.texte]; } };
       recomposer(ouvert, r.cellules, outil);
       if (nbRiches) ouvert.datesEnTexte.riches = riches;
-      if (outil.formules) ouvert.datesEnTexte.empreinte = empreinteDesFeuilles(ouvert.parties);       // un texte de formule est codé : voir demanderRecalcul
+      var empreinteCodee = empreinteDesFeuilles(ouvert.parties);
+      if (outil.formules) ouvert.datesEnTexte.empreinte = empreinteCodee;       // un texte de formule est codé : voir demanderRecalcul
+      ouvert.datesEnTexte.codage = empreinteCodee;                              // version 1.35 : l'empreinte est gardée pour tout classeur codé
       var notes = prevenir(ouvert, r, config || {}, P, outil);
       var lignesAvant = r.correspondance.length, nomCode = coderNomFichier(separerNom(nomFichier)[0], r, config || {}, P);
       if (nomCode.restes.length) notes.push(phraseNom(nomCode.restes));
@@ -3574,8 +3616,16 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       var cellules = grille(ouvert);
       if (!cellules.length) return { ok: false, erreur: 'Ce classeur ne contient aucun texte : rien à restituer.' };
       var intact = !!(datesEnTexte && datesEnTexte.empreinte) && datesEnTexte.empreinte === empreinteDesFeuilles(ouvert.parties);      // le classeur codé revient tel quel
+      /* Version 1.35 : l'outil a réécrit le classeur (il ne revient pas tel que la page l'a codé) et y a laissé des formules. Le
+         résultat qu'une formule garde en mémoire a pu être calculé sur un code (longueur, majuscules, premières lettres d'une
+         cellule codée) : une fois les données restituées, Excel doit recalculer. Sans l'empreinte du codage (table rechargée
+         depuis un fichier), la page ne sait pas si le classeur a été réécrit : rien ne change dans ce cas. Quand plusieurs
+         classeurs ont été codés et que le nom du fichier ne dit pas lequel revient, la page donne leurs empreintes (codages). */
+      var codages = !datesEnTexte ? [] : datesEnTexte.codage ? [datesEnTexte.codage] : Array.isArray(datesEnTexte.codages) ? datesEnTexte.codages : [];
+      var reecrit = codages.length > 0 && codages.indexOf(empreinteDesFeuilles(ouvert.parties)) < 0 && porteDesFormules(ouvert.parties);
       var r = P.depseudonymiser(cellules, correspondance);
       if (!r.ok) return { ok: false, erreur: r.erreur };
+      var restitue = r.cellules.some(function (c, i) { return c[0] !== cellules[i][0]; });
       var refuses = [], outil = { aligneur: new Aligneur(correspondance.map(function (c) { return [c[1], c[0]]; }), true), refus: 0,
         memoire: datesEnTexte && datesEnTexte.riches && typeof datesEnTexte.riches === 'object' ? datesEnTexte.riches : null };
       recomposer(ouvert, r.cellules, outil);
@@ -3584,11 +3634,11 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         ouvert.textuelles.forEach(function (t) { t.morceaux.forEach(function (m) { if (m.texte === undefined) return; var nv = r.cellules[ouvert.index[k++]][0]; if (!m.date && nv !== m.texte && garde(m, nv, etats) !== nv) refuses.push(m.texte); }); });
       }
       var notes = renommerOnglets(ouvert, P, correspondance, prefixe);
-      demanderRecalcul(ouvert, !intact && (!!outil.formules || !!ouvert.onglets));
+      demanderRecalcul(ouvert, (!intact && (!!outil.formules || !!ouvert.onglets)) || (reecrit && restitue));
       var hors = codesHorsTextes(ouvert, P, prefixe, refuses, correspondance);
       if (ouvert.illisibles.length) notes.push(ouvert.illisibles.length + (ouvert.illisibles.length > 1 ? ' parties du classeur sont écrites' : ' partie du classeur est écrite') + ' dans un codage que la page ne lit pas : rien n’y a été restitué.');
       return ecrire(ouvert).then(function (octets) {
-        var tout = r.cellules.map(function (c) { return c[0]; }).join('\n'), restants = P.codesRestants(tout, prefixe, correspondance), vus = {};
+        var tout = r.cellules.map(function (c) { return c[0]; }).join('\n'), restants = P.codesRestants(tout, prefixe, correspondance), vus = tableVide();
         restants.forEach(function (c) { vus['c' + c] = 1; });
         hors.codes.forEach(function (c) { if (!vus['c' + c]) { vus['c' + c] = 1; restants.push(c); } });
         if (hors.lieux.length) notes.push('Des codes restent à un endroit où la page ne les remplace pas : ' + hors.lieux.join(', ') + '. Les corriger dans Excel.');
@@ -3607,7 +3657,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   }
 
   racine.PseudonymiseurExcel = {
-    version: '1.34 du 20/11/2026',
+    version: '1.35 du 20/11/2026',
     pseudonymiser: pseudonymiser, depseudonymiser: depseudonymiser, apercu: apercu,
     lireZip: lireZip, ecrireZip: ecrireZip, crc32: crc32, decouperXml: decouperXml, recomposerXml: recomposerXml, apercuClasseur: apercuClasseur,
     serieEnTexte: serieEnTexte, texteEnSerie: texteEnSerie, formatAfficheUneDate: formatAfficheUneDate, stylesDeDate: stylesDeDate,
@@ -3619,7 +3669,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
 </script>
 <script>
 /* Pseudonymiseur, traitement d'un document Word (.docx, .docm, .dotx, .dotm) ou d'un diaporama PowerPoint (.pptx, .pptm,
-   .ppsx, .ppsm, .potx, .potm) dans le navigateur. Version 1.34 du 20 novembre 2026.
+   .ppsx, .ppsm, .potx, .potm) dans le navigateur. Version 1.35 du 20 novembre 2026.
    Un document Word ou PowerPoint est, comme un classeur Excel, une archive zip de fichiers XML. Seuls les textes sont passés
    au moteur : paragraphes, tableaux, en-têtes et pieds de page, notes, commentaires, zones de texte, texte supprimé gardé par le
    suivi des modifications, notes du présentateur, masques, graphiques et schémas, liens, propriétés du fichier et noms d'auteur.
@@ -3637,6 +3687,14 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
    Aucune bibliothèque extérieure, aucun envoi : rien ne quitte le poste. */
 (function (racine) {
   'use strict';
+  // Version 1.35 : une table est toujours interrogée par cette fonction, qui appelle la fonction du langage elle-même. Écrite
+  // « table.hasOwnProperty(clé) », la question passait par la table : une clé venue du texte et nommée « hasOwnProperty »
+  // (un terme du Dictionnaire, un code de la table) lui ôtait sa réponse et arrêtait le traitement.
+  function possede(table, cle) { return Object.prototype.hasOwnProperty.call(table, cle); }
+  // Version 1.35 : une table vide, sans rien d'hérité. Une table écrite « {} » répond aussi aux noms que le langage donne à
+  // tout objet (constructor) : lue par sa clé seule, elle faisait passer le mot « Constructor » pour un mot à conserver,
+  // qui n'était jamais codé comme un nom. Les tables lues par leur clé seule sont créées par cette fonction.
+  function tableVide() { return Object.create(null); }
   var X = racine.PseudonymiseurExcel || (typeof require === 'function' ? require('./excel.js').PseudonymiseurExcel : null);
 
   var decodeur = new TextDecoder('utf-8', { ignoreBOM: true }), encodeur = new TextEncoder();
@@ -3735,7 +3793,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     var m; RE_ESPACE.lastIndex = 0;
     while ((m = RE_ESPACE.exec(xml)) !== null) {
       var uri = m[2] !== undefined ? m[2] : m[3];
-      if (ESPACES_ATTENDUS.hasOwnProperty(uri) && ESPACES_ATTENDUS[uri] !== m[1]) return true;
+      if (possede(ESPACES_ATTENDUS, uri) && ESPACES_ATTENDUS[uri] !== m[1]) return true;
     }
     return false;
   }
@@ -3804,7 +3862,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     var ouverte = null, pos = 0, n = xml.length, m;
     var estProprietes = nomPartie === 'docProps/core.xml', estApplication = nomPartie === 'docProps/app.xml', estPerso = nomPartie === 'docProps/custom.xml';
     var toutTexte = /^customXml\/item[^/]*\.xml$/.test(nomPartie), estLiens = /\.rels$/i.test(nomPartie);
-    var cache = 0, tabulations = 0, replis = 0, formes = [], champs = [], proprieteCourante = '', objets = {};
+    var cache = 0, tabulations = 0, replis = 0, formes = [], champs = [], proprieteCourante = '', objets = tableVide();
     var compte = { supprimes: 0, objets: 0, opaques: 0, donnees: 0 };
 
     function contexte() { return pile[pile.length - 1]; }
@@ -3828,7 +3886,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     function couper() { var c = contexte(); c.texte = null; c.supprime = null; }
     function piece(nom, brut, d, f, extra) {
       var dec = decoder(brut), p = { nom: nom, brut: brut, texte: dec.texte, carte: dec.carte, d: d, f: f };
-      if (extra) for (var k in extra) if (extra.hasOwnProperty(k)) p[k] = extra[k];
+      if (extra) for (var k in extra) if (possede(extra, k)) p[k] = extra[k];
       return p;
     }
 
@@ -3865,9 +3923,9 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
           ouverte = null; continue;
         }
         if (ouverte) { ouverte.opaque = true; continue; }
-        if (CONTENEURS.hasOwnProperty(nom)) { if (pile.length > 1) pile.pop(); evenements.push({ e: 'p' }); continue; }
-        if (COUPURES.hasOwnProperty(nom)) { couper(); continue; }
-        if (CACHES_TEXTE.hasOwnProperty(nom)) { if (cache > 0) cache--; continue; }
+        if (possede(CONTENEURS, nom)) { if (pile.length > 1) pile.pop(); evenements.push({ e: 'p' }); continue; }
+        if (possede(COUPURES, nom)) { couper(); continue; }
+        if (possede(CACHES_TEXTE, nom)) { if (cache > 0) cache--; continue; }
         if (nom === 'w:tabs') { if (tabulations > 0) tabulations--; continue; }
         if (nom === 'mc:Fallback') { if (replis > 0) replis--; continue; }
         if (nom === 'w:tc' || nom === 'a:tc') evenements.push({ e: 'c1' });
@@ -3882,7 +3940,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       var local = nomLocal(nom);
 
       // attributs porteurs de texte
-      if (attributs.length > 3 && (ELEMENTS_A_ATTRIBUTS.hasOwnProperty(local) || (nom.charCodeAt(0) === 118 && nom.charCodeAt(1) === 58) || attributs.indexOf('author=') >= 0 || attributs.indexOf('userId=') >= 0)) {
+      if (attributs.length > 3 && (possede(ELEMENTS_A_ATTRIBUTS, local) || (nom.charCodeAt(0) === 118 && nom.charCodeAt(1) === 58) || attributs.indexOf('author=') >= 0 || attributs.indexOf('userId=') >= 0)) {
         var debutAttributs = debutNom + nom.length, ma;
         RE_ATTRIBUT.lastIndex = 0;
         while ((ma = RE_ATTRIBUT.exec(attributs)) !== null) {
@@ -3900,27 +3958,27 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       if (nom === 'w:fldData' || nom === 'w:binData') compte.donnees++;
       if (local === 'OLEObject' || local === 'oleObj') {
         var ro = /\sr:id\s*=\s*["']([^"']*)["']/.exec(attributs), cleObjet = ro ? ro[1] : 'sans' + compte.objets;
-        if (!objets.hasOwnProperty(cleObjet)) { objets[cleObjet] = 1; compte.objets++; }
+        if (!possede(objets, cleObjet)) { objets[cleObjet] = 1; compte.objets++; }
       }
 
-      if (CONTENEURS.hasOwnProperty(nom)) {
+      if (possede(CONTENEURS, nom)) {
         if (autoFermante) evenements.push({ e: 'p' });
         else { if (pile.length > 1) evenements.push({ e: 'p0' }); pile.push({ texte: null, supprime: null, champ: null }); }
         continue;
       }
-      if (PIECES.hasOwnProperty(nom)) {
+      if (possede(PIECES, nom)) {
         if (autoFermante) ajouter(PIECES[nom], piece(nom, '', lt, finBalise, { vide: true, baliseD: lt, baliseF: finBalise, e: finBalise }));
         else ouverte = { nom: nom, type: PIECES[nom], d: finBalise, baliseD: lt, baliseF: finBalise };
         continue;
       }
-      if (FIXES.hasOwnProperty(nom) && autoFermante) {
+      if (possede(FIXES, nom) && autoFermante) {
         var c0 = contexte();
         if (!c0.texte) c0.texte = nouveauSegment('texte');
         c0.supprime = null;
         c0.texte.pieces.push({ nom: nom, fixe: true, texte: FIXES[nom], brut: '', carte: null, d: lt, f: finBalise });
         continue;
       }
-      if (COUPURES.hasOwnProperty(nom)) {
+      if (possede(COUPURES, nom)) {
         if (nom === 'w:tab' && tabulations > 0) continue;
         couper();
         if (COUPURES[nom]) evenements.push({ e: COUPURES[nom] === '\t' ? 'tab' : 'br' });
@@ -3933,7 +3991,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         else if (tf && tf[1] === 'end' && champs.length) champs.pop();
         continue;
       }
-      if (CACHES_TEXTE.hasOwnProperty(nom)) { if (!autoFermante) cache++; continue; }
+      if (possede(CACHES_TEXTE, nom)) { if (!autoFermante) cache++; continue; }
       if (nom === 'w:tabs') { if (!autoFermante) tabulations++; continue; }
       if (nom === 'mc:Fallback') { if (!autoFermante) replis++; continue; }
       if (nom === 'w:tc' || nom === 'a:tc') { if (!autoFermante) evenements.push({ e: 'c0' }); continue; }
@@ -3944,10 +4002,10 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
 
       // éléments dont tout le contenu est un texte
       var classeSimple = null, visible = false, discret = false;
-      if (cache > 0 && DANS_UN_CACHE.hasOwnProperty(nom)) { classeSimple = 'texte'; visible = true; }
+      if (cache > 0 && possede(DANS_UN_CACHE, nom)) { classeSimple = 'texte'; visible = true; }
       else if (nom === 'p:text') { classeSimple = 'texte'; visible = true; }
-      else if (estProprietes && SIMPLES_PROPRIETES.hasOwnProperty(local)) classeSimple = SIMPLES_PROPRIETES[local];
-      else if (estApplication && SIMPLES_APPLICATION.hasOwnProperty(local)) { classeSimple = SIMPLES_APPLICATION[local]; if (local === 'lpstr' || local === 'lpwstr' || local === 'Template') { classeSimple = 'reserve'; discret = true; } }
+      else if (estProprietes && possede(SIMPLES_PROPRIETES, local)) classeSimple = SIMPLES_PROPRIETES[local];
+      else if (estApplication && possede(SIMPLES_APPLICATION, local)) { classeSimple = SIMPLES_APPLICATION[local]; if (local === 'lpstr' || local === 'lpwstr' || local === 'Template') { classeSimple = 'reserve'; discret = true; } }
       else if (estPerso && local === 'lpwstr') { classeSimple = PROPRIETE_TECHNIQUE.test(proprieteCourante) ? 'technique' : 'texte'; discret = classeSimple === 'technique'; }
       if (classeSimple) ouverte = { nom: nom, type: 'simple', classe: classeSimple, visible: visible, discret: discret, d: finBalise, baliseD: lt, baliseF: finBalise };
     }
@@ -4012,18 +4070,18 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   /* Prépare, à partir de la table de correspondance, la recherche des codes et l'élément d'origine de chacun
      (restitué par le moteur lui-même, pour suivre exactement sa règle). */
   function preparerTable(correspondance, P) {
-    var vus = {}, codes = [], i;
-    for (i = 0; i < correspondance.length; i++) { var c = String(correspondance[i][1]); if (c !== '' && !vus.hasOwnProperty(c)) { vus[c] = 1; codes.push(c); } }
-    var table = { origines: {}, originesBas: {}, reCodes: null, reCodesSansCasse: null, reOrigines: null, codeDe: {} };
+    var vus = tableVide(), codes = [], i;
+    for (i = 0; i < correspondance.length; i++) { var c = String(correspondance[i][1]); if (c !== '' && !possede(vus, c)) { vus[c] = 1; codes.push(c); } }
+    var table = { origines: tableVide(), originesBas: tableVide(), reCodes: null, reCodesSansCasse: null, reOrigines: null, codeDe: tableVide() };
     if (!codes.length) return table;
     var r = P.depseudonymiser(codes.map(function (c) { return [c]; }), correspondance);
     if (!r.ok) return table;
-    codes.forEach(function (c, k) { table.origines[c] = r.cellules[k][0]; if (!table.originesBas.hasOwnProperty(c.toLowerCase())) table.originesBas[c.toLowerCase()] = r.cellules[k][0]; });
+    codes.forEach(function (c, k) { table.origines[c] = r.cellules[k][0]; if (!possede(table.originesBas, c.toLowerCase())) table.originesBas[c.toLowerCase()] = r.cellules[k][0]; });
     var motif = codes.slice().sort(function (a, b) { return b.length - a.length; }).map(echapper).join('|');
     table.reCodes = new RegExp(motif, 'g'); table.reCodesSansCasse = new RegExp(motif, 'gi');
     // éléments d'origine de quatre caractères au moins, pour coder dans un nom technique ce qui est déjà codé ailleurs
     var connus = [];
-    codes.forEach(function (c) { var o = table.origines[c]; if (typeof o === 'string' && o.length >= 4 && !table.codeDe.hasOwnProperty(o)) { table.codeDe[o] = c; connus.push(o); } });
+    codes.forEach(function (c) { var o = table.origines[c]; if (typeof o === 'string' && o.length >= 4 && !possede(table.codeDe, o)) { table.codeDe[o] = c; connus.push(o); } });
     if (connus.length) table.reOrigines = new RegExp('(?<![A-Za-z0-9\\u00C0-\\u024F])(?:' + connus.sort(function (a, b) { return b.length - a.length; }).map(echapper).join('|') + ')(?![A-Za-z0-9\\u00C0-\\u024F])', 'g');
     return table;
   }
@@ -4032,7 +4090,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   function propager(texte, table) {
     if (!table.reOrigines) return texte;
     table.reOrigines.lastIndex = 0;
-    return texte.replace(table.reOrigines, function (m) { return table.codeDe.hasOwnProperty(m) ? table.codeDe[m] : m; });
+    return texte.replace(table.reOrigines, function (m) { return possede(table.codeDe, m) ? table.codeDe[m] : m; });
   }
 
   // ------------------------------------------------------------------ répartition d'un texte rendu dans les pièces d'un segment
@@ -4115,7 +4173,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
      xml:space="preserve", false pour le retirer (retour exact à l'original), undefined pour décider d'après le texte. */
   function ecrirePiece(xml, p, brut, texte, etatEspace, sortie) {
     var balise = p.baliseD !== undefined ? xml.slice(p.baliseD, p.baliseF) : '';
-    var veutEspace = AVEC_ESPACE.hasOwnProperty(p.nom) && (etatEspace === true || (etatEspace === undefined && /^\s|\s$/.test(texte)));
+    var veutEspace = possede(AVEC_ESPACE, p.nom) && (etatEspace === true || (etatEspace === undefined && /^\s|\s$/.test(texte)));
     if (p.vide) {
       if (brut === '') return;
       var ouvrante = balise.replace(/\s*\/>$/, '');
@@ -4124,7 +4182,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       return;
     }
     if (brut !== p.brut) sortie.push([p.d, p.f, brut]);
-    if (p.attribut || !AVEC_ESPACE.hasOwnProperty(p.nom)) return;
+    if (p.attribut || !possede(AVEC_ESPACE, p.nom)) return;
     if (veutEspace && !avecEspace(balise)) sortie.push([p.baliseD, p.baliseF, balise.slice(0, -1) + ' xml:space="preserve">']);
     else if (etatEspace === false && avecEspace(balise)) sortie.push([p.baliseD, p.baliseF, balise.replace(/\s+xml:space\s*=\s*(?:"[^"]*"|'[^']*')/, '')]);
   }
@@ -4185,8 +4243,8 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   function ouvrirArchive(u8, restitution, profondeur) {
     var entrees;
     try { entrees = X.lireZip(u8); } catch (e) { return Promise.reject(new Error(messageArchive(e))); }
-    var noms = {}; entrees.forEach(function (e) { noms[e.nom] = e; });
-    var genre = noms.hasOwnProperty('xl/workbook.xml') ? 'excel' : null;
+    var noms = tableVide(); entrees.forEach(function (e) { noms[e.nom] = e; });
+    var genre = possede(noms, 'xl/workbook.xml') ? 'excel' : null;
     if (!genre) entrees.some(function (e) {
       if (/^word\/document[^/]*\.xml$/.test(e.nom)) { genre = 'word'; return true; }
       if (e.nom === 'ppt/presentation.xml') { genre = 'powerpoint'; return true; }
@@ -4236,15 +4294,22 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         if (e.nom === '[Content_Types].xml') archive.types = autre;
         archive.autres.push(autre);
       });
-      return Promise.all(aOuvrir.map(function (e) {
+      // Version 1.35 : les fichiers incorporés sont rangés dans l'ordre où le fichier les porte, et non dans l'ordre où leur
+      // lecture se termine, qui changeait d'une fois à l'autre : l'aperçu et les messages d'un document qui en porte plusieurs
+      // sont les mêmes à chaque codage.
+      var ouvertes = [];
+      return Promise.all(aOuvrir.map(function (e, rang) {
         return decompresser(e).then(function (o) { return ouvrirArchive(o, restitution, profondeur + 1); })
-          .then(function (sous) {
-            archive.incorporees.push({ entree: e, archive: sous });
-            COMPTES.forEach(function (k) { archive.compte[k] += sous.compte[k]; });
-            sous.illisibles.forEach(function (n) { archive.illisibles.push(e.nom + ' : ' + n); });
-            sous.nonDecodees.forEach(function (n) { archive.nonDecodees.push(e.nom + ' : ' + n); });
-          }, function () { archive.compte.objets++; });
-      }));
+          .then(function (sous) { ouvertes[rang] = { entree: e, archive: sous }; }, function () { archive.compte.objets++; });
+      })).then(function () {
+        ouvertes.forEach(function (i) {
+          var e = i.entree, sous = i.archive;
+          archive.incorporees.push(i);
+          COMPTES.forEach(function (k) { archive.compte[k] += sous.compte[k]; });
+          sous.illisibles.forEach(function (n) { archive.illisibles.push(e.nom + ' : ' + n); });
+          sous.nonDecodees.forEach(function (n) { archive.nonDecodees.push(e.nom + ' : ' + n); });
+        });
+      });
     }).then(function () {
       if (genre === 'excel') return completerClasseur(archive, noms).then(function () { return archive; });
       ordonner(archive);
@@ -4253,21 +4318,21 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   }
   /* Classeur incorporé : les parties utiles à son aperçu (liste des onglets) sont lues aussi. */
   function completerClasseur(archive, noms) {
-    var besoin = ['xl/workbook.xml', 'xl/_rels/workbook.xml.rels', 'xl/sharedStrings.xml', 'xl/styles.xml'].filter(function (n) { return noms.hasOwnProperty(n); });
-    archive.pourApercu = {};
+    var besoin = ['xl/workbook.xml', 'xl/_rels/workbook.xml.rels', 'xl/sharedStrings.xml', 'xl/styles.xml'].filter(function (n) { return possede(noms, n); });
+    archive.pourApercu = tableVide();
     return Promise.all(besoin.map(function (n) { return decompresser(noms[n]); })).then(function (contenus) {
       besoin.forEach(function (n, i) { archive.pourApercu[n] = decodeur.decode(contenus[i]); });
     });
   }
   /* Range les parties dans l'ordre de lecture : le numéro des codes suit ainsi le texte, comme pour un texte collé. */
   function ordonner(archive) {
-    var parNom = {}, rang = {}, i;
+    var parNom = tableVide(), rang = tableVide(), i;
     archive.parties.forEach(function (p) { parNom[p.nom] = p; });
     if (archive.genre === 'powerpoint') {
       ordreDesDiapositives(parNom).forEach(function (nom, k) { rang[nom] = 100 + 2 * k; var notes = notesDe(nom, parNom); if (notes) rang[notes.nom] = 101 + 2 * k; });
     }
     function rangDe(nom) {
-      if (rang.hasOwnProperty(nom)) return rang[nom];
+      if (possede(rang, nom)) return rang[nom];
       if (/^word\/document[^/]*\.xml$/.test(nom)) return 0;
       if (/^word\/(?:header|footer)[^/]*\.xml$/.test(nom)) return 1;
       if (/^word\/(?:footnotes|endnotes)[^/]*\.xml$/.test(nom)) return 2;
@@ -4395,7 +4460,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   }
   function numeroDe(nom) { var m = /(\d+)\.xml$/.exec(nom); return m ? parseInt(m[1], 10) : 0; }
   function relations(xml) {
-    var res = {}, re = /<Relationship\b[^>]*>/g, m;
+    var res = tableVide(), re = /<Relationship\b[^>]*>/g, m;
     while (xml && (m = re.exec(xml)) !== null) {
       var id = /\bId="([^"]*)"/.exec(m[0]), cible = /\bTarget="([^"]*)"/.exec(m[0]), type = /\bType="([^"]*)"/.exec(m[0]);
       if (id && cible) res[id[1]] = { cible: cible[1], type: type ? type[1] : '' };
@@ -4434,18 +4499,18 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   function horsGabarit(s) { return !s.forme || s.forme.ph === null || s.forme.ph === 'ftr' || s.forme.ph === 'hdr'; }
   function bloc(titre, texte) { return texte ? '### ' + titre + '\n' + texte : ''; }
   function listeSansDoublon(textes) {
-    var vus = {}, res = [];
-    textes.forEach(function (t) { t = propre(t).trim(); if (t !== '' && !vus.hasOwnProperty(t)) { vus[t] = 1; res.push(t); } });
+    var vus = tableVide(), res = [];
+    textes.forEach(function (t) { t = propre(t).trim(); if (t !== '' && !possede(vus, t)) { vus[t] = 1; res.push(t); } });
     return res.join('\n');
   }
   /* Aperçu d'une archive : le texte visible d'abord, puis ce qui ne se voit pas à l'écran (propriétés, auteurs, liens). */
   function apercuArchive(archive) {
     if (archive.genre === 'excel') {
-      var parties = {}; Object.keys(archive.pourApercu || {}).forEach(function (n) { parties[n] = archive.pourApercu[n]; });
+      var parties = tableVide(); Object.keys(archive.pourApercu || {}).forEach(function (n) { parties[n] = archive.pourApercu[n]; });
       archive.parties.forEach(function (p) { parties[p.nom] = p.nouveau !== undefined ? p.nouveau : p.xml; });
       return X.apercuClasseur(parties);
     }
-    var parNom = {}, blocs = [], vues = {};
+    var parNom = tableVide(), blocs = [], vues = tableVide();
     archive.parties.forEach(function (p) { parNom[p.nom] = p; });
     function ap(p, filtre) { vues[p.nom] = 1; return apercuPartie(p.analyse, filtre); }
     function groupe(titre, test, filtre) {
@@ -4475,17 +4540,17 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     archive.parties.forEach(function (p) { if (!vues[p.nom]) { var t = apercuPartie(p.analyse); if (t) autres.push(t); } });
     if (autres.length) blocs.push(bloc('Autres textes', autres.join('\n')));
     // ce qui ne se voit pas à l'écran
-    var caches = [], supprimes = [];
+    var textesCaches = [], supprimes = [];
     archive.parties.forEach(function (p) {
       p.analyse.segments.forEach(function (s) {
         if (s.genre === 'supprime') supprimes.push(texteCourant(s));
         else if (s.genre === 'champ' || (s.genre === 'simple' && !s.visible)) {
           if (s.zones ? !s.zones.length : s.genre === 'champ') return;
-          if (!s.discret || s.nouveau !== undefined) caches.push(texteCourant(s));
+          if (!s.discret || s.nouveau !== undefined) textesCaches.push(texteCourant(s));
         }
       });
     });
-    var ts = listeSansDoublon(supprimes), tc = listeSansDoublon(caches);
+    var ts = listeSansDoublon(supprimes), tc = listeSansDoublon(textesCaches);
     if (ts) blocs.push(bloc('Texte supprimé, gardé par le suivi des modifications', ts));
     if (tc) blocs.push(bloc('Propriétés, auteurs et liens du fichier', tc));
     archive.incorporees.forEach(function (i) {
@@ -4504,24 +4569,24 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   var RE_CHEMIN = /[\\\/](?:Users|Utilisateurs|Documents and Settings|home)[\\\/]/i;
   var COMPTE_COMMUN = /^(?:Public|Default|Default User|All Users|Shared|Partag[ée])$/i;
   function Maison(prefixe, correspondance, seance) {
-    this.prefixe = prefixe; this.correspondance = correspondance; this.codes = {}; this.nouvelles = []; this.inserees = 0; this.suivants = {};
+    this.prefixe = prefixe; this.correspondance = correspondance; this.codes = tableVide(); this.nouvelles = []; this.inserees = 0; this.suivants = tableVide();
     this.seance = seance && typeof seance.codePour === 'function' ? seance : null;     // version 1.33 : numéros à la suite de ceux de la séance
     this.nb = { Auteur: 0, Initiales: 0, Compte: 0, Texte: 0 };
   }
   Maison.prototype.code = function (etiquette, valeur) {
     var cle = 'v' + valeur;
-    if (this.codes.hasOwnProperty(cle)) return this.codes[cle];
+    if (possede(this.codes, cle)) return this.codes[cle];
     if (!this.connus) {        // une valeur que le moteur a déjà codée ailleurs garde son code : une personne, un code
-      var connus = this.connus = {};
-      this.correspondance.forEach(function (c) { var o = 'v' + String(c[0]); if (!connus.hasOwnProperty(o)) connus[o] = String(c[1]); });
+      var connus = this.connus = tableVide();
+      this.correspondance.forEach(function (c) { var o = 'v' + String(c[0]); if (!possede(connus, o)) connus[o] = String(c[1]); });
     }
-    if (this.connus.hasOwnProperty(cle)) { this.codes[cle] = this.connus[cle]; return this.codes[cle]; }
+    if (possede(this.connus, cle)) { this.codes[cle] = this.connus[cle]; return this.codes[cle]; }
     if (this.seance) {
       var k = this.seance.codePour(valeur, etiquette, this.prefixe);
       this.codes[cle] = k.code; this.nouvelles.push([valeur, k.code]); this.nb[etiquette]++;
       return k.code;
     }
-    if (!this.suivants.hasOwnProperty(etiquette)) {
+    if (!possede(this.suivants, etiquette)) {
       var re = new RegExp('^' + echapper(this.prefixe) + '_' + etiquette + '[A-Z]*_(\\d+)$', 'i'), max = 0;
       this.correspondance.forEach(function (c) { var m = re.exec(String(c[1])); if (m) max = Math.max(max, parseInt(m[1], 10)); });
       this.suivants[etiquette] = max + 1;
@@ -4583,7 +4648,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   function estBlanc(c) { return c === ' ' || c === '\t' || c === '\n' || c === '\r' || c === '\u00A0'; }
   function zonesDuChamp(texte, nomChamp, avecMotCle) {
     var zones = [];
-    if (!CHAMPS_A_TEXTE.hasOwnProperty(nomChamp)) return zones;
+    if (!possede(CHAMPS_A_TEXTE, nomChamp)) return zones;
     var i = 0, n = texte.length, debut = -1, dansGuillemets = false, c;
     if (avecMotCle) { var m = /^\s*[A-Za-z]+/.exec(texte); if (m) i = m[0].length; }
     function fermer(fin) {
@@ -4619,7 +4684,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   /* Prénoms connus du moteur, pour décider si un nom technique lui est passé. */
   var RE_TELEPHONE_SEUL = /(?:^|[^\d+])(?:0|\+33[ .]?)[1-9](?:[ .-]?\d{2}){4}(?!\d)/;
   function prenomsConnus(config, P) {
-    var connus = {};
+    var connus = tableVide();
     ((config && config.prenoms) || []).forEach(function (v) { v = P.normaliser(String(v).replace(/^ +| +$/g, '')); if (v) connus[v] = 1; });
     return function (texte) {
       if (typeof texte.normalize === 'function') texte = texte.normalize('NFC');             // version 1.33 : accents écrits à part, lus réunis
@@ -4627,10 +4692,10 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       if (RE_TELEPHONE_SEUL.test(texte)) return true;                                        // version 1.33 : un numéro de téléphone dans une donnée technique
       var mots = texte.match(/[A-Za-z\u00C0-\u024F\u1E00-\u1EFF]{2,}(?:-[A-Za-z\u00C0-\u024F\u1E00-\u1EFF]{2,})*/g) || [];   // version 1.34 : lettres du vietnamien comprises
       for (var i = 0; i < mots.length; i++) {
-        if (connus.hasOwnProperty(P.normaliser(mots[i]))) return true;
-        if (i + 1 < mots.length && connus.hasOwnProperty(P.normaliser(mots[i] + ' ' + mots[i + 1]))) return true;     // version 1.33 : prénom en deux mots (Thu Ha)
+        if (possede(connus, P.normaliser(mots[i]))) return true;
+        if (i + 1 < mots.length && possede(connus, P.normaliser(mots[i] + ' ' + mots[i + 1]))) return true;     // version 1.33 : prénom en deux mots (Thu Ha)
         var parties = mots[i].split('-');
-        if (parties.length > 1) for (var j = 0; j < parties.length; j++) if (connus.hasOwnProperty(P.normaliser(parties[j]))) return true;
+        if (parties.length > 1) for (var j = 0; j < parties.length; j++) if (possede(connus, P.normaliser(parties[j]))) return true;
       }
       return false;
     };
@@ -4681,7 +4746,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
      lit pas (styles, numérotation) et, dans les textes lus par zones (code de champ, nom d'une forme, donnée technique), ce qui
      reste après codage. Rend [{ origine, lieux }]. Lecture seule : rien n'est changé dans le fichier. */
   function chercherEnClair(archive, correspondance) {
-    var idx = X.indexerOrigines ? X.indexerOrigines(correspondance) : null, trouves = [], parOrigine = {};
+    var idx = X.indexerOrigines ? X.indexerOrigines(correspondance) : null, trouves = [], parOrigine = tableVide();
     if (!idx) return trouves;
     function noter(origine, lieu) {
       var e = parOrigine['o' + origine];
@@ -4731,9 +4796,9 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   }
   function citerListe(l, max) { return l.slice(0, max).join(' ; ') + (l.length > max ? ' ; et ' + (l.length - max) + (l.length - max > 1 ? ' autres' : ' autre') : ''); }
   function prevenir(archive, correspondance, config, P, aUnPrenom, prefixe) {
-    var notes = [], bas = prefixe.toLowerCase() + '_', dits = {};
+    var notes = [], bas = prefixe.toLowerCase() + '_', dits = tableVide();
     // version 1.33 : un nom de famille de la table écrit seul (un style « Tessharto ») est lu aussi, voir X.nomsDeFamille
-    var famille = {}; (X.nomsDeFamille ? X.nomsDeFamille(correspondance, config, P) : []).forEach(function (m) { famille['n' + P.normaliser(m)] = 1; });
+    var famille = tableVide(); (X.nomsDeFamille ? X.nomsDeFamille(correspondance, config, P) : []).forEach(function (m) { famille['n' + P.normaliser(m)] = 1; });
     var aUnNom = function (texte) { return ((typeof texte.normalize === 'function' ? texte.normalize('NFC') : texte).match(/[A-Za-z\u00C0-\u024F\u1E00-\u1EFF]{3,}(?:[-'\u2019][A-Za-z\u00C0-\u024F\u1E00-\u1EFF]+)*/g) || []).some(function (m) { return famille['n' + P.normaliser(m)] === 1; }); };
     var noms = nomsNonCodes(archive).filter(function (x) { return x.texte.toLowerCase().indexOf(bas) < 0 && (aUnPrenom(x.texte) || aUnNom(x.texte)) && !dits['n' + x.lieu + x.texte] && (dits['n' + x.lieu + x.texte] = 1); });
     if (noms.length) {
@@ -4770,12 +4835,12 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       cles.push(rep.textes[i]);
       valeurs.push(x.vide ? [x.brut, espace, xml.slice(x.baliseD, x.baliseF)] : [x.brut, espace]);
       if (x.brut !== encodeurDe(x)(x.texte)) trivial = false;
-      if (AVEC_ESPACE.hasOwnProperty(x.nom) && !espace && /^\s|\s$/.test(x.texte)) trivial = false;
+      if (possede(AVEC_ESPACE, x.nom) && !espace && /^\s|\s$/.test(x.texte)) trivial = false;
     });
     if (nb > 1) trivial = false;
     var cle = JSON.stringify(cles), js = JSON.stringify(valeurs);
-    if (memo.ambigus.hasOwnProperty(cle)) return;
-    if (memo.vus.hasOwnProperty(cle)) { if (memo.vus[cle] !== js) { memo.ambigus[cle] = 1; delete memo.segments[cle]; } return; }
+    if (possede(memo.ambigus, cle)) return;
+    if (possede(memo.vus, cle)) { if (memo.vus[cle] !== js) { memo.ambigus[cle] = 1; delete memo.segments[cle]; } return; }
     memo.vus[cle] = js;
     if (!trivial) memo.segments[cle] = valeurs;
   }
@@ -4847,7 +4912,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       var table = preparerTable(r.correspondance, P);
 
       // écriture de chaque partie
-      var memo = { segments: {}, vus: {}, ambigus: {} }, nbCroises = 0, miniatures = 0, miniaturesGardees = 0;
+      var memo = { segments: tableVide(), vus: tableVide(), ambigus: tableVide() }, nbCroises = 0, miniatures = 0, miniaturesGardees = 0;
       parcourirArchives(archive, function (a) { if (a.miniature) { if (retirerMiniature(a)) miniatures++; else miniaturesGardees++; } });
       parcourir(archive, function (p) {
         if (p.morceaux) {
@@ -4905,14 +4970,14 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     var modifiables = s.pieces.filter(modifiable);
     if (!modifiables.length) return false;
     var cle = JSON.stringify([modifiables[0].attribut || 't'].concat(modifiables.map(function (x) { return x.texte; })));
-    var v = segmentsMemoire.hasOwnProperty(cle) ? segmentsMemoire[cle] : null;
+    var v = possede(segmentsMemoire, cle) ? segmentsMemoire[cle] : null;
     if (!Array.isArray(v) || v.length !== modifiables.length) return false;
     var k = 0, attendu = '', valable = true;
     s.pieces.forEach(function (x) {
       if (x.fixe) { attendu += x.texte; return; }
       var e = v[k++];
       if (!Array.isArray(e)) { valable = false; return; }
-      if (e[0] === null) { if (!FIXES.hasOwnProperty(e[1]) || x.attribut || x.nom !== 'w:t' || x.texte !== '' || x.baliseD === undefined) valable = false; else attendu += FIXES[e[1]]; return; }
+      if (e[0] === null) { if (!possede(FIXES, e[1]) || x.attribut || x.nom !== 'w:t' || x.texte !== '' || x.baliseD === undefined) valable = false; else attendu += FIXES[e[1]]; return; }
       if (typeof e[0] !== 'string' || e[0].indexOf('<') >= 0 || (x.attribut && e[0].indexOf(x.attribut) >= 0)) { valable = false; return; }
       if (e.length > 2 && (e[0] !== '' || typeof e[2] !== 'string' || !RE_BALISE_VIDE.test(e[2]) || e[2].indexOf('<' + x.nom) !== 0)) { valable = false; return; }
       attendu += decoder(e[0]).texte;
@@ -4950,7 +5015,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       var r = P.depseudonymiser(cellules, correspondance);
       if (!r.ok) return { ok: false, erreur: r.erreur };
       index.forEach(function (d, i) { var t = r.cellules[i][0]; if (d.morceau) d.morceau.rendu = t; else if (d.segment) d.segment.rendu = t; else d.piece.rendu = t; });
-      var table = preparerTable(correspondance, P), segmentsMemoire = (memoire && memoire.segments && typeof memoire.segments === 'object') ? memoire.segments : {};
+      var table = preparerTable(correspondance, P), segmentsMemoire = (memoire && memoire.segments && typeof memoire.segments === 'object') ? memoire.segments : tableVide();
       var nbTextes = 0, nbExacts = 0, nbFusions = 0, nbFilet = 0, malFormees = [];
       parcourir(archive, function (p) {
         if (p.morceaux) {
@@ -5032,7 +5097,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   }
 
   racine.PseudonymiseurDocuments = {
-    version: '1.34 du 20/11/2026',
+    version: '1.35 du 20/11/2026',
     pseudonymiser: pseudonymiser, depseudonymiser: depseudonymiser, apercu: apercu, extension: extension,
     analyser: analyser, decoder: decoder, repartir: repartir, alignerCodage: alignerCodage, alignerRestitution: alignerRestitution,
     remplacementUnique: remplacementUnique, zonesDuChamp: zonesDuChamp, coderChemins: coderChemins, Maison: Maison
@@ -5073,6 +5138,14 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
    Aucune donnée ne sort de la page. */
 (function (racine) {
   'use strict';
+  // Version 1.35 : une table est toujours interrogée par cette fonction, qui appelle la fonction du langage elle-même. Écrite
+  // « table.hasOwnProperty(clé) », la question passait par la table : une clé venue du texte et nommée « hasOwnProperty »
+  // (un terme du Dictionnaire, un code de la table) lui ôtait sa réponse et arrêtait le traitement.
+  function possede(table, cle) { return Object.prototype.hasOwnProperty.call(table, cle); }
+  // Version 1.35 : une table vide, sans rien d'hérité. Une table écrite « {} » répond aussi aux noms que le langage donne à
+  // tout objet (constructor) : lue par sa clé seule, elle faisait passer le mot « Constructor » pour un mot à conserver,
+  // qui n'était jamais codé comme un nom. Les tables lues par leur clé seule sont créées par cette fonction.
+  function tableVide() { return Object.create(null); }
 
   var SPECIALES = '   -   　';
   // Traits d'union particuliers (trait d'union, trait d'union insécable, tiret numérique, tiret court) : lus comme « - ».
@@ -5116,7 +5189,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     p[k] = t.length;
     return p;
   }
-  function copie(o) { var c = {}, k; for (k in (o || {})) if (Object.prototype.hasOwnProperty.call(o, k)) c[k] = o[k]; return c; }
+  function copie(o) { var c = tableVide(), k; for (k in (o || {})) if (Object.prototype.hasOwnProperty.call(o, k)) c[k] = o[k]; return c; }
   function echapper(s) { return s.replace(/[\\^$.|?*+()[\]{}\/-]/g, '\\$&'); }
   function pad3(n) { var s = String(n); while (s.length < 3) s = '0' + s; return s; }
 
@@ -5133,7 +5206,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
 
   // Table d'un résultat du moteur : code -> texte d'origine (première ligne de la table pour ce code, comme à la restitution).
   function Table(correspondance) {
-    var origine = new Map(), longueurs = [], vues = {}, debuts = {};
+    var origine = new Map(), longueurs = [], vues = tableVide(), debuts = tableVide();
     (correspondance || []).forEach(function (l) {
       var code = String(l[1]);
       if (origine.has(code) || !code.length) return;
@@ -5271,7 +5344,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     }
     if (!speciales) return P.pseudonymiser(cellules, reglagesParticuliers(config) ? reglagesLisses(config) : config);                    // étape 0 : le moteur seul
 
-    var ou = {}, accents = {};                                                    // texte aux caractères invisibles ou aux accents écrits à part : place de chaque caractère lu
+    var ou = tableVide(), accents = tableVide();                                                    // texte aux caractères invisibles ou aux accents écrits à part : place de chaque caractère lu
     var lisses = cellules.map(function (ligne, lr) {
       return ligne.map(function (t, lc) {
         if (typeof t !== 'string' || !aSpeciale(t)) return t;
@@ -5303,14 +5376,14 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     if (!plans.length) { res.espaces = bilan; return res; }
 
     // Écritures de chaque code dans les textes à espaces insécables.
-    var base = {}, variantes = {}, ordre = [];
+    var base = tableVide(), variantes = tableVide(), ordre = [];
     plans.forEach(function (p) {
       if (!p.els) return;
       var vrai = cellules[p.r][p.c];
       p.els.forEach(function (x) {
         x.vrai = vrai.substring(x.d, x.f);
         if (x.vrai === table.origine.get(x.code)) { base[x.code] = true; return; }
-        if (!variantes[x.code]) { variantes[x.code] = { liste: [], vues: {} }; ordre.push(x.code); }
+        if (!variantes[x.code]) { variantes[x.code] = { liste: [], vues: tableVide() }; ordre.push(x.code); }
         if (variantes[x.code].vues['v' + x.vrai] !== 1) { variantes[x.code].vues['v' + x.vrai] = 1; variantes[x.code].liste.push(x.vrai); }
       });
     });
@@ -5323,7 +5396,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     /* Étapes 2 et 3. Avec reprise = true, l'écriture à espaces insécables prend la ligne de la table quand le code ne sert à
        aucune autre écriture ; sinon chaque écriture nouvelle reçoit un code à lettre et aucune ligne du moteur n'est changée. */
     function composer(reprise) {
-      var pris = {}, ecriture = {}, origineNouvelle = {}, ajoutees = {}, nb = 0;
+      var pris = tableVide(), ecriture = tableVide(), origineNouvelle = tableVide(), ajoutees = tableVide(), nb = 0;
       res.correspondance.forEach(function (l) { pris[String(l[1]).toLowerCase()] = 1; });
       ordre.forEach(function (code) {
         var liste = variantes[code].liste, i = 0, n = 1, cand;
@@ -5346,11 +5419,11 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         });
         return out + vrai.substring(pos);
       });
-      var vus = {}, lignes = [];
+      var vus = tableVide(), lignes = [];
       res.correspondance.forEach(function (l) {
         var code = String(l[1]), premiere = vus[code] !== 1;
         vus[code] = 1;
-        lignes.push(premiere && origineNouvelle.hasOwnProperty(code) ? [origineNouvelle[code], l[1]] : l);
+        lignes.push(premiere && possede(origineNouvelle, code) ? [origineNouvelle[code], l[1]] : l);
         if (premiere && ajoutees[code]) ajoutees[code].forEach(function (a) { lignes.push(a); });
       });
       return { sorties: sorties, table: lignes, ecritures: nb };
@@ -5361,7 +5434,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       var essai = res.cellules.map(function (ligne) { return ligne.slice(); }), k;
       for (k = 0; k < plans.length; k++) essai[plans[k].r][plans[k].c] = sortieDe(k);
       var retour = lignes.length ? P.depseudonymiser(essai, lignes) : { ok: true, cellules: essai };
-      var dansPlans = [], horsPlans = 0, estPlan = {}, rr, cc;
+      var dansPlans = [], horsPlans = 0, estPlan = tableVide(), rr, cc;
       for (k = 0; k < plans.length; k++) {
         estPlan[plans[k].r + ':' + plans[k].c] = 1;
         if (!retour.ok || retour.cellules[plans[k].r][plans[k].c] !== cellules[plans[k].r][plans[k].c]) dansPlans.push(k);
@@ -5373,7 +5446,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       return { dansPlans: dansPlans, horsPlans: horsPlans };
     }
 
-    var compo = composer(true), entier = {};
+    var compo = composer(true), entier = tableVide();
     plans.forEach(function (p, i) { if (!p.els) entier[i] = 1; });
     function sortieProvisoire(i) { return entier[i] === 1 ? cellules[plans[i].r][plans[i].c] : compo.sorties[i]; }
     var e = ecarts(sortieProvisoire, compo.table);
@@ -5384,9 +5457,9 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     e.dansPlans.forEach(function (i) { entier[i] = 1; });
 
     // Textes codés en entier, sous un code Texte de plus (le numéro suit ceux de la table).
-    var lignes = compo.table, codesEntiers = {}, suivant = null, nbEntiers = 0, restants = 0;
+    var lignes = compo.table, codesEntiers = tableVide(), suivant = null, nbEntiers = 0, restants = 0;
     function codeEntier(texte) {
-      if (codesEntiers.hasOwnProperty('v' + texte)) return codesEntiers['v' + texte];
+      if (possede(codesEntiers, 'v' + texte)) return codesEntiers['v' + texte];
       if (suivant === null) {
         var re = new RegExp('^' + echapper(prefixe) + '_Texte[A-Z]*_(\\d+)$', 'i'), max = 0, m;
         lignes.forEach(function (l) { m = re.exec(String(l[1])); if (m) max = Math.max(max, parseInt(m[1], 10)); });
@@ -5462,8 +5535,8 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     this.table = [];                 // [[origine, code]...] : une ligne par code dès le deuxième codage
     this.origineDe = new Map();      // code -> origine (première ligne de la table pour ce code)
     this.codesDe = new Map();        // origine -> codes qui la rendent (un seul par préfixe, sauf table rechargée)
-    this.pris = {};                  // codes de la séance, en minuscules
-    this.maxDe = {};                 // tête + queue -> plus grand numéro
+    this.pris = tableVide();                  // codes de la séance, en minuscules
+    this.maxDe = tableVide();                 // tête + queue -> plus grand numéro
     this.codages = 0;                // nombre de codages intégrés
     if (Array.isArray(table) && table.length) this.noter(table, true);
   }
@@ -5537,7 +5610,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
 
   /* Remplace dans un texte chaque code par celui que donne la carte, du plus long au plus court, en une seule lecture. */
   function PlanDeCodes(carte) {
-    var longueurs = [], vues = {}, debuts = {};
+    var longueurs = [], vues = tableVide(), debuts = tableVide();
     carte.forEach(function (v, code) {
       debuts[code.charAt(0)] = 1;
       if (!vues[code.length]) { vues[code.length] = 1; longueurs.push(code.length); }
@@ -5583,7 +5656,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     });
 
     // 3. les autres, groupés par élément (même étiquette de base, même numéro)
-    var elements = {}, ordreElements = [], sansNumero = [];
+    var elements = tableVide(), ordreElements = [], sansNumero = [];
     locaux.forEach(function (c) {
       var d = decomposer(c);
       if (!d) { if (!carte.has(c)) sansNumero.push(c); return; }
@@ -5592,7 +5665,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       elements[cle].codes.push({ code: c, d: d });
       if (carte.has(c) && elements[cle].repris === null) elements[cle].repris = carte.get(c);
     });
-    var attribues = {}, familles = {}, ordreFamilles = [];
+    var attribues = tableVide(), familles = tableVide(), ordreFamilles = [];
     function prendre(code) { attribues['c' + minuscules(code)] = 1; return code; }
     function estLibre(code) { return moi.libre(code) && attribues['c' + minuscules(code)] !== 1; }
     ordreElements.forEach(function (cle) {
@@ -5641,7 +5714,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     }
 
     // 5. contrôle du retour avec la table de la séance, complétée des lignes nouvelles
-    var ajoutees = [], dejaVues = {};
+    var ajoutees = [], dejaVues = tableVide();
     lignes.forEach(function (l) { var c = String(l[1]); if (c !== '' && !moi.origineDe.has(c) && dejaVues['c' + c] !== 1) { dejaVues['c' + c] = 1; ajoutees.push([String(l[0]), c]); } });
     var tableEssai = this.table.concat(ajoutees);
     var retour = P.depseudonymiser(sortie, tableEssai), aReprendre = [], r, c, attendu;
@@ -5723,11 +5796,11 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   function preparerReparation(correspondance) {
     var garde = preparations && correspondance && typeof correspondance === 'object' ? preparations.get(correspondance) : null;
     if (garde && garde.n === correspondance.length) return garde.prep;
-    var prefixes = {}, ordre = [], vus = {};
-    function prefixeDe(p) { if (!prefixes['p' + p]) { prefixes['p' + p] = { prefixe: p, cles: {}, ambigus: {}, exacts: {} }; ordre.push('p' + p); } return prefixes['p' + p]; }
+    var prefixes = tableVide(), ordre = [], vus = tableVide();
+    function prefixeDe(p) { if (!prefixes['p' + p]) { prefixes['p' + p] = { prefixe: p, cles: tableVide(), ambigus: tableVide(), exacts: tableVide() }; ordre.push('p' + p); } return prefixes['p' + p]; }
     function ranger(x, cle, code) {
       if (x.ambigus[cle] === 1) return;
-      if (x.cles.hasOwnProperty(cle) && x.cles[cle] !== code) { x.ambigus[cle] = 1; delete x.cles[cle]; return; }
+      if (possede(x.cles, cle) && x.cles[cle] !== code) { x.ambigus[cle] = 1; delete x.cles[cle]; return; }
       x.cles[cle] = code;
     }
     (correspondance || []).forEach(function (l) {
@@ -5747,7 +5820,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       x.exacts['c' + minuscules(code)] = 1;
     });
     // un même préfixe écrit en minuscules (adresses mail, liens) et tel qu'il est (autres codes) : une seule entrée
-    var parBas = {}, liste = [];
+    var parBas = tableVide(), liste = [];
     ordre.forEach(function (k) {
       var x = prefixes[k], bas = minuscules(x.prefixe), y = parBas['p' + bas];
       if (!y) { parBas['p' + bas] = x; liste.push(x); return; }
@@ -5781,7 +5854,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     function rendre(trouve, cle, chiffres) {
       var n = numeroLisible(chiffres), code;
       if (n < 0) return trouve;
-      code = x.cles.hasOwnProperty(cle + '|' + n) ? x.cles[cle + '|' + n] : null;
+      code = possede(x.cles, cle + '|' + n) ? x.cles[cle + '|' + n] : null;
       if (!code || minuscules(trouve) === minuscules(code)) return trouve;
       if (formes) formes.push([trouve, code]);
       return code;
@@ -5815,7 +5888,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     }) : cellules;
     var res = P.depseudonymiser(change ? repares : cellules, correspondance);
     if (res && res.ok) {
-      var vues = {}, uniques = [];
+      var vues = tableVide(), uniques = [];
       formes.forEach(function (f) { var k = 'f' + f[0] + '\u0000' + f[1]; if (vues[k] !== 1) { vues[k] = 1; uniques.push(f); } });
       res.reparations = uniques;
     }
@@ -5895,7 +5968,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     'Service', 'Entreprise', 'Texte', 'Terme', 'Auteur', 'Initiales', 'Compte', 'Chemin'];
   var etiquettesBas = null;
   function etiquetteConnue(e) {
-    if (!etiquettesBas) { etiquettesBas = {}; ETIQUETTES.forEach(function (x) { etiquettesBas['e' + sansAccentsBas(x)] = 1; }); }
+    if (!etiquettesBas) { etiquettesBas = tableVide(); ETIQUETTES.forEach(function (x) { etiquettesBas['e' + sansAccentsBas(x)] = 1; }); }
     var b = sansAccentsBas(e), k;
     if (etiquettesBas['e' + b] === 1) return true;
     for (k = 1; k <= 2 && k < b.length; k++) if (etiquettesBas['e' + b.slice(0, b.length - k)] === 1) return true;   // lettre d'une autre écriture (PersonneB)
@@ -5907,7 +5980,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   function codesRestants(texte, prefixe, correspondance) {
     var uniques = codesRestantsSous(texte, prefixe);
     if (!correspondance || !correspondance.length) return uniques;
-    var bas = minuscules(prefixe), vus = {};
+    var bas = minuscules(prefixe), vus = tableVide();
     uniques.forEach(function (x) { vus['v' + x] = 1; });
     preparerReparation(correspondance).prefixes.forEach(function (x) {
       if (x.bas === bas) return;
@@ -5916,7 +5989,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     return uniques;
   }
   function codesRestantsSous(texte, prefixe) {
-    var pl = echapper(minuscules(prefixe)), p = echapper(prefixe), uniques = [], vus = {}, m;
+    var pl = echapper(minuscules(prefixe)), p = echapper(prefixe), uniques = [], vus = tableVide(), m;
     function noter(x) { if (vus['v' + x] !== 1) { vus['v' + x] = 1; uniques.push(x); } }
     if (minuscules(sansInvisibles(texte)).indexOf(minuscules(prefixe)) < 0) return uniques;
     var exact = new RegExp(pl + '_mail[a-z]*_\\d+@' + pl + '\\.invalid|https://' + pl + '\\.invalid/lien[a-z]*_\\d+|\\b' + p + '_[A-Za-z]+_\\d+', 'gi');
@@ -7328,6 +7401,14 @@ var LISTES_ORIGINE = {
 <script>
 (function () {
   'use strict';
+  // Version 1.35 : une table est toujours interrogée par cette fonction, qui appelle la fonction du langage elle-même. Écrite
+  // « table.hasOwnProperty(clé) », la question passait par la table : une clé venue du texte et nommée « hasOwnProperty »
+  // (un terme du Dictionnaire, un code de la table) lui ôtait sa réponse et arrêtait le traitement.
+  function possede(table, cle) { return Object.prototype.hasOwnProperty.call(table, cle); }
+  // Version 1.35 : une table vide, sans rien d'hérité. Une table écrite « {} » répond aussi aux noms que le langage donne à
+  // tout objet (constructor) : lue par sa clé seule, elle faisait passer le mot « Constructor » pour un mot à conserver,
+  // qui n'était jamais codé comme un nom. Les tables lues par leur clé seule sont créées par cette fonction.
+  function tableVide() { return Object.create(null); }
   // Depuis la version 1.31 : le moteur est enveloppé par le module des espaces insécables (depuis la 1.32, des traits d'union particuliers et des caractères invisibles ; depuis la 1.33, des accents écrits à part). Les trois flux (texte collé, classeur Excel,
   // document Word ou PowerPoint) passent par cette enveloppe ; le moteur lui-même n'est pas modifié.
   var P = window.PseudonymiseurEspaces.envelopper(window.Pseudonymiseur);
@@ -7341,14 +7422,14 @@ var LISTES_ORIGINE = {
   function stockage(nom) {
     try { var s = window[nom]; if (s && typeof s.getItem === 'function') return s; } catch (e) { /* accès refusé */ }
     stockRefuse = true;
-    var m = {};
+    var m = tableVide();
     return {
       getItem: function (c) { return Object.prototype.hasOwnProperty.call(m, c) ? m[c] : null; },
       setItem: function (c, v) { m[c] = String(v); },
       removeItem: function (c) { delete m[c]; }
     };
   }
-  var stockLocal = stockage('local' + 'Storage'), stockSession = stockage('session' + 'Storage');
+  var stockLocal = stockage('localStorage'), stockSession = stockage('sessionStorage');
   function lireStock(stock, cle) { try { var v = stock.getItem(cle); return v ? JSON.parse(v) : null; } catch (e) { return null; } }
   function ecrireStock(stock, cle, val) { try { stock.setItem(cle, JSON.stringify(val)); } catch (e) { /* stockage indisponible */ } }
 
@@ -7378,7 +7459,7 @@ var LISTES_ORIGINE = {
     var aSeg = a && a.segments && typeof a.segments === 'object', bSeg = b && b.segments && typeof b.segments === 'object';
     if (!bSeg) return aSeg ? a : null;
     if (!aSeg) return b;
-    var seg = {}, amb = {}, a1 = Object.prototype.hasOwnProperty;
+    var seg = tableVide(), amb = tableVide(), a1 = Object.prototype.hasOwnProperty;
     [a.ambigus, b.ambigus].forEach(function (x) { if (x && typeof x === 'object') Object.keys(x).forEach(function (k) { amb[k] = 1; }); });
     [a.segments, b.segments].forEach(function (x) {
       Object.keys(x).forEach(function (k) {
@@ -7405,20 +7486,22 @@ var LISTES_ORIGINE = {
     if (l.length === 1) return l[0].dates || null;
     // plusieurs classeurs codés dans la séance, et le nom du fichier déposé ne dit pas lequel : toute date restituée dans une
     // cellule au format de date redevient une date (réglage du module quand il ne sait rien du classeur d'origine)
-    var series = {}, conflit = {};
+    var series = tableVide(), conflit = tableVide();
     l.forEach(function (c) {
       var x = c.dates && c.dates.series;
-      if (x) Object.keys(x).forEach(function (k) { if (series.hasOwnProperty(k) && series[k] !== String(x[k])) conflit[k] = 1; series[k] = String(x[k]); });
+      if (x) Object.keys(x).forEach(function (k) { if (possede(series, k) && series[k] !== String(x[k])) conflit[k] = 1; series[k] = String(x[k]); });
     });
     Object.keys(conflit).forEach(function (k) { delete series[k]; });
     // version 1.33 : les morceaux d'origine des cellules à mise en forme partielle sont réunis de la même façon
-    var riches = {}, conflitRiches = {};
+    var riches = tableVide(), conflitRiches = tableVide();
     l.forEach(function (c) {
       var x = c.dates && c.dates.riches;
-      if (x && typeof x === 'object') Object.keys(x).forEach(function (k) { if (riches.hasOwnProperty(k) && JSON.stringify(riches[k]) !== JSON.stringify(x[k])) conflitRiches[k] = 1; riches[k] = x[k]; });
+      if (x && typeof x === 'object') Object.keys(x).forEach(function (k) { if (possede(riches, k) && JSON.stringify(riches[k]) !== JSON.stringify(x[k])) conflitRiches[k] = 1; riches[k] = x[k]; });
     });
     Object.keys(conflitRiches).forEach(function (k) { delete riches[k]; });
-    return { textes: [], cellules: [], series: series, riches: riches, avecType: l.every(function (c) { return !!(c.dates && c.dates.avecType); }), erreurs: 0 };
+    // version 1.35 : les empreintes des classeurs codés dans l'onglet, pour reconnaître un classeur que l'outil a réécrit
+    var codages = l.map(function (c) { return c.dates && c.dates.codage; }).filter(Boolean);
+    return { textes: [], cellules: [], series: series, riches: riches, avecType: l.every(function (c) { return !!(c.dates && c.dates.avecType); }), erreurs: 0, codages: codages.length === l.length ? codages : [] };
   }
 
   function listesParDefaut() {
@@ -7429,16 +7512,22 @@ var LISTES_ORIGINE = {
       origine: LISTES_ORIGINE.version
     };
   }
+  // Version 1.35 : d'un fichier de réglages, ou de ce que le navigateur a gardé, seuls les réglages connus sont repris (préfixe,
+  // dates, adresses, seuil) ; toute autre ligne est laissée de côté.
+  function reprendreReglages(defaut, lus) {
+    if (lus && typeof lus === 'object') Object.keys(defaut).forEach(function (k) { if (possede(lus, k)) defaut[k] = lus[k]; });
+    return defaut;
+  }
   // Une nouvelle version de la page peut apporter de nouveaux mots d'origine (mots à conserver, prénoms, villes, dictionnaire) :
   // ils sont ajoutés aux listes gardées dans le navigateur, sans toucher aux ajouts ni aux réglages de l'utilisateur.
   function completerDepuisOrigine(l) {
     if (l.origine === LISTES_ORIGINE.version) return 0;
     var d = listesParDefaut(), ajouts = 0;
     ['conserver', 'prenoms', 'villes'].forEach(function (k) {
-      var vus = {}; l[k].forEach(function (v) { vus[String(v).trim().toLowerCase()] = 1; });
+      var vus = tableVide(); l[k].forEach(function (v) { vus[String(v).trim().toLowerCase()] = 1; });
       d[k].forEach(function (v) { if (!vus[v.trim().toLowerCase()]) { l[k].push(v); ajouts++; } });
     });
-    var textes = {}; l.dictionnaire.forEach(function (x) { textes[String(x.texte || '').trim().toLowerCase()] = 1; });
+    var textes = tableVide(); l.dictionnaire.forEach(function (x) { textes[String(x.texte || '').trim().toLowerCase()] = 1; });
     d.dictionnaire.forEach(function (x) { if (!textes[x.texte.trim().toLowerCase()]) { l.dictionnaire.push(x); ajouts++; } });
     l.origine = LISTES_ORIGINE.version;
     return ajouts;
@@ -7452,7 +7541,7 @@ var LISTES_ORIGINE = {
       noms: Array.isArray(l.noms) ? l.noms : d.noms,
       villes: Array.isArray(l.villes) ? l.villes : d.villes,
       dictionnaire: Array.isArray(l.dictionnaire) ? l.dictionnaire : d.dictionnaire,
-      reglages: Object.assign(d.reglages, l.reglages || {}),
+      reglages: reprendreReglages(d.reglages, l.reglages),
       origine: l.origine || ''
     };
     var ajouts = completerDepuisOrigine(r);
@@ -7513,7 +7602,7 @@ var LISTES_ORIGINE = {
     etat.classeurs = Array.isArray(s.classeurs) ? s.classeurs : (s.datesEnTexte ? [{ cle: '', dates: s.datesEnTexte }] : []);
     var m = lireStock(stockSession, CLE_MEMOIRE);
     etat.memoireDocument = (m && typeof m === 'object' && m.segments && typeof m.segments === 'object') ? m : null;
-    $('bilan').innerHTML = s.bilan || '';
+    reprendreBilan(s.bilan);
     afficherCorrespondance(); majEtapes();
   }
 
@@ -7586,7 +7675,9 @@ var LISTES_ORIGINE = {
   }
   function lireFichier(input, cb) {
     var f = input.files && input.files[0]; if (!f) return;
-    var r = new FileReader(); r.onload = function () { cb(String(r.result).replace(/^\ufeff/, '')); input.value = ''; }; r.readAsText(f, 'utf-8');
+    var r = new FileReader(); r.onload = function () { cb(String(r.result).replace(/^\ufeff/, '')); input.value = ''; };
+    r.onerror = function () { input.value = ''; toast('Le navigateur n’a pas pu lire ce fichier. Le choisir de nouveau.'); };     // version 1.35
+    r.readAsText(f, 'utf-8');
   }
 
   // ------------------------------------------------------------------ configuration du moteur
@@ -7627,6 +7718,16 @@ var LISTES_ORIGINE = {
     var k = s && s.controle;
     if (!k || k.ecarts) return '';
     return ' Contrôle fait : ' + (k.textes > 1 ? 'les ' + k.textes + ' textes codés reviennent' : 'le texte codé revient') + ' exactement à l\u2019original à la restitution.';
+  }
+  // Version 1.35 : le bilan gardé avec le travail de l'onglet est repris case par case, écrit comme du texte : seuls les
+  // chiffres et les mots que la page y écrit elle-même sont repris, rien d'autre de ce que le navigateur a gardé.
+  function reprendreBilan(garde) {
+    var b = $('bilan'), re = /<div><b>(\d+)<\/b><span>([^<>&]*)<\/span><\/div>/g, m;
+    b.textContent = '';
+    while ((m = re.exec(typeof garde === 'string' ? garde : '')) !== null) {
+      var d = document.createElement('div'), n = document.createElement('b'), t = document.createElement('span');
+      n.textContent = m[1]; t.textContent = m[2]; d.appendChild(n); d.appendChild(t); b.appendChild(d);
+    }
   }
   function afficherBilan(s) {
     $('bilan').innerHTML = [
@@ -7795,12 +7896,20 @@ var LISTES_ORIGINE = {
   var X = window.PseudonymiseurExcel;
   etat.classeurEntree = null; etat.classeurSortie = null; etat.classeurFinal = null;
   function estClasseur(f) { return !!f && /\.(xlsx|xlsm)$/i.test(f.name); }
-  function lireOctets(f, cb) { var r = new FileReader(); r.onload = function () { cb(new Uint8Array(r.result)); }; r.readAsArrayBuffer(f); }
+  // Version 1.35 : quand le navigateur ne peut pas lire le fichier choisi (déplacé, renommé ou supprimé entre-temps, emplacement
+  // qui ne répond plus), la page le dit sous la zone de dépôt au lieu de rester sans réponse.
+  var FICHIER_ILLISIBLE = 'Le navigateur n’a pas pu lire ce fichier : il a peut-être été déplacé, renommé ou supprimé, ou son emplacement ne répond plus. Le choisir de nouveau.';
+  function lireOctets(f, cb, idMessage) {
+    var r = new FileReader();
+    r.onload = function () { cb(new Uint8Array(r.result)); };
+    r.onerror = function () { message(idMessage, 'erreur', FICHIER_ILLISIBLE); };
+    r.readAsArrayBuffer(f);
+  }
   /* Version 1.33 : un code resté en place n'est pas toujours absent de la table. Depuis cette version, un code de la table
      peut rester à un endroit où l'outil ne l'a pas remplacé (un nom d'onglet qui deviendrait trop long, un endroit du
      fichier qu'il ne récrit pas) : la phrase dit lequel des deux cas se présente. le : « le classeur », « le document »… */
   function phraseRestants(restants, le) {
-    var codes = {}; etat.correspondance.forEach(function (c) { codes[String(c[1]).toLowerCase()] = 1; });
+    var codes = tableVide(); etat.correspondance.forEach(function (c) { codes[String(c[1]).toLowerCase()] = 1; });
     var connus = restants.filter(function (c) { return codes[String(c).toLowerCase()] === 1; }), inconnus = restants.filter(function (c) { return codes[String(c).toLowerCase()] !== 1; });
     var s = function (l) { return l.length > 1 ? 's' : ''; }, liste = function (l) { return l.map(echapperHtml).join(', '); };
     var absents = pluriel(inconnus.length, 'code') + ' resté' + s(inconnus) + ' en place, absent' + s(inconnus) + ' de la table : ' + liste(inconnus) + '. Vérifier ' + le + ' renvoyé, ou charger la bonne table.';
@@ -7832,7 +7941,7 @@ var LISTES_ORIGINE = {
         message('msg-entree', 'ok', 'Classeur « ' + echapperHtml(f.name) + ' » lu sur votre poste : ' + pluriel(a.onglets, 'onglet') + ', ' + pluriel(a.nbTextes, 'texte') + '. Ci-dessous, l’aperçu des cellules. Pseudonymiser traite le classeur.');
         pseudonymiserClasseur();
       });
-    });
+    }, 'msg-entree');
   }
   function pseudonymiserClasseur() {
     var ce = etat.classeurEntree; if (!ce) return;
@@ -7876,7 +7985,7 @@ var LISTES_ORIGINE = {
           montrer('restitue'); telechargerClasseur(etat.classeurFinal);
         });
       });
-    });
+    }, 'msg-reponse');
   }
 
   // ------------------------------------------------------------------ documents Word et diaporamas PowerPoint (version 1.30, 19/11/2026)
@@ -7912,7 +8021,7 @@ var LISTES_ORIGINE = {
         message('msg-entree', 'ok', m.Nom + ' « ' + echapperHtml(f.name) + ' » lu sur votre poste : ' + (a.genre === 'powerpoint' ? pluriel(a.diapositives, 'diapositive') + ', ' : '') + pluriel(a.nbTextes, 'texte') + '. Ci-dessous, l’aperçu de ses textes. Pseudonymiser traite ' + m.le + '.');
         pseudonymiserDocument();
       });
-    });
+    }, 'msg-entree');
   }
   function pseudonymiserDocument() {
     var ce = etat.classeurEntree; if (!ce || !ce.genre) return;
@@ -7954,7 +8063,7 @@ var LISTES_ORIGINE = {
         majEtapes(); sauverSession(); $('chk-couleur-final').checked = false; basculerApercu('restitue', false);
         montrer('restitue'); telechargerClasseur(etat.classeurFinal);
       });
-    });
+    }, 'msg-reponse');
   }
   // Aiguillage : un classeur suit le chemin d'avant ; un document Word ou PowerPoint, le chemin ci-dessus ; tout autre fichier est refusé.
   function deposerEntree(f) {
@@ -8092,7 +8201,7 @@ var LISTES_ORIGINE = {
           noms: Array.isArray(l.noms) ? l.noms.map(String) : d.noms,
           villes: Array.isArray(l.villes) ? l.villes.map(String) : d.villes,
           dictionnaire: Array.isArray(l.dictionnaire) ? l.dictionnaire.map(function (x) { return { texte: String(x.texte || ''), etiquette: String(x.etiquette || ''), type: String(x.type || 'Texte') }; }) : d.dictionnaire,
-          reglages: Object.assign(d.reglages, l.reglages || {}),
+          reglages: reprendreReglages(d.reglages, l.reglages),
           origine: typeof l.origine === 'string' ? l.origine : ''
         };
         var ajouts = completerDepuisOrigine(etat.listes);
@@ -8121,6 +8230,8 @@ var LISTES_ORIGINE = {
    Il n'envoie rien, ne charge rien et ne touche ni aux listes, ni à la table de correspondance, ni aux textes en cours. */
 (function () {
   'use strict';
+  // Version 1.35 : une table vide, sans rien d'hérité, comme dans le script principal de la page.
+  function tableVide() { return Object.create(null); }
   var CLE_PROMPTS = 'pseudonymiseur.prompts.v1';
   var $ = function (id) { return document.getElementById(id); };
   if (!$('vue-prompts')) return;
@@ -8174,7 +8285,7 @@ var LISTES_ORIGINE = {
         REGLES_CODES[0], REGLES_CODES[1], REGLES_CODES[2],
         "4. Un code ne dit rien de ce qu'il remplace : ni l'ordre alphabétique d'un nom, ni le jour d'une date. Ne trie pas et ne calcule pas à partir d'un code. Si mon travail l'exige, dis-le-moi au lieu de le faire.",
         "5. Pour citer une personne, une date, un numéro, une adresse ou un lien, reprends son code tel qu'il figure dans le classeur.",
-        "6. Une date remplacée par un code est devenue un texte : une formule qui s'en sert peut afficher une erreur dans le classeur codé. C'est attendu. Ne corrige pas ces formules et ne remplace pas ces codes par des dates.",
+        "6. Une date remplacée par un code est devenue un texte : une formule qui s'en sert peut afficher une erreur dans le classeur codé. C'est attendu. Ne corrige pas ces formules et ne remplace pas ces codes par des dates. Si tu recopies un de ces codes dans une autre cellule ou dans un nouveau classeur, donne à cette cellule le même format de date que la cellule d'origine (à défaut, jj/mm/aaaa) : la date y reviendra comme une vraie date.",
         "",
         "Règles sur le classeur :",
         "7. Travaille sur le fichier joint lui-même et rends-moi un fichier Excel à télécharger, pas un tableau recopié dans la conversation.",
@@ -8220,7 +8331,7 @@ var LISTES_ORIGINE = {
 
   // ---- enregistrement dans ce navigateur (rôle, forme, consignes en plus)
   function lireGardes() {
-    try { var v = JSON.parse(localStorage.getItem(CLE_PROMPTS) || 'null'); return (v && typeof v === 'object') ? v : {}; } catch (e) { return {}; }
+    try { var v = JSON.parse(localStorage.getItem(CLE_PROMPTS) || 'null'); return (v && typeof v === 'object') ? v : tableVide(); } catch (e) { return tableVide(); }
   }
   function ecrireGardes(g) { try { localStorage.setItem(CLE_PROMPTS, JSON.stringify(g)); } catch (e) { } }
 
@@ -8285,7 +8396,7 @@ var LISTES_ORIGINE = {
   // ---- construction des modèles
   var gardes = lireGardes();
   Object.keys(MODELES).forEach(function (nom) {
-    var m = MODELES[nom], corps = $('prompt-' + nom), g = (gardes[nom] && typeof gardes[nom] === 'object') ? gardes[nom] : {};
+    var m = MODELES[nom], corps = $('prompt-' + nom), g = (gardes[nom] && typeof gardes[nom] === 'object') ? gardes[nom] : tableVide();
     m.champs.forEach(function (c) {
       var ligne = document.createElement('label'); ligne.className = 'ligne';
       var titre = document.createElement('span'); titre.className = 'intitule'; titre.textContent = c.intitule + ' :';
@@ -8295,7 +8406,7 @@ var LISTES_ORIGINE = {
       ta.value = (c.garde && typeof g[c.cle] === 'string') ? g[c.cle] : (c.defaut || '');
       ta.addEventListener('input', function () {
         ajuster(ta); message(nom, '', '');
-        if (c.garde) { var tout = lireGardes(); if (!tout[nom] || typeof tout[nom] !== 'object') tout[nom] = {}; tout[nom][c.cle] = ta.value; ecrireGardes(tout); }
+        if (c.garde) { var tout = lireGardes(); if (!tout[nom] || typeof tout[nom] !== 'object') tout[nom] = tableVide(); tout[nom][c.cle] = ta.value; ecrireGardes(tout); }
       });
       ligne.appendChild(titre); ligne.appendChild(ta); corps.appendChild(ligne);
     });
