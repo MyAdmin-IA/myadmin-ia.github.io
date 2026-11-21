@@ -507,7 +507,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         <h1>À propos</h1>
         <p>Cet outil est une aide. Il ne remplace pas la relecture : chaque utilisateur relit le texte codé avant tout envoi et reste responsable des données qu'il transmet.</p>
         <p>Il est fourni en l'état, sans garantie. Il n'est pas, à ce jour, un outil validé par Lyon 1 Université.</p>
-        <p><strong>Pseudonymiseur</strong>, version web 1.35 du 20 novembre 2026, mise à jour le 20 novembre 2026 à 23h30. Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
+        <p><strong>Pseudonymiseur</strong>, version web 1.36 du 21 novembre 2026, mise à jour le 21 novembre 2026 à 22h07. Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
         <h2>Où vont les données</h2>
         <ul class="propre">
           <li>Nulle part. Cette page est un programme complet que le serveur livre à votre navigateur ; le traitement se fait ensuite sur votre poste. Le serveur ne voit ni le texte, ni la table de correspondance, ni vos listes.</li>
@@ -519,13 +519,13 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
           <li>Il ne reconnaît pas une formule ou un résultat scientifique confidentiel : rien ne le distingue d'une formule publique. Ajoutez-le au Dictionnaire, en texte ou en motif.</li>
           <li>Il ne lit pas les images ni les pièces jointes : seul le texte collé est traité, ou les textes d'un classeur Excel, d'un document Word ou d'un diaporama PowerPoint déposé (pas les images qu'il contient, ni le son, ni la vidéo, ni les équations).</li>
           <li>Il ne lit ni les anciens formats (.doc, .xls, .ppt), ni les fichiers PDF, ni un fichier protégé par un mot de passe à l'ouverture : enregistrer le fichier au format actuel (.docx, .xlsx, .pptx), sans mot de passe, ou coller son texte à l'étape 1.</li>
-          <li>Il ne reconnaît pas tout. Restent en clair : un nom de famille écrit seul, qui ne figure nulle part avec un prénom ou une civilité ; c'est le cas, dans un tableau, d'un nom placé dans une autre cellule que le prénom (une colonne Nom, une colonne Prénom), et d'un nom écrit avant le prénom (Tessharto Paul), sauf si le nom est écrit en majuscules (TESSHARTO) ; un nom écrit tout en minuscules ; un prénom absent de la liste Prénoms, écrit seul ou devant un nom qui n'est pas en majuscules (le nom reste alors en clair lui aussi) ; un nom collé à un autre mot par un tiret bas (Dossier_Tessharto) ; après un prénom, un nom précédé de « des », « le », « la » ou « de l' » écrits en minuscules (Alice des Morvelang) ; un nom écrit après une fonction, même précédée d'une civilité (la directrice Tessharto, Monsieur le Président Tessharto) ; un nom écrit dans un autre alphabet que l'alphabet latin (grec, cyrillique, arabe, chinois) ; un nom à majuscule intérieure (Paul McTessharto) ; des initiales (P. T., Paul T.) ; un identifiant fait du prénom et du nom (paul.tessharto). Les ajouter à la liste Noms du service, où une colonne de noms copiée d'un tableau se colle telle quelle, et un prénom à la liste Prénoms. Un nom ou un prénom écrit en plusieurs mots (Thu Ha) s'y écrit sur une seule ligne : il est reconnu par chacun de ses mots. Ces deux listes ne reconnaissent qu'un mot écrit avec une majuscule, en lettres latines : un nom écrit tout en minuscules, dans un autre alphabet ou à majuscule intérieure, des initiales et un identifiant s'ajoutent au Dictionnaire. Chaque ligne est lue à part : un élément coupé par un saut de ligne, dans un texte, une cellule ou un paragraphe (le prénom sur une ligne et le nom sur la suivante, un numéro écrit sur deux lignes), peut rester en clair en tout ou en partie. Reste aussi en clair un mot dont l'accent est un signe à part, posé à côté de la lettre (Ame´lie, fe´vrier), comme en donne le texte copié de certains fichiers PDF : corriger le texte avant de le coder.</li>
-        <li>Il code parfois un mot de trop. Après un prénom, une particule (« de », « du », « van ») et le mot à majuscule qui la suit sont lus comme un nom de famille : dans « Alice de Gauvernot », où Gauvernot serait une entreprise, ce mot est codé avec le prénom, puis partout où il est écrit seul. La restitution rend le texte exact. Pour que ce mot reste lisible par l'outil d'intelligence artificielle, l'inscrire à la liste Mots à conserver. De même, un sigle ou un mot écrit en majuscules, que l'outil code quand il est écrit seul parce qu'il est absent de cette liste, est codé aussi après « d' », devant la marque anglaise « 's » (ABCD's report), et après toute apostrophe quand il est déjà codé ailleurs dans le texte. Une ville de la liste Villes est reconnue même écrite en minuscules : « qu'il vienne » ou « la valence du carbone » sont codés comme un lieu ; retirer Vienne ou Valence de la liste Villes si ces mots comptent. Enfin, des chiffres sont parfois lus comme une coordonnée : un nombre entre parenthèses suivi de groupes de chiffres (« Dotation (2026) 125 000 € », « Total (1) 12 500 € ») est codé comme un téléphone, et trois groupes de quatre chiffres écrits à la suite (« Exercices 2024 2025 2026 », « Années 2024-2025-2026 ») comme un numéro de carte ; écrits « Dotation 2026 : 125 000 € » ou « Exercices 2024, 2025 et 2026 », ils restent lisibles.</li>
+          <li>Il ne reconnaît pas tout. Restent en clair : un nom de famille écrit seul, qui ne figure nulle part avec un prénom, une civilité ou une fonction que l'outil connaît ; c'est le cas, dans un tableau, d'un nom placé dans une colonne dont l'en-tête ne dit pas « Nom » (une colonne « Agent » ou « Étudiant », une colonne sans en-tête), et d'un nom écrit avant le prénom au début d'une ligne ou d'une cellule (Tessharto Paul a signé), sauf si le nom est écrit en majuscules (TESSHARTO) ; un nom écrit tout en minuscules ; un prénom absent de la liste Prénoms, écrit seul ou devant un nom qui n'est pas en majuscules (le nom reste alors en clair lui aussi) ; un nom collé à un autre mot par un tiret bas (Dossier_Tessharto) ; après un prénom, un nom précédé de « des », « le », « la » ou « de l' » écrits en minuscules (Alice des Morvelang) ; un nom écrit après une fonction que l'outil ne connaît pas (la gestionnaire Tessharto) ou après une fonction au pluriel (les étudiants Tessharto et Valdoreth) ; un nom écrit dans un autre alphabet que l'alphabet latin (grec, cyrillique, arabe, chinois) ; un nom à majuscule intérieure dont le début n'est pas l'un des plus courants, comme Mc, Mac, Le, De ou Van (Paul TesshArto) ; des initiales (P. T., Paul T.) ; un identifiant fait du prénom et du nom (paul.tessharto). Les ajouter à la liste Noms du service, où une colonne de noms copiée d'un tableau se colle telle quelle, et un prénom à la liste Prénoms. Un nom ou un prénom écrit en plusieurs mots (Thu Ha) s'y écrit sur une seule ligne : il est reconnu par chacun de ses mots. Ces deux listes ne reconnaissent qu'un mot écrit avec une majuscule, en lettres latines : un nom écrit tout en minuscules, dans un autre alphabet ou à majuscule intérieure, des initiales et un identifiant s'ajoutent au Dictionnaire. Chaque ligne est lue à part : un élément coupé par un saut de ligne, dans un texte, une cellule ou un paragraphe (le prénom sur une ligne et le nom sur la suivante, un numéro écrit sur deux lignes), peut rester en clair en tout ou en partie. Reste aussi en clair un mot dont l'accent est un signe à part, posé à côté de la lettre (Ame´lie, fe´vrier), comme en donne le texte copié de certains fichiers PDF : corriger le texte avant de le coder.</li>
+        <li>Il code parfois un mot de trop. Après un prénom, une particule (« de », « du », « van ») et le mot à majuscule qui la suit sont lus comme un nom de famille : dans « Alice de Gauvernot », où Gauvernot serait une entreprise, ce mot est codé avec le prénom, puis partout où il est écrit seul. La restitution rend le texte exact. Pour que ce mot reste lisible par l'outil d'intelligence artificielle, l'inscrire à la liste Mots à conserver. De même, un sigle ou un mot écrit en majuscules, que l'outil code quand il est écrit seul parce qu'il est absent de cette liste, est codé aussi après « d' », devant la marque anglaise « 's » (ABCD's report), et après toute apostrophe quand il est déjà codé ailleurs dans le texte. Une ville de la liste Villes est reconnue même écrite en minuscules : « qu'il vienne » ou « la valence du carbone » sont codés comme un lieu ; retirer Vienne ou Valence de la liste Villes si ces mots comptent. Enfin, des chiffres sont parfois lus comme une coordonnée : un nombre entre parenthèses suivi de groupes de chiffres (« Dotation (2026) 125 000 € », « Total (1) 12 500 € ») est codé comme un téléphone, et trois groupes de quatre chiffres écrits à la suite (« Exercices 2024 2025 2026 », « Années 2024-2025-2026 ») comme un numéro de carte ; écrits « Dotation 2026 : 125 000 € » ou « Exercices 2024, 2025 et 2026 », ils restent lisibles. Dans un tableau (classeur Excel, tableau d'un document Word ou d'un diaporama PowerPoint, lignes collées avec leurs tabulations), une colonne dont l'en-tête est « Nom » ou « Prénom » est lue comme une liste de noms ou de prénoms, même absents des listes ; il en va de même de la case placée à droite de « Nom » ou de « Prénom » dans une fiche, et d'une ligne « Nom : Tessharto ». Une colonne « Nom » qui porte autre chose que des personnes (Stylos, Classeurs) est donc codée, et un mot relevé dans une telle colonne est codé partout où il est écrit avec une majuscule, même là où il désigne autre chose. Devant un nom à plusieurs particules écrites avec une majuscule (Van Der Gauvernot), les particules d'une telle colonne restent en clair. De même, après une fonction (le directeur, la présidente, le chef), un mot à majuscule que l'outil ne connaît pas est lu comme un nom : « le chef Cuisine » est codé. Dans tous ces cas, la restitution rend le texte exact.</li>
         <li>Dans un classeur Excel, il laisse en clair : les noms d'onglets, les noms définis, les noms de tableaux et de tableaux croisés dynamiques, les noms de plages protégées, les cellules saisies comme nombres, les dates calculées par une formule, les dates qu'un tableau croisé dynamique garde en mémoire, le texte d'un format de nombre, les nombres des graphiques, les macros, les requêtes de données (Power Query), le modèle de données et les objets incorporés. L'étape 2 le signale quand un de ces endroits porte un nom que l'outil reconnaît ou un élément codé ailleurs dans le classeur. Là où Excel n'accepte qu'un texte court (255 caractères pour une liste déroulante, un message de validation ou un texte de formule, 32 pour le titre d'un message), un texte que son code rendrait trop long reste en clair, et l'étape 2 le dit.</li>
         <li>À la restitution d'un classeur Excel, le texte revient exactement. Dans une cellule dont une partie seulement est en gras ou en couleur, la mise en forme revient exactement si l'outil d'intelligence artificielle n'a pas modifié la cellule ; sinon, un nom qui passait d'une mise en forme à l'autre prend celle de son début. Un onglet dont le nom porte un code retrouve son nom quand Excel l'accepte (31 caractères au plus, sans aucun des signes / \ [ ] : ? *, et pas déjà pris) ; sinon il garde son code et l'étape 4 le dit. Une date que l'outil d'intelligence artificielle a recopiée dans une autre cellule ou dans un classeur neuf revient en vraie date si cette cellule a un format de date ; sinon elle revient sous forme de texte (12/03/2026), et une formule qui s'en sert peut ne pas calculer : le modèle de prompt pour un classeur demande à l'outil de donner un format de date à ces cellules. Quand l'outil a réécrit un classeur qui porte des formules et qu'une donnée y est restituée, le classeur rendu demande à Excel de tout recalculer à son ouverture : un résultat que l'outil avait calculé sur un code (longueur d'un texte, majuscules, premières lettres) reprend ainsi sa vraie valeur. Après le chargement d'une table de correspondance depuis un fichier, la page ne sait plus reconnaître un classeur réécrit : elle ne demande ce recalcul que si le texte d'une formule ou le nom d'un onglet est restitué ; dans Excel, Ctrl+Alt+F9 recalcule alors toutes les formules.</li>
         <li>Ce que l'outil d'intelligence artificielle règle d'après la longueur du texte est calculé sur les codes, qui n'ont pas la longueur du texte d'origine : après la restitution, une colonne dont il a ajusté la largeur peut être trop étroite ou trop large, une zone de texte ou une bulle de commentaire un peu trop haute. Le texte, lui, revient en entier : ajuster ces dimensions dans le fichier rendu.</li>
         <li>Un grand fichier demande du temps, pendant lequel la page ne répond pas : lors des essais, de trente à quarante secondes pour un classeur de 10 000 lignes ou pour un document Word de 6 000 paragraphes, et de deux à un peu plus de trois minutes pour un classeur de 30 000 lignes. Ces durées changent d'une mesure à l'autre et dépendent de l'ordinateur.</li>
-        <li>Le nom du fichier est codé comme un texte, et l'outil y cherche aussi le nom de famille des personnes codées dans le contenu. Un nom que le contenu ne porte pas, ou que l'outil n'y a pas reconnu comme une personne, reste dans le nom du fichier : le vérifier avant d'envoyer le fichier. Un nom de fichier qui porte déjà un code n'est pas codé une seconde fois : l'étape 2 signale ce qui y reste en clair.</li>
+        <li>Le nom du fichier est codé comme un texte, et l'outil y cherche aussi le nom de famille des personnes codées dans le contenu. Un nom que le contenu ne porte pas, ou que l'outil n'y a pas reconnu comme une personne, reste dans le nom du fichier : le vérifier avant d'envoyer le fichier. Un nom de fichier qui porte déjà un code n'est pas codé une seconde fois : l'étape 2 signale ce qui y reste en clair. Dans le nom d'un fichier, un tiret bas est lu comme une espace : une personne écrite avec des tirets bas (TESSHARTO_Paul) les retrouve à la restitution ; une date, une adresse ou un numéro écrits avec des tirets bas (12_mars_2026) reviennent avec des espaces.</li>
         <li>Il ne sait pas dire si la table chargée est bien celle du fichier déposé à l'étape 3 : un fichier restitué avec la table d'un autre travail recevrait les données de cet autre travail. Garder chaque table enregistrée avec le fichier qu'elle accompagne.</li>
         <li>Dans un document Word ou un diaporama PowerPoint, il laisse en clair : les nombres des graphiques, les dates et heures des modifications et des commentaires, les noms de styles et de signets, le nom d'un champ de fusion, l'image qui montre un objet inséré (un tableau Excel collé comme objet), le nom donné à une forme ou à une image quand la personne n'est citée nulle part ailleurs dans le fichier, et un identifiant de connexion écrit dans le texte (à ajouter au Dictionnaire). Il ne lit pas non plus les macros, le contenu d'un fichier inséré à un ancien format ou d'une page web insérée, ni les données internes de certains champs (bibliographie, formulaire) : l'étape 2 le signale quand le fichier déposé en contient.</li>
           <li>À la restitution d'un document Word ou d'un diaporama PowerPoint, le texte revient exactement. La mise en forme revient exactement pour chaque passage que l'outil d'intelligence artificielle n'a pas modifié ; dans un passage modifié, ou si la table a été retapée à la main, un nom dont les lettres n'avaient pas toutes la même mise en forme (une partie en gras, par exemple) prend celle de son début. L'image miniature du fichier, retirée au codage, n'est pas remise.</li>
@@ -534,8 +534,8 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         <h2>Auteur</h2>
         <p>Outil créé par M. Manoël PYANET, directeur administratif du département composante Génie Électrique et des Procédés, Lyon 1 Université. Première version le 28 septembre 2026, sous la forme d'un classeur Excel ; version web depuis le 19 octobre 2026.</p>
         <h2>Ordre de traitement</h2>
-        <p>Adresses mail et liens ; Dictionnaire ; adresses postales, codes postaux, bâtiments, campus et villes seules ; IBAN, BIC, sécurité sociale, cartes, suites de onze chiffres et plus, téléphones, plaques et identifiants, SIRET, nombres longs ; dates ; personnes (mots en majuscules, prénoms connus, civilité suivie d'un nom, avec ou sans particule) ; puis un second passage pour les noms de famille écrits seuls, vus dans un nom complet du même texte ou listés dans Noms du service. Chaque ligne du texte est traitée comme une ligne de tableau, chaque tabulation comme une colonne, exactement comme dans le classeur Excel.</p>
-        <details class="historique"><summary>Historique des versions</summary><p>Origine : classeur Excel « Anonymiseur à bouton » créé le 28 septembre 2026, en version 3 le 30 septembre 2026, renommé « Pseudonymiseur à bouton » en version 4 le 12 octobre 2026. Version web du 19 octobre 2026 : reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et trois corrections (la troisième : un prénom composé dont la suite est en minuscules, Marie-odile MORVELANG, est reconnu) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). La version 1.7 code en plus les téléphones étrangers (indicatif entre parenthèses, ou tout numéro écrit après Tel, Direct, Mobile, Fax), les adresses étrangères écrites sur une ligne qui finit par un pays, les entreprises suivies d'une forme juridique (Ltd, Inc, GmbH, SARL, SAS), le nom entier d'un bâtiment, le numéro dans un nom de rue (avenue du 8 mai 1945), et le nom écrit avant une adresse mail ou avant « a écrit : », même avec un prénom inconnu ; la version 1.8 ne prend plus pour une personne un intitulé en majuscules qui commence par un nom de lieu ou de service (QUAI CHARGEMENT devient un lieu, SERVICE COURRIER reste en clair) ni le sigle GLPI ; la version 1.9 laisse en clair un sigle défini dans le texte entre parenthèses, quand ses lettres sont les initiales de sa définition (CAL, capacité d'accueil limitée) ; la version 1.10 code une signature réduite à une initiale collée au nom, seule sur sa ligne (J.Tessharto) ; FAQ et CAUTION restent en clair ; la version 1.11 code un prénom connu écrit après une élision (d'Alice), reconnaît un terme du Dictionnaire écrit sans accent (Societe pour Société), laisse en clair quatre sigles et mots de plus, dont SUJET, copie la sortie dès la pseudonymisation et ajoute le bouton Coller et restituer ; la version 1.11.1 laisse en clair un titre suivi d'un mot courant au pluriel (Professeur des Universités) et un mot de remplissage fait d'une seule lettre répétée (XXXX) ; la version 1.12 code une date écrite sans année (27 octobre, 27/10, lundi 12), une boîte fonctionnelle écrite avec un point devant son adresse (Service.Achats), le nom d'un outil de gestion du Dictionnaire quelle que soit sa casse et un nom de campus, ajouté à la liste Villes ; la version 1.12.1 restitue la réponse déjà collée quand le navigateur refuse la lecture du presse-papiers ; la version 1.13 accepte un classeur Excel déposé tel quel (.xlsx, .xlsm) : seuls ses textes sont codés, le classeur codé est téléchargé avec ses onglets, formules et mises en forme intacts, et le classeur renvoyé par l'outil se restitue de la même façon, le tout sur le poste ; la version 1.13.1 code un nom écrit après une initiale (P. Valdoreth, L. Gauvernot), sauf après un mot ordinaire en minuscules, un chiffre, un symbole ou un point (125 °C. Équations) et dans une suite d'initiales (N. B.) ; la version 1.14 code aussi, dans un classeur Excel, les dates saisies dans les cellules, qu'Excel enregistre comme des nombres, et les remet en dates, avec leur format, à la restitution ; une date calculée par une formule reste en clair ; la version 1.15 code une suite de jours devant un mois (les 13, 14 et 15 octobre), un mois suivi de son année (avril 2026) et le nom écrit après Dr ou Pr (Dr El Valdoreth, Pr Le Gauvernot), laisse en clair un numéro de page ou de partie (page 3/12) et une fraction suivie d'une unité (1/2 journée), ne coupe plus un numéro long par le code d'un numéro plus court, restitue en entier une adresse dont une partie avait déjà reçu un code et, quand un même code couvre deux écritures d'un même élément, restitue toujours la première écrite ; la version 1.16 donne son propre code à chaque écriture d'une même personne ou d'un même terme du Dictionnaire (Paul TESSHARTO, puis TESSHARTO : Pseudo_Personne_001, puis Pseudo_PersonneB_001, même numéro et une lettre après l'étiquette), pour que la restitution rende chaque texte exactement comme il était, et contrôle à chaque pseudonymisation que chaque texte codé revient exactement au texte d'origine ; un texte qui n'y reviendrait pas est codé en entier, sous un seul code ; la version 1.16.1 ne livre plus dans le Dictionnaire que quatre lignes d'exemple, pour que chacun y écrive les siennes, sans rien changer aux listes déjà enregistrées dans un navigateur ; la version 1.16.2 précise, en tête de cette page, le statut de l'outil ; la version 1.20 reprend la version 1.16.2, range cet historique en bas de la rubrique, rappelle l'origine de l'outil, affiche l'heure de sa mise à jour et ajoute la page Prompts : deux modèles de consigne à copier, pour un texte et pour un classeur Excel, qui demandent à l'outil d'intelligence artificielle de ne pas toucher aux codes ; la version 1.21 remplace les exemples de la page par des exemples généraux, aux noms de personnes inventés, et ajoute EDF, ENGIE et SNCF à la liste d'origine des mots à conserver ; la version 1.22 reprend la version 1.21, sans changement de l'outil ; la version 1.23 ajoute au mode d'emploi un quatrième geste de sûreté : relire ce que l'outil d'intelligence artificielle a rendu ; la version 1.30 pseudonymise et restitue aussi les documents Word (.docx) et les diaporamas PowerPoint (.pptx), déposés comme un classeur Excel : textes, tableaux, en-têtes et pieds de page, notes, commentaires, zones de texte, graphiques, liens, propriétés et auteurs du fichier, sans toucher à la mise en page ni aux images ; elle ajoute un troisième modèle de prompt pour ces fichiers et affiche ce qui reste en clair ; la page reste utilisable quand le navigateur refuse l'enregistrement local, listes et réglages n'étant alors gardés que le temps de l'onglet ; les règles de remplacement et le traitement des classeurs Excel ne changent pas ; la version 1.31 lit une espace insécable comme une espace ordinaire, dans un texte collé comme dans un fichier déposé : les numéros de téléphone, les dates en lettres, les IBAN, les numéros de sécurité sociale, les adresses et les noms écrits avec des espaces insécables, qui restaient en clair en tout ou en partie, sont codés, et la restitution remet chaque espace insécable à sa place ; un même élément écrit des deux façons garde son numéro et reçoit une lettre (Pseudo_TelephoneB_001) ; un texte sans espace insécable est codé exactement comme avant ; la version 1.32 lit de même un trait d'union insécable ou un tiret court comme un trait d'union ordinaire, et ne tient pas compte, pour lire, des caractères invisibles qu'un copier-coller glisse dans un numéro, une date, une adresse ou un nom (césure invisible, espace sans chasse, marques de sens d'écriture) : l'élément est codé en entier, et la restitution remet chaque caractère à sa place ; la version 1.33 garde une seule table pour tout ce qui est codé dans l'onglet : deux fichiers codés à la suite se restituent chacun avec leurs propres données ; elle lit une lettre accentuée écrite en deux caractères, la lettre puis son accent (texte copié de certains fichiers PDF, fichier venu d'un Mac), comme la même lettre écrite en un seul : les prénoms, les noms, les dates en lettres et les villes écrits ainsi, qui restaient en clair, sont codés, et la restitution rend l'écriture d'origine ; dans un classeur Excel, elle code aussi le texte écrit entre guillemets dans une formule, les listes déroulantes et les messages de validation, les textes que les graphiques et les tableaux croisés dynamiques gardent en mémoire, les scénarios, les infobulles, le texte de remplacement des images, les propriétés du fichier et le chemin d'enregistrement, lit d'un seul tenant un nom coupé par la mise en forme d'une cellule, et restitue les codes que l'outil a écrits à ces endroits ou dans le nom d'un onglet ; elle reconnaît un code que l'outil a rendu sous une autre écriture (Pseudo\_Personne\_001) et signale celui qu'elle ne reconnaît pas, y compris quand la table porte un autre préfixe que celui des réglages ; elle code le nom du fichier, où elle cherche aussi le nom de famille des personnes codées dans le contenu ; dans un document Word, elle code le titre et la description d'un tableau, ainsi que l'infobulle d'un lien et le nom d'une forme tels que les écrit LibreOffice ; à l'étape 2, elle signale ce qui reste en clair à un endroit qu'elle ne code pas ; quand le navigateur n'a plus la place de garder le travail de l'onglet, elle garde la table avant les textes, ne laisse plus revenir une table plus ancienne après un rechargement de la page, et prévient quand la table elle-même ne tient plus ; la version 1.34 code le nom à particule écrit après un prénom connu ou une civilité, que la particule soit en minuscules ou porte une majuscule (Alice de Morvelang, Paul van der Gauvernot, Paul Van Der Gauvernot, Mme de la Morvelang), et le nom à apostrophe (Mme d'Orvelang, Paul N'Gauvernot, D'ORVELANG Alice), qui restaient en clair en tout ou en partie ; elle les code aussi dans le nom du fichier ; après « de », « du » ou « de la », elle ne prend pas pour un nom un mot courant, un service, une discipline, un mois, une ville de la liste Villes ni un mot à conserver (Paul de la Scolarité) ; dans la liste Noms du service, un nom écrit en plusieurs mots, qui restait sans effet, est reconnu par chacun de ses mots ; elle code aussi le nom écrit après « Professeure », « Docteure » ou « Dre », et les noms qui suivent une civilité au pluriel, séparés par une virgule ou par « et » (MM. Tessharto, Valdoreth et Morvelang) ; elle code aussi le nom déjà connu écrit après une apostrophe (le dossier d'Orvelang, puisqu'Orvelang), le mot en majuscules écrit après « d' » (le dossier d'ORVELANG), les noms écrits avec des lettres latines d'autres langues (Mme Şorvelang, M. Yıldoreth, Mme Valdorếth) et le nom ou le prénom suivi de la marque anglaise « 's » (Tessharto's team, Alice's report), qui restaient en clair en tout ou en partie ; elle code aussi le téléphone écrit avec l'indicatif « 00 33 » (0033 4 00 00 00 05), qui n'était codé qu'après le mot Tél, Portable ou Fax, et le téléphone écrit avec l'indicatif entre parenthèses ((+33) 4 00 00 00 04), qui restait en clair ; un texte qui ne porte aucune de ces écritures est codé exactement comme avant ; la version 1.35 reconnaît, dans la liste Prénoms, un prénom écrit en plusieurs mots (Thu Ha) par chacun de ses mots, alors qu'une telle ligne restait sans effet ; elle code en entier une adresse mail qui porte une lettre accentuée (amélie.morvelang@univ-exemple.fr), dont le début restait en clair ; dans un classeur Excel, elle code et restitue le texte cherché par une mise en forme conditionnelle, qui restait en clair au codage et gardait son code à la restitution ; le modèle de prompt pour un classeur demande à l'outil de donner un format de date à la cellule où il recopie une date codée, pour qu'elle y revienne en vraie date, et les limites disent ce que deviennent une date recopiée sans format de date et les dimensions que l'outil règle d'après la longueur des codes ; un document Word ou un diaporama PowerPoint qui porte plusieurs fichiers incorporés (les classeurs de ses graphiques) reçoit les mêmes codes à chaque codage, alors que leurs numéros pouvaient changer d'une fois à l'autre ; un classeur que l'outil a réécrit et qui porte des formules demande à Excel de tout recalculer à son ouverture dès qu'une donnée y est restituée, alors qu'un résultat calculé par l'outil sur un code (longueur d'un texte, majuscules, premières lettres) pouvait rester affiché ; quand le navigateur ne peut pas lire le fichier déposé (fichier déplacé ou supprimé entre-temps), la page le dit au lieu de rester sans réponse ; sur un écran étroit, un nom de fichier très long, un bouton au texte long et le tableau du Dictionnaire ne dépassent plus de la page ; un mot qui est aussi le nom d'une fonction interne du langage de la page (constructor, hasOwnProperty, toString) est traité comme tout autre mot, où qu'il soit écrit (texte, listes, Dictionnaire, table de correspondance, fichier), alors que « Constructor » n'était jamais codé comme un nom de personne et que le terme « hasOwnProperty » inscrit au Dictionnaire arrêtait le codage ; le code de la page est repris à quatre endroits pour sa relecture (accès au stockage du navigateur écrit en toutes lettres, bilan chiffré repris comme du texte après un rechargement de la page, seuls les réglages connus repris d'un fichier de réglages, deux fonctions qui ne servaient plus retirées), sans effet sur les textes et les fichiers traités ; un texte, une liste ou un fichier qui ne porte rien de cela est traité exactement comme avant.</p></details>
+        <p>Dans un tableau, relevé des colonnes « Nom » et « Prénom » ; adresses mail et liens ; Dictionnaire ; adresses postales, codes postaux, bâtiments, campus et villes seules ; IBAN, BIC, sécurité sociale, cartes, suites de onze chiffres et plus, téléphones, plaques et identifiants, SIRET, nombres longs ; dates ; personnes (mots en majuscules, prénoms connus, civilité ou fonction suivie d'un nom, avec ou sans particule) ; puis un second passage pour les noms de famille écrits seuls, vus dans un nom complet du même texte ou listés dans Noms du service. Chaque ligne du texte est traitée comme une ligne de tableau, chaque tabulation comme une colonne, exactement comme dans le classeur Excel.</p>
+        <details class="historique"><summary>Historique des versions</summary><p>Origine : classeur Excel « Anonymiseur à bouton » créé le 28 septembre 2026, en version 3 le 30 septembre 2026, renommé « Pseudonymiseur à bouton » en version 4 le 12 octobre 2026. Version web du 19 octobre 2026 : reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et trois corrections (la troisième : un prénom composé dont la suite est en minuscules, Marie-odile MORVELANG, est reconnu) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). La version 1.7 code en plus les téléphones étrangers (indicatif entre parenthèses, ou tout numéro écrit après Tel, Direct, Mobile, Fax), les adresses étrangères écrites sur une ligne qui finit par un pays, les entreprises suivies d'une forme juridique (Ltd, Inc, GmbH, SARL, SAS), le nom entier d'un bâtiment, le numéro dans un nom de rue (avenue du 8 mai 1945), et le nom écrit avant une adresse mail ou avant « a écrit : », même avec un prénom inconnu ; la version 1.8 ne prend plus pour une personne un intitulé en majuscules qui commence par un nom de lieu ou de service (QUAI CHARGEMENT devient un lieu, SERVICE COURRIER reste en clair) ni le sigle GLPI ; la version 1.9 laisse en clair un sigle défini dans le texte entre parenthèses, quand ses lettres sont les initiales de sa définition (CAL, capacité d'accueil limitée) ; la version 1.10 code une signature réduite à une initiale collée au nom, seule sur sa ligne (J.Tessharto) ; FAQ et CAUTION restent en clair ; la version 1.11 code un prénom connu écrit après une élision (d'Alice), reconnaît un terme du Dictionnaire écrit sans accent (Societe pour Société), laisse en clair quatre sigles et mots de plus, dont SUJET, copie la sortie dès la pseudonymisation et ajoute le bouton Coller et restituer ; la version 1.11.1 laisse en clair un titre suivi d'un mot courant au pluriel (Professeur des Universités) et un mot de remplissage fait d'une seule lettre répétée (XXXX) ; la version 1.12 code une date écrite sans année (27 octobre, 27/10, lundi 12), une boîte fonctionnelle écrite avec un point devant son adresse (Service.Achats), le nom d'un outil de gestion du Dictionnaire quelle que soit sa casse et un nom de campus, ajouté à la liste Villes ; la version 1.12.1 restitue la réponse déjà collée quand le navigateur refuse la lecture du presse-papiers ; la version 1.13 accepte un classeur Excel déposé tel quel (.xlsx, .xlsm) : seuls ses textes sont codés, le classeur codé est téléchargé avec ses onglets, formules et mises en forme intacts, et le classeur renvoyé par l'outil se restitue de la même façon, le tout sur le poste ; la version 1.13.1 code un nom écrit après une initiale (P. Valdoreth, L. Gauvernot), sauf après un mot ordinaire en minuscules, un chiffre, un symbole ou un point (125 °C. Équations) et dans une suite d'initiales (N. B.) ; la version 1.14 code aussi, dans un classeur Excel, les dates saisies dans les cellules, qu'Excel enregistre comme des nombres, et les remet en dates, avec leur format, à la restitution ; une date calculée par une formule reste en clair ; la version 1.15 code une suite de jours devant un mois (les 13, 14 et 15 octobre), un mois suivi de son année (avril 2026) et le nom écrit après Dr ou Pr (Dr El Valdoreth, Pr Le Gauvernot), laisse en clair un numéro de page ou de partie (page 3/12) et une fraction suivie d'une unité (1/2 journée), ne coupe plus un numéro long par le code d'un numéro plus court, restitue en entier une adresse dont une partie avait déjà reçu un code et, quand un même code couvre deux écritures d'un même élément, restitue toujours la première écrite ; la version 1.16 donne son propre code à chaque écriture d'une même personne ou d'un même terme du Dictionnaire (Paul TESSHARTO, puis TESSHARTO : Pseudo_Personne_001, puis Pseudo_PersonneB_001, même numéro et une lettre après l'étiquette), pour que la restitution rende chaque texte exactement comme il était, et contrôle à chaque pseudonymisation que chaque texte codé revient exactement au texte d'origine ; un texte qui n'y reviendrait pas est codé en entier, sous un seul code ; la version 1.16.1 ne livre plus dans le Dictionnaire que quatre lignes d'exemple, pour que chacun y écrive les siennes, sans rien changer aux listes déjà enregistrées dans un navigateur ; la version 1.16.2 précise, en tête de cette page, le statut de l'outil ; la version 1.20 reprend la version 1.16.2, range cet historique en bas de la rubrique, rappelle l'origine de l'outil, affiche l'heure de sa mise à jour et ajoute la page Prompts : deux modèles de consigne à copier, pour un texte et pour un classeur Excel, qui demandent à l'outil d'intelligence artificielle de ne pas toucher aux codes ; la version 1.21 remplace les exemples de la page par des exemples généraux, aux noms de personnes inventés, et ajoute EDF, ENGIE et SNCF à la liste d'origine des mots à conserver ; la version 1.22 reprend la version 1.21, sans changement de l'outil ; la version 1.23 ajoute au mode d'emploi un quatrième geste de sûreté : relire ce que l'outil d'intelligence artificielle a rendu ; la version 1.30 pseudonymise et restitue aussi les documents Word (.docx) et les diaporamas PowerPoint (.pptx), déposés comme un classeur Excel : textes, tableaux, en-têtes et pieds de page, notes, commentaires, zones de texte, graphiques, liens, propriétés et auteurs du fichier, sans toucher à la mise en page ni aux images ; elle ajoute un troisième modèle de prompt pour ces fichiers et affiche ce qui reste en clair ; la page reste utilisable quand le navigateur refuse l'enregistrement local, listes et réglages n'étant alors gardés que le temps de l'onglet ; les règles de remplacement et le traitement des classeurs Excel ne changent pas ; la version 1.31 lit une espace insécable comme une espace ordinaire, dans un texte collé comme dans un fichier déposé : les numéros de téléphone, les dates en lettres, les IBAN, les numéros de sécurité sociale, les adresses et les noms écrits avec des espaces insécables, qui restaient en clair en tout ou en partie, sont codés, et la restitution remet chaque espace insécable à sa place ; un même élément écrit des deux façons garde son numéro et reçoit une lettre (Pseudo_TelephoneB_001) ; un texte sans espace insécable est codé exactement comme avant ; la version 1.32 lit de même un trait d'union insécable ou un tiret court comme un trait d'union ordinaire, et ne tient pas compte, pour lire, des caractères invisibles qu'un copier-coller glisse dans un numéro, une date, une adresse ou un nom (césure invisible, espace sans chasse, marques de sens d'écriture) : l'élément est codé en entier, et la restitution remet chaque caractère à sa place ; la version 1.33 garde une seule table pour tout ce qui est codé dans l'onglet : deux fichiers codés à la suite se restituent chacun avec leurs propres données ; elle lit une lettre accentuée écrite en deux caractères, la lettre puis son accent (texte copié de certains fichiers PDF, fichier venu d'un Mac), comme la même lettre écrite en un seul : les prénoms, les noms, les dates en lettres et les villes écrits ainsi, qui restaient en clair, sont codés, et la restitution rend l'écriture d'origine ; dans un classeur Excel, elle code aussi le texte écrit entre guillemets dans une formule, les listes déroulantes et les messages de validation, les textes que les graphiques et les tableaux croisés dynamiques gardent en mémoire, les scénarios, les infobulles, le texte de remplacement des images, les propriétés du fichier et le chemin d'enregistrement, lit d'un seul tenant un nom coupé par la mise en forme d'une cellule, et restitue les codes que l'outil a écrits à ces endroits ou dans le nom d'un onglet ; elle reconnaît un code que l'outil a rendu sous une autre écriture (Pseudo\_Personne\_001) et signale celui qu'elle ne reconnaît pas, y compris quand la table porte un autre préfixe que celui des réglages ; elle code le nom du fichier, où elle cherche aussi le nom de famille des personnes codées dans le contenu ; dans un document Word, elle code le titre et la description d'un tableau, ainsi que l'infobulle d'un lien et le nom d'une forme tels que les écrit LibreOffice ; à l'étape 2, elle signale ce qui reste en clair à un endroit qu'elle ne code pas ; quand le navigateur n'a plus la place de garder le travail de l'onglet, elle garde la table avant les textes, ne laisse plus revenir une table plus ancienne après un rechargement de la page, et prévient quand la table elle-même ne tient plus ; la version 1.34 code le nom à particule écrit après un prénom connu ou une civilité, que la particule soit en minuscules ou porte une majuscule (Alice de Morvelang, Paul van der Gauvernot, Paul Van Der Gauvernot, Mme de la Morvelang), et le nom à apostrophe (Mme d'Orvelang, Paul N'Gauvernot, D'ORVELANG Alice), qui restaient en clair en tout ou en partie ; elle les code aussi dans le nom du fichier ; après « de », « du » ou « de la », elle ne prend pas pour un nom un mot courant, un service, une discipline, un mois, une ville de la liste Villes ni un mot à conserver (Paul de la Scolarité) ; dans la liste Noms du service, un nom écrit en plusieurs mots, qui restait sans effet, est reconnu par chacun de ses mots ; elle code aussi le nom écrit après « Professeure », « Docteure » ou « Dre », et les noms qui suivent une civilité au pluriel, séparés par une virgule ou par « et » (MM. Tessharto, Valdoreth et Morvelang) ; elle code aussi le nom déjà connu écrit après une apostrophe (le dossier d'Orvelang, puisqu'Orvelang), le mot en majuscules écrit après « d' » (le dossier d'ORVELANG), les noms écrits avec des lettres latines d'autres langues (Mme Şorvelang, M. Yıldoreth, Mme Valdorếth) et le nom ou le prénom suivi de la marque anglaise « 's » (Tessharto's team, Alice's report), qui restaient en clair en tout ou en partie ; elle code aussi le téléphone écrit avec l'indicatif « 00 33 » (0033 4 00 00 00 05), qui n'était codé qu'après le mot Tél, Portable ou Fax, et le téléphone écrit avec l'indicatif entre parenthèses ((+33) 4 00 00 00 04), qui restait en clair ; un texte qui ne porte aucune de ces écritures est codé exactement comme avant ; la version 1.35 reconnaît, dans la liste Prénoms, un prénom écrit en plusieurs mots (Thu Ha) par chacun de ses mots, alors qu'une telle ligne restait sans effet ; elle code en entier une adresse mail qui porte une lettre accentuée (amélie.morvelang@univ-exemple.fr), dont le début restait en clair ; dans un classeur Excel, elle code et restitue le texte cherché par une mise en forme conditionnelle, qui restait en clair au codage et gardait son code à la restitution ; le modèle de prompt pour un classeur demande à l'outil de donner un format de date à la cellule où il recopie une date codée, pour qu'elle y revienne en vraie date, et les limites disent ce que deviennent une date recopiée sans format de date et les dimensions que l'outil règle d'après la longueur des codes ; un document Word ou un diaporama PowerPoint qui porte plusieurs fichiers incorporés (les classeurs de ses graphiques) reçoit les mêmes codes à chaque codage, alors que leurs numéros pouvaient changer d'une fois à l'autre ; un classeur que l'outil a réécrit et qui porte des formules demande à Excel de tout recalculer à son ouverture dès qu'une donnée y est restituée, alors qu'un résultat calculé par l'outil sur un code (longueur d'un texte, majuscules, premières lettres) pouvait rester affiché ; quand le navigateur ne peut pas lire le fichier déposé (fichier déplacé ou supprimé entre-temps), la page le dit au lieu de rester sans réponse ; sur un écran étroit, un nom de fichier très long, un bouton au texte long et le tableau du Dictionnaire ne dépassent plus de la page ; un mot qui est aussi le nom d'une fonction interne du langage de la page (constructor, hasOwnProperty, toString) est traité comme tout autre mot, où qu'il soit écrit (texte, listes, Dictionnaire, table de correspondance, fichier), alors que « Constructor » n'était jamais codé comme un nom de personne et que le terme « hasOwnProperty » inscrit au Dictionnaire arrêtait le codage ; le code de la page est repris à quatre endroits pour sa relecture (accès au stockage du navigateur écrit en toutes lettres, bilan chiffré repris comme du texte après un rechargement de la page, seuls les réglages connus repris d'un fichier de réglages, deux fonctions qui ne servaient plus retirées), sans effet sur les textes et les fichiers traités ; un texte, une liste ou un fichier qui ne porte rien de cela est traité exactement comme avant ; la version 1.36 lit, dans un tableau (classeur Excel, tableau d'un document Word ou d'un diaporama PowerPoint, lignes collées avec leurs tabulations), la colonne dont l'en-tête est « Nom » ou « Prénom » comme une liste de noms ou de prénoms, même absents des listes, ainsi que la case placée à droite de « Nom » ou de « Prénom » dans une fiche et la ligne « Nom : Tessharto » ; elle code un nom écrit avant un prénom connu dans le fil d'une phrase (le dossier de Tessharto Paul) ou dans une colonne qui porte au moins trois noms ainsi écrits, un nom écrit après une fonction (la directrice Tessharto, Monsieur le Président Tessharto, notre collègue Tessharto), un nom de naissance écrit après « né » ou « née », un nom écrit après « Me » ou « Pre », et un nom à majuscule intérieure qui commence par Mc, Mac, Le, De ou un autre début courant (Paul McTessharto) ; neuf mots d'en-tête écrits en majuscules (NOM, PRÉNOM, GRADE, CORPS, FONCTION, STATUT, ADRESSE, OBSERVATIONS, GÉNÉRAL) entrent dans la liste Mots à conserver et ne sont plus codés ; dans le nom d'un fichier, une personne écrite avec des tirets bas (TESSHARTO_Paul) retrouve ses tirets bas à la restitution, alors qu'ils revenaient en espaces ; un texte ou un fichier qui ne porte rien de cela est traité exactement comme avant.</p></details>
       </div>
     </section>
 
@@ -544,7 +544,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
 
 <footer class="pied">
   <span>Lyon 1 Université</span>
-  <span>Pseudonymiseur, version web 1.35 du 20 novembre 2026, mise à jour le 20 novembre 2026 à 23h30</span>
+  <span>Pseudonymiseur, version web 1.36 du 21 novembre 2026, mise à jour le 21 novembre 2026 à 22h07</span>
   <span>Traitement local, aucune donnée transmise</span>
 </footer>
 <div class="toast" id="toast"></div>
@@ -762,7 +762,35 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   // qu'écrit en majuscules (« mm » est une unité).
   var CIVILITES_PLURIEL = { mmes: 1, mlles: 1, mesdames: 1, messieurs: 1, mesdemoiselles: 1 };
   function civilitePlurielle(m) { return m === 'MM' || possede(CIVILITES_PLURIEL, normaliser(m)); }
-  function estCivilite(m) { return m === 'MM' || possede(CIVILITES, normaliser(m)); }
+  // Version 1.36 : « Me » (maître) et « Pre » (professeure) ne comptent qu'écrits ainsi, et devant un nom (voir finPersonne).
+  function estCivilite(m) { return m === 'MM' || m === 'Me' || m === 'Pre' || possede(CIVILITES, normaliser(m)); }
+  /* Version 1.36 : nom à majuscule intérieure (McTessharto, DeMorvelang, LeGauvernot). Il est lu comme un nom écrit avec une
+     majuscule là où un nom est attendu : après un prénom connu, après une civilité, et quand il est déjà connu. Seuls les
+     débuts de nom courants sont lus, pour laisser en clair les noms de produits (PowerPoint, LibreOffice). */
+  var RE_MAJ_INTERIEURE = /^(?:Mc|Mac|De|Di|Du|Le|La|Van|Fitz|Del|Da|Des|Ben|El|Al)[A-ZÀ-Ý][a-zà-ÿ]{2,}$/;
+  function nomMajInterieure(m) { return RE_MAJ_INTERIEURE.test(m); }
+  /* Version 1.36 : nom écrit après une fonction ou une qualité, précédée d'un article (le président Tessharto, la directrice
+     Valdoreth, l'étudiant Morvelang, notre collègue Gauvernot). Le mot qui suit est le nom quand il est écrit avec une majuscule
+     et qu'il n'est ni un mot courant, ni un mot à conserver, ni une ville, ni un prénom connu, ni un service ou une discipline,
+     ni un mot qui qualifie la fonction (le directeur Général, la secrétaire Pédagogique). */
+  var FONCTIONS = tableVide(), QUALIFICATIFS = tableVide(), DETERMINANTS = tableVide();
+  ('president presidente vice-president vice-presidente directeur directrice doyen doyenne recteur rectrice ministre maire prefet prefete ' +
+    'depute deputee senateur senatrice proviseur proviseure inspecteur inspectrice commissaire juge procureur procureure colonel commandant ' +
+    'capitaine lieutenant ambassadeur ambassadrice tresorier tresoriere secretaire chef cheffe conseiller conseillere collegue etudiant etudiante ' +
+    'eleve stagiaire doctorant doctorante agent agente candidat candidate enseignant enseignante technicien technicienne ingenieur ingenieure ' +
+    'salarie salariee apprenti apprentie vacataire intervenant intervenante employe employee tuteur tutrice').split(' ')
+    .forEach(function (m) { FONCTIONS[m] = 1; });
+  ('general generale generaux adjoint adjointe administratif administrative financier financiere technique delegue deleguee executif ' +
+    'executive honoraire regional regionale national nationale departemental departementale academique scientifique pedagogique ' +
+    'commercial commerciale juridique medical medicale operationnel operationnelle fondateur fondatrice sortant sortante elu elue ' +
+    'actuel actuelle interimaire comptable principal principale qualite marketing innovation humaines achats international ' +
+    'internationale europeen europeenne erasmus libre senior junior associe associee emerite titulaire suppleant suppleante ' +
+    'provisoire permanent permanente externe interne municipal municipale communal communale communautaire federal federale ' +
+    'central centrale local locale territorial territoriale public publique prive privee industriel industrielle artistique ' +
+    'culturel culturelle sportif sportive social sociale sanitaire hospitalier hospitaliere universitaire doctoral doctorale ' +
+    'etranger etrangere boursier boursiere inscrit inscrite concerne concernee present presente absent absente').split(' ')
+    .forEach(function (m) { QUALIFICATIFS[m] = 1; });
+  ('le la du au notre votre leur ce cet cette').split(' ').forEach(function (m) { DETERMINANTS[m] = 1; });
 
   // Mots qui suivent « Pr » ou « Dr » sans être un nom (version 1.15).
   var SUITE_DE_TITRE = { emerite: 1, emerites: 1, honoraire: 1, honoraires: 1, associe: 1, associee: 1, agrege: 1, agregee: 1, invite: 1, invitee: 1 };
@@ -858,6 +886,21 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       if (k && !vuesVilles[k] && !this.conserver[k]) { vuesVilles[k] = true; this.villes.push(v); }
     }, this);
     this.villes = trierParLongueur(this.villes, function (x) { return x; });
+    // Version 1.36 : les noms et les prénoms relevés dans le texte lui-même (colonne dont l'en-tête est « Nom » ou « Prénom »,
+    // ligne « Nom : … », voir releverNoms) sont lus comme s'ils étaient inscrits aux listes Prénoms et Noms du service, pour ce
+    // codage seulement. Un mot de la liste Conserver ou un prénom connu n'est pas inscrit comme nom.
+    (config.prenomsReleves || []).forEach(function (v) {
+      v = normaliser(trim(v)); if (!v || this.conserver[v]) return;
+      this.prenoms[v] = true;
+      if (/[ \t\u00a0]/.test(v)) v.split(/[ \t\u00a0]+/).forEach(function (w) {
+        if (w.length >= 2 && !possede(PARTICULES, w) && !possede(SECONDES_PARTICULES, w) && !this.conserver[w]) this.prenoms[w] = true;
+      }, this);
+    }, this);
+    (config.nomsReleves || []).forEach(function (v) {
+      v = normaliser(trim(v));
+      if (v.length < 2 || this.prenoms[v] || this.conserver[v] || possede(PARTICULES, v) || possede(SECONDES_PARTICULES, v)) return;
+      this.noms[v] = true; if (v.indexOf('\u2019') >= 0) this.noms[v.replace(/\u2019/g, "'")] = true;
+    }, this);
     this.dictionnaire = (config.dictionnaire || []).map(function (l, idx) {
       return { texte: trim(l.texte), etiquette: trim(l.etiquette), motif: normaliser(trim(l.type)) === 'motif', ligne: idx + 2 };
     }).filter(function (l) { return l.texte.length > 0; });
@@ -1485,11 +1528,12 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         i = g.fin + 1;
         continue;
       }
-      this.elisionEnClair = -1;
+      this.elisionEnClair = -1; this.debutPersonne = -1;
       if (genres[i] === 'W') fin = this.finPersonne(mots, genres, n, i);
       if (fin >= 0) {
         debut = i;
-        if (estCivilite(partieUtile(mots[i]))) { res += mots[i] + mots[i + 1]; debut = i + 2; }
+        if (this.debutPersonne > i) { for (j = i; j < this.debutPersonne; j++) res += mots[j]; debut = this.debutPersonne; }   // version 1.36 : le nom vient après une fonction ou après « née »
+        else if (estCivilite(partieUtile(mots[i]))) { res += mots[i] + mots[i + 1]; debut = i + 2; }
         orig = '';
         for (j = debut; j <= fin; j++) orig += mots[j];
         if (motElide(mots[debut]) && (!this.nomApostropheLibre(mots[debut]) || this.elisionEnClair === debut)) {
@@ -1613,7 +1657,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       }
       return this.nomConnuApresApostrophe(m) ? 2 : 0;
     }
-    if ((estMaj(m) || estCapitalise(m)) && m.length >= 2 && !this.conserver[cle] && !estCivilite(m) && this.nomConnu(cle)) return 1;
+    if ((estMaj(m) || estCapitalise(m) || nomMajInterieure(m)) && m.length >= 2 && !this.conserver[cle] && !estCivilite(m) && this.nomConnu(cle)) return 1;
     return this.nomConnuApresApostrophe(m) ? 2 : 0;
   };
 
@@ -1673,7 +1717,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       if (this.conserver[normaliser(mots[k])] || estRemplissage(mots[k])) break;
       if (motElide(mots[k])) break;
       if (estCode(mots, genres, n, k)) break;
-      if ((estMaj(mots[k]) && mots[k].length >= 2) || estCapitalise(mots[k]) || this.prenomComposeMinuscule(mots[k])) { fin = k; ajoutes++; } else break;
+      if ((estMaj(mots[k]) && mots[k].length >= 2) || estCapitalise(mots[k]) || nomMajInterieure(mots[k]) || this.prenomComposeMinuscule(mots[k])) { fin = k; ajoutes++; } else break;
     }
     return fin;
   };
@@ -1742,7 +1786,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     }
     // Correction par rapport au module 4.1 : une civilité suivie d'un code déjà posé (M. Pseudo_Telephone_001)
     // ne forme pas une personne ; sinon le préfixe était codé et la restitution laissait le code en place.
-    if ((estMaj(mots[k]) || estCapitalise(mots[k])) && !this.conserver[normaliser(mots[k])] && !estCivilite(mots[k]) && !estCode(mots, genres, n, k)) {
+    if ((estMaj(mots[k]) || estCapitalise(mots[k]) || nomMajInterieure(mots[k])) && !this.conserver[normaliser(mots[k])] && !estCivilite(mots[k]) && !estCode(mots, genres, n, k)) {
       return this.suiteParticule(mots, genres, n, k, this.etendre(mots, genres, n, k, 2), true);   // version 1.34 : Mme Alice de la Morvelang, M. Van der Gauvernot
     }
     if (estParticule(mots[k])) {
@@ -1771,7 +1815,8 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     // Version 1.15 : « Dr » et « Pr » écrits ainsi (pas « DR », « PR ») devant un nom écrit avec une majuscule sont des
     // civilités, même s'ils figurent dans la liste Conserver (Dr El Valdoreth, Pr Le Gauvernot, Dr Tessharto).
     var titreCourt = false;
-    if ((b === 'Dr' || b === 'Pr') && !estCode(mots, genres, n, i)) {
+    var titreExact = b === 'Me' || b === 'Pre';                 // version 1.36 : Me Tessharto, Pre Valdoreth
+    if ((b === 'Dr' || b === 'Pr' || titreExact) && !estCode(mots, genres, n, i)) {
       var kt = motSuivant(mots, genres, n, i, true);
       if (kt >= 0 && !estCode(mots, genres, n, kt) && !estCivilite(mots[kt])) {
         if (estParticule(mots[kt])) titreCourt = true; // la suite est contrôlée par la règle des civilités
@@ -1779,10 +1824,13 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
           !this.conserver[normaliser(mots[kt])] && !possede(SUITE_DE_TITRE, normaliser(mots[kt]))) titreCourt = true;
       }
     }
+    if (titreExact && !(titreCourt && b === m)) return -1;      // « Me » et « Pre » ne sont des civilités que devant un nom
     if (!titreCourt && b !== 'MM' && (this.conserver[normaliser(b)] || estRemplissage(b))) return -1;
     // Règle ajoutée le 26/10/2026 (absente du module 4.1) : un prénom connu écrit après une élision (d'Alice, l'Amélie)
     // est une personne ; l'élision reste en clair et seul le nom est codé. Les autres mots élidés restent en clair.
     if (motElide(m)) {
+      // Version 1.36 : fonction écrite après « l' » (l'étudiant Morvelang, l'inspectrice Valdoreth).
+      if (/^[lL]['\u2019]/.test(m) && b.length === m.length - 2) { k = this.nomApresFonction(mots, genres, n, i, true); if (k >= 0) { this.debutPersonne = k; return k; } }
       if (estCapitalise(b) && this.estPrenom(b) && !motCourant(b) && !estCode(mots, genres, n, i) && !apresMotDeRue(mots, genres, i)) return this.suiteParticule(mots, genres, n, i, this.etendre(mots, genres, n, i, 2));
       // Version 1.34 : nom à apostrophe en majuscules suivi d'un prénom connu (N'GAUVERNOT Paul, D'ORVELANG Alice). « L' » est
       // laissé de côté : devant un prénom, c'est le plus souvent un article (L'ENSEIGNANT Paul …).
@@ -1859,12 +1907,51 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       }
     }
 
+    // Version 1.36. Nom écrit après « née » (née Valdoreth) : le mot qui suit, écrit avec une majuscule, est le nom.
+    var bl = lcase(b);
+    if ((bl === 'n\u00e9' || bl === 'n\u00e9e' || bl === 'n\u00e9s' || bl === 'n\u00e9es') && !estMaj(b)) {
+      k = motSuivant(mots, genres, n, i, false);
+      if (k >= 0 && (estCapitalise(mots[k]) || nomMajInterieure(mots[k])) && mots[k].length >= 3 && !motCourant(mots[k]) && !estRemplissage(mots[k]) &&
+        !this.conserver[normaliser(mots[k])] && !this.estPrenom(mots[k]) && !estCivilite(mots[k]) && !estCode(mots, genres, n, k)) { this.debutPersonne = k; return k; }
+    }
+    // Version 1.36. Nom écrit après une fonction précédée d'un article : le président Tessharto, la directrice Valdoreth.
+    k = this.nomApresFonction(mots, genres, n, i, false);
+    if (k >= 0) { this.debutPersonne = k; return k; }
+    // Version 1.36. Nom écrit avec une majuscule devant un prénom connu, dans le fil d'une phrase (le dossier de Tessharto Paul) :
+    // le mot vient après un mot en minuscules, et le prénom n'est pas lui-même suivi d'un nom. En début de phrase ou de ligne,
+    // rien n'est lu ainsi (Bonjour Paul, Merci Alice).
+    if (estCapitalise(b) && b === m && b.length >= 3 && !motCourant(b) && !this.estPrenom(b) && !this.estVille(b) && !estCivilite(b) && !estParticule(b) &&
+      !motApresParticule(b) && !possede(QUALIFICATIFS, normaliser(b)) && !apresMotDeRue(mots, genres, i) &&
+      i >= 2 && mots[i - 1] === ' ' && genres[i - 2] === 'W' && mots[i - 2] === lcase(mots[i - 2]) && estLettre(mots[i - 2].charAt(mots[i - 2].length - 1)) && !estCode(mots, genres, n, i - 2)) {
+      k = motSuivant(mots, genres, n, i, false);
+      if (k >= 0 && estCapitalise(mots[k]) && this.estPrenom(mots[k]) && !motCourant(mots[k]) && !this.conserver[normaliser(mots[k])] && !estCode(mots, genres, n, k) &&
+        this.suiteParticule(mots, genres, n, k, this.etendre(mots, genres, n, k, 2)) === k) return k;
+    }
+
     // 3. Prénom connu, écrit avec une majuscule : Lucas Valdoreth, Paul TESSHARTO, Bonjour Paul, Marie-Odile Morvelang.
     if ((estCapitalise(b) && this.estPrenom(b)) || this.prenomComposeMinuscule(b)) {
       if (apresMotDeRue(mots, genres, i)) return -1;
       return this.suiteParticule(mots, genres, n, i, this.etendre(mots, genres, n, i, 2));   // version 1.34 : Alice de Morvelang, Paul N'Gauvernot
     }
     return -1;
+  };
+
+  // Version 1.36. Le mot i est une fonction (président, directrice, étudiant), précédée d'un article sauf quand « l' » y est
+  // collé ; rend la place du nom écrit juste après, ou -1.
+  Session.prototype.nomApresFonction = function (mots, genres, n, i, determine) {
+    var b = partieUtile(mots[i]);
+    if (estMaj(b) || !possede(FONCTIONS, normaliser(b)) || estCode(mots, genres, n, i)) return -1;
+    if (!determine && !(i >= 2 && mots[i - 1] === ' ' && genres[i - 2] === 'W' && possede(DETERMINANTS, lcase(mots[i - 2])))) return -1;
+    var k = motSuivant(mots, genres, n, i, false);
+    if (k < 0) return -1;
+    var w = mots[k], cle = normaliser(w);
+    if (!(estCapitalise(w) || nomMajInterieure(w)) || w.length < 3 || estCode(mots, genres, n, k)) return -1;
+    if (motCourant(w) || estRemplissage(w) || motApresParticule(w) || this.conserver[cle] || this.estVille(w) || this.estPrenom(w) || estCivilite(w) ||
+      possede(QUALIFICATIFS, cle) || possede(FONCTIONS, cle) || estParticule(w)) return -1;
+    // le mot est suivi d'un nom en majuscules (le doctorant Tomasz NOWAK) : prénom et nom sont lus ensemble par les règles d'avant
+    var k2 = motSuivant(mots, genres, n, k, false);
+    if (k2 >= 0 && estMaj(partieUtile(mots[k2])) && partieUtile(mots[k2]).length >= 2 && !this.conserver[normaliser(partieUtile(mots[k2]))] && !estCode(mots, genres, n, k2)) return -1;
+    return k;
   };
 
   function cleTriee(mots) {
@@ -2005,8 +2092,159 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   }
 
   /* Pseudonymise un tableau de cellules. Retourne { ok, erreur, cellules, correspondance: [[origine, code]...], stats, avertissements }. */
+  /* Version 1.36. Noms et prénoms que la disposition du texte désigne :
+       a. dans un tableau, les cellules écrites sous un en-tête « Nom », « Prénom », « Nom et prénom », « Nom de l'agent » ;
+       b. dans un formulaire, la cellule écrite à droite d'une telle étiquette ;
+       c. dans un texte, la ligne « Nom : Tessharto » ;
+       d. une colonne où au moins trois cellules sont faites d'un mot à majuscule suivi d'un prénom connu (Tessharto Paul).
+     Une valeur n'est relevée que si elle a la forme d'un nom : cinq mots au plus, des lettres seulement, une majuscule à chaque
+     mot hors particule, aucun mot courant. Les noms relevés sont ensuite lus comme ceux de la liste Noms du service, les prénoms
+     comme ceux de la liste Prénoms, pour ce codage seulement (voir Session). Jusque-là, un nom écrit « Tessharto » dans une
+     colonne Nom, à part du prénom, restait en clair. */
+  var EN_TETES_NOM = tableVide(), EN_TETES_PRENOM = tableVide(), PERSONNES_EN_TETE = tableVide(), JAMAIS_UN_NOM = tableVide();
+  ("nom|noms|nom de famille|nom d'usage|nom usuel|nom de naissance|nom patronymique|nom marital|nom d'epouse|nom de jeune fille|patronyme|" +
+    "nom prenom|nom prenoms|noms prenoms|nom et prenom|nom et prenoms|noms et prenoms|nom, prenom|nom / prenom|nom/prenom|nom - prenom|" +
+    "prenom nom|prenoms nom|prenom et nom|prenom, nom|prenom / nom|prenom/nom|prenom - nom|nom complet").split('|').forEach(function (m) { EN_TETES_NOM[m] = 1; });
+  ("prenom|prenoms|prenom usuel|premier prenom|prenom d'usage|autres prenoms").split('|').forEach(function (m) { EN_TETES_PRENOM[m] = 1; });
+  ('agent agente etudiant etudiante eleve responsable tuteur tutrice enseignant enseignante candidat candidate stagiaire salarie salariee ' +
+    'employe employee intervenant intervenante vacataire beneficiaire demandeur demandeuse titulaire directeur directrice encadrant encadrante ' +
+    'signataire representant representante participant participante membre doctorant doctorante chercheur chercheuse gestionnaire usager ' +
+    'patient patiente personne interesse interessee apprenti apprentie alternant alternante referent referente collegue correspondant ' +
+    'correspondante contact auteur autrice redacteur redactrice expediteur destinataire president presidente rapporteur rapporteure ' +
+    'examinateur examinatrice maitre chef cheffe conjoint conjointe enfant parent remplacant remplacante evaluateur evaluatrice superieur ' +
+    'superieure professeur professeure medecin invite invitee laureat laureate boursier boursiere adherent adherente').split(' ')
+    .forEach(function (m) { PERSONNES_EN_TETE[m] = 1; });
+  ('total totaux sous-total vacant vacante neant idem inconnu inconnue divers autre autres anonyme aucun aucune oui non adresse grade fonction ' +
+    'statut corps telephone email courriel ville pays age sexe civilite matricule section discipline echelon indice categorie affectation ' +
+    'quotite observation observations commentaire commentaires remarque remarques date naissance signature qualite titre libelle designation ' +
+    'reference montant prix quantite nombre effectif moyenne somme ensemble prenom prenoms nom noms identite type nature etat situation motif ' +
+    'numero code rang niveau annee mois jour heure duree debut fin lieu horaire emploi metier specialite diplome filiere classe promotion ' +
+    'organisme etablissement structure employeur absent absente present presente excuse excusee voir appeler rappeler relancer ' +
+    'mobile portable fixe fax domicile standard personnel personnelle professionnel professionnelle urgence').split(' ')
+    .forEach(function (m) { JAMAIS_UN_NOM[m] = 1; });
+  function cleEnTete(t) {
+    return normaliser(trim(t.replace(/[\u00a0\u202f\t\r\n]+/g, ' '))).replace(/\u2019/g, "'").replace(/\(s\)/g, 's').replace(/ *[:*]+ *$/, '').replace(/ +/g, ' ');
+  }
+  // 'N' : l'étiquette désigne un nom de personne ; 'P' : un prénom ; '' : ni l'un ni l'autre.
+  function genreEnTete(t) {
+    if (typeof t !== 'string' || t.length < 3 || t.length > 60) return '';
+    var k = cleEnTete(t), m;
+    if (possede(EN_TETES_PRENOM, k)) return 'P';
+    if (possede(EN_TETES_NOM, k)) return 'N';
+    m = /^(prenoms?|noms?(?: et prenoms?| prenoms?|, prenoms?)?|prenoms? (?:et )?noms?) (?:du |de la |de l'|des |de )([a-z]+)/.exec(k);
+    if (!m) return '';
+    if (!possede(PERSONNES_EN_TETE, m[2]) && !(m[2].length > 3 && m[2].charAt(m[2].length - 1) === 's' && possede(PERSONNES_EN_TETE, m[2].substring(0, m[2].length - 1)))) return '';
+    return /^prenoms?$/.test(m[1]) ? 'P' : 'N';
+  }
+  // Les mots d'une valeur qui a la forme d'un nom de personne, sans civilité, initiale ni particule ; null si elle ne l'a pas.
+  function motsDuNom(v) {
+    if (typeof v !== 'string' || v.length < 2 || v.length > 60) return null;
+    v = trim(v.replace(/[\u00a0\u202f\t]/g, ' '));
+    if (v.length < 2 || /[0-9\n\r@_\/\\:;!?()\[\]{}<>"=+*%&#]/.test(v)) return null;
+    var mots = v.split(/[ ,]+/), utiles = [], i, j, m, b, p, ch;
+    if (mots.length > 5) return null;
+    for (i = 0; i < mots.length; i++) {
+      m = mots[i].replace(/\.$/, '');
+      if (m === '') continue;
+      if (m.length === 1 && estLettre(m)) continue;                              // initiale, ou « M. »
+      for (j = 0; j < m.length; j++) { ch = m.charAt(j); if (!estLettre(ch) && ch !== '-' && ch !== "'" && ch !== '\u2019') return null; }
+      if (estCivilite(m) || estParticule(m) || possede(SECONDES_PARTICULES, normaliser(m))) continue;
+      b = partieUtile(m); p = b.charAt(0);
+      if (b.length < 2 || !(p === ucase(p) && p !== lcase(p))) return null;
+      if (motCourant(b) || estRemplissage(b) || possede(JAMAIS_UN_NOM, normaliser(b)) || possede(JAMAIS_UN_NOM, normaliser(m))) return null;
+      utiles.push(b.length < m.length && nomApostrophe(m) && 'NMO'.indexOf(m.charAt(0)) >= 0 ? m : b);
+    }
+    return utiles.length ? utiles : null;
+  }
+  // uneColonne : la grille est un vrai tableau même s'il n'a qu'une colonne (les modules des fichiers passent leurs tableaux ainsi).
+  function releverNoms(grille, config, uneColonne) {
+    var res = { noms: [], prenoms: [] }, vus = tableVide(), prenoms = null;
+    if (!Array.isArray(grille)) return res;
+    function prenomDeListe(m) {
+      if (!prenoms) { prenoms = tableVide(); ((config && config.prenoms) || []).forEach(function (v) { v = normaliser(trim(v)); if (v) prenoms[v] = 1; }); }
+      var k = normaliser(m), p = k.indexOf('-');
+      return possede(prenoms, k) || (p > 0 && possede(prenoms, k.substring(0, p)));
+    }
+    function inscrire(liste, v) { var k = (liste === res.noms ? 'N:' : 'P:') + normaliser(v); if (!possede(vus, k)) { vus[k] = 1; liste.push(v); } }
+    function noter(genre, v) {
+      var mots = motsDuNom(v);
+      if (!mots) return false;
+      if (genre === 'P') inscrire(res.prenoms, mots.join(' '));
+      else mots.forEach(function (m) { inscrire(res.noms, m); });
+      return true;
+    }
+    function cellule(r, c) { var l = grille[r]; return Array.isArray(l) && typeof l[c] === 'string' ? l[c] : ''; }
+    function ligneVide(r) { var l = grille[r], i; if (Array.isArray(l)) for (i = 0; i < l.length; i++) if (typeof l[i] === 'string' && l[i] !== '') return false; return true; }
+    var r, c, ligne, t, g, rr, cc, v, pleines, formulaire, largeur = 0, paires, mots, dessous, dessus, droite, autres;
+    for (r = 0; r < grille.length; r++) {
+      ligne = grille[r];
+      if (!Array.isArray(ligne)) continue;
+      if (ligne.length > largeur) largeur = ligne.length;
+      pleines = 0;
+      for (c = 0; c < ligne.length; c++) if (typeof ligne[c] === 'string' && ligne[c] !== '') pleines++;
+      for (c = 0; c < ligne.length; c++) {
+        t = ligne[c];
+        if (typeof t !== 'string' || t === '') continue;
+        if (t.indexOf(':') > 0) t.split(/\r?\n/).forEach(function (l) {                                  // c. « Nom : Tessharto »
+          var p = l.indexOf(':'), g2 = p > 0 && p <= 60 ? genreEnTete(l.substring(0, p)) : '';
+          if (g2) noter(g2, l.substring(p + 1));
+        });
+        g = genreEnTete(t);
+        if (!g || (!uneColonne && pleines < 2)) continue;
+        // Tableau (les valeurs sont dessous) ou formulaire (la valeur est à droite) ? Formulaire : l'étiquette finit par deux
+        // points, ou l'étiquette écrite juste au-dessus ou juste au-dessous est elle aussi « Nom » ou « Prénom », ou encore la
+        // cellule du dessous n'a pas la forme d'un nom alors que celle de droite l'a. Tableau : la cellule voisine de la même
+        // ligne est elle aussi un en-tête « Nom » ou « Prénom », et dans tous les autres cas.
+        dessous = ''; dessus = '';
+        for (rr = r + 1; rr < grille.length && rr <= r + 3 && dessous === ''; rr++) dessous = cellule(rr, c);
+        for (rr = r - 1; rr >= 0 && rr >= r - 3 && dessus === ''; rr--) dessus = cellule(rr, c);
+        droite = '';
+        for (cc = c + 1; cc < ligne.length && cc <= c + 3 && droite === ''; cc++) droite = cellule(r, cc);
+        if (/:[ \u00a0]*$/.test(t)) formulaire = true;
+        else if (genreEnTete(cellule(r, c + 1)) || (c > 0 && genreEnTete(cellule(r, c - 1)))) formulaire = false;
+        else if (genreEnTete(dessous) || genreEnTete(dessus)) formulaire = true;
+        else formulaire = !motsDuNom(dessous) && !!motsDuNom(droite);
+        if (formulaire) {                                                                                 // b. la valeur est écrite à droite
+          for (cc = c + 1; cc < ligne.length && cc <= c + 3; cc++) {
+            v = cellule(r, cc);
+            if (v !== '') { if (!genreEnTete(v)) noter(g, v); break; }
+          }
+          continue;
+        }
+        for (rr = r + 1, autres = 0; rr < grille.length && autres < 3; rr++) {                            // a. les valeurs sont écrites dessous
+          v = cellule(rr, c);
+          if (v === '') { if (ligneVide(rr)) break; continue; }      // une ligne entièrement vide finit le tableau
+          if (genreEnTete(v) || /:[ \u00a0]*$/.test(v)) break;
+          if (noter(g, v)) autres = 0; else autres++;                // trois cellules de suite qui n'ont pas la forme d'un nom : la colonne n'en porte plus
+        }
+      }
+    }
+    for (c = 0; c < largeur; c++) {                                                                       // d. colonne de « Nom Prénom »
+      paires = [];
+      for (r = 0; r < grille.length; r++) {
+        v = cellule(r, c);
+        if (v.length < 5 || v.length > 40) continue;
+        mots = motsDuNom(v);
+        if (mots && mots.length === 2 && mots[0].length >= 3 && estCapitalise(mots[0]) && !prenomDeListe(mots[0]) && estCapitalise(mots[1]) && prenomDeListe(mots[1])) paires.push(mots[0]);
+      }
+      if (paires.length >= 3) paires.forEach(function (m) { inscrire(res.noms, m); });
+    }
+    return res;
+  }
+  // Les réglages complétés des noms et des prénoms relevés dans la grille ; les mêmes réglages s'il n'y en a pas.
+  function avecReleve(cellules, config) {
+    if (config.releve === false) return config;
+    var r = releverNoms(cellules, config, false), c = {}, k;
+    if (!r.noms.length && !r.prenoms.length) return config;
+    for (k in config) if (possede(config, k)) c[k] = config[k];
+    c.nomsReleves = (config.nomsReleves || []).concat(r.noms);
+    c.prenomsReleves = (config.prenomsReleves || []).concat(r.prenoms);
+    return c;
+  }
+
   function pseudonymiser(cellules, config) {
-    var s = new Session(config || {});
+    config = avecReleve(cellules, config || {});
+    var s = new Session(config);
     var vide = true, r, c;
     for (r = 0; r < cellules.length; r++) for (c = 0; c < cellules[r].length; c++) if (cellules[r][c] !== '') vide = false;
     if (vide) return { ok: false, erreur: 'L\u2019entrée est vide : coller d\u2019abord le texte.' };
@@ -2123,12 +2361,13 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   }
 
   racine.Pseudonymiseur = {
-    version: '1.35 (web) du 20/11/2026, reprise du module Excel 4.1 du 16/10/2026, règles ajoutées depuis',
+    version: '1.36 (web) du 21/11/2026, reprise du module Excel 4.1 du 16/10/2026, règles ajoutées depuis',
     pseudonymiser: pseudonymiser,
     depseudonymiser: depseudonymiser,
     texteEnCellules: texteEnCellules,
     cellulesEnTexte: cellulesEnTexte,
     codesRestants: codesRestants,
+    releverNoms: releverNoms,
     normaliser: normaliser
   };
 })(typeof module !== 'undefined' && module.exports ? module.exports : window);
@@ -2942,6 +3181,44 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     }).join('\n\n');
   }
 
+  /* Version 1.36. Les textes d'une feuille rangés par ligne et par colonne, pour le relevé des colonnes « Nom » et « Prénom »
+     (voir releverNoms dans le moteur). Seuls les textes comptent ; les nombres et les dates sont laissés vides. */
+  function grilleDeFeuille(xml, chaines) {
+    var lignes = [], re = /<c\b([^>]*?)(?:\/>|>([\s\S]*?)<\/c>)/g, m;
+    while ((m = re.exec(xml)) !== null) {
+      if (!m[2]) continue;
+      var type = /\bt="([^"]*)"/.exec(m[1]), val = '';
+      if (!type) continue;
+      if (type[1] === 's') { var v = /<v>([^<]*)<\/v>/.exec(m[2]); val = v ? (chaines[parseInt(v[1], 10)] || '') : ''; }
+      else if (type[1] === 'inlineStr') { var ts = [], re3 = /<t(?:\s[^>]*)?>([^<]*)<\/t>/g, m3; while ((m3 = re3.exec(m[2])) !== null) ts.push(decoderXml(m3[1])); val = ts.join(''); }
+      else if (type[1] === 'str') { var v2 = /<v>([^<]*)<\/v>/.exec(m[2]); val = v2 ? decoderXml(v2[1]) : ''; }
+      if (val === '') continue;
+      var ref = /\br="([A-Z]+)(\d+)"/.exec(m[1]); if (!ref) continue;
+      var r = parseInt(ref[2], 10) - 1, c = colonneEnNumero(ref[1]) - 1;
+      if (r > 1048575 || c > 16383) continue;
+      while (lignes.length <= r) lignes.push([]);
+      while (lignes[r].length < c) lignes[r].push('');
+      lignes[r][c] = val;
+    }
+    return lignes;
+  }
+  /* Version 1.36. Les réglages, complétés des noms et des prénoms écrits sous un en-tête « Nom » ou « Prénom » dans les feuilles
+     du classeur : le moteur les lit ensuite comme ceux des listes Noms du service et Prénoms, partout dans le classeur. */
+  function avecReleveClasseur(parties, config, P) {
+    if (!P || typeof P.releverNoms !== 'function' || (config && config.releve === false)) return config;
+    var chaines = parties['xl/sharedStrings.xml'] ? chainesPartagees(parties['xl/sharedStrings.xml']) : [], noms = [], prenoms = [];
+    ongletsDuClasseur(parties).forEach(function (o) {
+      if (!parties[o.partie]) return;
+      var r = P.releverNoms(grilleDeFeuille(parties[o.partie], chaines), config, true);
+      noms = noms.concat(r.noms); prenoms = prenoms.concat(r.prenoms);
+    });
+    if (!noms.length && !prenoms.length) return config;
+    var c = tableVide(), k;
+    for (k in config) if (Object.prototype.hasOwnProperty.call(config, k)) c[k] = config[k];
+    c.nomsReleves = (config.nomsReleves || []).concat(noms); c.prenomsReleves = (config.prenomsReleves || []).concat(prenoms);
+    return c;
+  }
+
   // ------------------------------------------------------------------ traitement commun
   function typeMime(nom) {
     return /\.xlsm$/i.test(nom) ? 'application/vnd.ms-excel.sheet.macroEnabled.12' : 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
@@ -3539,6 +3816,16 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         }
       }
       if (!zones.length || dejaCode) return res;
+      // version 1.36 : une personne écrite avec un tiret bas dans le nom du fichier (TESSHARTO_Paul) reçoit un code pour
+      // cette écriture ; le nom restitué retrouve ainsi son tiret bas
+      if (seance && typeof seance.codePour === 'function') zones.forEach(function (x) {
+        var ecrit = base.slice(x[0], x[1]);
+        if (ecrit.indexOf('_') < 0 || String(x[2]).indexOf(prefixe + '_Personne') !== 0) return;
+        var cp = seance.codePour(ecrit, 'Personne', prefixe);
+        if (!cp || !cp.code || RE_INTERDIT_NOM.test(cp.code)) return;
+        if (!table.some(function (l) { return String(l[1]) === cp.code; })) { var pl = 0; while (pl < table.length && String(table[pl][0]).length >= ecrit.length) pl++; table.splice(pl, 0, [ecrit, cp.code]); }
+        x[2] = cp.code;
+      });
       zones.sort(function (a, b) { return a[0] - b[0]; });
       var nom = '', pos = 0;
       zones.forEach(function (x) { if (x[0] < pos) return; nom += base.slice(pos, x[0]) + x[2]; pos = x[1]; });
@@ -3574,6 +3861,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       if (refus) return { ok: false, erreur: refus };
       var cellules = grille(ouvert), apercuEntree = apercuClasseur(ouvert.parties);
       if (!cellules.length) return { ok: false, erreur: 'Ce classeur ne contient aucun texte : rien à pseudonymiser.' };
+      config = avecReleveClasseur(ouvert.parties, config || {}, P);            // version 1.36 : colonnes « Nom » et « Prénom »
       /* Les textes passent seuls dans le moteur, exactement comme avant la version 1.14 : chaque texte reçoit le même code.
          Les dates des cellules sont codées ensuite, avec les codes de date du moteur, sans rien changer aux textes. */
       var morceaux = ouvert.premiers;
@@ -3657,7 +3945,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   }
 
   racine.PseudonymiseurExcel = {
-    version: '1.35 du 20/11/2026',
+    version: '1.36 du 21/11/2026',
     pseudonymiser: pseudonymiser, depseudonymiser: depseudonymiser, apercu: apercu,
     lireZip: lireZip, ecrireZip: ecrireZip, crc32: crc32, decouperXml: decouperXml, recomposerXml: recomposerXml, apercuClasseur: apercuClasseur,
     serieEnTexte: serieEnTexte, texteEnSerie: texteEnSerie, formatAfficheUneDate: formatAfficheUneDate, stylesDeDate: stylesDeDate,
@@ -4348,6 +4636,53 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     for (i = 0; i < ordre.length; i++) archive.parties[i] = ordre[i].p;
   }
 
+  /* Version 1.36. Les tableaux d'une partie Word (w) ou PowerPoint (a), chacun rangé par ligne et par colonne, pour le relevé
+     des colonnes « Nom » et « Prénom » (voir releverNoms dans le moteur). Une cellule fusionnée sur plusieurs colonnes de Word
+     occupe ces colonnes ; un tableau placé dans une cellule est rendu à part. Les paragraphes d'une cellule sont séparés par
+     un retour à la ligne. */
+  function grillesDesTableaux(xml, p) {
+    var res = [], pile = [], t, m;
+    var re = new RegExp('<(\\/?)(' + p + ':tbl|' + p + ':tr|' + p + ':tc|' + p + ':p)(?=[\\s>\\/])[^>]*>|<' + p + ':gridSpan\\b[^>]*' + p + ':val="(\\d+)"[^>]*>|<' + p + ':t(?:\\s[^>]*)?>([^<]*)<\\/' + p + ':t>', 'g');
+    while ((m = re.exec(xml)) !== null) {
+      t = pile.length ? pile[pile.length - 1] : null;
+      if (m[2] === p + ':tbl') {
+        if (m[1]) { if (t) { res.push(t.lignes); pile.pop(); } }
+        else if (!/\/>$/.test(m[0])) pile.push({ lignes: [], ligne: null, colonne: 0, cellule: null, portee: 1 });
+      } else if (!t) continue;
+      else if (m[2] === p + ':tr') { if (m[1]) { if (t.ligne) t.lignes.push(t.ligne); t.ligne = null; } else { t.ligne = []; t.colonne = 0; } }
+      else if (m[2] === p + ':tc') {
+        if (!t.ligne) continue;
+        if (!m[1] && !/\/>$/.test(m[0])) { t.cellule = ''; t.portee = 1; t.debut = true; continue; }
+        while (t.ligne.length < t.colonne) t.ligne.push('');
+        t.ligne[t.colonne] = (t.cellule || '').replace(/^\s+|\s+$/g, ''); t.colonne += m[1] ? t.portee : 1; t.cellule = null;
+      } else if (m[2] === p + ':p') { if (!m[1] && t.cellule !== null) { if (!t.debut) t.cellule += '\n'; t.debut = false; } }
+      else if (m[3] !== undefined) { if (t.cellule !== null) { var n = parseInt(m[3], 10); if (n >= 1 && n <= 63) t.portee = n; } }
+      else if (m[4] !== undefined && t.cellule !== null) t.cellule += decoder(m[4]).texte;
+    }
+    return res;
+  }
+  /* Version 1.36. Les réglages, complétés des noms et des prénoms écrits sous un en-tête « Nom » ou « Prénom » dans les tableaux
+     du document : le moteur les lit ensuite comme ceux des listes Noms du service et Prénoms, partout dans le document. */
+  function avecReleveDocument(archive, config, P) {
+    if (!P || typeof P.releverNoms !== 'function' || (config && config.releve === false)) return config;
+    var noms = [], prenoms = [];
+    parcourir(archive, function (partie) {
+      if (typeof partie.xml !== 'string') return;
+      ['w', 'a'].forEach(function (p) {
+        if (partie.xml.indexOf('<' + p + ':tbl') < 0) return;
+        grillesDesTableaux(partie.xml, p).forEach(function (g) {
+          var r = P.releverNoms(g, config, true);
+          noms = noms.concat(r.noms); prenoms = prenoms.concat(r.prenoms);
+        });
+      });
+    });
+    if (!noms.length && !prenoms.length) return config;
+    var c = tableVide(), k;
+    for (k in config) if (Object.prototype.hasOwnProperty.call(config, k)) c[k] = config[k];
+    c.nomsReleves = (config.nomsReleves || []).concat(noms); c.prenomsReleves = (config.prenomsReleves || []).concat(prenoms);
+    return c;
+  }
+
   /* Toutes les parties d'une archive et de ses fichiers incorporés, dans l'ordre. */
   function parcourir(archive, fonction) {
     archive.parties.forEach(function (p) { fonction(p, archive); });
@@ -4856,6 +5191,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       if (archive.illisibles.length) return { ok: false, erreur: messageIllisible(archive.illisibles) };
       var nbTextes = compterTextes(archive);
       if (!nbTextes) return { ok: false, erreur: 'Ce document ne contient aucun texte : rien à pseudonymiser.' };
+      config = avecReleveDocument(archive, config || {}, P);                   // version 1.36 : colonnes « Nom » et « Prénom » des tableaux
       var apercuEntree = apercuArchive(archive), demandes = demandesDeCodage(archive, prenomsConnus(config, P));
       var prefixe = String((config && config.prefixe) || '').replace(/^ +| +$/g, '') || 'Pseudo';
       var r = demandes.length ? P.pseudonymiser(demandes.map(function (d) { return [d.texte]; }), config)
@@ -5097,7 +5433,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   }
 
   racine.PseudonymiseurDocuments = {
-    version: '1.35 du 20/11/2026',
+    version: '1.36 du 21/11/2026',
     pseudonymiser: pseudonymiser, depseudonymiser: depseudonymiser, apercu: apercu, extension: extension,
     analyser: analyser, decoder: decoder, repartir: repartir, alignerCodage: alignerCodage, alignerRestitution: alignerRestitution,
     remplacementUnique: remplacementUnique, zonesDuChamp: zonesDuChamp, coderChemins: coderChemins, Maison: Maison
@@ -6020,6 +6356,12 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       if (s && typeof s.integrer === 'function') { res = s.integrer(res, cellules, P, prefixe); if (!res.ok) return res; } else s = null;
       return garder(P, res, cellules, prefixe, s);          // sans séance et sans le mot du préfixe dans le texte : le résultat de la version 1.32
     };
+    // version 1.36 : le relevé des colonnes « Nom » et « Prénom » lit les textes comme le codage les lira (espaces insécables,
+    // traits d'union particuliers, caractères invisibles, accents écrits en deux caractères)
+    if (typeof P.releverNoms === 'function') m.releverNoms = function (grille, config, uneColonne) {
+      var lisse = (grille || []).map(function (ligne) { return (ligne || []).map(function (t) { return typeof t === 'string' && aSpeciale(t) ? lisser(t) : t; }); });
+      return P.releverNoms(lisse, reglagesParticuliers(config) ? reglagesLisses(config) : config, uneColonne);
+    };
     m.nouvelleSeance = function (table) { return new Seance(table); };
     m.depseudonymiser = function (cellules, correspondance) { return depseudonymiser(P, cellules, correspondance); };
     if (typeof P.codesRestants === 'function') m.codesRestants = codesRestants;
@@ -6028,7 +6370,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     return m;
   }
 
-  racine.PseudonymiseurEspaces = { version: '1.33 du 20/11/2026', envelopper: envelopper, Seance: Seance, reperer: reperer, suivre: suivre, passagesCodes: passagesCodes, Table: Table, lisser: lisser, places: places };
+  racine.PseudonymiseurEspaces = { version: '1.36 du 21/11/2026', envelopper: envelopper, Seance: Seance, reperer: reperer, suivre: suivre, passagesCodes: passagesCodes, Table: Table, lisser: lisser, places: places };
 })(typeof module !== 'undefined' && module.exports ? module.exports : window);
 
 </script>
@@ -7249,7 +7591,16 @@ var LISTES_ORIGINE = {
 "SUJET",
 "EDF",
 "ENGIE",
-"SNCF"
+"SNCF",
+"NOM",
+"PRÉNOM",
+"GRADE",
+"CORPS",
+"FONCTION",
+"STATUT",
+"ADRESSE",
+"OBSERVATIONS",
+"GÉNÉRAL"
 ],
 "dictionnaire": [
 {
@@ -7395,7 +7746,7 @@ var LISTES_ORIGINE = {
 "Berlin",
 "Doua"
 ],
-"version": "1.12 du 27/10/2026"
+"version": "1.36 du 21/11/2026"
 };
 </script>
 <script>
