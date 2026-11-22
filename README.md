@@ -17,6 +17,7 @@ Page de l'outil : https://myadmin-ia.github.io/pseudonymiseur/
 ## Contenu du dépôt
 
 - `pseudonymiseur/index.html` : l'application complète en un seul fichier (HTML, CSS et JavaScript), sans bibliothèque ni ressource externe.
+- `pseudonymiseur/audit.html` : l'audit de l'outil (corrections, essais, limites exemple par exemple), en une page sans script ni ressource externe, à l'adresse de l'outil suivie de « audit.html ».
 
 ## Auteur
 

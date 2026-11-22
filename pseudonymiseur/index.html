@@ -57,6 +57,11 @@ section.vue.active{display:block}
 details.historique{margin-top:18px;border-top:1px solid var(--filet);padding-top:12px}
 details.historique summary{cursor:pointer;font-size:1.05rem;font-weight:600;color:var(--encre)}
 details.historique p{color:var(--gris);font-size:.93rem;margin-top:8px}
+details.plus{margin-top:12px}
+details.plus summary{cursor:pointer;font-size:.95rem;font-weight:600;color:var(--encre)}
+details.plus p,details.plus li{color:var(--gris);font-size:.93rem}
+details.plus p{margin-top:8px}
+details.plus ul{margin-top:8px}
 
 /* ----- prompts */
 .enrouge{color:var(--rouge-fonce);font-weight:600}
@@ -216,18 +221,26 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-accueil">
       <div class="carte">
         <h1>Mode d'emploi</h1>
-        <p class="sous">Le Pseudonymiseur remplace, sur votre poste, les noms, adresses mail, téléphones, numéros, dates et adresses d'un texte par des codes. Vous confiez le texte codé à l'outil d'intelligence artificielle, puis vous remettez les vraies données dans sa réponse. La table de correspondance ne quitte jamais votre navigateur.</p>
+        <p class="sous">Le Pseudonymiseur remplace, sur votre poste, les noms, adresses mail, téléphones, numéros, dates et adresses par des codes. Vous envoyez le texte codé à l'outil d'intelligence artificielle, puis la page remet les vraies données dans sa réponse. Rien ne quitte votre navigateur.</p>
         <div class="etapes">
-          <div><b>Étape 1</b><strong>Coller le texte</strong><p>Un mail, un document, un tableau copié d'Excel. Puis cliquer sur Pseudonymiser. Ou déposer tel quel un classeur Excel, un document Word ou un diaporama PowerPoint.</p></div>
-          <div><b>Étape 2</b><strong>Relire et copier</strong><p>Relire la sortie, la corriger à la main si besoin, puis cliquer sur Copier pour l'IA. La coller dans l'outil, à la suite d'un prompt de la page Prompts.</p></div>
+          <div><b>Étape 1</b><strong>Coller le texte</strong><p>Coller un mail, un document ou un tableau, puis cliquer sur Pseudonymiser. Ou déposer un fichier Excel, Word ou PowerPoint.</p></div>
+          <div><b>Étape 2</b><strong>Relire et copier</strong><p>Relire la sortie, puis cliquer sur Copier pour l'IA. La coller dans l'outil, à la suite d'un prompt de la page Prompts.</p></div>
           <div><b>Étape 3</b><strong>Coller la réponse</strong><p>Copier la réponse de l'outil, puis cliquer sur Coller et restituer. Ou déposer le fichier renvoyé par l'outil.</p></div>
-          <div><b>Étape 4</b><strong>Récupérer le texte</strong><p>Relire le texte final, déjà copié, et le coller dans votre mail ou votre document. Pour un fichier déposé, le fichier restitué est téléchargé.</p></div>
+          <div><b>Étape 4</b><strong>Récupérer le texte</strong><p>Relire le texte final, déjà copié, et le coller dans votre mail ou votre document. Un fichier restitué est téléchargé.</p></div>
         </div>
         <div class="actions"><button class="btn principal" data-aller="entree">Commencer, étape 1</button><button class="btn" data-aller="prompts">Prompts pour l'IA</button></div>
       </div>
       <div class="deux">
         <div class="carte">
           <h2 style="margin-top:0">Ce qui est remplacé</h2>
+          <ul class="propre">
+            <li>Les personnes : <code>Pseudo_Personne_001</code>. Une même personne garde toujours le même numéro.</li>
+            <li>Les adresses mail, les liens, les adresses postales et les villes.</li>
+            <li>Les téléphones, IBAN, numéros de sécurité sociale et nombres longs.</li>
+            <li>Les dates.</li>
+            <li>Les termes de votre Dictionnaire.</li>
+          </ul>
+          <details class="plus"><summary>Tous les codes, un par un</summary>
           <ul class="propre">
             <li>Les personnes : <code>Pseudo_Personne_001</code>. Une même personne garde toujours le même numéro ; chaque autre écriture de son nom reçoit une lettre (Claude TESSHARTO : <code>Pseudo_Personne_001</code> ; TESSHARTO Claude : <code>Pseudo_PersonneB_001</code> ; M. Tessharto : <code>Pseudo_PersonneC_001</code>).</li>
             <li>Les adresses mail : <code>pseudo_mail_001@pseudo.invalid</code> ; les liens : <code>https://pseudo.invalid/lien_001</code>.</li>
@@ -237,22 +250,22 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
             <li>Les termes de votre Dictionnaire : raison sociale, service, fonction, famille d'identifiants.</li>
             <li>Dans un document Word ou un diaporama PowerPoint déposé, ce que le fichier dit de ses auteurs : auteur du fichier, auteurs des commentaires et des modifications (<code>Pseudo_Auteur_001</code>, <code>Pseudo_Initiales_001</code>), nom de compte dans un chemin de fichier (<code>Pseudo_Compte_001</code>).</li>
           </ul>
+          </details>
         </div>
         <div class="carte">
           <h2 style="margin-top:0">Ce qui reste en clair</h2>
           <ul class="propre">
-            <li>Les sigles et mots de la liste Conserver (EDF, ENGIE, SNCF, TVA, TOTAL, SOMME…).</li>
-            <li>Les montants avec espaces, pourcentages, formules et grandeurs physiques (12 500,00 €, 97,2 %, 1,5 kW).</li>
+            <li>Les sigles et mots de la liste Mots à conserver (EDF, SNCF, TVA…).</li>
+            <li>Les montants, pourcentages, formules et grandeurs physiques (12 500,00 €, 97,2 %, 1,5 kW).</li>
             <li>Les mots courants écrits avec une majuscule en début de phrase.</li>
             <li>Une situation décrite sans nom (« le chef d'agence est en arrêt ») : à retirer à la main dans la sortie.</li>
-            <li>Dans un fichier déposé, les images : une signature, une photo, une capture d'écran se retirent à la main avant le dépôt.</li>
+            <li>Les images d'un fichier déposé (signature, photo, capture d'écran) : à retirer à la main avant le dépôt.</li>
           </ul>
-          <h2>Quatre gestes de sûreté</h2>
+          <h2>Trois gestes de sûreté</h2>
           <ul class="propre">
             <li>Relire la sortie en entier avant de la copier : l'outil ne voit que ce qui part.</li>
-            <li>Un code resté dans le texte final est signalé en orange : vérifier la réponse de l'outil.</li>
+            <li>Relire le résultat au retour : un code resté en place est signalé en orange, et le pseudonymiseur ne contrôle pas ce que l'outil a écrit.</li>
             <li>Avant de fermer l'onglet, enregistrer la table de correspondance si la réponse de l'outil n'est pas encore revenue.</li>
-            <li>Relire les textes et les tableaux rendus par l'outil d'intelligence artificielle, puis le résultat restitué : le pseudonymiseur ne contrôle pas leur exactitude.</li>
           </ul>
         </div>
       </div>
@@ -262,7 +275,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-entree">
       <div class="carte">
         <h1>Étape 1, le texte à protéger</h1>
-        <p class="sous">Collez le texte tel quel : mail avec son en-tête, document, tableau copié d'Excel (les colonnes sont conservées). Les montants, dates et numéros restent écrits comme dans l'original. Un classeur Excel, un document Word ou un diaporama PowerPoint se dépose en bas de cette page.</p>
+        <p class="sous">Collez le texte tel quel (mail, document, tableau copié d'Excel), puis cliquez sur Pseudonymiser. Un fichier Excel, Word ou PowerPoint se dépose en bas de cette page.</p>
         <label class="etiquette" for="entree">Texte d'origine</label>
         <textarea id="entree" spellcheck="false" placeholder="Coller ici le texte à pseudonymiser…"></textarea>
         <div class="message" id="msg-entree"></div>
@@ -276,8 +289,11 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         <div class="depot" id="depot-entree">
           <input type="file" id="fichier-entree" accept=".xlsx,.xlsm,.docx,.docm,.dotx,.dotm,.pptx,.pptm,.ppsx,.ppsm,.potx,.potm" hidden>
           <p><strong>Ou un fichier Excel, Word ou PowerPoint</strong> (.xlsx, .xlsm, .docx, .pptx) : le déposer ici, ou <button type="button" class="lien" id="btn-fichier-entree">choisir le fichier</button>. Il est pseudonymisé aussitôt et le fichier codé est téléchargé ; son nom est codé comme son contenu.</p>
-          <p class="sous"><strong>Classeur Excel.</strong> Le classeur est lu sur votre poste. Sont codés les textes (cellules, commentaires, en-têtes et pieds de page, zones de texte, texte écrit entre guillemets dans une formule, listes déroulantes et messages de validation, texte cherché par une mise en forme conditionnelle, textes que les graphiques et les tableaux croisés dynamiques gardent en mémoire, liens et infobulles, scénarios, texte de remplacement des images, propriétés et auteur du fichier, chemin d'enregistrement) et, quand le réglage « Pseudonymiser les dates » est sur Oui, les dates saisies dans les cellules. Onglets, formules, couleurs, largeurs et filtres restent tels quels. Restent en clair : les noms d'onglets, les noms définis, les noms de tableaux, les cellules saisies comme nombres (un téléphone sans espace), les dates calculées par une formule, les dates qu'un tableau croisé dynamique garde en mémoire, le texte d'un format de nombre, les images, les macros et les requêtes de données. Quand un de ces endroits porte un nom que l'outil reconnaît, ou un élément codé ailleurs dans le classeur, l'étape 2 le signale.</p>
-          <p class="sous"><strong>Document Word, diaporama PowerPoint.</strong> Le fichier est lu sur votre poste. Sont codés ses textes (paragraphes, tableaux, titre et description d'un tableau, en-têtes et pieds de page, notes, commentaires, zones de texte, notes de l'orateur, textes des graphiques et des schémas, texte supprimé que le suivi des modifications garde, liens) et ce que le fichier dit de ses auteurs (propriétés, auteurs des commentaires et des modifications, nom de compte dans un chemin de fichier). Mise en page, styles, images et animations restent tels quels ; l'image miniature du fichier est retirée. Restent en clair : les images (signature, photo, capture d'écran), le son et la vidéo, les équations, les nombres des graphiques, les dates et heures des modifications et des commentaires, les noms de styles et de signets, le nom d'un champ de fusion, les macros. Quand un de ces endroits porte un élément codé ailleurs dans le fichier, l'étape 2 le signale. Un fichier à l'ancien format (.doc, .ppt) s'enregistre d'abord en .docx ou .pptx.</p>
+          <p class="sous">Restent en clair : les images, les noms d'onglets d'un classeur et les cellules saisies comme nombres. L'étape 2 signale ce qu'elle repère.</p>
+          <details class="plus"><summary>Ce qui est codé dans un fichier, ce qui reste en clair</summary>
+          <p><strong>Classeur Excel.</strong> Le classeur est lu sur votre poste. Sont codés les textes (cellules, commentaires, en-têtes et pieds de page, zones de texte, texte écrit entre guillemets dans une formule, listes déroulantes et messages de validation, texte cherché par une mise en forme conditionnelle, textes que les graphiques et les tableaux croisés dynamiques gardent en mémoire, liens et infobulles, scénarios, texte de remplacement des images, propriétés et auteur du fichier, chemin d'enregistrement) et, quand le réglage « Pseudonymiser les dates » est sur Oui, les dates saisies dans les cellules. Onglets, formules, couleurs, largeurs et filtres restent tels quels. Restent en clair : les noms d'onglets, les noms définis, les noms de tableaux, les cellules saisies comme nombres (un téléphone sans espace), les dates calculées par une formule, les dates qu'un tableau croisé dynamique garde en mémoire, le texte d'un format de nombre, les images, les macros et les requêtes de données. Quand un de ces endroits porte un nom que l'outil reconnaît, ou un élément codé ailleurs dans le classeur, l'étape 2 le signale.</p>
+          <p><strong>Document Word, diaporama PowerPoint.</strong> Le fichier est lu sur votre poste. Sont codés ses textes (paragraphes, tableaux, titre et description d'un tableau, en-têtes et pieds de page, notes, commentaires, zones de texte, notes de l'orateur, textes des graphiques et des schémas, texte supprimé que le suivi des modifications garde, liens) et ce que le fichier dit de ses auteurs (propriétés, auteurs des commentaires et des modifications, nom de compte dans un chemin de fichier). Mise en page, styles, images et animations restent tels quels ; l'image miniature du fichier est retirée. Restent en clair : les images (signature, photo, capture d'écran), le son et la vidéo, les équations, les nombres des graphiques, les dates et heures des modifications et des commentaires, les noms de styles et de signets, le nom d'un champ de fusion, les macros. Quand un de ces endroits porte un élément codé ailleurs dans le fichier, l'étape 2 le signale. Un fichier à l'ancien format (.doc, .ppt) s'enregistre d'abord en .docx ou .pptx.</p>
+          </details>
         </div>
       </div>
     </section>
@@ -286,7 +302,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-sortie">
       <div class="carte">
         <h1>Étape 2, la sortie pour l'outil d'intelligence artificielle</h1>
-        <p class="sous">Relire en entier. Ce qui a été remplacé à tort se corrige directement dans le texte ci-dessous. Ce qui a été manqué s'ajoute au Dictionnaire, puis on relance Pseudonymiser.</p>
+        <p class="sous">Relire en entier avant de copier. Un mot codé à tort se corrige dans le texte ci-dessous. Un mot manqué s'ajoute au Dictionnaire, puis on relance Pseudonymiser.</p>
         <div class="bilan" id="bilan"></div>
         <div class="message" id="msg-sortie"></div>
         <div class="message" id="msg-garde-sortie"></div>
@@ -312,7 +328,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-reponse">
       <div class="carte">
         <h1>Étape 3, la réponse de l'outil</h1>
-        <p class="sous">Copiez la réponse de l'outil d'intelligence artificielle, puis cliquez sur Coller et restituer. Les codes y sont reconnus même si l'outil a changé leur casse (pseudo_personne_001) ou les a écrits un peu autrement (Pseudo\_Personne\_001, Pseudo Personne 1) : la page dit alors lesquels, pour relecture. Un code qu'elle ne reconnaît pas reste en place, et l'étape 4 le signale.</p>
+        <p class="sous">Copiez la réponse de l'outil d'intelligence artificielle, puis cliquez sur Coller et restituer. Un code que la page ne reconnaît pas reste en place, et l'étape 4 le signale.</p>
         <label class="etiquette" for="reponse">Réponse reçue</label>
         <textarea id="reponse" spellcheck="false" placeholder="Coller ici la réponse de l'outil…"></textarea>
         <div class="message" id="msg-reponse"></div>
@@ -327,8 +343,11 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         <div class="depot" id="depot-reponse">
           <input type="file" id="fichier-reponse" accept=".xlsx,.xlsm,.docx,.docm,.dotx,.dotm,.pptx,.pptm,.ppsx,.ppsm,.potx,.potm" hidden>
           <p><strong>Ou le fichier renvoyé par l'outil</strong> (classeur Excel, document Word, diaporama PowerPoint) : le déposer ici, ou <button type="button" class="lien" id="btn-fichier-reponse">choisir le fichier</button>. Les vraies données y sont remises et le fichier restitué est téléchargé.</p>
-          <p class="sous">Classeur Excel : les codes sont remis dans tous les textes que la page lit, y compris le texte d'une formule, une liste déroulante, un graphique, un tableau croisé dynamique et le nom d'un onglet créé par l'outil. Un code resté à un endroit que la page ne réécrit pas (le nom d'un nom défini ou d'un tableau, par exemple) est signalé à l'étape 4, avec l'endroit.</p>
-          <p class="sous">Document Word, diaporama PowerPoint : le texte revient exactement. La mise en forme d'origine revient aussi, pour chaque passage que l'outil d'intelligence artificielle n'a pas modifié, quand le fichier est restitué dans cette page avec la table du codage (gardée dans l'onglet, ou enregistrée puis rechargée). Dans un passage modifié, un nom dont les lettres n'avaient pas toutes la même mise en forme prend celle de son début.</p>
+          <details class="plus"><summary>Le détail de la restitution</summary>
+          <p>Les codes sont reconnus même si l'outil a changé leur casse (pseudo_personne_001) ou les a écrits un peu autrement (Pseudo\_Personne\_001, Pseudo Personne 1) : la page dit alors lesquels, pour relecture.</p>
+          <p>Classeur Excel : les codes sont remis dans tous les textes que la page lit, y compris le texte d'une formule, une liste déroulante, un graphique, un tableau croisé dynamique et le nom d'un onglet créé par l'outil. Un code resté à un endroit que la page ne réécrit pas (le nom d'un nom défini ou d'un tableau, par exemple) est signalé à l'étape 4, avec l'endroit.</p>
+          <p>Document Word, diaporama PowerPoint : le texte revient exactement. La mise en forme d'origine revient aussi, pour chaque passage que l'outil d'intelligence artificielle n'a pas modifié, quand le fichier est restitué dans cette page avec la table du codage (gardée dans l'onglet, ou enregistrée puis rechargée). Dans un passage modifié, un nom dont les lettres n'avaient pas toutes la même mise en forme prend celle de son début.</p>
+          </details>
         </div>
       </div>
     </section>
@@ -359,7 +378,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-correspondance">
       <div class="carte">
         <h1>Table de correspondance <small id="corresp-date"></small></h1>
-        <p class="sous">Chaque élément d'origine et son code. La table réunit tout ce qui a été codé dans cet onglet depuis son ouverture, ou depuis Tout effacer : plusieurs textes ou fichiers codés à la suite se restituent chacun avec elle, dans n'importe quel ordre. Elle reste dans ce navigateur, dans cet onglet. Si la réponse de l'outil doit arriver plus tard ou sur un autre poste, enregistrez la table dans un fichier, puis rechargez-la ici avant l'étape 3.</p>
+        <p class="sous">Chaque élément d'origine et son code, pour tout ce qui a été codé dans cet onglet depuis son ouverture ou depuis Tout effacer. La table reste dans cet onglet et disparaît à sa fermeture. Si la réponse de l'outil arrive plus tard ou sur un autre poste, enregistrez la table, puis rechargez-la ici avant l'étape 3.</p>
         <div class="message" id="msg-garde-corresp" style="margin:0 0 12px"></div>
         <div class="actions" style="margin:0 0 12px">
           <button class="btn" id="btn-enregistrer-corresp">Enregistrer la table (fichier)</button>
@@ -376,17 +395,16 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-prompts">
       <div class="carte">
         <h1>Prompts pour l'outil d'intelligence artificielle</h1>
-        <p class="sous">Un prompt est la consigne donnée à l'outil. Ces trois modèles lui demandent votre travail et lui interdisent de toucher aux codes : un code modifié ne peut plus être remis en clair. Les parties <span class="enrouge">en rouge</span> sont les vôtres ; le texte en noir protège les codes et ne se modifie pas.</p>
+        <p class="sous">Un prompt est la consigne donnée à l'outil. Ces trois modèles lui demandent votre travail et lui interdisent de toucher aux codes. Les parties <span class="enrouge">en rouge</span> sont les vôtres ; le texte en noir protège les codes et ne se modifie pas.</p>
         <div class="etapes">
-          <div><b>D'abord</b><strong>Écrire le travail</strong><p>Une fois le texte ou le fichier codé (étapes 1 et 2), écrire le travail demandé dans la partie en rouge du modèle.</p></div>
+          <div><b>D'abord</b><strong>Écrire le travail</strong><p>Une fois le texte ou le fichier codé, écrire le travail demandé dans la partie en rouge du modèle.</p></div>
           <div><b>Ensuite</b><strong>Copier le prompt</strong><p>Cliquer sur Copier le prompt, puis le coller dans l'outil d'intelligence artificielle.</p></div>
           <div><b>Puis</b><strong>Ajouter le texte codé</strong><p>Modèle 1 : à l'étape 2, cliquer sur Copier pour l'IA et coller la sortie à la suite du prompt. Modèles 2 et 3 : joindre le fichier codé.</p></div>
           <div><b>Enfin</b><strong>Envoyer et restituer</strong><p>Envoyer. Rapporter la réponse, ou le fichier rendu, à l'étape 3, puis relire le résultat.</p></div>
         </div>
         <ul class="propre">
           <li>Ce qui est écrit en rouge part tel quel dans l'outil : aucun nom, aucune donnée personnelle. Pour désigner une personne ou une date, reprendre son code.</li>
-          <li>Le rôle, la forme et les consignes en plus restent enregistrés dans ce navigateur ; le contexte et le travail demandé, non. Les exemples de codes suivent le préfixe de vos réglages.</li>
-          <li>Un prompt réduit les erreurs de l'outil, il ne les supprime pas. Un code resté dans le texte final est signalé à l'étape 4.</li>
+          <li>Un prompt réduit les erreurs de l'outil, il ne les supprime pas : relire le résultat.</li>
         </ul>
       </div>
       <div class="carte">
@@ -428,7 +446,10 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-dictionnaire">
       <div class="carte">
         <h1>Dictionnaire</h1>
-        <p class="sous">Ce que la détection automatique ne voit pas : raisons sociales, services, fonctions, numéros courts, familles d'identifiants. Un texte est remplacé comme mot entier, quelle que soit sa casse ; un motif est une expression régulière (<code>\d</code> un chiffre, <code>[A-Z]</code> une majuscule, <code>{3}</code> trois fois, <code>\.</code> un point). L'étiquette entre dans le code : Fournisseur donne <code>Pseudo_Fournisseur_001</code>. Les textes les plus longs sont appliqués d'abord.</p>
+        <p class="sous">Pour ce que la détection automatique ne voit pas : raison sociale, service, fonction, numéro court. L'étiquette entre dans le code : Fournisseur donne <code>Pseudo_Fournisseur_001</code>.</p>
+        <details class="plus" style="margin:0 0 12px"><summary>Texte ou motif : pour aller plus loin</summary>
+        <p>Un texte est remplacé comme mot entier, quelle que soit sa casse ; un motif est une expression régulière (<code>\d</code> un chiffre, <code>[A-Z]</code> une majuscule, <code>{3}</code> trois fois, <code>\.</code> un point). Une famille d'identifiants s'écrit en motif. Les textes les plus longs sont appliqués d'abord.</p>
+        </details>
         <table><thead><tr><th style="width:46%">À remplacer (texte ou motif)</th><th>Étiquette</th><th style="width:110px">Type</th><th></th></tr></thead><tbody id="tbody-dict"></tbody></table>
         <div class="actions">
           <button class="btn" id="btn-ajouter-dict">Ajouter une ligne</button>
@@ -443,7 +464,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-conserver">
       <div class="carte">
         <h1>Mots à ne jamais remplacer</h1>
-        <p class="sous">Mots en majuscules qui ne sont pas des noms de personnes : sigles, services, fonctions Excel, mois, en-têtes de tableau. Un mot par ligne. Les majuscules et les accents ne comptent pas. Ajoutez les sigles de votre service.</p>
+        <p class="sous">Sigles et mots en majuscules qui ne sont pas des personnes (EDF, TVA, TOTAL). Un mot par ligne ; les majuscules et les accents ne comptent pas. Ajoutez les sigles de votre service.</p>
         <textarea id="liste-conserver" class="liste" spellcheck="false"></textarea>
         <div class="actions"><span class="esp"></span><button class="btn discret" id="btn-retablir-conserver">Rétablir la liste d'origine</button></div>
       </div>
@@ -453,7 +474,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-prenoms">
       <div class="carte">
         <h1>Prénoms reconnus</h1>
-        <p class="sous">Un prénom écrit avec une majuscule est reconnu comme une personne, seul ou suivi d'un nom (Lucas Valdoreth, Bonjour Paul, Marie-Odile Morvelang). Un prénom composé est reconnu par sa première partie. Un prénom par ligne ; ajoutez ceux qui manquent.</p>
+        <p class="sous">Un prénom de cette liste, écrit avec une majuscule, est codé seul ou suivi d'un nom (Bonjour Paul, Lucas Valdoreth). Un prénom composé est reconnu par sa première partie. Un prénom par ligne ; ajoutez ceux qui manquent.</p>
         <textarea id="liste-prenoms" class="liste" spellcheck="false"></textarea>
         <div class="actions"><span class="esp"></span><button class="btn discret" id="btn-retablir-prenoms">Rétablir la liste d'origine</button></div>
       </div>
@@ -463,7 +484,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-noms">
       <div class="carte">
         <h1>Noms de famille du service</h1>
-        <p class="sous">Noms de votre service, un par ligne : ils sont reconnus même écrits seuls avec une majuscule (Tessharto). Un nom en plusieurs mots (de Gauvernot) est reconnu par chacun de ses mots, particules à part. Liste vide au départ ; à remplir avec l'annuaire du service. Elle reste dans ce navigateur.</p>
+        <p class="sous">Les noms de votre service, un par ligne : ils sont codés même écrits seuls avec une majuscule (Tessharto). Un nom en plusieurs mots (de Gauvernot) s'écrit sur une seule ligne. Liste vide au départ, à remplir avec l'annuaire du service.</p>
         <textarea id="liste-noms" class="liste" spellcheck="false" placeholder="Un nom par ligne"></textarea>
       </div>
     </section>
@@ -472,7 +493,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-villes">
       <div class="carte">
         <h1>Villes reconnues seules</h1>
-        <p class="sous">Une ville écrite seule, sans code postal (« Fait à Bordeaux »), est remplacée par un code Pseudo_Lieu. Une ville par ligne ; les majuscules et les accents ne comptent pas. Au départ : les communes de la métropole de Lyon et les grandes villes. Une ville présente aussi dans Mots à conserver reste en clair (c'est le cas de Lyon, d'origine). Elle reste dans ce navigateur.</p>
+        <p class="sous">Une ville écrite seule, sans code postal (« Fait à Bordeaux »), est codée. Une ville par ligne. Au départ : les communes de la métropole de Lyon et les grandes villes. Une ville inscrite aussi dans Mots à conserver reste en clair ; c'est le cas de Lyon.</p>
         <textarea id="liste-villes" class="liste" spellcheck="false" placeholder="Une ville par ligne"></textarea>
         <div class="actions"><span class="esp"></span><button class="btn discret" id="btn-retablir-villes">Rétablir la liste d'origine</button></div>
       </div>
@@ -482,12 +503,12 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     <section class="vue" id="vue-reglages">
       <div class="carte">
         <h1>Réglages</h1>
-        <p class="sous">Chaque modification des réglages et des listes est enregistrée aussitôt dans ce navigateur, sur ce poste : rien à valider. Le fichier de réglages sert seulement à emporter vos listes et votre dictionnaire sur un autre poste, ou à les partager dans votre service.</p>
+        <p class="sous">Chaque modification est enregistrée aussitôt dans ce navigateur : rien à valider. Le fichier de réglages sert à emporter vos listes et votre dictionnaire sur un autre poste, ou à les partager dans votre service.</p>
         <div class="reglages">
-          <div class="champ"><label for="reg-prefixe">Préfixe des codes</label><input id="reg-prefixe" value="Pseudo"><small>Mot placé devant chaque code. À changer seulement si le texte collé contient déjà ce mot suivi d'un tiret bas ; l'étape 1 le signale.</small></div>
-          <div class="champ"><label for="reg-seuil">Nombres longs à partir de</label><select id="reg-seuil"><option>4</option><option selected>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select><small>Nombre de chiffres à partir duquel un nombre sans espace est codé. 5 par défaut ; 7 pour un tableau de montants, afin que les totaux restent lisibles par l'outil.</small></div>
-          <div class="champ"><label for="reg-dates">Pseudonymiser les dates</label><select id="reg-dates"><option value="oui">Oui</option><option value="non">Non</option></select><small>Non quand l'outil doit calculer un délai ou classer des dates ; les dates de naissance se mettent alors dans le Dictionnaire. Dans un classeur Excel, une date codée devient un texte : une formule qui s'en sert ne calcule plus tant que le classeur n'est pas restitué.</small></div>
-          <div class="champ"><label for="reg-adresses">Pseudonymiser les adresses</label><select id="reg-adresses"><option value="oui">Oui</option><option value="non">Non</option></select><small>Adresses postales avec numéro et type de voie, codes postaux suivis d'une ville, bâtiments, campus, villes seules de la liste Villes.</small></div>
+          <div class="champ"><label for="reg-prefixe">Préfixe des codes</label><input id="reg-prefixe" value="Pseudo"><small>Mot placé devant chaque code. À changer seulement si votre texte contient déjà ce mot suivi d'un tiret bas ; l'étape 1 le signale.</small></div>
+          <div class="champ"><label for="reg-seuil">Nombres longs à partir de</label><select id="reg-seuil"><option>4</option><option selected>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select><small>Un nombre sans espace est codé à partir de ce nombre de chiffres. 5 par défaut ; 7 pour garder lisibles les totaux d'un tableau de montants.</small></div>
+          <div class="champ"><label for="reg-dates">Pseudonymiser les dates</label><select id="reg-dates"><option value="oui">Oui</option><option value="non">Non</option></select><small>Non quand l'outil doit calculer un délai ou classer des dates ; les dates de naissance se mettent alors dans le Dictionnaire. Dans un classeur Excel, une date codée devient un texte jusqu'à la restitution : une formule qui s'en sert ne calcule plus.</small></div>
+          <div class="champ"><label for="reg-adresses">Pseudonymiser les adresses</label><select id="reg-adresses"><option value="oui">Oui</option><option value="non">Non</option></select><small>Adresses postales, codes postaux suivis d'une ville, bâtiments, campus et villes de la liste Villes.</small></div>
         </div>
         <hr class="filet">
         <div class="actions">
@@ -507,35 +528,79 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         <h1>À propos</h1>
         <p>Cet outil est une aide. Il ne remplace pas la relecture : chaque utilisateur relit le texte codé avant tout envoi et reste responsable des données qu'il transmet.</p>
         <p>Il est fourni en l'état, sans garantie. Il n'est pas, à ce jour, un outil validé par Lyon 1 Université.</p>
-        <p><strong>Pseudonymiseur</strong>, version web 1.36 du 21 novembre 2026, mise à jour le 21 novembre 2026 à 23h26. Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
+        <p><strong>Pseudonymiseur</strong>, version web 1.40 du 22 novembre 2026, mise à jour le 23 novembre 2026 à 0h30. Conçu pour la formation des personnels de Lyon 1 Université à la maîtrise de l'intelligence artificielle.</p>
         <h2>Où vont les données</h2>
         <ul class="propre">
           <li>Nulle part. Cette page est un programme complet que le serveur livre à votre navigateur ; le traitement se fait ensuite sur votre poste. Le serveur ne voit ni le texte, ni la table de correspondance, ni vos listes.</li>
-          <li>Le texte en cours et la table de correspondance sont gardés dans l'onglet ouvert, le temps de la session ; ils disparaissent à la fermeture de l'onglet. La place que le navigateur leur laisse est limitée : après un très gros fichier, ou beaucoup de fichiers codés à la suite, la page garde la table avant les textes ; si la table elle-même ne tient plus, la page le dit et demande de l'enregistrer dans un fichier. Un fichier déposé (classeur Excel, document Word, diaporama PowerPoint) reste en mémoire le temps de l'onglet et n'est jamais enregistré par la page. Pour un document Word ou un diaporama PowerPoint, la page garde aussi dans l'onglet, avec la table de correspondance, les passages d'origine dont elle a besoin pour rendre la mise en forme à la restitution ; ils sont enregistrés avec la table quand vous l'enregistrez. Vos listes, votre dictionnaire et vos réglages sont gardés dans ce navigateur, sur ce poste. Il en va de même, à la page Prompts, du rôle, de la forme et des consignes en plus ; le contexte et le travail demandé ne sont pas enregistrés.</li>
           <li>« Tout effacer » vide le texte en cours et la table. Les listes et réglages se remettent d'origine depuis la page Réglages.</li>
         </ul>
-        <h2>Ce que l'outil ne fait pas</h2>
+        <details class="plus"><summary>Ce que le navigateur garde, et jusqu'à quand</summary>
         <ul class="propre">
+          <li>Le texte en cours et la table de correspondance sont gardés dans l'onglet ouvert, le temps de la session ; ils disparaissent à la fermeture de l'onglet. La place que le navigateur leur laisse est limitée : après un très gros fichier, ou beaucoup de fichiers codés à la suite, la page garde la table avant les textes ; si la table elle-même ne tient plus, la page le dit et demande de l'enregistrer dans un fichier. Un fichier déposé (classeur Excel, document Word, diaporama PowerPoint) reste en mémoire le temps de l'onglet et n'est jamais enregistré par la page. Pour un document Word ou un diaporama PowerPoint, la page garde aussi dans l'onglet, avec la table de correspondance, les passages d'origine dont elle a besoin pour rendre la mise en forme à la restitution ; ils sont enregistrés avec la table quand vous l'enregistrez. Vos listes, votre dictionnaire et vos réglages sont gardés dans ce navigateur, sur ce poste. Il en va de même, à la page Prompts, du rôle, de la forme et des consignes en plus ; le contexte et le travail demandé ne sont pas enregistrés.</li>
+        </ul>
+        </details>
+        <h2>Auteur</h2>
+        <p>Outil créé par M. Manoël PYANET, directeur administratif du département composante Génie Électrique et des Procédés, Lyon 1 Université. Première version le 28 septembre 2026, sous la forme d'un classeur Excel ; version web depuis le 19 octobre 2026.</p>
+        <h2>Limites connues</h2>
+        <ul class="propre">
+          <li>Il ne remplace pas la relecture : chaque envoi à l'outil d'intelligence artificielle se vérifie avant de partir.</li>
+          <li>Il ne lit ni les images, ni les fichiers PDF, ni les anciens formats (.doc, .xls, .ppt), ni un fichier protégé par un mot de passe.</li>
+          <li>Il ne reconnaît pas tout : un nom de famille écrit seul, un nom en minuscules, un prénom absent de la liste Prénoms ou des initiales peuvent rester en clair. Les ajouter aux listes Noms du service et Prénoms, ou au Dictionnaire.</li>
+          <li>Il code parfois un mot de trop, comme un sigle absent de la liste Mots à conserver. La restitution rend le texte exact.</li>
+          <li>Dans un classeur Excel, les noms d'onglets et les cellules saisies comme nombres restent en clair.</li>
+          <li>À la restitution, le texte revient exactement. Dans un passage que l'outil d'intelligence artificielle a réécrit ou remis en forme, la mise en forme d'un nom écrit en partie en gras ou en couleur peut changer.</li>
+          <li>Un grand fichier demande du temps : jusqu'à quelques minutes pour un classeur de 30 000 lignes.</li>
+          <li>Il ne sait pas dire si la table chargée est bien celle du fichier restitué : garder chaque table avec son fichier.</li>
+        </ul>
+        <details class="plus"><summary>Ce qui peut rester en clair : le détail</summary>
+        <ul class="propre">
+          <li>Il ne reconnaît pas tout. Restent en clair : un nom de famille écrit seul, qui ne figure nulle part avec un prénom, une civilité ou une fonction que l'outil connaît ; c'est le cas, dans un tableau, d'un nom placé dans une colonne dont l'en-tête ne dit pas « Nom » (une colonne « Agent » ou « Étudiant », une colonne sans en-tête), et d'un nom écrit avant le prénom au début d'une ligne ou d'une cellule (Tessharto Paul a signé), sauf si le nom est écrit en majuscules (TESSHARTO) ; un nom écrit tout en minuscules ; un prénom absent de la liste Prénoms, écrit seul ou devant un nom qui n'est pas en majuscules (le nom reste alors en clair lui aussi) ; un nom collé à un autre mot par un tiret bas (Dossier_Tessharto) ; après un prénom, un nom précédé de « des », « le », « la » ou « de l' » écrits en minuscules (Alice des Morvelang) ; un nom écrit après une fonction que l'outil ne connaît pas (la gestionnaire Tessharto) ou après une fonction au pluriel (les étudiants Tessharto et Valdoreth) ; un nom écrit dans un autre alphabet que l'alphabet latin (grec, cyrillique, arabe, chinois) ; un nom à majuscule intérieure dont le début n'est pas l'un des plus courants, comme Mc, Mac, Le, De ou Van (Paul TesshArto) ; des initiales (P. T., Paul T.) ; un identifiant fait du prénom et du nom (paul.tessharto). Les ajouter à la liste Noms du service, où une colonne de noms copiée d'un tableau se colle telle quelle, et un prénom à la liste Prénoms. Un nom ou un prénom écrit en plusieurs mots (Thu Ha) s'y écrit sur une seule ligne : il est reconnu par chacun de ses mots. Ces deux listes ne reconnaissent qu'un mot écrit avec une majuscule, en lettres latines : un nom écrit tout en minuscules, dans un autre alphabet ou à majuscule intérieure, des initiales et un identifiant s'ajoutent au Dictionnaire. Chaque ligne est lue à part : un élément coupé par un saut de ligne, dans un texte, une cellule ou un paragraphe (le prénom sur une ligne et le nom sur la suivante, un numéro écrit sur deux lignes), peut rester en clair en tout ou en partie. Reste aussi en clair un mot dont l'accent est un signe à part, posé à côté de la lettre (Ame´lie, fe´vrier), comme en donne le texte copié de certains fichiers PDF : corriger le texte avant de le coder.</li>
           <li>Il ne reconnaît pas une formule ou un résultat scientifique confidentiel : rien ne le distingue d'une formule publique. Ajoutez-le au Dictionnaire, en texte ou en motif.</li>
           <li>Il ne lit pas les images ni les pièces jointes : seul le texte collé est traité, ou les textes d'un classeur Excel, d'un document Word ou d'un diaporama PowerPoint déposé (pas les images qu'il contient, ni le son, ni la vidéo, ni les équations).</li>
           <li>Il ne lit ni les anciens formats (.doc, .xls, .ppt), ni les fichiers PDF, ni un fichier protégé par un mot de passe à l'ouverture : enregistrer le fichier au format actuel (.docx, .xlsx, .pptx), sans mot de passe, ou coller son texte à l'étape 1.</li>
-          <li>Il ne reconnaît pas tout. Restent en clair : un nom de famille écrit seul, qui ne figure nulle part avec un prénom, une civilité ou une fonction que l'outil connaît ; c'est le cas, dans un tableau, d'un nom placé dans une colonne dont l'en-tête ne dit pas « Nom » (une colonne « Agent » ou « Étudiant », une colonne sans en-tête), et d'un nom écrit avant le prénom au début d'une ligne ou d'une cellule (Tessharto Paul a signé), sauf si le nom est écrit en majuscules (TESSHARTO) ; un nom écrit tout en minuscules ; un prénom absent de la liste Prénoms, écrit seul ou devant un nom qui n'est pas en majuscules (le nom reste alors en clair lui aussi) ; un nom collé à un autre mot par un tiret bas (Dossier_Tessharto) ; après un prénom, un nom précédé de « des », « le », « la » ou « de l' » écrits en minuscules (Alice des Morvelang) ; un nom écrit après une fonction que l'outil ne connaît pas (la gestionnaire Tessharto) ou après une fonction au pluriel (les étudiants Tessharto et Valdoreth) ; un nom écrit dans un autre alphabet que l'alphabet latin (grec, cyrillique, arabe, chinois) ; un nom à majuscule intérieure dont le début n'est pas l'un des plus courants, comme Mc, Mac, Le, De ou Van (Paul TesshArto) ; des initiales (P. T., Paul T.) ; un identifiant fait du prénom et du nom (paul.tessharto). Les ajouter à la liste Noms du service, où une colonne de noms copiée d'un tableau se colle telle quelle, et un prénom à la liste Prénoms. Un nom ou un prénom écrit en plusieurs mots (Thu Ha) s'y écrit sur une seule ligne : il est reconnu par chacun de ses mots. Ces deux listes ne reconnaissent qu'un mot écrit avec une majuscule, en lettres latines : un nom écrit tout en minuscules, dans un autre alphabet ou à majuscule intérieure, des initiales et un identifiant s'ajoutent au Dictionnaire. Chaque ligne est lue à part : un élément coupé par un saut de ligne, dans un texte, une cellule ou un paragraphe (le prénom sur une ligne et le nom sur la suivante, un numéro écrit sur deux lignes), peut rester en clair en tout ou en partie. Reste aussi en clair un mot dont l'accent est un signe à part, posé à côté de la lettre (Ame´lie, fe´vrier), comme en donne le texte copié de certains fichiers PDF : corriger le texte avant de le coder.</li>
-        <li>Il code parfois un mot de trop. Après un prénom, une particule (« de », « du », « van ») et le mot à majuscule qui la suit sont lus comme un nom de famille : dans « Alice de Gauvernot », où Gauvernot serait une entreprise, ce mot est codé avec le prénom, puis partout où il est écrit seul. La restitution rend le texte exact. Pour que ce mot reste lisible par l'outil d'intelligence artificielle, l'inscrire à la liste Mots à conserver. De même, un sigle ou un mot écrit en majuscules, que l'outil code quand il est écrit seul parce qu'il est absent de cette liste, est codé aussi après « d' », devant la marque anglaise « 's » (ABCD's report), et après toute apostrophe quand il est déjà codé ailleurs dans le texte. Une ville de la liste Villes est reconnue même écrite en minuscules : « qu'il vienne » ou « la valence du carbone » sont codés comme un lieu ; retirer Vienne ou Valence de la liste Villes si ces mots comptent. Enfin, des chiffres sont parfois lus comme une coordonnée : un nombre entre parenthèses suivi de groupes de chiffres (« Dotation (2026) 125 000 € », « Total (1) 12 500 € ») est codé comme un téléphone, et trois groupes de quatre chiffres écrits à la suite (« Exercices 2024 2025 2026 », « Années 2024-2025-2026 ») comme un numéro de carte ; écrits « Dotation 2026 : 125 000 € » ou « Exercices 2024, 2025 et 2026 », ils restent lisibles. Dans un tableau (classeur Excel, tableau d'un document Word ou d'un diaporama PowerPoint, lignes collées avec leurs tabulations), une colonne dont l'en-tête est « Nom » ou « Prénom » est lue comme une liste de noms ou de prénoms, même absents des listes ; il en va de même de la case placée à droite de « Nom » ou de « Prénom » dans une fiche, et d'une ligne « Nom : Tessharto ». Une colonne « Nom » qui porte autre chose que des personnes (Stylos, Classeurs) est donc codée, et un mot relevé dans une telle colonne est codé partout où il est écrit avec une majuscule, même là où il désigne autre chose. Devant un nom à plusieurs particules écrites avec une majuscule (Van Der Gauvernot), les particules d'une telle colonne restent en clair. De même, après une fonction (le directeur, la présidente, le chef), un mot à majuscule que l'outil ne connaît pas est lu comme un nom : « le chef Cuisine » est codé. Dans tous ces cas, la restitution rend le texte exact.</li>
-        <li>Dans un classeur Excel, il laisse en clair : les noms d'onglets, les noms définis, les noms de tableaux et de tableaux croisés dynamiques, les noms de plages protégées, les cellules saisies comme nombres, les dates calculées par une formule, les dates qu'un tableau croisé dynamique garde en mémoire, le texte d'un format de nombre, les nombres des graphiques, les macros, les requêtes de données (Power Query), le modèle de données et les objets incorporés. L'étape 2 le signale quand un de ces endroits porte un nom que l'outil reconnaît ou un élément codé ailleurs dans le classeur. Là où Excel n'accepte qu'un texte court (255 caractères pour une liste déroulante, un message de validation ou un texte de formule, 32 pour le titre d'un message), un texte que son code rendrait trop long reste en clair, et l'étape 2 le dit.</li>
-        <li>À la restitution d'un classeur Excel, le texte revient exactement. Dans une cellule dont une partie seulement est en gras ou en couleur, la mise en forme revient exactement si l'outil d'intelligence artificielle n'a pas modifié la cellule ; sinon, un nom qui passait d'une mise en forme à l'autre prend celle de son début. Un onglet dont le nom porte un code retrouve son nom quand Excel l'accepte (31 caractères au plus, sans aucun des signes / \ [ ] : ? *, et pas déjà pris) ; sinon il garde son code et l'étape 4 le dit. Une date que l'outil d'intelligence artificielle a recopiée dans une autre cellule ou dans un classeur neuf revient en vraie date si cette cellule a un format de date ; sinon elle revient sous forme de texte (12/03/2026), et une formule qui s'en sert peut ne pas calculer : le modèle de prompt pour un classeur demande à l'outil de donner un format de date à ces cellules. Quand l'outil a réécrit un classeur qui porte des formules et qu'une donnée y est restituée, le classeur rendu demande à Excel de tout recalculer à son ouverture : un résultat que l'outil avait calculé sur un code (longueur d'un texte, majuscules, premières lettres) reprend ainsi sa vraie valeur. Après le chargement d'une table de correspondance depuis un fichier, la page ne sait plus reconnaître un classeur réécrit : elle ne demande ce recalcul que si le texte d'une formule ou le nom d'un onglet est restitué ; dans Excel, Ctrl+Alt+F9 recalcule alors toutes les formules.</li>
-        <li>Ce que l'outil d'intelligence artificielle règle d'après la longueur du texte est calculé sur les codes, qui n'ont pas la longueur du texte d'origine : après la restitution, une colonne dont il a ajusté la largeur peut être trop étroite ou trop large, une zone de texte ou une bulle de commentaire un peu trop haute. Le texte, lui, revient en entier : ajuster ces dimensions dans le fichier rendu.</li>
-        <li>Un grand fichier demande du temps, pendant lequel la page ne répond pas : lors des essais, de trente à quarante secondes pour un classeur de 10 000 lignes ou pour un document Word de 6 000 paragraphes, et de deux à un peu plus de trois minutes pour un classeur de 30 000 lignes. Ces durées changent d'une mesure à l'autre et dépendent de l'ordinateur.</li>
-        <li>Le nom du fichier est codé comme un texte, et l'outil y cherche aussi le nom de famille des personnes codées dans le contenu. Un nom que le contenu ne porte pas, ou que l'outil n'y a pas reconnu comme une personne, reste dans le nom du fichier : le vérifier avant d'envoyer le fichier. Un nom de fichier qui porte déjà un code n'est pas codé une seconde fois : l'étape 2 signale ce qui y reste en clair. Dans le nom d'un fichier, un tiret bas est lu comme une espace : une personne écrite avec des tirets bas (TESSHARTO_Paul) les retrouve à la restitution ; une date, une adresse ou un numéro écrits avec des tirets bas (12_mars_2026) reviennent avec des espaces.</li>
-        <li>Il ne sait pas dire si la table chargée est bien celle du fichier déposé à l'étape 3 : un fichier restitué avec la table d'un autre travail recevrait les données de cet autre travail. Garder chaque table enregistrée avec le fichier qu'elle accompagne.</li>
-        <li>Dans un document Word ou un diaporama PowerPoint, il laisse en clair : les nombres des graphiques, les dates et heures des modifications et des commentaires, les noms de styles et de signets, le nom d'un champ de fusion, l'image qui montre un objet inséré (un tableau Excel collé comme objet), le nom donné à une forme ou à une image quand la personne n'est citée nulle part ailleurs dans le fichier, et un identifiant de connexion écrit dans le texte (à ajouter au Dictionnaire). Il ne lit pas non plus les macros, le contenu d'un fichier inséré à un ancien format ou d'une page web insérée, ni les données internes de certains champs (bibliographie, formulaire) : l'étape 2 le signale quand le fichier déposé en contient.</li>
-          <li>À la restitution d'un document Word ou d'un diaporama PowerPoint, le texte revient exactement. La mise en forme revient exactement pour chaque passage que l'outil d'intelligence artificielle n'a pas modifié ; dans un passage modifié, ou si la table a été retapée à la main, un nom dont les lettres n'avaient pas toutes la même mise en forme (une partie en gras, par exemple) prend celle de son début. L'image miniature du fichier, retirée au codage, n'est pas remise.</li>
-          <li>Il ne remplace pas la relecture : chaque envoi à l'outil d'intelligence artificielle se vérifie avant de partir.</li>
         </ul>
-        <h2>Auteur</h2>
-        <p>Outil créé par M. Manoël PYANET, directeur administratif du département composante Génie Électrique et des Procédés, Lyon 1 Université. Première version le 28 septembre 2026, sous la forme d'un classeur Excel ; version web depuis le 19 octobre 2026.</p>
-        <h2>Ordre de traitement</h2>
+        </details>
+        <details class="plus"><summary>Ce qui est codé en trop : le détail</summary>
+        <ul class="propre">
+          <li>Il code parfois un mot de trop. Après un prénom, une particule (« de », « du », « van ») et le mot à majuscule qui la suit sont lus comme un nom de famille : dans « Alice de Gauvernot », où Gauvernot serait une entreprise, ce mot est codé avec le prénom, puis partout où il est écrit seul. La restitution rend le texte exact. Pour que ce mot reste lisible par l'outil d'intelligence artificielle, l'inscrire à la liste Mots à conserver. De même, un sigle ou un mot écrit en majuscules, que l'outil code quand il est écrit seul parce qu'il est absent de cette liste, est codé aussi après « d' », devant la marque anglaise « 's » (ABCD's report), et après toute apostrophe quand il est déjà codé ailleurs dans le texte. Une ville de la liste Villes est reconnue même écrite en minuscules : « qu'il vienne » ou « la valence du carbone » sont codés comme un lieu ; retirer Vienne ou Valence de la liste Villes si ces mots comptent. Enfin, des chiffres sont parfois lus comme une coordonnée : un nombre entre parenthèses suivi de groupes de chiffres (« Dotation (2026) 125 000 € », « Total (1) 12 500 € ») est codé comme un téléphone, et trois groupes de quatre chiffres écrits à la suite (« Exercices 2024 2025 2026 », « Années 2024-2025-2026 ») comme un numéro de carte ; écrits « Dotation 2026 : 125 000 € » ou « Exercices 2024, 2025 et 2026 », ils restent lisibles. Dans un tableau (classeur Excel, tableau d'un document Word ou d'un diaporama PowerPoint, lignes collées avec leurs tabulations), une colonne dont l'en-tête est « Nom » ou « Prénom » est lue comme une liste de noms ou de prénoms, même absents des listes ; il en va de même de la case placée à droite de « Nom » ou de « Prénom » dans une fiche, et d'une ligne « Nom : Tessharto ». Une colonne « Nom » qui porte autre chose que des personnes (Stylos, Classeurs) est donc codée, et un mot relevé dans une telle colonne est codé partout où il est écrit avec une majuscule, même là où il désigne autre chose. Devant un nom à plusieurs particules écrites avec une majuscule (Van Der Gauvernot), les particules d'une telle colonne restent en clair. De même, après une fonction (le directeur, la présidente, le chef), un mot à majuscule que l'outil ne connaît pas est lu comme un nom : « le chef Cuisine » est codé. Dans tous ces cas, la restitution rend le texte exact.</li>
+        </ul>
+        </details>
+        <details class="plus"><summary>Classeur Excel : le détail</summary>
+        <ul class="propre">
+          <li>Dans un classeur Excel, il laisse en clair : les noms d'onglets, les noms définis, les noms de tableaux et de tableaux croisés dynamiques, les noms de plages protégées, les cellules saisies comme nombres, les dates calculées par une formule, les dates qu'un tableau croisé dynamique garde en mémoire, le texte d'un format de nombre, les nombres des graphiques, les macros, les requêtes de données (Power Query), le modèle de données et les objets incorporés. L'étape 2 le signale quand un de ces endroits porte un nom que l'outil reconnaît ou un élément codé ailleurs dans le classeur. Là où Excel n'accepte qu'un texte court (255 caractères pour une liste déroulante, un message de validation ou un texte de formule, 32 pour le titre d'un message), un texte que son code rendrait trop long reste en clair, et l'étape 2 le dit.</li>
+          <li>À la restitution d'un classeur Excel, le texte revient exactement. Dans une cellule dont une partie seulement est en gras ou en couleur, la mise en forme d'origine revient quand le texte de la cellule est revenu sans changement, même si Excel ou l'outil d'intelligence artificielle a réenregistré le classeur, à condition de restituer le classeur dans l'onglet où il a été codé (si plusieurs classeurs y ont été codés, le fichier rendu doit avoir gardé son nom) ; elle revient aussi quand l'outil n'a changé que la mise en forme de la cellule, sans toucher à son texte. Dans une cellule dont l'outil a changé le texte, ou quand deux cellules du classeur portent le même texte avec deux mises en forme, un nom qui passait d'une mise en forme à l'autre prend celle de son début. Quand l'outil a lui-même réécrit le classeur sans les mises en forme partielles des cellules, comme certains le font aussi sur un fichier en clair, elles ne reviennent pas. Un onglet dont le nom porte un code retrouve son nom quand Excel l'accepte (31 caractères au plus, sans aucun des signes / \ [ ] : ? *, et pas déjà pris) ; sinon il garde son code et l'étape 4 le dit. Une date que l'outil d'intelligence artificielle a recopiée dans une autre cellule ou dans un classeur neuf revient en vraie date si cette cellule a un format de date ; sinon elle revient sous forme de texte (12/03/2026), et une formule qui s'en sert peut ne pas calculer : le modèle de prompt pour un classeur demande à l'outil de donner un format de date à ces cellules. Quand l'outil a réécrit un classeur qui porte des formules et qu'une donnée y est restituée, le classeur rendu demande à Excel de tout recalculer à son ouverture : un résultat que l'outil avait calculé sur un code (longueur d'un texte, majuscules, premières lettres) reprend ainsi sa vraie valeur. Après le chargement d'une table de correspondance depuis un fichier, la page ne sait plus reconnaître un classeur réécrit : elle ne demande ce recalcul que si le texte d'une formule ou le nom d'un onglet est restitué ; dans Excel, Ctrl+Alt+F9 recalcule alors toutes les formules.</li>
+        </ul>
+        </details>
+        <details class="plus"><summary>Document Word, diaporama PowerPoint : le détail</summary>
+        <ul class="propre">
+          <li>Dans un document Word ou un diaporama PowerPoint, il laisse en clair : les nombres des graphiques, les dates et heures des modifications et des commentaires, les noms de styles et de signets, le nom d'un champ de fusion, l'image qui montre un objet inséré (un tableau Excel collé comme objet), le nom donné à une forme ou à une image quand la personne n'est citée nulle part ailleurs dans le fichier, et un identifiant de connexion écrit dans le texte (à ajouter au Dictionnaire). Il ne lit pas non plus les macros, le contenu d'un fichier inséré à un ancien format ou d'une page web insérée, ni les données internes de certains champs (bibliographie, formulaire) : l'étape 2 le signale quand le fichier déposé en contient.</li>
+          <li>À la restitution d'un document Word ou d'un diaporama PowerPoint, le texte revient exactement. La mise en forme revient pour chaque passage dont le texte est revenu sans changement, même si Word, PowerPoint ou l'outil d'intelligence artificielle a réenregistré le fichier ; dans un passage dont l'outil a changé le texte ou qu'il a recopié ailleurs dans le fichier, quand deux passages du fichier portent le même texte avec deux mises en forme, ou si la table a été retapée à la main, un nom dont les lettres n'avaient pas toutes la même mise en forme (une partie en gras, par exemple) prend celle de son début. Quand l'outil n'a changé que la mise en forme d'un passage, sans toucher à son texte, la partie d'un tel nom qui avait sa propre mise en forme reprend celle d'origine. L'image miniature du fichier, retirée au codage, n'est pas remise.</li>
+        </ul>
+        </details>
+        <details class="plus"><summary>Nom du fichier, durée, dimensions, table : le détail</summary>
+        <ul class="propre">
+          <li>Le nom du fichier est codé comme un texte, et l'outil y cherche aussi le nom de famille des personnes codées dans le contenu. Un nom que le contenu ne porte pas, ou que l'outil n'y a pas reconnu comme une personne, reste dans le nom du fichier : le vérifier avant d'envoyer le fichier. Un nom de fichier qui porte déjà un code n'est pas codé une seconde fois : l'étape 2 signale ce qui y reste en clair. Dans le nom d'un fichier, un tiret bas est lu comme une espace : une personne écrite avec des tirets bas (TESSHARTO_Paul) les retrouve à la restitution ; une date, une adresse ou un numéro écrits avec des tirets bas (12_mars_2026) reviennent avec des espaces.</li>
+          <li>Un grand fichier demande du temps, pendant lequel la page ne répond pas : lors des essais, de trente à quarante secondes pour un classeur de 10 000 lignes ou pour un document Word de 6 000 paragraphes, et de deux à un peu plus de trois minutes pour un classeur de 30 000 lignes. Ces durées changent d'une mesure à l'autre et dépendent de l'ordinateur.</li>
+          <li>Ce que l'outil d'intelligence artificielle règle d'après la longueur du texte est calculé sur les codes, qui n'ont pas la longueur du texte d'origine : après la restitution, une colonne dont il a ajusté la largeur peut être trop étroite ou trop large, une zone de texte ou une bulle de commentaire un peu trop haute. Le texte, lui, revient en entier : ajuster ces dimensions dans le fichier rendu.</li>
+          <li>Il ne sait pas dire si la table chargée est bien celle du fichier déposé à l'étape 3 : un fichier restitué avec la table d'un autre travail recevrait les données de cet autre travail. Garder chaque table enregistrée avec le fichier qu'elle accompagne.</li>
+        </ul>
+        </details>
+        <details class="plus"><summary>Ordre de traitement</summary>
         <p>Dans un tableau, relevé des colonnes « Nom » et « Prénom » ; adresses mail et liens ; Dictionnaire ; adresses postales, codes postaux, bâtiments, campus et villes seules ; IBAN, BIC, sécurité sociale, cartes, suites de onze chiffres et plus, téléphones, plaques et identifiants, SIRET, nombres longs ; dates ; personnes (mots en majuscules, prénoms connus, civilité ou fonction suivie d'un nom, avec ou sans particule) ; puis un second passage pour les noms de famille écrits seuls, vus dans un nom complet du même texte ou listés dans Noms du service. Chaque ligne du texte est traitée comme une ligne de tableau, chaque tabulation comme une colonne, exactement comme dans le classeur Excel.</p>
-        <details class="historique"><summary>Historique des versions</summary><p>Origine : classeur Excel « Anonymiseur à bouton » créé le 28 septembre 2026, en version 3 le 30 septembre 2026, renommé « Pseudonymiseur à bouton » en version 4 le 12 octobre 2026. Version web du 19 octobre 2026 : reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et trois corrections (la troisième : un prénom composé dont la suite est en minuscules, Marie-odile MORVELANG, est reconnu) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). La version 1.7 code en plus les téléphones étrangers (indicatif entre parenthèses, ou tout numéro écrit après Tel, Direct, Mobile, Fax), les adresses étrangères écrites sur une ligne qui finit par un pays, les entreprises suivies d'une forme juridique (Ltd, Inc, GmbH, SARL, SAS), le nom entier d'un bâtiment, le numéro dans un nom de rue (avenue du 8 mai 1945), et le nom écrit avant une adresse mail ou avant « a écrit : », même avec un prénom inconnu ; la version 1.8 ne prend plus pour une personne un intitulé en majuscules qui commence par un nom de lieu ou de service (QUAI CHARGEMENT devient un lieu, SERVICE COURRIER reste en clair) ni le sigle GLPI ; la version 1.9 laisse en clair un sigle défini dans le texte entre parenthèses, quand ses lettres sont les initiales de sa définition (CAL, capacité d'accueil limitée) ; la version 1.10 code une signature réduite à une initiale collée au nom, seule sur sa ligne (J.Tessharto) ; FAQ et CAUTION restent en clair ; la version 1.11 code un prénom connu écrit après une élision (d'Alice), reconnaît un terme du Dictionnaire écrit sans accent (Societe pour Société), laisse en clair quatre sigles et mots de plus, dont SUJET, copie la sortie dès la pseudonymisation et ajoute le bouton Coller et restituer ; la version 1.11.1 laisse en clair un titre suivi d'un mot courant au pluriel (Professeur des Universités) et un mot de remplissage fait d'une seule lettre répétée (XXXX) ; la version 1.12 code une date écrite sans année (27 octobre, 27/10, lundi 12), une boîte fonctionnelle écrite avec un point devant son adresse (Service.Achats), le nom d'un outil de gestion du Dictionnaire quelle que soit sa casse et un nom de campus, ajouté à la liste Villes ; la version 1.12.1 restitue la réponse déjà collée quand le navigateur refuse la lecture du presse-papiers ; la version 1.13 accepte un classeur Excel déposé tel quel (.xlsx, .xlsm) : seuls ses textes sont codés, le classeur codé est téléchargé avec ses onglets, formules et mises en forme intacts, et le classeur renvoyé par l'outil se restitue de la même façon, le tout sur le poste ; la version 1.13.1 code un nom écrit après une initiale (P. Valdoreth, L. Gauvernot), sauf après un mot ordinaire en minuscules, un chiffre, un symbole ou un point (125 °C. Équations) et dans une suite d'initiales (N. B.) ; la version 1.14 code aussi, dans un classeur Excel, les dates saisies dans les cellules, qu'Excel enregistre comme des nombres, et les remet en dates, avec leur format, à la restitution ; une date calculée par une formule reste en clair ; la version 1.15 code une suite de jours devant un mois (les 13, 14 et 15 octobre), un mois suivi de son année (avril 2026) et le nom écrit après Dr ou Pr (Dr El Valdoreth, Pr Le Gauvernot), laisse en clair un numéro de page ou de partie (page 3/12) et une fraction suivie d'une unité (1/2 journée), ne coupe plus un numéro long par le code d'un numéro plus court, restitue en entier une adresse dont une partie avait déjà reçu un code et, quand un même code couvre deux écritures d'un même élément, restitue toujours la première écrite ; la version 1.16 donne son propre code à chaque écriture d'une même personne ou d'un même terme du Dictionnaire (Paul TESSHARTO, puis TESSHARTO : Pseudo_Personne_001, puis Pseudo_PersonneB_001, même numéro et une lettre après l'étiquette), pour que la restitution rende chaque texte exactement comme il était, et contrôle à chaque pseudonymisation que chaque texte codé revient exactement au texte d'origine ; un texte qui n'y reviendrait pas est codé en entier, sous un seul code ; la version 1.16.1 ne livre plus dans le Dictionnaire que quatre lignes d'exemple, pour que chacun y écrive les siennes, sans rien changer aux listes déjà enregistrées dans un navigateur ; la version 1.16.2 précise, en tête de cette page, le statut de l'outil ; la version 1.20 reprend la version 1.16.2, range cet historique en bas de la rubrique, rappelle l'origine de l'outil, affiche l'heure de sa mise à jour et ajoute la page Prompts : deux modèles de consigne à copier, pour un texte et pour un classeur Excel, qui demandent à l'outil d'intelligence artificielle de ne pas toucher aux codes ; la version 1.21 remplace les exemples de la page par des exemples généraux, aux noms de personnes inventés, et ajoute EDF, ENGIE et SNCF à la liste d'origine des mots à conserver ; la version 1.22 reprend la version 1.21, sans changement de l'outil ; la version 1.23 ajoute au mode d'emploi un quatrième geste de sûreté : relire ce que l'outil d'intelligence artificielle a rendu ; la version 1.30 pseudonymise et restitue aussi les documents Word (.docx) et les diaporamas PowerPoint (.pptx), déposés comme un classeur Excel : textes, tableaux, en-têtes et pieds de page, notes, commentaires, zones de texte, graphiques, liens, propriétés et auteurs du fichier, sans toucher à la mise en page ni aux images ; elle ajoute un troisième modèle de prompt pour ces fichiers et affiche ce qui reste en clair ; la page reste utilisable quand le navigateur refuse l'enregistrement local, listes et réglages n'étant alors gardés que le temps de l'onglet ; les règles de remplacement et le traitement des classeurs Excel ne changent pas ; la version 1.31 lit une espace insécable comme une espace ordinaire, dans un texte collé comme dans un fichier déposé : les numéros de téléphone, les dates en lettres, les IBAN, les numéros de sécurité sociale, les adresses et les noms écrits avec des espaces insécables, qui restaient en clair en tout ou en partie, sont codés, et la restitution remet chaque espace insécable à sa place ; un même élément écrit des deux façons garde son numéro et reçoit une lettre (Pseudo_TelephoneB_001) ; un texte sans espace insécable est codé exactement comme avant ; la version 1.32 lit de même un trait d'union insécable ou un tiret court comme un trait d'union ordinaire, et ne tient pas compte, pour lire, des caractères invisibles qu'un copier-coller glisse dans un numéro, une date, une adresse ou un nom (césure invisible, espace sans chasse, marques de sens d'écriture) : l'élément est codé en entier, et la restitution remet chaque caractère à sa place ; la version 1.33 garde une seule table pour tout ce qui est codé dans l'onglet : deux fichiers codés à la suite se restituent chacun avec leurs propres données ; elle lit une lettre accentuée écrite en deux caractères, la lettre puis son accent (texte copié de certains fichiers PDF, fichier venu d'un Mac), comme la même lettre écrite en un seul : les prénoms, les noms, les dates en lettres et les villes écrits ainsi, qui restaient en clair, sont codés, et la restitution rend l'écriture d'origine ; dans un classeur Excel, elle code aussi le texte écrit entre guillemets dans une formule, les listes déroulantes et les messages de validation, les textes que les graphiques et les tableaux croisés dynamiques gardent en mémoire, les scénarios, les infobulles, le texte de remplacement des images, les propriétés du fichier et le chemin d'enregistrement, lit d'un seul tenant un nom coupé par la mise en forme d'une cellule, et restitue les codes que l'outil a écrits à ces endroits ou dans le nom d'un onglet ; elle reconnaît un code que l'outil a rendu sous une autre écriture (Pseudo\_Personne\_001) et signale celui qu'elle ne reconnaît pas, y compris quand la table porte un autre préfixe que celui des réglages ; elle code le nom du fichier, où elle cherche aussi le nom de famille des personnes codées dans le contenu ; dans un document Word, elle code le titre et la description d'un tableau, ainsi que l'infobulle d'un lien et le nom d'une forme tels que les écrit LibreOffice ; à l'étape 2, elle signale ce qui reste en clair à un endroit qu'elle ne code pas ; quand le navigateur n'a plus la place de garder le travail de l'onglet, elle garde la table avant les textes, ne laisse plus revenir une table plus ancienne après un rechargement de la page, et prévient quand la table elle-même ne tient plus ; la version 1.34 code le nom à particule écrit après un prénom connu ou une civilité, que la particule soit en minuscules ou porte une majuscule (Alice de Morvelang, Paul van der Gauvernot, Paul Van Der Gauvernot, Mme de la Morvelang), et le nom à apostrophe (Mme d'Orvelang, Paul N'Gauvernot, D'ORVELANG Alice), qui restaient en clair en tout ou en partie ; elle les code aussi dans le nom du fichier ; après « de », « du » ou « de la », elle ne prend pas pour un nom un mot courant, un service, une discipline, un mois, une ville de la liste Villes ni un mot à conserver (Paul de la Scolarité) ; dans la liste Noms du service, un nom écrit en plusieurs mots, qui restait sans effet, est reconnu par chacun de ses mots ; elle code aussi le nom écrit après « Professeure », « Docteure » ou « Dre », et les noms qui suivent une civilité au pluriel, séparés par une virgule ou par « et » (MM. Tessharto, Valdoreth et Morvelang) ; elle code aussi le nom déjà connu écrit après une apostrophe (le dossier d'Orvelang, puisqu'Orvelang), le mot en majuscules écrit après « d' » (le dossier d'ORVELANG), les noms écrits avec des lettres latines d'autres langues (Mme Şorvelang, M. Yıldoreth, Mme Valdorếth) et le nom ou le prénom suivi de la marque anglaise « 's » (Tessharto's team, Alice's report), qui restaient en clair en tout ou en partie ; elle code aussi le téléphone écrit avec l'indicatif « 00 33 » (0033 4 00 00 00 05), qui n'était codé qu'après le mot Tél, Portable ou Fax, et le téléphone écrit avec l'indicatif entre parenthèses ((+33) 4 00 00 00 04), qui restait en clair ; un texte qui ne porte aucune de ces écritures est codé exactement comme avant ; la version 1.35 reconnaît, dans la liste Prénoms, un prénom écrit en plusieurs mots (Thu Ha) par chacun de ses mots, alors qu'une telle ligne restait sans effet ; elle code en entier une adresse mail qui porte une lettre accentuée (amélie.morvelang@univ-exemple.fr), dont le début restait en clair ; dans un classeur Excel, elle code et restitue le texte cherché par une mise en forme conditionnelle, qui restait en clair au codage et gardait son code à la restitution ; le modèle de prompt pour un classeur demande à l'outil de donner un format de date à la cellule où il recopie une date codée, pour qu'elle y revienne en vraie date, et les limites disent ce que deviennent une date recopiée sans format de date et les dimensions que l'outil règle d'après la longueur des codes ; un document Word ou un diaporama PowerPoint qui porte plusieurs fichiers incorporés (les classeurs de ses graphiques) reçoit les mêmes codes à chaque codage, alors que leurs numéros pouvaient changer d'une fois à l'autre ; un classeur que l'outil a réécrit et qui porte des formules demande à Excel de tout recalculer à son ouverture dès qu'une donnée y est restituée, alors qu'un résultat calculé par l'outil sur un code (longueur d'un texte, majuscules, premières lettres) pouvait rester affiché ; quand le navigateur ne peut pas lire le fichier déposé (fichier déplacé ou supprimé entre-temps), la page le dit au lieu de rester sans réponse ; sur un écran étroit, un nom de fichier très long, un bouton au texte long et le tableau du Dictionnaire ne dépassent plus de la page ; un mot qui est aussi le nom d'une fonction interne du langage de la page (constructor, hasOwnProperty, toString) est traité comme tout autre mot, où qu'il soit écrit (texte, listes, Dictionnaire, table de correspondance, fichier), alors que « Constructor » n'était jamais codé comme un nom de personne et que le terme « hasOwnProperty » inscrit au Dictionnaire arrêtait le codage ; le code de la page est repris à quatre endroits pour sa relecture (accès au stockage du navigateur écrit en toutes lettres, bilan chiffré repris comme du texte après un rechargement de la page, seuls les réglages connus repris d'un fichier de réglages, deux fonctions qui ne servaient plus retirées), sans effet sur les textes et les fichiers traités ; un texte, une liste ou un fichier qui ne porte rien de cela est traité exactement comme avant ; la version 1.36 lit, dans un tableau (classeur Excel, tableau d'un document Word ou d'un diaporama PowerPoint, lignes collées avec leurs tabulations), la colonne dont l'en-tête est « Nom » ou « Prénom » comme une liste de noms ou de prénoms, même absents des listes, ainsi que la case placée à droite de « Nom » ou de « Prénom » dans une fiche et la ligne « Nom : Tessharto » ; elle code un nom écrit avant un prénom connu dans le fil d'une phrase (le dossier de Tessharto Paul) ou dans une colonne qui porte au moins trois noms ainsi écrits, un nom écrit après une fonction (la directrice Tessharto, Monsieur le Président Tessharto, notre collègue Tessharto), un nom de naissance écrit après « né » ou « née », un nom écrit après « Me » ou « Pre », et un nom à majuscule intérieure qui commence par Mc, Mac, Le, De ou un autre début courant (Paul McTessharto) ; dans le nom d'un fichier, une personne écrite avec des tirets bas (TESSHARTO_Paul) retrouve ses tirets bas à la restitution, alors qu'ils revenaient en espaces ; un texte ou un fichier qui ne porte rien de cela est traité exactement comme avant.</p></details>
+        </details>
+        <details class="plus"><summary>Essais et audit</summary>
+        <p><strong>Essais de l'auteur, le 22 novembre 2026.</strong> M. Manoël PYANET a mené lui-même tous les essais d'usage, du codage au résultat rendu. Un mail, un document Word, un classeur Excel et un diaporama PowerPoint, aux données inventées, ont été codés dans cette page (version 1.36), confiés à un outil d'intelligence artificielle (Microsoft 365 Copilot pour les trois fichiers), puis restitués dans cette page. Chaque résultat a ensuite été comparé à l'original, texte par texte et mise en forme par mise en forme.</p>
+        <ul class="propre">
+          <li>Tout ce que l'outil devait coder l'a été. Est resté en clair, comme la page l'annonce à l'étape 2, le nom d'un onglet du classeur.</li>
+          <li>Tous les textes sont revenus exacts, sans aucun code restant, y compris des codes que l'outil d'intelligence artificielle avait recopiés sans leurs tirets bas.</li>
+          <li>Un défaut relevé : dans une cellule du classeur et dans une diapositive, un nom écrit en partie en rouge est revenu sans son rouge. La version 1.40 le corrige.</li>
+          <li>Codés en trop, puis rendus exactement : deux sigles absents de la liste Mots à conserver du navigateur de l'essai, un titre de colonne écrit en majuscules et un mot placé en tête d'une note.</li>
+        </ul>
+        <p><strong>Séries d'essais avant chaque mise en ligne.</strong> Deux séries sont rejouées par programme sur la page exacte à publier, hors navigateur puis dans le navigateur Chromium. Pour la version 1.40 s'y ajoutent les trois fichiers de l'auteur, restitués de nouveau, quatre essais neufs du même genre, et la comparaison des versions 1.36 et 1.40, fichier par fichier : codage de 345 fichiers, restitution de 511 fichiers retravaillés comme par un outil d'intelligence artificielle.</p>
+        <p><strong>Non vérifié.</strong> Un autre navigateur que Chromium, un vrai téléphone, un fichier protégé par Word, Excel ou PowerPoint eux-mêmes, et toute écriture absente des essais : la relecture avant envoi reste le dernier contrôle.</p>
+        <p><strong>Audit complet</strong> (corrections, essais, limites exemple par exemple) : à l'adresse de cette page, suivie de « audit.html ».</p>
+        </details>
+        <details class="historique"><summary>Historique des versions</summary><p>Origine : classeur Excel « Anonymiseur à bouton » créé le 28 septembre 2026, en version 3 le 30 septembre 2026, renommé « Pseudonymiseur à bouton » en version 4 le 12 octobre 2026. Version web du 19 octobre 2026 : reprise, règle par règle, du classeur Excel « Pseudonymiseur à bouton » version 4.1 du 16 octobre 2026, vérifiée sur les mêmes jeux de test, avec deux corrections (une civilité suivie d'un code, M. Pseudo_Telephone_001, ne forme plus une personne ; une suite de chiffres collée à un code n'est plus reprise) et trois corrections (la troisième : un prénom composé dont la suite est en minuscules, Marie-odile MORVELANG, est reconnu) et deux règles nouvelles (une ville écrite seule, d'après la liste Villes ; les codes BIC, après le mot BIC ou SWIFT ou seuls sous leur forme de onze caractères). La version 1.7 code en plus les téléphones étrangers (indicatif entre parenthèses, ou tout numéro écrit après Tel, Direct, Mobile, Fax), les adresses étrangères écrites sur une ligne qui finit par un pays, les entreprises suivies d'une forme juridique (Ltd, Inc, GmbH, SARL, SAS), le nom entier d'un bâtiment, le numéro dans un nom de rue (avenue du 8 mai 1945), et le nom écrit avant une adresse mail ou avant « a écrit : », même avec un prénom inconnu ; la version 1.8 ne prend plus pour une personne un intitulé en majuscules qui commence par un nom de lieu ou de service (QUAI CHARGEMENT devient un lieu, SERVICE COURRIER reste en clair) ni le sigle GLPI ; la version 1.9 laisse en clair un sigle défini dans le texte entre parenthèses, quand ses lettres sont les initiales de sa définition (CAL, capacité d'accueil limitée) ; la version 1.10 code une signature réduite à une initiale collée au nom, seule sur sa ligne (J.Tessharto) ; FAQ et CAUTION restent en clair ; la version 1.11 code un prénom connu écrit après une élision (d'Alice), reconnaît un terme du Dictionnaire écrit sans accent (Societe pour Société), laisse en clair quatre sigles et mots de plus, dont SUJET, copie la sortie dès la pseudonymisation et ajoute le bouton Coller et restituer ; la version 1.11.1 laisse en clair un titre suivi d'un mot courant au pluriel (Professeur des Universités) et un mot de remplissage fait d'une seule lettre répétée (XXXX) ; la version 1.12 code une date écrite sans année (27 octobre, 27/10, lundi 12), une boîte fonctionnelle écrite avec un point devant son adresse (Service.Achats), le nom d'un outil de gestion du Dictionnaire quelle que soit sa casse et un nom de campus, ajouté à la liste Villes ; la version 1.12.1 restitue la réponse déjà collée quand le navigateur refuse la lecture du presse-papiers ; la version 1.13 accepte un classeur Excel déposé tel quel (.xlsx, .xlsm) : seuls ses textes sont codés, le classeur codé est téléchargé avec ses onglets, formules et mises en forme intacts, et le classeur renvoyé par l'outil se restitue de la même façon, le tout sur le poste ; la version 1.13.1 code un nom écrit après une initiale (P. Valdoreth, L. Gauvernot), sauf après un mot ordinaire en minuscules, un chiffre, un symbole ou un point (125 °C. Équations) et dans une suite d'initiales (N. B.) ; la version 1.14 code aussi, dans un classeur Excel, les dates saisies dans les cellules, qu'Excel enregistre comme des nombres, et les remet en dates, avec leur format, à la restitution ; une date calculée par une formule reste en clair ; la version 1.15 code une suite de jours devant un mois (les 13, 14 et 15 octobre), un mois suivi de son année (avril 2026) et le nom écrit après Dr ou Pr (Dr El Valdoreth, Pr Le Gauvernot), laisse en clair un numéro de page ou de partie (page 3/12) et une fraction suivie d'une unité (1/2 journée), ne coupe plus un numéro long par le code d'un numéro plus court, restitue en entier une adresse dont une partie avait déjà reçu un code et, quand un même code couvre deux écritures d'un même élément, restitue toujours la première écrite ; la version 1.16 donne son propre code à chaque écriture d'une même personne ou d'un même terme du Dictionnaire (Paul TESSHARTO, puis TESSHARTO : Pseudo_Personne_001, puis Pseudo_PersonneB_001, même numéro et une lettre après l'étiquette), pour que la restitution rende chaque texte exactement comme il était, et contrôle à chaque pseudonymisation que chaque texte codé revient exactement au texte d'origine ; un texte qui n'y reviendrait pas est codé en entier, sous un seul code ; la version 1.16.1 ne livre plus dans le Dictionnaire que quatre lignes d'exemple, pour que chacun y écrive les siennes, sans rien changer aux listes déjà enregistrées dans un navigateur ; la version 1.16.2 précise, en tête de cette page, le statut de l'outil ; la version 1.20 reprend la version 1.16.2, range cet historique en bas de la rubrique, rappelle l'origine de l'outil, affiche l'heure de sa mise à jour et ajoute la page Prompts : deux modèles de consigne à copier, pour un texte et pour un classeur Excel, qui demandent à l'outil d'intelligence artificielle de ne pas toucher aux codes ; la version 1.21 remplace les exemples de la page par des exemples généraux, aux noms de personnes inventés, et ajoute EDF, ENGIE et SNCF à la liste d'origine des mots à conserver ; la version 1.22 reprend la version 1.21, sans changement de l'outil ; la version 1.23 ajoute au mode d'emploi un quatrième geste de sûreté : relire ce que l'outil d'intelligence artificielle a rendu ; la version 1.30 pseudonymise et restitue aussi les documents Word (.docx) et les diaporamas PowerPoint (.pptx), déposés comme un classeur Excel : textes, tableaux, en-têtes et pieds de page, notes, commentaires, zones de texte, graphiques, liens, propriétés et auteurs du fichier, sans toucher à la mise en page ni aux images ; elle ajoute un troisième modèle de prompt pour ces fichiers et affiche ce qui reste en clair ; la page reste utilisable quand le navigateur refuse l'enregistrement local, listes et réglages n'étant alors gardés que le temps de l'onglet ; les règles de remplacement et le traitement des classeurs Excel ne changent pas ; la version 1.31 lit une espace insécable comme une espace ordinaire, dans un texte collé comme dans un fichier déposé : les numéros de téléphone, les dates en lettres, les IBAN, les numéros de sécurité sociale, les adresses et les noms écrits avec des espaces insécables, qui restaient en clair en tout ou en partie, sont codés, et la restitution remet chaque espace insécable à sa place ; un même élément écrit des deux façons garde son numéro et reçoit une lettre (Pseudo_TelephoneB_001) ; un texte sans espace insécable est codé exactement comme avant ; la version 1.32 lit de même un trait d'union insécable ou un tiret court comme un trait d'union ordinaire, et ne tient pas compte, pour lire, des caractères invisibles qu'un copier-coller glisse dans un numéro, une date, une adresse ou un nom (césure invisible, espace sans chasse, marques de sens d'écriture) : l'élément est codé en entier, et la restitution remet chaque caractère à sa place ; la version 1.33 garde une seule table pour tout ce qui est codé dans l'onglet : deux fichiers codés à la suite se restituent chacun avec leurs propres données ; elle lit une lettre accentuée écrite en deux caractères, la lettre puis son accent (texte copié de certains fichiers PDF, fichier venu d'un Mac), comme la même lettre écrite en un seul : les prénoms, les noms, les dates en lettres et les villes écrits ainsi, qui restaient en clair, sont codés, et la restitution rend l'écriture d'origine ; dans un classeur Excel, elle code aussi le texte écrit entre guillemets dans une formule, les listes déroulantes et les messages de validation, les textes que les graphiques et les tableaux croisés dynamiques gardent en mémoire, les scénarios, les infobulles, le texte de remplacement des images, les propriétés du fichier et le chemin d'enregistrement, lit d'un seul tenant un nom coupé par la mise en forme d'une cellule, et restitue les codes que l'outil a écrits à ces endroits ou dans le nom d'un onglet ; elle reconnaît un code que l'outil a rendu sous une autre écriture (Pseudo\_Personne\_001) et signale celui qu'elle ne reconnaît pas, y compris quand la table porte un autre préfixe que celui des réglages ; elle code le nom du fichier, où elle cherche aussi le nom de famille des personnes codées dans le contenu ; dans un document Word, elle code le titre et la description d'un tableau, ainsi que l'infobulle d'un lien et le nom d'une forme tels que les écrit LibreOffice ; à l'étape 2, elle signale ce qui reste en clair à un endroit qu'elle ne code pas ; quand le navigateur n'a plus la place de garder le travail de l'onglet, elle garde la table avant les textes, ne laisse plus revenir une table plus ancienne après un rechargement de la page, et prévient quand la table elle-même ne tient plus ; la version 1.34 code le nom à particule écrit après un prénom connu ou une civilité, que la particule soit en minuscules ou porte une majuscule (Alice de Morvelang, Paul van der Gauvernot, Paul Van Der Gauvernot, Mme de la Morvelang), et le nom à apostrophe (Mme d'Orvelang, Paul N'Gauvernot, D'ORVELANG Alice), qui restaient en clair en tout ou en partie ; elle les code aussi dans le nom du fichier ; après « de », « du » ou « de la », elle ne prend pas pour un nom un mot courant, un service, une discipline, un mois, une ville de la liste Villes ni un mot à conserver (Paul de la Scolarité) ; dans la liste Noms du service, un nom écrit en plusieurs mots, qui restait sans effet, est reconnu par chacun de ses mots ; elle code aussi le nom écrit après « Professeure », « Docteure » ou « Dre », et les noms qui suivent une civilité au pluriel, séparés par une virgule ou par « et » (MM. Tessharto, Valdoreth et Morvelang) ; elle code aussi le nom déjà connu écrit après une apostrophe (le dossier d'Orvelang, puisqu'Orvelang), le mot en majuscules écrit après « d' » (le dossier d'ORVELANG), les noms écrits avec des lettres latines d'autres langues (Mme Şorvelang, M. Yıldoreth, Mme Valdorếth) et le nom ou le prénom suivi de la marque anglaise « 's » (Tessharto's team, Alice's report), qui restaient en clair en tout ou en partie ; elle code aussi le téléphone écrit avec l'indicatif « 00 33 » (0033 4 00 00 00 05), qui n'était codé qu'après le mot Tél, Portable ou Fax, et le téléphone écrit avec l'indicatif entre parenthèses ((+33) 4 00 00 00 04), qui restait en clair ; un texte qui ne porte aucune de ces écritures est codé exactement comme avant ; la version 1.35 reconnaît, dans la liste Prénoms, un prénom écrit en plusieurs mots (Thu Ha) par chacun de ses mots, alors qu'une telle ligne restait sans effet ; elle code en entier une adresse mail qui porte une lettre accentuée (amélie.morvelang@univ-exemple.fr), dont le début restait en clair ; dans un classeur Excel, elle code et restitue le texte cherché par une mise en forme conditionnelle, qui restait en clair au codage et gardait son code à la restitution ; le modèle de prompt pour un classeur demande à l'outil de donner un format de date à la cellule où il recopie une date codée, pour qu'elle y revienne en vraie date, et les limites disent ce que deviennent une date recopiée sans format de date et les dimensions que l'outil règle d'après la longueur des codes ; un document Word ou un diaporama PowerPoint qui porte plusieurs fichiers incorporés (les classeurs de ses graphiques) reçoit les mêmes codes à chaque codage, alors que leurs numéros pouvaient changer d'une fois à l'autre ; un classeur que l'outil a réécrit et qui porte des formules demande à Excel de tout recalculer à son ouverture dès qu'une donnée y est restituée, alors qu'un résultat calculé par l'outil sur un code (longueur d'un texte, majuscules, premières lettres) pouvait rester affiché ; quand le navigateur ne peut pas lire le fichier déposé (fichier déplacé ou supprimé entre-temps), la page le dit au lieu de rester sans réponse ; sur un écran étroit, un nom de fichier très long, un bouton au texte long et le tableau du Dictionnaire ne dépassent plus de la page ; un mot qui est aussi le nom d'une fonction interne du langage de la page (constructor, hasOwnProperty, toString) est traité comme tout autre mot, où qu'il soit écrit (texte, listes, Dictionnaire, table de correspondance, fichier), alors que « Constructor » n'était jamais codé comme un nom de personne et que le terme « hasOwnProperty » inscrit au Dictionnaire arrêtait le codage ; le code de la page est repris à quatre endroits pour sa relecture (accès au stockage du navigateur écrit en toutes lettres, bilan chiffré repris comme du texte après un rechargement de la page, seuls les réglages connus repris d'un fichier de réglages, deux fonctions qui ne servaient plus retirées), sans effet sur les textes et les fichiers traités ; un texte, une liste ou un fichier qui ne porte rien de cela est traité exactement comme avant ; la version 1.36 lit, dans un tableau (classeur Excel, tableau d'un document Word ou d'un diaporama PowerPoint, lignes collées avec leurs tabulations), la colonne dont l'en-tête est « Nom » ou « Prénom » comme une liste de noms ou de prénoms, même absents des listes, ainsi que la case placée à droite de « Nom » ou de « Prénom » dans une fiche et la ligne « Nom : Tessharto » ; elle code un nom écrit avant un prénom connu dans le fil d'une phrase (le dossier de Tessharto Paul) ou dans une colonne qui porte au moins trois noms ainsi écrits, un nom écrit après une fonction (la directrice Tessharto, Monsieur le Président Tessharto, notre collègue Tessharto), un nom de naissance écrit après « né » ou « née », un nom écrit après « Me » ou « Pre », et un nom à majuscule intérieure qui commence par Mc, Mac, Le, De ou un autre début courant (Paul McTessharto) ; dans le nom d'un fichier, une personne écrite avec des tirets bas (TESSHARTO_Paul) retrouve ses tirets bas à la restitution, alors qu'ils revenaient en espaces ; un texte ou un fichier qui ne porte rien de cela est traité exactement comme avant ; la version 1.40 du 22 novembre 2026 rend sa mise en forme à un nom, une date ou une adresse écrits avec deux mises en forme (une partie en gras ou en couleur) quand Word, Excel, PowerPoint ou l'outil d'intelligence artificielle a réenregistré le fichier sans changer le texte du passage ou de la cellule, alors que l'élément revenait en entier dans la mise en forme de son début (défaut relevé par l'auteur le 22 novembre 2026, lors de ses essais avec Microsoft 365 Copilot, dans une cellule d'un classeur et dans une diapositive) ; le codage ne change pas : un texte ou un fichier reçoit exactement les mêmes codes qu'avec la version 1.36 ; les pages de l'outil sont raccourcies, leur détail est rangé dans des blocs repliés de la page « À propos », qui reçoit aussi le bloc « Essais et audit ».</p></details>
       </div>
     </section>
 
@@ -544,7 +609,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
 
 <footer class="pied">
   <span>Lyon 1 Université</span>
-  <span>Pseudonymiseur, version web 1.36 du 21 novembre 2026, mise à jour le 21 novembre 2026 à 23h26</span>
+  <span>Pseudonymiseur, version web 1.40 du 22 novembre 2026, mise à jour le 23 novembre 2026 à 0h30</span>
   <span>Traitement local, aucune donnée transmise</span>
 </footer>
 <div class="toast" id="toast"></div>
@@ -3851,6 +3916,61 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
     return 'Le nom du fichier porte encore ' + (restes.length > 1 ? 'des éléments codés' : 'un élément codé') + ' dans son contenu (' + restes.slice(0, 4).map(function (x) { return '« ' + x + ' »'; }).join(', ') + ') : le renommer avant de le déposer dans l’outil.';
   }
 
+  // ------------------------------------------------------------------ version 1.40 : un nom écrit avec deux mises en forme
+  /* Dans une cellule à mise en forme partielle, un nom écrit avec deux mises en forme va en entier, sous son code, dans le
+     premier morceau ; le suivant reste vide. Excel ou l'outil d'intelligence artificielle retirent ce morceau vide, ou réunissent
+     les morceaux, en enregistrant : la note des versions précédentes (clé : la cellule codée telle qu'elle était écrite) ne se
+     retrouve plus, et le nom revenait en entier dans la mise en forme du premier morceau. Une seconde note garde, pour chaque
+     cellule de ce genre, son écriture d'origine sous son texte d'origine : à la restitution, la cellule dont le texte est revenu
+     exactement le même reprend cette écriture. Deux cellules de même texte dans le classeur : aucune note pour ce texte. */
+  var RE_CELLULE_RICHE = /^(?:<r>(?:<rPr>(?:<[A-Za-z][A-Za-z0-9]*(?:\s+[A-Za-z][A-Za-z0-9]*="[^"<>&]*")*\s*\/>)*<\/rPr>)?<t(?:\s+xml:space="preserve")?>[^<]*<\/t><\/r>){2,}$/;
+  var RE_ENTITE_FAUSSE = /&(?!(?:amp|lt|gt|quot|apos|#\d{1,7}|#x[0-9A-Fa-f]{1,6});)/;
+  var TAILLE_FORMES_MAX = 300000, TAILLE_FORME_MAX = 20000;
+  function celluleRiche(interieur) { return typeof interieur === 'string' && interieur.length <= TAILLE_FORME_MAX && RE_CELLULE_RICHE.test(interieur) && !RE_ENTITE_FAUSSE.test(interieur); }
+  function texteDeCellule(interieur) {
+    var t = '', re = /<t(?:\s[^>]*)?>([^<]*)<\/t>/g, m, sans = interieur.replace(/<rPh\b[\s\S]*?<\/rPh>/g, '');
+    while ((m = re.exec(sans)) !== null) t += decoderXml(m[1]);
+    return t;
+  }
+  function interieursDesChaines(xml) { var l = [], re = /<si>([\s\S]*?)<\/si>/g, m; while ((m = re.exec(xml)) !== null) l.push(m[1]); return l; }
+  /* avant, apres : xl/sharedStrings.xml d'origine et codé. Rend la note, ou null. */
+  function noterLesFormes(avant, apres) {
+    if (typeof avant !== 'string' || typeof apres !== 'string' || avant === apres) return null;
+    var a = interieursDesChaines(avant), b = interieursDesChaines(apres);
+    if (a.length !== b.length) return null;
+    var nombre = tableVide(), formes = tableVide(), nb = 0, taille = 0, textes = a.map(texteDeCellule);
+    textes.forEach(function (t) { nombre[t] = (nombre[t] || 0) + 1; });
+    for (var i = 0; i < a.length; i++) {
+      if (a[i] === b[i] || nombre[textes[i]] !== 1 || !celluleRiche(a[i])) continue;
+      if (!/<t(?:\s[^>]*)?><\/t>/.test(b[i]) || /<t(?:\s[^>]*)?><\/t>/.test(a[i])) continue;        // seulement si le codage a vidé un morceau
+      taille += a[i].length + textes[i].length;
+      if (taille > TAILLE_FORMES_MAX) break;
+      formes[textes[i]] = a[i]; nb++;
+    }
+    return nb ? formes : null;
+  }
+  /* Après la restitution : chaque cellule dont le texte est celui d'une note reprend son écriture d'origine. La note peut venir
+     d'ailleurs que du codage (session gardée par le navigateur) : elle est relue, et la liste des textes du classeur ne doit pas
+     changer. Rend le nombre de cellules reprises. */
+  function rendreLesFormes(ouvert, formes) {
+    var nom = 'xl/sharedStrings.xml', xml = ouvert.parties[nom], nb = 0;
+    if (!formes || typeof formes !== 'object' || typeof xml !== 'string') return 0;
+    var nombre = tableVide();           // comme au codage : un texte porté par deux cellules différentes ne reprend aucune note
+    interieursDesChaines(xml).forEach(function (i) { var t = texteDeCellule(i); nombre[t] = (nombre[t] || 0) + 1; });
+    var nouveau = xml.replace(/<si>([\s\S]*?)<\/si>/g, function (tout, interieur) {
+      if (interieur.indexOf('<rPh') >= 0 || interieur.indexOf('<t') < 0) return tout;
+      var t = texteDeCellule(interieur);
+      if (t === '' || !possede(formes, t) || nombre[t] !== 1) return tout;
+      var f = formes[t];
+      if (f === interieur || !celluleRiche(f) || texteDeCellule(f) !== t) return tout;
+      nb++; return '<si>' + f + '</si>';
+    });
+    if (!nb || nouveau === xml) return 0;
+    if (JSON.stringify(chainesPartagees(nouveau)) !== JSON.stringify(chainesPartagees(xml))) return 0;
+    ouvert.parties[nom] = nouveau; ouvert.changees[nom] = true;
+    return nb;
+  }
+
   // ------------------------------------------------------------------ interface publique
   /* Pseudonymise un classeur. u8 : octets du fichier ; config : celle du moteur ; moteur : window.Pseudonymiseur.
      Rend une promesse de { ok, erreur, octets, nom, type, correspondance, stats, avertissements, apercuEntree, apercuSortie, nbTextes }. */
@@ -3873,8 +3993,11 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       poserLesCodes(morceaux, r, config, P);
       var riches = tableVide(), nbRiches = 0;
       var outil = { aligneur: new Aligneur(r.correspondance, false), refus: 0, noter: function (ecrit, m) { if (!possede(riches, ecrit)) nbRiches++; riches[ecrit] = [m.origine, m.texte]; } };
+      var chainesAvant = ouvert.parties['xl/sharedStrings.xml'];
       recomposer(ouvert, r.cellules, outil);
       if (nbRiches) ouvert.datesEnTexte.riches = riches;
+      var formes = noterLesFormes(chainesAvant, ouvert.parties['xl/sharedStrings.xml']);       // version 1.40
+      if (formes) ouvert.datesEnTexte.formes = formes;
       var empreinteCodee = empreinteDesFeuilles(ouvert.parties);
       if (outil.formules) ouvert.datesEnTexte.empreinte = empreinteCodee;       // un texte de formule est codé : voir demanderRecalcul
       ouvert.datesEnTexte.codage = empreinteCodee;                              // version 1.35 : l'empreinte est gardée pour tout classeur codé
@@ -3917,6 +4040,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       var refuses = [], outil = { aligneur: new Aligneur(correspondance.map(function (c) { return [c[1], c[0]]; }), true), refus: 0,
         memoire: datesEnTexte && datesEnTexte.riches && typeof datesEnTexte.riches === 'object' ? datesEnTexte.riches : null };
       recomposer(ouvert, r.cellules, outil);
+      var nbFormes = rendreLesFormes(ouvert, datesEnTexte && datesEnTexte.formes);              // version 1.40
       if (outil.refus) {            // textes que les garde-fous ont laissés codés : à signaler
         var k = 0, etats = [];
         ouvert.textuelles.forEach(function (t) { t.morceaux.forEach(function (m) { if (m.texte === undefined) return; var nv = r.cellules[ouvert.index[k++]][0]; if (!m.date && nv !== m.texte && garde(m, nv, etats) !== nv) refuses.push(m.texte); }); });
@@ -3933,7 +4057,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         return {
           ok: true, octets: octets, nom: rendreNomFichier(separerNom(nomFichier)[0], correspondance, P) + '_restitué' + separerNom(nomFichier)[1], type: typeMime(nomFichier),
           apercu: apercuClasseur(ouvert.parties), restants: restants, nbTextes: cellules.length, nbDates: ouvert.nbDates || 0, recalcul: !!ouvert.recalculDemande,
-          reparations: r.reparations || [], avertissements: notes, onglets: ouvert.onglets || 0
+          reparations: r.reparations || [], avertissements: notes, onglets: ouvert.onglets || 0, nbFormes: nbFormes
         };
       });
     }).catch(function (e) { return { ok: false, erreur: e && e.message ? e.message : String(e) }; });
@@ -3945,7 +4069,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   }
 
   racine.PseudonymiseurExcel = {
-    version: '1.36 du 21/11/2026',
+    version: '1.40 du 22/11/2026',
     pseudonymiser: pseudonymiser, depseudonymiser: depseudonymiser, apercu: apercu,
     lireZip: lireZip, ecrireZip: ecrireZip, crc32: crc32, decouperXml: decouperXml, recomposerXml: recomposerXml, apercuClasseur: apercuClasseur,
     serieEnTexte: serieEnTexte, texteEnSerie: texteEnSerie, formatAfficheUneDate: formatAfficheUneDate, stylesDeDate: stylesDeDate,
@@ -5173,11 +5297,207 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       if (possede(AVEC_ESPACE, x.nom) && !espace && /^\s|\s$/.test(x.texte)) trivial = false;
     });
     if (nb > 1) trivial = false;
-    var cle = JSON.stringify(cles), js = JSON.stringify(valeurs);
+    garderNote(memo, JSON.stringify(cles), valeurs, trivial);
+    noterParLeTexte(memo, xml, s, rep);
+  }
+  function garderNote(memo, cle, valeurs, trivial) {
+    var js = JSON.stringify(valeurs);
     if (possede(memo.ambigus, cle)) return;
     if (possede(memo.vus, cle)) { if (memo.vus[cle] !== js) { memo.ambigus[cle] = 1; delete memo.segments[cle]; } return; }
     memo.vus[cle] = js;
     if (!trivial) memo.segments[cle] = valeurs;
+  }
+
+  // ------------------------------------------------------------------ version 1.40 : un nom écrit avec deux mises en forme
+  /* Au codage, un nom écrit avec deux mises en forme va en entier, sous son code, dans le premier morceau ; le suivant reste
+     vide. Word, PowerPoint ou l'outil d'intelligence artificielle retirent souvent ce morceau vide en enregistrant : la note
+     habituelle (clé : le texte codé de chaque morceau) ne se retrouve plus, et le nom revenait en entier dans la mise en forme
+     du premier morceau. Une seconde note, dont la clé est le texte codé du paragraphe entier, garde le morceau vidé tel qu'il
+     était écrit : à la restitution, il est remis à sa place quand le texte codé du paragraphe est revenu sans changement. */
+  var RE_MORCEAU = /^<(a|w):r(?:\s[^<>]*)?>(?:<\1:rPr(?:\s[^<>]*)?\/>|<\1:rPr(?:\s[^<>]*)?>(?:(?!<\/?\1:rPr[\s>\/])(?!<\/?\1:r[\s>\/])(?!<\/?\1:t[\s>\/])[\s\S])*<\/\1:rPr>)?(<\1:t(?:\s[^<>]*)?>)([^<]*)<\/\1:t><\/\1:r>$/;
+  var RE_JETON = /<(\/?)([A-Za-z_][\w.\-]*(?::[A-Za-z_][\w.\-]*)?)((?:\s+[A-Za-z_][\w.\-]*(?::[A-Za-z_][\w.\-]*)?\s*=\s*(?:"[^"<]*"|'[^'<]*'))*)\s*(\/?)>/g;
+  var RE_ENTITE_FAUSSE = /&(?!(?:amp|lt|gt|quot|apos|#\d{1,7}|#x[0-9A-Fa-f]{1,6});)/;
+  var TAILLE_MORCEAU_MAX = 6000;
+  /* Un morceau gardé en note est-il un XML équilibré, sans lien vers une autre partie du fichier, avec des préfixes que la
+     partie connaît ? Rend le découpage du morceau, ou null. La note peut venir d'un fichier de table : elle est donc relue. */
+  function lireMorceau(morceau, prefixe, xml, sansLien) {
+    if (typeof morceau !== 'string' || morceau.length > TAILLE_MORCEAU_MAX || RE_ENTITE_FAUSSE.test(morceau)) return null;
+    var m = RE_MORCEAU.exec(morceau);
+    if (!m || m[1] !== prefixe) return null;
+    var pile = [], pos = 0, j, employes = tableVide(), declares = tableVide();
+    function prefixeDe(n) { var i = n.indexOf(':'); if (i > 0) employes[n.slice(0, i)] = 1; }
+    RE_JETON.lastIndex = 0;
+    while ((j = RE_JETON.exec(morceau)) !== null) {
+      if (j.index !== pos && (morceau.slice(pos, j.index).indexOf('<') >= 0 || pile[pile.length - 1] !== prefixe + ':t')) return null;
+      pos = j.index + j[0].length;
+      if (j[1]) { if (j[3] || j[4] || pile.pop() !== j[2]) return null; continue; }
+      prefixeDe(j[2]);
+      var reA = /\s([A-Za-z_][\w.\-]*(?::[A-Za-z_][\w.\-]*)?)\s*=/g, a;
+      while ((a = reA.exec(j[3])) !== null) {
+        if (a[1].slice(0, 6) === 'xmlns:') declares[a[1].slice(6)] = 1; else if (a[1] !== 'xmlns') prefixeDe(a[1]);
+      }
+      if (!j[4]) pile.push(j[2]);
+    }
+    if (pos !== morceau.length || pile.length) return null;
+    var racineXml = /<[A-Za-z_][^<>]*>/.exec(xml), tete = racineXml ? racineXml[0] : '', noms = Object.keys(employes);
+    for (var k = 0; k < noms.length; k++) {
+      var n = noms[k];
+      if (n === 'xml' || possede(declares, n)) continue;
+      if (n === 'r' && sansLien) return null;                               // un lien vers une autre partie du fichier ne se recopie pas
+      if (!new RegExp('\\sxmlns:' + n.replace(/[.\-]/g, '\\$&') + '\\s*=').test(tete)) return null;
+    }
+    return { tete: morceau.slice(0, morceau.length - m[3].length - m[2].length - prefixe.length * 2 - 10), balise: m[2], brut: m[3] };
+  }
+  /* Le morceau (a:r ou w:r) qui entoure une pièce de texte, quand il ne porte que sa mise en forme et ce texte. */
+  function morceauAutour(xml, x, sansLien) {
+    if (x.attribut || x.vide || x.baliseD === undefined || (x.nom !== 'a:t' && x.nom !== 'w:t')) return null;
+    var prefixe = x.nom.charAt(0), fermeture = '</' + prefixe + ':r>';
+    if (!xml.startsWith(fermeture, x.e)) return null;
+    var d = x.baliseD, limite = Math.max(0, x.baliseD - TAILLE_MORCEAU_MAX);
+    for (;;) {
+      d = xml.lastIndexOf('<' + prefixe + ':r', d - 1);
+      if (d < limite || d < 0) return null;
+      var c = xml.charCodeAt(d + 4);
+      if (c === 62 || c === 32 || c === 9 || c === 10 || c === 13) break;      // « <a:r> » ou « <a:r … » ; « <a:rPr » n'en est pas un
+      if (d === 0) return null;
+    }
+    var morceau = xml.slice(d, x.e + fermeture.length);
+    return lireMorceau(morceau, prefixe, xml, sansLien) ? morceau : null;
+  }
+  /* Clé de la seconde note : le texte entier du passage, tel qu'il est lu. null pour un passage que cette note ne concerne pas. */
+  function cleParLeTexte(s, texte) {
+    var nom = s.pieces.length ? s.pieces[0].nom : '';
+    return (nom === 'a:t' || nom === 'w:t') ? JSON.stringify(['~', nom, texte]) : null;
+  }
+  function cleDuNombre(cle) { return '["#",' + cle.slice(5); }
+  /* Empreinte courte d'une clé (FNV-1a sur 32 bits) : la note garde, sous cette forme, les passages codés qui n'ont pas de
+     seconde note. Deux clés de même empreinte : la seconde note n'est pas employée, rien d'autre. */
+  function empreinteCourte(t) {
+    var h = 0x811c9dc5;
+    for (var i = 0; i < t.length; i++) { h ^= t.charCodeAt(i); h = Math.imul(h, 0x01000193); }
+    return (h >>> 0).toString(36);
+  }
+  function valeursParLeTexte(xml, s, rep) {
+    var pieces = s.pieces, nom = pieces.length ? pieces[0].nom : '', valeurs = [], vides = 0, i;
+    if (pieces.length < 2) return null;
+    for (i = 0; i < pieces.length; i++) {
+      var x = pieces[i];
+      if (x.fixe || x.attribut || x.nom !== nom || x.baliseD === undefined || typeof rep.textes[i] !== 'string') return null;
+      var espace = avecEspace(xml.slice(x.baliseD, x.baliseF)) ? 1 : 0;
+      if (rep.textes[i] === '' && x.texte !== '') {
+        var morceau = morceauAutour(xml, x, true);
+        if (!morceau) return null;
+        valeurs.push(['', x.brut, espace, morceau]); vides++;
+      } else valeurs.push([rep.textes[i], x.brut, espace]);
+    }
+    return vides && jointure(rep.textes) === s.rendu ? valeurs : null;
+  }
+  /* Chaque passage codé est compté sous son texte codé. Celui où le codage a vidé un morceau reçoit la seconde note ; les
+     autres sont retenus à part : un passage de même texte codé écrit autrement (un seul morceau, une autre mise en forme) ne
+     doit jamais recevoir la mise en forme d'un autre. */
+  function noterParLeTexte(memo, xml, s, rep) {
+    var cle = cleParLeTexte(s, s.rendu);
+    if (cle === null) return;
+    memo.nombres[cle] = (memo.nombres[cle] || 0) + 1;
+    var valeurs = valeursParLeTexte(xml, s, rep);
+    if (valeurs) garderNote(memo, cle, valeurs, false); else memo.autres[cle] = 1;
+  }
+  /* Après le codage de toutes les parties : une seconde note ne reste que si tous les passages de ce texte codé la portent, à
+     l'identique ; leur nombre est noté avec elle. Rend les empreintes des textes codés qui n'ont pas de seconde note. */
+  function finirLesNotes(memo) {
+    var textes = tableVide();
+    Object.keys(memo.autres).forEach(function (cle) { delete memo.segments[cle]; textes[empreinteCourte(cle)] = 1; });
+    Object.keys(memo.ambigus).forEach(function (cle) { if (cle.slice(0, 5) === '["~",') textes[empreinteCourte(cle)] = 1; });
+    Object.keys(memo.segments).forEach(function (cle) { if (cle.slice(0, 5) === '["~",') memo.segments[cleDuNombre(cle)] = memo.nombres[cle]; });
+    return textes;
+  }
+  /* La seconde note n'est employée que si : la note dit quels textes codés n'en ont pas, et ce texte n'en fait pas partie ;
+     le fichier reçu ne porte pas ce texte plus de fois que le fichier codé (un passage que l'outil aurait recopié). */
+  function admisParLeTexte(s, segmentsMemoire, textesMemoire, nombreRecu) {
+    var cle = cleParLeTexte(s, s.texte);
+    if (cle === null || !textesMemoire || !possede(segmentsMemoire, cle) || possede(textesMemoire, empreinteCourte(cle))) return false;
+    var n = possede(segmentsMemoire, cleDuNombre(cle)) ? segmentsMemoire[cleDuNombre(cle)] : null;
+    return typeof n === 'number' && n >= 1 && possede(nombreRecu, cle) && nombreRecu[cle] <= n;
+  }
+  /* Une copie du morceau, avec un autre texte : la suite d'un morceau que la restitution doit couper en deux. */
+  function copieDuMorceau(lu, prefixe, brut, texte) {
+    var balise = lu.balise;
+    if (prefixe === 'w' && /^\s|\s$/.test(texte) && !avecEspace(balise)) balise = balise.slice(0, -1) + ' xml:space="preserve">';
+    return lu.tete + balise + brut + '</' + prefixe + ':t></' + prefixe + ':r>';
+  }
+  /* Restitution par la seconde note. Les morceaux reçus doivent être ceux d'origine, réunis ou non par l'outil qui a enregistré
+     le fichier, avec ou sans leurs morceaux vides. Rend true si c'est fait ; false laisse la restitution habituelle agir. */
+  function rendreParLeTexte(xml, s, segmentsMemoire, sortie) {
+    var pieces = s.pieces, nom = pieces.length ? pieces[0].nom : '', prefixe = nom.charAt(0), k, e;
+    if ((nom !== 'a:t' && nom !== 'w:t') || pieces.some(function (x) { return x.fixe || x.attribut || x.nom !== nom || x.baliseD === undefined; })) return false;
+    var cle = JSON.stringify(['~', nom, s.texte]);
+    var v = possede(segmentsMemoire, cle) ? segmentsMemoire[cle] : null;
+    if (!Array.isArray(v) || v.length < 2 || v.length > 500) return false;
+    for (k = 0; k < v.length; k++) {
+      e = v[k];
+      if (!Array.isArray(e) || typeof e[0] !== 'string' || typeof e[1] !== 'string' || e[1].indexOf('<') >= 0 || RE_ENTITE_FAUSSE.test(e[1])) return false;
+      if (e.length > 3) { var lu = e[0] === '' ? lireMorceau(e[3], prefixe, xml, true) : null; if (!lu || lu.brut !== e[1]) return false; }
+    }
+    var i = 0, plan = [], attendu = '', valable = true;
+    function suite(parts, j) {                     // morceaux vidés qui suivent : remis après la pièce, sauf si la pièce suivante est vide elle aussi
+      while (i < v.length && v[i][0] === '') {
+        if (j + 1 < pieces.length && pieces[j + 1].texte === '') break;
+        e = v[i++];
+        if (e[1] === '') continue;
+        if (e.length < 4) { valable = false; return; }
+        parts.push({ morceau: e });
+      }
+    }
+    pieces.forEach(function (x, j) {
+      if (!valable) return;
+      var parts = [], t = x.texte;
+      if (t === '') {
+        if (i < v.length && v[i][0] === '') { parts.push({ groupe: [v[i]] }); i++; suite(parts, j); }
+        plan.push(parts); return;
+      }
+      var lu = 0, groupe = [];
+      while (lu < t.length) {
+        if (i >= v.length) { valable = false; return; }
+        e = v[i++];
+        if (e[0] === '') {
+          if (e[1] === '') continue;                                           // morceau vide dès l'origine : rien à rendre
+          if (e.length < 4 || (!groupe.length && !parts.length)) { valable = false; return; }
+          if (groupe.length) { parts.push({ groupe: groupe }); groupe = []; }
+          parts.push({ morceau: e }); continue;
+        }
+        if (t.substr(lu, e[0].length) !== e[0]) { valable = false; return; }
+        lu += e[0].length; groupe.push(e);
+      }
+      if (groupe.length) parts.push({ groupe: groupe });
+      suite(parts, j);
+      plan.push(parts);
+    });
+    if (!valable || i !== v.length) return false;
+    function brutDe(g) { return g.map(function (y) { return y[1]; }).join(''); }
+    plan.forEach(function (parts, j) {
+      if (!parts.length) { attendu += pieces[j].texte; return; }
+      parts.forEach(function (q) { attendu += decoder(q.groupe ? brutDe(q.groupe) : q.morceau[1]).texte; });
+    });
+    if (attendu !== s.rendu) return false;
+    var ecrits = [], fermeture = '</' + prefixe + ':r>';
+    for (k = 0; k < pieces.length; k++) {
+      var parts = plan[k], x = pieces[k];
+      if (!parts.length) continue;
+      var g = parts[0].groupe, brut = brutDe(g);
+      ecrirePiece(xml, x, brut, decoder(brut).texte, g.length === 1 ? !!g[0][2] : undefined, ecrits);
+      if (parts.length === 1) continue;
+      if (x.vide || !xml.startsWith(fermeture, x.e)) return false;
+      var ajout = '', courant = null;
+      for (var n = 1; n < parts.length; n++) {
+        if (parts[n].morceau) { ajout += parts[n].morceau[3]; continue; }
+        if (!courant) { var autour = morceauAutour(xml, x, false); courant = autour ? lireMorceau(autour, prefixe, xml, false) : null; if (!courant) return false; }
+        var b = brutDe(parts[n].groupe);
+        ajout += copieDuMorceau(courant, prefixe, b, decoder(b).texte);
+      }
+      ecrits.push([x.e + fermeture.length, x.e + fermeture.length, ajout]);
+    }
+    ecrits.forEach(function (r) { sortie.push(r); });
+    return true;
   }
 
   /* Pseudonymise un document Word ou PowerPoint. u8 : octets du fichier ; config : celle du moteur ; moteur : window.Pseudonymiseur.
@@ -5248,7 +5568,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       var table = preparerTable(r.correspondance, P);
 
       // écriture de chaque partie
-      var memo = { segments: tableVide(), vus: tableVide(), ambigus: tableVide() }, nbCroises = 0, miniatures = 0, miniaturesGardees = 0;
+      var memo = { segments: tableVide(), vus: tableVide(), ambigus: tableVide(), nombres: tableVide(), autres: tableVide() }, nbCroises = 0, miniatures = 0, miniaturesGardees = 0;
       parcourirArchives(archive, function (a) { if (a.miniature) { if (retirerMiniature(a)) miniatures++; else miniaturesGardees++; } });
       parcourir(archive, function (p) {
         if (p.morceaux) {
@@ -5270,6 +5590,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         if (remplacements.length) { p.nouveau = appliquer(p.xml, remplacements); controlerPartie(p, attendus); }
       });
       parcourirArchives(archive, function (a) { if (a.types && a.types.nouveau !== undefined) controlerXml(a.types.nouveau, a.types.nom, a.types.xml); });
+      var textesSansNote = finirLesNotes(memo);
       var notesEnClair = []; try { notesEnClair = prevenir(archive, r.correspondance, config || {}, P, prenomsConnus(config, P), prefixe); } catch (x) { notesEnClair = []; }
       // version 1.33 : le nom du fichier est codé comme un texte
       var nomCode = X.coderNomFichier ? X.coderNomFichier(baseDuNom(nomFichier), r, config || {}, P) : { nom: baseDuNom(nomFichier), restes: [] };
@@ -5292,7 +5613,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         return {
           ok: true, octets: octets, nom: nomSortie(nomFichier, '_pseudonymisé', archive.genre, nomCode.nom), type: typeMime(nomFichier, archive.genre), genre: archive.genre,
           correspondance: r.correspondance, stats: r.stats, avertissements: avertissements, informations: informations,
-          memoire: { version: 1, segments: memo.segments }, nbCroises: nbCroises,
+          memoire: { version: 1, segments: memo.segments, textes: textesSansNote }, nbCroises: nbCroises,
           apercuEntree: apercuEntree, apercuSortie: apercuArchive(archive), nbTextes: nbTextes
         };
       });
@@ -5352,7 +5673,12 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
       if (!r.ok) return { ok: false, erreur: r.erreur };
       index.forEach(function (d, i) { var t = r.cellules[i][0]; if (d.morceau) d.morceau.rendu = t; else if (d.segment) d.segment.rendu = t; else d.piece.rendu = t; });
       var table = preparerTable(correspondance, P), segmentsMemoire = (memoire && memoire.segments && typeof memoire.segments === 'object') ? memoire.segments : tableVide();
-      var nbTextes = 0, nbExacts = 0, nbFusions = 0, nbFilet = 0, malFormees = [];
+      var textesMemoire = (memoire && memoire.textes && typeof memoire.textes === 'object') ? memoire.textes : null, nombreRecu = tableVide();
+      parcourir(archive, function (p) {
+        if (p.morceaux) return;
+        p.analyse.segments.forEach(function (s) { var cle = s.texte === '' ? null : cleParLeTexte(s, s.texte); if (cle !== null) nombreRecu[cle] = (nombreRecu[cle] || 0) + 1; });
+      });
+      var nbTextes = 0, nbExacts = 0, nbFusions = 0, nbFilet = 0, nbRetours = 0, malFormees = [];
       parcourir(archive, function (p) {
         if (p.morceaux) {
           var textes = [], change = false;
@@ -5360,13 +5686,17 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
           if (change) p.nouveau = X.recomposerXml(p.morceaux, textes);
           return;
         }
-        var remplacements = [], attendus = [];
+        var remplacements, attendus, compte, parLeTexte = true;
+        function restituerLaPartie() {
+        remplacements = []; attendus = []; compte = { textes: 0, exacts: 0, fusions: 0, retours: 0 };
         p.analyse.segments.forEach(function (s) {
-          if (s.texte !== '') nbTextes++;
+          if (s.texte !== '') compte.textes++;
           if (s.rendu === undefined || s.rendu === s.texte) { attendus.push(s.texte); return; }
           s.nouveau = s.rendu; attendus.push(s.rendu);
           // 1. paragraphe que l'outil n'a pas touché : ses morceaux d'origine, exactement
-          if (rendreLesMorceaux(p.xml, s, segmentsMemoire, remplacements)) { nbExacts++; return; }
+          if (rendreLesMorceaux(p.xml, s, segmentsMemoire, remplacements)) { compte.exacts++; return; }
+          // 1 bis (version 1.40). même texte codé, morceaux réunis ou morceau vide retiré à l'enregistrement : la mise en forme d'origine
+          if (parLeTexte && admisParLeTexte(s, segmentsMemoire, textesMemoire, nombreRecu) && rendreParLeTexte(p.xml, s, segmentsMemoire, remplacements)) { compte.exacts++; compte.retours++; return; }
           // 2. chaque morceau restitué à sa place
           var parPiece = s.pieces.length === 1 ? [s.rendu] : s.pieces.map(function (x) { return x.fixe ? x.texte : (x.rendu !== undefined ? x.rendu : x.texte); });
           if (parPiece.join('') === s.rendu) {
@@ -5380,10 +5710,16 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
           // 3. un code coupé entre deux morceaux : les morceaux voisins sont réunis dans le premier
           var rep = repartirTexte(s, s.rendu, alignerRestitution(s.texte, s.rendu, table));
           if (!rep) { attendus[attendus.length - 1] = s.texte; s.nouveau = undefined; return; }
-          nbFusions++;
+          compte.fusions++;
           ecrireRepartition(p.xml, s, rep, remplacements);
         });
         if (remplacements.length) { p.nouveau = appliquer(p.xml, remplacements); controlerPartie(p, attendus, malFormees); }
+        }
+        /* La seconde note ajoute des morceaux à la partie. Si la partie ainsi écrite ne se relit pas comme attendu, elle est
+           refaite sans cette note : le résultat est alors celui des versions précédentes, jamais un refus de plus. */
+        try { restituerLaPartie(); }
+        catch (x) { if (!compte || !compte.retours) throw x; p.nouveau = undefined; parLeTexte = false; restituerLaPartie(); }
+        nbTextes += compte.textes; nbExacts += compte.exacts; nbFusions += compte.fusions; nbRetours += compte.retours;
       });
       /* Filet : un code que l'outil aurait écrit ailleurs que dans un texte lu (un nom de style, un signet) est restitué là où
          il est, si la partie reste un XML lisible. Puis tout le fichier est relu à la recherche de codes restants. */
@@ -5414,7 +5750,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
         return {
           ok: true, octets: octets, nom: nomSortie(nomFichier, '_restitué', archive.genre, X.rendreNomFichier ? X.rendreNomFichier(baseDuNom(nomFichier), correspondance, P) : undefined), type: typeMime(nomFichier, archive.genre), genre: archive.genre,
           apercuRecu: apercuRecu, apercu: apercuArchive(archive), restants: P.codesRestants(tout.join('\n'), prefixe, correspondance), avertissements: avertissements,
-          nbTextes: nbTextes, nbExacts: nbExacts, nbFusions: nbFusions, nbFilet: nbFilet, reparations: r.reparations || []
+          nbTextes: nbTextes, nbExacts: nbExacts, nbFusions: nbFusions, nbFilet: nbFilet, nbRetours: nbRetours, reparations: r.reparations || []
         };
       });
     }).catch(function (e) { return { ok: false, erreur: e && e.message ? e.message : String(e) }; });
@@ -5433,7 +5769,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--fond);padding:1px 
   }
 
   racine.PseudonymiseurDocuments = {
-    version: '1.36 du 21/11/2026',
+    version: '1.40 du 22/11/2026',
     pseudonymiser: pseudonymiser, depseudonymiser: depseudonymiser, apercu: apercu, extension: extension,
     analyser: analyser, decoder: decoder, repartir: repartir, alignerCodage: alignerCodage, alignerRestitution: alignerRestitution,
     remplacementUnique: remplacementUnique, zonesDuChamp: zonesDuChamp, coderChemins: coderChemins, Maison: Maison
@@ -7811,6 +8147,9 @@ var LISTES_ORIGINE = {
     });
     var m = { version: 1, segments: seg };
     if (Object.keys(amb).length) m.ambigus = amb;
+    // version 1.40 : les textes codés qui n'ont pas de seconde note de mise en forme, pour tous les documents de la séance
+    var ta = a.textes && typeof a.textes === 'object' ? a.textes : null, tb = b.textes && typeof b.textes === 'object' ? b.textes : null;
+    if (ta && tb) { var tx = tableVide(); [ta, tb].forEach(function (x) { Object.keys(x).forEach(function (k) { tx[k] = 1; }); }); m.textes = tx; }
     return m;
   }
   // Dates des classeurs codés dans la séance (dates écrites en texte, à laisser en texte au retour) : gardées par classeur.
